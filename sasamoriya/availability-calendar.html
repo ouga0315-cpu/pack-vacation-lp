@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>空き状況カレンダー</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;background:#fafaf8;color:#333;line-height:1.5}
+  .cal-wrap{max-width:460px;margin:0 auto;padding:16px}
+
+  /* タブ */
+  .tabs{display:flex;gap:4px;margin-bottom:16px}
+  .tab{flex:1;padding:10px 6px;border:2px solid #d4c9b8;border-radius:10px;background:#fff;font-size:13px;font-weight:700;text-align:center;cursor:pointer;transition:all .2s;color:#8a7e6e}
+  .tab.active{background:#4a6741;border-color:#4a6741;color:#fff}
+  .tab:not(.active):hover{background:#f5f0e8}
+
+  /* 月ナビ */
+  .month-header{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:12px}
+  .month-header h3{font-size:16px;font-weight:700;min-width:140px;text-align:center;color:#4a6741}
+
+  /* カレンダーグリッド */
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:24px}
+  .cal-grid .dow{font-size:11px;font-weight:700;text-align:center;padding:4px 0;color:#8a7e6e}
+  .cal-grid .dow:first-child{color:#c0392b}
+  .cal-grid .dow:last-child{color:#2980b9}
+  .day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:13px;font-weight:600;transition:all .15s}
+  .day.empty{background:transparent}
+  .day.available{background:#e8f5e3;color:#2d5a27;cursor:pointer}
+  .day.available:hover{background:#c8e6c0;transform:scale(1.05)}
+  .day.booked{background:#e8e5e0;color:#aaa;text-decoration:line-through;cursor:default}
+  .day.today{outline:2.5px solid #4a6741;outline-offset:-2px;font-weight:900}
+  .day.past{background:#f2f0ed;color:#c0bbb3;cursor:default}
+
+  /* 凡例 */
+  .legend{display:flex;justify-content:center;gap:16px;margin-bottom:20px;font-size:12px;color:#8a7e6e}
+  .legend span{display:flex;align-items:center;gap:4px}
+  .legend-dot{width:12px;height:12px;border-radius:4px;display:inline-block}
+  .legend-dot.av{background:#e8f5e3;border:1px solid #a3d49a}
+  .legend-dot.bk{background:#e8e5e0;border:1px solid #ccc}
+  .legend-dot.td{background:#fff;border:2.5px solid #4a6741}
+
+  /* Instagram CTA */
+  .cta-area{text-align:center;padding:20px 0 8px}
+  .cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border:none;border-radius:50px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;text-decoration:none;transition:all .2s}
+  .cta-btn.sasamori{background:linear-gradient(135deg,#4a6741,#6b8f5e)}
+  .cta-btn.akari2{background:linear-gradient(135deg,#8b6914,#c49a2a)}
+  .cta-btn.akari4{background:linear-gradient(135deg,#8b6914,#c49a2a)}
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+  .cta-btn svg{width:22px;height:22px;fill:#fff}
+  .cta-sub{font-size:12px;color:#8a7e6e;margin-top:8px}
+
+  /* ローディング */
+  .loading{text-align:center;padding:40px 0;color:#aaa;font-size:13px}
+  .loading .spinner{display:inline-block;width:24px;height:24px;border:3px solid #e0ddd6;border-top-color:#4a6741;border-radius:50%;animation:spin .7s linear infinite;margin-bottom:8px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* フォールバック通知 */
+  .fallback-note{text-align:center;font-size:11px;color:#bbb;margin-bottom:12px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="cal-wrap">
+
+  <!-- タブ -->
+  <div class="tabs">
+    <div class="tab active" data-prop="sasamori" onclick="switchTab('sasamori')">
+      <div>&#x1F3E0; 笹森家</div>
+      <div style="font-size:10px;font-weight:400;margin-top:2px">一棟貸し</div>
+    </div>
+    <div class="tab" data-prop="akari2" onclick="switchTab('akari2')">
+      <div>&#x1F3E1; 灯</div>
+      <div style="font-size:10px;font-weight:400;margin-top:2px">2名部屋</div>
+    </div>
+    <div class="tab" data-prop="akari4" onclick="switchTab('akari4')">
+      <div>&#x1F3E1; 灯</div>
+      <div style="font-size:10px;font-weight:400;margin-top:2px">4名部屋</div>
+    </div>
+  </div>
+
+  <!-- カレンダー描画エリア -->
+  <div id="cal-container">
+    <div class="loading"><div class="spinner"></div><br>カレンダーを読み込み中...</div>
+  </div>
+
+  <!-- 凡例 -->
+  <div class="legend">
+    <span><span class="legend-dot av"></span>空き</span>
+    <span><span class="legend-dot bk"></span>予約済</span>
+    <span><span class="legend-dot td"></span>今日</span>
+  </div>
+
+  <!-- Instagram CTA -->
+  <div class="cta-area">
+    <a id="cta-btn" class="cta-btn sasamori" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      Instagramで予約する
+    </a>
+    <div class="cta-sub">DMにてご希望日をお伝えください</div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  // ===== 設定 =====
+  var CONFIG = {
+    sasamori: {
+      name: '民宿 笹森家',
+      icalUrls: [
+        'https://www.airbnb.jp/calendar/ical/1102707699897440341.ics?t=1ded900809014cb2a0ad576dbf36475e',
+        'https://ical.booking.com/v1/export?t=efa33e4f-8b52-4154-994e-fe7579b23999',
+        'https://ical.vacation-stay.jp/ical/v1/room_groups/860420.ics?s=d817b08590d4ba36757448abb168a648'
+      ],
+      instagram: 'https://ig.me/m/sasamorihouse',
+      ctaClass: 'sasamori'
+    },
+    akari2: {
+      name: 'ゲストハウス 灯（2名部屋）',
+      icalUrls: [
+        'https://www.airbnb.jp/calendar/ical/1525678819171946938.ics?t=19e6d1e4acf344149ebe58be36898440',
+        'https://ical.booking.com/v1/export?t=468efb80-5bf6-4987-96c2-b2e35b0274fd'
+      ],
+      instagram: 'https://ig.me/m/guesthousetomoshibi',
+      ctaClass: 'akari2'
+    },
+    akari4: {
+      name: 'ゲストハウス 灯（4名部屋）',
+      icalUrls: [
+        'https://www.airbnb.jp/calendar/ical/1555074192614564774.ics?t=17250d93b91e41a5b423904bd06b4171',
+        'https://ical.booking.com/v1/export?t=707f077b-93cb-4f2d-abe1-6ae1fde452b6'
+      ],
+      instagram: 'https://ig.me/m/guesthousetomoshibi',
+      ctaClass: 'akari4'
+    }
+  };
+
+  // Google Apps Script プロキシURL
+  var GAS_PROXY_URL = 'https://script.google.com/macros/s/AKfycbw9_9z9yxgUH_ijYILVzVN6vbstrg_UKzOs5t6O7OvxtOgpCzweNSJ5AmyLMEedEtL-/exec';
+
+  var currentProp = 'sasamori';
+  var bookedDates = { sasamori: {}, akari2: {}, akari4: {} };
+  var useFallback = { sasamori: false, akari2: false, akari4: false };
+
+  // ===== iCal パーサー =====
+  function parseIcal(text) {
+    var dates = {};
+    var events = text.split('BEGIN:VEVENT');
+    for (var i = 1; i < events.length; i++) {
+      var ev = events[i];
+      var dtstart = extractField(ev, 'DTSTART');
+      var dtend = extractField(ev, 'DTEND');
+      if (dtstart) {
+        var start = parseIcalDate(dtstart);
+        var end = dtend ? parseIcalDate(dtend) : addDays(start, 1);
+        var d = new Date(start);
+        while (d < end) {
+          dates[formatDate(d)] = true;
+          d.setDate(d.getDate() + 1);
+        }
+      }
+    }
+    return dates;
+  }
+
+  function extractField(block, field) {
+    var re = new RegExp(field + '[^:]*:(.+)');
+    var m = block.match(re);
+    return m ? m[1].trim() : null;
+  }
+
+  function parseIcalDate(s) {
+    s = s.replace(/[^0-9T]/g, '');
+    var y = parseInt(s.substr(0, 4));
+    var mo = parseInt(s.substr(4, 2)) - 1;
+    var d = parseInt(s.substr(6, 2));
+    return new Date(y, mo, d);
+  }
+
+  function addDays(date, n) {
+    var r = new Date(date);
+    r.setDate(r.getDate() + n);
+    return r;
+  }
+
+  function formatDate(d) {
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  }
+
+  // ===== iCal 取得（複数ソースをマージ） =====
+  function fetchIcal(prop, callback) {
+    var urls = CONFIG[prop].icalUrls;
+    if (!urls || urls.length === 0 || !GAS_PROXY_URL || GAS_PROXY_URL.indexOf('PASTE_') === 0) {
+      generateSampleData(prop);
+      callback();
+      return;
+    }
+
+    var mergedDates = {};
+    var completed = 0;
+    var anySuccess = false;
+
+    urls.forEach(function(url) {
+      var proxyUrl = GAS_PROXY_URL + '?url=' + encodeURIComponent(url);
+      fetch(proxyUrl)
+        .then(function(res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.text();
+        })
+        .then(function(text) {
+          if (text.indexOf('BEGIN:VCALENDAR') !== -1) {
+            var parsed = parseIcal(text);
+            for (var key in parsed) {
+              mergedDates[key] = true;
+            }
+            anySuccess = true;
+          }
+        })
+        .catch(function() { /* 個別失敗は無視、他ソースで補完 */ })
+        .finally(function() {
+          completed++;
+          if (completed >= urls.length) {
+            if (anySuccess) {
+              bookedDates[prop] = mergedDates;
+              useFallback[prop] = false;
+            } else {
+              generateSampleData(prop);
+            }
+            callback();
+          }
+        });
+    });
+  }
+
+  // ===== サンプルデータ生成 =====
+  function generateSampleData(prop) {
+    useFallback[prop] = true;
+    var dates = {};
+    var today = new Date();
+    // ランダムに数日を予約済みにする
+    var seedMap = {
+      sasamori: [3,4,5,10,11,18,19,20,25,26],
+      akari2: [1,2,7,8,14,15,16,22,23,28,29],
+      akari4: [2,3,9,10,11,17,18,24,25,30]
+    };
+    var seeds = seedMap[prop] || [5,6,12,13,19,20,26,27];
+    for (var m = 0; m < 2; m++) {
+      var year = today.getFullYear();
+      var month = today.getMonth() + m;
+      if (month > 11) { month -= 12; year++; }
+      for (var s = 0; s < seeds.length; s++) {
+        var dim = new Date(year, month + 1, 0).getDate();
+        if (seeds[s] <= dim) {
+          dates[year + '-' + String(month + 1).padStart(2, '0') + '-' + String(seeds[s]).padStart(2, '0')] = true;
+        }
+      }
+    }
+    bookedDates[prop] = dates;
+  }
+
+  // ===== カレンダー描画 =====
+  function renderCalendars() {
+    var container = document.getElementById('cal-container');
+    container.innerHTML = '';
+
+    if (useFallback[currentProp]) {
+      var note = document.createElement('div');
+      note.className = 'fallback-note';
+      note.textContent = '* サンプル表示中（iCal未接続）';
+      container.appendChild(note);
+    }
+
+    var today = new Date();
+    for (var m = 0; m < 2; m++) {
+      var year = today.getFullYear();
+      var month = today.getMonth() + m;
+      if (month > 11) { month -= 12; year++; }
+      renderMonth(container, year, month, today);
+    }
+  }
+
+  function renderMonth(container, year, month, today) {
+    var MONTHS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    var DOWS = ['日','月','火','水','木','金','土'];
+
+    // ヘッダー
+    var header = document.createElement('div');
+    header.className = 'month-header';
+    var h3 = document.createElement('h3');
+    h3.textContent = year + '年 ' + MONTHS[month];
+    header.appendChild(h3);
+    container.appendChild(header);
+
+    // グリッド
+    var grid = document.createElement('div');
+    grid.className = 'cal-grid';
+
+    // 曜日ラベル
+    for (var w = 0; w < 7; w++) {
+      var dow = document.createElement('div');
+      dow.className = 'dow';
+      dow.textContent = DOWS[w];
+      grid.appendChild(dow);
+    }
+
+    var firstDay = new Date(year, month, 1).getDay();
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+    var todayStr = formatDate(today);
+
+    // 空セル
+    for (var e = 0; e < firstDay; e++) {
+      var empty = document.createElement('div');
+      empty.className = 'day empty';
+      grid.appendChild(empty);
+    }
+
+    // 日付セル
+    for (var d = 1; d <= daysInMonth; d++) {
+      var cell = document.createElement('div');
+      cell.className = 'day';
+      cell.textContent = d;
+
+      var dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      var dateObj = new Date(year, month, d);
+      var isPast = dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+      if (dateStr === todayStr) {
+        cell.classList.add('today');
+      }
+
+      if (isPast) {
+        cell.classList.add('past');
+      } else if (bookedDates[currentProp][dateStr]) {
+        cell.classList.add('booked');
+      } else {
+        cell.classList.add('available');
+      }
+
+      grid.appendChild(cell);
+    }
+
+    container.appendChild(grid);
+  }
+
+  // ===== タブ切り替え =====
+  window.switchTab = function(prop) {
+    currentProp = prop;
+    var tabs = document.querySelectorAll('.tab');
+    tabs.forEach(function(t) {
+      t.classList.toggle('active', t.getAttribute('data-prop') === prop);
+    });
+
+    // CTA更新
+    var btn = document.getElementById('cta-btn');
+    btn.href = CONFIG[prop].instagram;
+    btn.className = 'cta-btn ' + CONFIG[prop].ctaClass;
+
+    renderCalendars();
+  };
+
+  // ===== データ再取得 =====
+  function refreshAll() {
+    var loaded = 0;
+    var total = 3;
+    function onDone() {
+      loaded++;
+      if (loaded >= total) {
+        renderCalendars();
+      }
+    }
+    fetchIcal('sasamori', onDone);
+    fetchIcal('akari2', onDone);
+    fetchIcal('akari4', onDone);
+  }
+
+  // ===== 初期化 =====
+  function init() {
+    refreshAll();
+    // CTA初期設定
+    var btn = document.getElementById('cta-btn');
+    btn.href = CONFIG[currentProp].instagram;
+
+    // 15分ごとに自動更新
+    setInterval(refreshAll, 15 * 60 * 1000);
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
+
