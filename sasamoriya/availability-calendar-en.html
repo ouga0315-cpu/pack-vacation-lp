@@ -15,7 +15,7 @@
   .tab.active{background:#4a6741;border-color:#4a6741;color:#fff}
   .tab:not(.active):hover{background:#f5f0e8}
 
-  /* /ナビ */
+  /* 月ナビ */
   .month-header{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:12px}
   .month-header h3{font-size:16px;font-weight:700;min-width:140px;text-align:center;color:#4a6741}
 
@@ -281,7 +281,7 @@
       String(d.getDate()).padStart(2, '0');
   }
 
-  // ===== iCal 取得（複数ソースをマージ) =====
+  // ===== iCal 取得（複数ソースをマージ） =====
   function fetchIcal(prop, callback) {
     var urls = CONFIG[prop].icalUrls;
     if (!urls || urls.length === 0 || !GAS_PROXY_URL || GAS_PROXY_URL.indexOf('PASTE_') === 0) {
@@ -379,7 +379,7 @@
     var header = document.createElement('div');
     header.className = 'month-header';
     var h3 = document.createElement('h3');
-    h3.textContent = year + '/ ' + MONTHS[month];
+    h3.textContent = year + '年 ' + MONTHS[month];
     header.appendChild(h3);
     container.appendChild(header);
 
@@ -491,7 +491,7 @@
 
   function formatYen(n) { return '¥' + n.toLocaleString(); }
 
-  // nights数分の合計を計算（日ごとに季節係数が変わる)
+  // 泊数分の合計を計算（日ごとに季節係数が変わる）
   function calcTotalPrice(checkin, checkout, guests) {
     var p = PRICING[currentProp];
     var ci = new Date(checkin); var co = new Date(checkout);
@@ -524,12 +524,12 @@
 
     document.getElementById('popupDate').textContent = dateLabel;
     document.getElementById('popupSeason').textContent = info.label;
-    document.getElementById('popupPrice').innerHTML = formatYen(base) + ' <small>／nights（1〜2)</small>';
+    document.getElementById('popupPrice').innerHTML = formatYen(base) + ' <small>/ night (1-2 ppl)</small>';
 
-    var detail = '3: ' + formatYen(base + perExtra) +
-                 ' ／ 4: ' + formatYen(base + perExtra*2) +
-                 ' ／ 5: ' + formatYen(base + perExtra*3) +
-                 ' ／ 6: ' + formatYen(base + perExtra*4);
+    var detail = '3 ppl: ' + formatYen(base + perExtra) +
+                 ' / 4 ppl: ' + formatYen(base + perExtra*2) +
+                 ' / 5 ppl: ' + formatYen(base + perExtra*3) +
+                 ' / 6 ppl: ' + formatYen(base + perExtra*4);
     document.getElementById('popupDetail').textContent = detail;
 
     // フォーム初期値
@@ -610,7 +610,7 @@
       website: hp,
       lang: 'ja',
       note: document.getElementById('fNote').value.trim(),
-      totalPrice: formatYen(total) + '（' + nights + 'nights)'
+      totalPrice: formatYen(total) + ' (' + nights + ' nights)'
     };
 
     if (GAS_BOOKING_URL.indexOf('PASTE_') === 0) {
