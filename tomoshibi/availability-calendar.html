@@ -201,6 +201,34 @@
   // Google Apps Script プロキシURL
   var GAS_PROXY_URL = 'https://script.google.com/macros/s/AKfycbw9_9z9yxgUH_ijYILVzVN6vbstrg_UKzOs5t6O7OvxtOgpCzweNSJ5AmyLMEedEtL-/exec';
 
+  // 予約受付 GAS (doPost/availability)
+  var GAS_BOOKING_URL_AVAIL = 'https://script.google.com/macros/s/AKfycbz--kp0PzzTHj_OdZXEWMWMRa0I4lsAYwhSnY6WOuQMc8EkuRtuyVsf2kUYTYyjXSxQLg/exec';
+
+  // JSONP で GAS から予約済み日付を取得してマージ
+  function fetchGasAvailability(prop, callback) {
+    if (!GAS_BOOKING_URL_AVAIL || GAS_BOOKING_URL_AVAIL.indexOf('PASTE_')===0) { callback(); return; }
+    var cbName = 'gasAvail_' + prop + '_' + Date.now();
+    var done = false;
+    window[cbName] = function(resp) {
+      done = true;
+      try {
+        if (resp && resp.success && resp.dates) {
+          if (!bookedDates[prop]) bookedDates[prop] = {};
+          for (var i=0;i<resp.dates.length;i++) bookedDates[prop][resp.dates[i]] = true;
+          useFallback[prop] = false;
+        }
+      } catch(e) {}
+      delete window[cbName];
+      if (s.parentNode) s.parentNode.removeChild(s);
+      callback();
+    };
+    var s = document.createElement('script');
+    s.src = GAS_BOOKING_URL_AVAIL + '?action=availability&prop=' + encodeURIComponent(prop) + '&callback=' + cbName + '&_=' + Date.now();
+    s.onerror = function(){ if (!done) { delete window[cbName]; callback(); } };
+    document.head.appendChild(s);
+    setTimeout(function(){ if(!done){ try{delete window[cbName];}catch(e){} callback(); } }, 8000);
+  }
+
   var currentProp = 'akari2';
   var bookedDates = { akari2: {}, akari4: {} };
   var useFallback = { akari2: false, akari4: false };
@@ -579,8 +607,11 @@
         renderCalendars();
       }
     }
+    total = 4;
     fetchIcal('akari2', onDone);
     fetchIcal('akari4', onDone);
+    fetchGasAvailability('akari2', onDone);
+    fetchGasAvailability('akari4', onDone);
   }
 
   // ===== 初期化 =====

@@ -414,16 +414,40 @@
     container.appendChild(grid);
   }
 
-  // ===== データ再取得 =====
-  function refreshAll() {
-    fetchIcal('sasamori', function() {
-      renderCalendars();
-    });
+  // 予約受付 GAS URL
+  var GAS_BOOKING_URL = 'https://script.google.com/macros/s/AKfycbz--kp0PzzTHj_OdZXEWMWMRa0I4lsAYwhSnY6WOuQMc8EkuRtuyVsf2kUYTYyjXSxQLg/exec';
+
+  // JSONP で GAS から予約済み日付を取得してマージ
+  function fetchGasAvailability(prop, callback) {
+    var cbName = 'gasAvail_' + prop + '_' + Date.now();
+    var done = false;
+    window[cbName] = function(resp) {
+      done = true;
+      try {
+        if (resp && resp.success && resp.dates) {
+          if (!bookedDates[prop]) bookedDates[prop] = {};
+          for (var i=0;i<resp.dates.length;i++) bookedDates[prop][resp.dates[i]] = true;
+          useFallback[prop] = false;
+        }
+      } catch(e) {}
+      delete window[cbName];
+      if (s.parentNode) s.parentNode.removeChild(s);
+      callback();
+    };
+    var s = document.createElement('script');
+    s.src = GAS_BOOKING_URL + '?action=availability&prop=' + encodeURIComponent(prop) + '&callback=' + cbName + '&_=' + Date.now();
+    s.onerror = function(){ if (!done) { delete window[cbName]; callback(); } };
+    document.head.appendChild(s);
+    setTimeout(function(){ if(!done){ try{delete window[cbName];}catch(e){} callback(); } }, 8000);
   }
 
-  // ===== 予約システム設定 =====
-  // ★★★ GASデプロイ後にこのURLを書き換えてください ★★★
-  var GAS_BOOKING_URL = 'https://script.google.com/macros/s/AKfycbz--kp0PzzTHj_OdZXEWMWMRa0I4lsAYwhSnY6WOuQMc8EkuRtuyVsf2kUYTYyjXSxQLg/exec';
+  // ===== データ再取得 =====
+  function refreshAll() {
+    var done = 0;
+    function onDone(){ done++; if (done>=2) renderCalendars(); }
+    fetchIcal('sasamori', onDone);
+    fetchGasAvailability('sasamori', onDone);
+  }
 
   var PRICING = {
     sasamori: { base: 23000, perExtra: 10000, maxGuests: 6 }
