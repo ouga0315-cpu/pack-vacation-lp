@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minshuku Sasamorihouse — Private Forest Retreat in Azumino, Nagano</title>
+<meta name="description" content="A private whole-house rental nestled in the forests of Azumino Gakushamura, Nagano. 2-bedroom house with living/dining room, 100㎡, pet-friendly, BBQ, 100-inch home theater. From ¥15,000/night.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏡</text></svg>">
+<meta property="og:title" content="Minshuku Sasamorihouse — A Forest Retreat in Azumino">
+<meta property="og:description" content="Private whole-house rental in Azumino Gakushamura forest. 2-bedroom house with living/dining room, pet-friendly, BBQ, home theater, newly renovated bathroom.">
+<meta property="og:image" content="../images/exterior-autumn.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown: #5C3D2E;
+    --cream: #F8F5F0;
+    --green: #3C5A3A;
+    --gold: #B89B5E;
+    --text: #2C2C2C;
+    --muted: #7A7368;
+    --light: #EFEBE4;
+    --dark: #1A1A18;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Zen Old Mincho', Georgia, serif;
+    color: var(--text); background: var(--cream);
+    letter-spacing: 0.04em; line-height: 2.0; font-weight: 400;
+  }
+  h1, h2, h3 { font-weight: 500; letter-spacing: 0.1em; line-height: 1.6; }
+
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  header {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(248,245,240,0.92); backdrop-filter: blur(12px);
+    padding: 20px 48px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-img { height: 56px; width: auto; }
+  .logo-text { font-size: 1.1rem; color: var(--brown); letter-spacing: 0.2em; font-weight: 500; }
+  .logo-text span { font-size: 0.65rem; display: block; color: var(--muted); letter-spacing: 0.3em; margin-top: 2px; }
+  nav a { margin-left: 32px; text-decoration: none; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.15em; transition: color 0.3s; }
+  nav a:hover { color: var(--brown); }
+  .btn-book {
+    background: var(--brown); color: white; padding: 10px 28px;
+    text-decoration: none; font-size: 0.75rem; letter-spacing: 0.2em; transition: opacity 0.3s;
+  }
+  .btn-book:hover { opacity: 0.8; }
+
+  .hero {
+    height: 100vh; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    filter: brightness(0.45);
+    opacity: 0; transition: opacity 1.2s ease-in-out;
+  }
+  .hero-slide.active { opacity: 1; }
+  .hero-content { position: relative; text-align: center; color: white; padding: 0 24px; }
+  .hero-sub { font-size: 0.7rem; letter-spacing: 0.5em; margin-bottom: 24px; opacity: 0.7; }
+  .hero-title { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.5; margin-bottom: 24px; letter-spacing: 0.15em; font-weight: 400; }
+  .hero-desc { font-size: 0.85rem; letter-spacing: 0.2em; opacity: 0.6; margin-bottom: 48px; }
+  .hero-btn {
+    display: inline-block; padding: 16px 56px;
+    border: 1px solid rgba(255,255,255,0.4); color: white;
+    text-decoration: none; letter-spacing: 0.25em; font-size: 0.75rem; transition: all 0.4s;
+  }
+  .hero-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+  .scroll-hint {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,0.4); font-size: 0.65rem; letter-spacing: 0.4em;
+  }
+  .scroll-hint::after { content: ''; display: block; width: 1px; height: 40px; background: rgba(255,255,255,0.3); margin: 12px auto 0; }
+
+  .section-inner { max-width: 1000px; margin: 0 auto; padding: 100px 48px; }
+  .section-label { font-size: 0.65rem; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 20px; }
+  .section-title { font-size: clamp(1.5rem, 2.5vw, 2.2rem); color: var(--brown); margin-bottom: 32px; }
+  .section-text { color: var(--muted); font-size: 0.92rem; }
+  .divider { border: none; border-top: 1px solid var(--gold); width: 40px; margin: 0; }
+
+  .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .about-img { width: 100%; height: 400px; object-fit: cover; }
+  .badge { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 16px; display: block; }
+
+  .rooms-section { background: var(--light); }
+  .room-card { background: white; max-width: 900px; margin: 0 auto; overflow: hidden; }
+  .room-img-main { width: 100%; height: 340px; object-fit: cover; }
+  .room-info { padding: 48px; }
+  .room-name { font-size: 1.2rem; color: var(--brown); margin-bottom: 24px; letter-spacing: 0.15em; }
+  .room-details { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 24px; }
+  .room-details-label { font-size: 0.65rem; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 12px; }
+  .room-details ul { list-style: none; font-size: 0.88rem; color: var(--muted); line-height: 2.2; }
+  .room-price { font-size: 0.88rem; color: var(--green); margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--light); }
+  .room-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 32px; }
+  .room-gallery img { width: 100%; height: 160px; object-fit: cover; }
+  .room-gallery figcaption { font-size: 0.68rem; color: var(--muted); text-align: center; margin-top: 8px; letter-spacing: 0.1em; }
+
+  .act-photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 4px; }
+  .act-photo { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+  .act-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+  .act-photo:hover img { transform: scale(1.05); }
+  .act-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
+  }
+  .act-photo-label { color: var(--gold); font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 8px; }
+  .act-photo-name { color: white; font-size: 1rem; letter-spacing: 0.1em; }
+  .act-photo-desc { color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-top: 6px; }
+
+  .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; padding: 0 48px; }
+  .reel-item { text-align: center; }
+  .reel-item iframe { width: 100%; height: 360px; border: none; border-radius: 12px; }
+  .reel-caption { font-size: 0.8rem; color: var(--muted); margin-top: 12px; letter-spacing: 0.1em; }
+
+  .reviews-section { background: white; }
+  .review-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+  .review-card { padding: 32px; background: var(--cream); border-radius: 8px; }
+  .review-stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 16px; }
+  .review-text { color: var(--muted); font-size: 0.88rem; line-height: 2.0; margin-bottom: 20px; }
+  .review-author { font-size: 0.75rem; color: var(--brown); letter-spacing: 0.1em; }
+
+  .season-photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .season-photo { position: relative; overflow: hidden; aspect-ratio: 3/4; }
+  .season-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+  .season-photo:hover img { transform: scale(1.05); }
+  .season-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
+  }
+  .season-photo-label { color: var(--gold); font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 8px; }
+  .season-photo-name { color: white; font-size: 1rem; letter-spacing: 0.1em; }
+  .season-photo-desc { color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-top: 6px; }
+
+  .access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 32px; }
+  .access-info dt { font-size: 0.65rem; color: var(--gold); letter-spacing: 0.2em; margin-top: 28px; }
+  .access-info dt:first-child { margin-top: 0; }
+  .access-info dd { color: var(--muted); line-height: 1.9; margin-top: 8px; font-size: 0.9rem; }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.4); text-align: center; padding: 60px 48px; font-size: 0.75rem; letter-spacing: 0.15em; }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; }
+  footer a:hover { color: var(--gold); }
+  .footer-links { margin: 20px 0; }
+  .footer-links a { margin: 0 16px; }
+
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .hamburger span { display: block; width: 20px; height: 1.5px; background: var(--brown); margin: 5px 0; transition: all 0.3s; }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+  .mobile-nav {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: rgba(248,245,240,0.97); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { text-decoration: none; color: var(--brown); font-size: 1.1rem; letter-spacing: 0.2em; }
+
+  .host-wrap { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: center; }
+  .host-photo { width: 280px; height: 280px; border-radius: 50%; object-fit: cover; background: var(--light); }
+  .host-name { font-size: 1.2rem; color: var(--brown); margin-bottom: 8px; }
+  .host-role { font-size: 0.72rem; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 20px; }
+  .host-text { color: var(--muted); font-size: 0.9rem; line-height: 2.2; }
+
+  .faq-list { max-width: 800px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--light); }
+  .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 24px 0; font-family: inherit; font-size: 0.95rem; color: var(--brown); letter-spacing: 0.08em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; line-height: 1.8; }
+  .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--gold); transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
+  .faq-q.open::after { content: '−'; }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
+  .faq-a-inner { padding: 0 0 24px; color: var(--muted); font-size: 0.88rem; line-height: 2.2; }
+
+  .contact-section { background: var(--brown); color: white; text-align: center; }
+  .contact-section .section-label { color: rgba(255,255,255,0.4); }
+  .contact-section h2 { color: white; }
+  .contact-text { color: rgba(255,255,255,0.6); font-size: 0.88rem; margin-bottom: 36px; }
+  .btn-contact {
+    display: inline-block; padding: 16px 48px; border: 1px solid rgba(255,255,255,0.3);
+    color: white; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.2em;
+    transition: all 0.3s; margin: 0 8px;
+  }
+  .btn-contact:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+  .lang-switch { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.15em; margin-left: 24px; text-decoration: none; border: 1px solid var(--light); padding: 6px 14px; transition: all 0.3s; }
+  .lang-switch:hover { color: var(--brown); border-color: var(--brown); }
+
+  @media (max-width: 768px) {
+    header { padding: 14px 20px; }
+    nav { display: none; }
+    .hamburger { display: block; }
+    .section-inner { padding: 72px 24px; }
+    .about-wrap, .access-grid, .room-details { grid-template-columns: 1fr; }
+    .about-img { height: 280px; }
+    .room-info { padding: 32px 24px; }
+    .room-gallery img { height: 120px; }
+    .reel-grid { padding: 0 24px; grid-template-columns: 1fr; }
+    .reel-item iframe { height: 320px; }
+    .host-wrap { grid-template-columns: 1fr; text-align: center; }
+    .host-photo { margin: 0 auto 24px; width: 200px; height: 200px; }
+    .review-grid { grid-template-columns: 1fr; }
+    .season-photo-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">
+    <img class="logo-img" src="../images/siro.png" alt="Sasamorihouse Logo">
+    <div class="logo-text">
+      Sasamorihouse
+      <span>MINSHUKU SASAMORIHOUSE</span>
+    </div>
+  </a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#activities">Activities</a>
+    <a href="#access">Access</a>
+    <a href="../ja/" class="lang-switch">日本語</a>
+  </nav>
+  <a href="#calendar" class="btn-book">Book Now</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#rooms" onclick="toggleMenu()">Rooms</a>
+  <a href="#activities" onclick="toggleMenu()">Activities</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="#access" onclick="toggleMenu()">Access</a>
+  <a href="#calendar" onclick="toggleMenu()">Book Now</a>
+  <a href="../ja/" onclick="toggleMenu()">日本語</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-slide active" style="background-image:url('../images/exterior-autumn.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/garden.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/living-kitchen.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-winter.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-spring.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-summer.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-autumn.jpg')"></div>
+  <div class="hero-content">
+    <p class="hero-sub">AZUMINO GAKUSHAMURA, NAGANO</p>
+    <h1 class="hero-title">Nothing but the rustle<br>of trees and birdsong</h1>
+    <p class="hero-desc">A private whole-house retreat in the forests of Azumino</p>
+    <a href="#calendar" class="hero-btn">Check Availability</a>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</div>
+
+<!-- ABOUT -->
+<div id="about">
+  <div class="section-inner">
+    <div class="about-wrap fade-in">
+      <div>
+        <p class="section-label">ABOUT</p>
+        <span class="badge">★4.79 ／ 61 Reviews</span>
+        <h2 class="section-title">A private space<br>in the heart of the forest</h2>
+        <hr class="divider" style="margin-bottom: 28px;">
+        <p class="section-text">
+          Minshuku Sasamorihouse is a private whole-house rental nestled in the forest of Azumino Gakushamura.<br><br>
+          Enjoy a 100㎡, two-story traditional Japanese house entirely to yourself.
+          A 100-inch home theater, an open-plan living room, and a private bathroom newly built in 2025.
+          The expansive 750㎡ garden is perfect for BBQ. Pets are more than welcome.<br><br>
+          The stillness here is extraordinary. All you hear is the sway of trees, birdsong,
+          and the faint sound of a distant train. A complete escape from everyday life.
+        </p>
+      </div>
+      <img class="about-img" src="../images/living-kitchen.jpg" alt="Sasamorihouse living & dining room">
+    </div>
+  </div>
+</div>
+
+<!-- ROOMS -->
+<div class="rooms-section" id="rooms">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">ROOMS</p>
+      <h2 class="section-title" style="text-align:center;">The House</h2>
+    </div>
+    <div class="room-card fade-in">
+      <img class="room-img-main" src="../images/exterior-autumn.jpg" alt="Sasamorihouse exterior in autumn">
+      <div class="room-info">
+        <p class="room-name">Whole-House Private Rental</p>
+        <div class="room-details">
+          <div>
+            <p class="room-details-label">FLOOR PLAN</p>
+            <ul>
+              <li>Japanese bedroom (4 futons)</li>
+              <li>Western bedroom / theater room (double bed)</li>
+              <li>Open-plan living & dining room</li>
+              <li>Private bathroom (newly built 2025)</li>
+            </ul>
+          </div>
+          <div>
+            <p class="room-details-label">DETAILS</p>
+            <ul>
+              <li>100㎡ house + 750㎡ garden</li>
+              <li>Forest villa area, Azumino Gakushamura</li>
+              <li>Pet-friendly ／ BBQ area</li>
+              <li>100-inch home theater</li>
+              <li>Free station pickup (on request)</li>
+              <li>Free parking for 3 cars</li>
+            </ul>
+          </div>
+        </div>
+        <p class="room-price"><strong>Up to 6 guests</strong> ／ From ¥15,000/night (varies by guests & season) ／ <a href="#calendar" style="color:var(--green);text-decoration:underline;">Check availability & book</a></p>
+        <div class="room-gallery">
+          <figure>
+            <img src="../images/kitchen-detail.jpg" alt="Full kitchen">
+            <figcaption>Full Kitchen</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/bedroom-western.jpg" alt="Western bedroom">
+            <figcaption>Western Bedroom</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/bathroom-new.jpg" alt="Bathroom (new 2025)">
+            <figcaption>Bathroom (New 2025)</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTIVITIES -->
+<div id="activities">
+  <div class="section-inner" style="padding-bottom: 40px;">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">ACTIVITIES</p>
+      <h2 class="section-title" style="text-align:center;">Experiences Only at Sasamorihouse</h2>
+    </div>
+  </div>
+  <div class="act-photo-grid fade-in">
+    <div class="act-photo">
+      <img src="../images/theater.jpg" alt="Home theater">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">CINEMA</p>
+        <p class="act-photo-name">100-inch Home Theater</p>
+        <p class="act-photo-desc">Movies, anime, and sports on the big screen</p>
+      </div>
+    </div>
+    <div class="act-photo">
+      <img src="../images/garden.jpg" alt="Forest garden">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">OUTDOOR</p>
+        <p class="act-photo-name">BBQ & Picnic in the Forest</p>
+        <p class="act-photo-desc">A vast 750㎡ garden, dappled in sunlight</p>
+      </div>
+    </div>
+    <div class="act-photo">
+      <img src="../images/lifestyle-pet.jpg" alt="Pet-friendly stay">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">PET FRIENDLY</p>
+        <p class="act-photo-name">Stay with Your Pet</p>
+        <p class="act-photo-desc">Cozy up under a kotatsu while gazing at the snow</p>
+      </div>
+    </div>
+    <div class="act-photo">
+      <img src="../images/pet-dog.jpg" alt="Pets welcome">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">WELCOME</p>
+        <p class="act-photo-name">Small Dogs & Cats Welcome</p>
+        <p class="act-photo-desc">Bring the whole family — pets included</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEASONS -->
+<div>
+  <div class="section-inner fade-in" style="padding-bottom: 40px;">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">SEASONS</p>
+      <h2 class="section-title" style="text-align:center;">Azumino Through the Seasons</h2>
+    </div>
+  </div>
+  <div class="season-photo-grid fade-in">
+    <div class="season-photo">
+      <img src="../images/season-winter.jpg" alt="Kurosawa Falls frozen waterfall in winter">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">WINTER</p>
+        <p class="season-photo-name">Frozen Falls & Snow</p>
+        <p class="season-photo-desc">Kurosawa ice falls, kotatsu time. Hakuba ski resorts 40 min away</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../images/season-spring.jpg" alt="Cherry blossoms in Azumino">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">SPRING</p>
+        <p class="season-photo-name">Cherry Blossoms & Alps</p>
+        <p class="season-photo-desc">Snow-capped peaks and wasabi farm flowers. Perfect for cycling</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../images/season-summer.jpg" alt="Summer rice paddies in Azumino">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">SUMMER</p>
+        <p class="season-photo-name">Rice Paddies & Starry Skies</p>
+        <p class="season-photo-desc">Lush green fields and the North Alps. Cool breeze at 600m altitude</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../images/season-autumn.jpg" alt="Autumn foliage in Azumino">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">AUTUMN</p>
+        <p class="season-photo-name">Foliage & Fresh Soba</p>
+        <p class="season-photo-desc">Peak autumn colors. Bonfire nights with the home theater</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPLORE AZUMINO -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">EXPLORE AZUMINO</p>
+      <h2 class="section-title" style="text-align:center;">Things to Do in Azumino</h2>
+      <p class="section-text" style="max-width:600px;margin:0 auto;">Use Sasamorihouse as your base to explore Azumino's nature and adventures.<br>Your host can guide you to the best trails, spots, and routes.</p>
+    </div>
+    <div class="reel-grid">
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/p/DP7ZOQzD6-o/embed" allowfullscreen></iframe>
+        <p class="reel-caption">Hiking — The North Alps</p>
+      </div>
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/reel/DInijkPyVHV/embed" allowfullscreen></iframe>
+        <p class="reel-caption">Cycling — Through rice fields</p>
+      </div>
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/reel/DMxFpW2yKPR/embed" allowfullscreen></iframe>
+        <p class="reel-caption">Canyoning — River adventures</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="reviews-section">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">GUEST REVIEWS</p>
+      <h2 class="section-title" style="text-align:center;">What Our Guests Say</h2>
+    </div>
+    <div class="review-grid fade-in">
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">"The owner was incredibly kind — he picked me up at the station and even stopped along the way to show me the Southern Alps and explain the local area. You can feel the care in every detail of the house. I definitely want to come back."</p>
+        <p class="review-author">— Maruno</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">"A quiet space surrounded by beautiful greenery. If that's what you're looking for, you'll love this place. The room felt so calming, wrapped in trees. It's become one of the places I want to visit again."</p>
+        <p class="review-author">— Yasuzu ／ Multi-night stay</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">"The host was very friendly and responded quickly to questions, so I felt safe throughout my stay. The room was clean, the bath was spacious, and it stayed warm all night. The setting was absolutely perfect."</p>
+        <p class="review-author">— Shigeru ／ Stayed with pet</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">"A wooden house located in the forest area of Azumino, warm and comfortable. You can feel the winter sun in the forest and enjoy the nearby landscape. Free parking available — a perfect place if you're seeking the quiet of the forest."</p>
+        <p class="review-author">— Shaokang ／ 3-night stay</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR -->
+<div id="calendar">
+  <div class="section-inner fade-in" style="text-align: center;">
+    <p class="section-label">AVAILABILITY</p>
+    <h2 class="section-title" style="text-align:center;">Availability Calendar</h2>
+    <p class="section-text" style="margin-bottom: 40px;">Check your preferred dates below.</p>
+    <iframe src="../availability-calendar.html" style="width:100%;height:560px;border:none;"></iframe>
+  </div>
+</div>
+
+<!-- SNS -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in" style="max-width: 720px; text-align: center;">
+    <p class="section-label">SNS</p>
+    <h2 class="section-title" style="text-align:center; margin-bottom: 32px;">Follow Our Latest Updates</h2>
+    <div style="display:flex; justify-content:center; gap:4px; margin-bottom:32px;">
+      <button onclick="switchSNS('ig','sasamori')" id="tab-ig-s" style="padding:12px 28px;border:1px solid var(--brown);background:var(--brown);color:white;cursor:pointer;font-size:0.72rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Instagram</button>
+      <button onclick="switchSNS('podcast','sasamori')" id="tab-podcast-s" style="padding:12px 28px;border:1px solid var(--brown);background:transparent;color:var(--brown);cursor:pointer;font-size:0.72rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Podcast</button>
+    </div>
+    <div id="sns-ig-s" style="min-height:540px;">
+      <iframe src="https://www.instagram.com/sasamorihouse/embed" style="width:100%;height:540px;border:none;overflow:hidden;background:white;"></iframe>
+    </div>
+    <div id="sns-podcast-s" style="display:none;min-height:540px;">
+      <iframe src="https://open.spotify.com/embed/show/0i1LD1y7MnyzoptDa6PytJ?theme=0" style="width:100%;height:540px;border:none;" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+<script>
+function switchSNS(type, site) {
+  var panels = ['ig','podcast'];
+  var s = '-s';
+  panels.forEach(function(p){
+    var el = document.getElementById('sns-'+p+s);
+    var tab = document.getElementById('tab-'+p+s);
+    if(el) el.style.display = p===type ? 'block' : 'none';
+    if(tab){
+      tab.style.background = p===type ? 'var(--brown)' : 'transparent';
+      tab.style.color = p===type ? 'white' : 'var(--brown)';
+    }
+  });
+}
+</script>
+
+<!-- HOST -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <p class="section-label">HOST</p>
+    <h2 class="section-title" style="text-align:center;">Meet Your Host</h2>
+    <div class="host-wrap" style="margin-top:48px;">
+      <img class="host-photo" src="../images/host-ouga.jpg" alt="Host Ouga Sanjo">
+      <div>
+        <p class="host-name">Ouga Sanjo</p>
+        <p class="host-role">FOUNDER, PACK VACATION</p>
+        <p class="host-text">
+          Born and raised in Tokyo, Ouga moved to Azumino at 23 and founded Minshuku Sasamorihouse, a whole-house rental. Since then, he has welcomed hundreds of guests from around the world.<br><br>
+          Alongside running the accommodations, he's passionate about sharing Azumino's nature and culture through social media and guiding hiking and sightseeing tours.<br><br>
+          When you visit, Ouga is happy to provide free station pickup, recommend local spots, and guide you on the best mountain trails.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div id="faq" style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title" style="text-align:center;">Frequently Asked Questions</h2>
+    <div class="faq-list" style="margin-top:40px;">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is Wi-Fi available?</button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, free Wi-Fi is available throughout the house. It's fast enough for remote work.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Are towels and amenities provided?</button>
+        <div class="faq-a"><div class="faq-a-inner">We provide bath towels, shampoo, and body soap. Please bring your own toothbrush.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Are there shops or supermarkets nearby?</button>
+        <div class="faq-a"><div class="faq-a-inner">There's a convenience store and supermarket about 10 minutes by car. We recommend shopping before arrival. We can also suggest BBQ supply stores.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Are there restrictions on pet type or size?</button>
+        <div class="faq-a"><div class="faq-a-inner">Small dogs and cats are welcome. A cleaning fee applies: ¥3,000 for the first pet, ¥1,000 for each additional pet. Please contact us before booking if you have a large dog.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is it suitable for families with young children?</button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely! Families with children are very welcome. Since it's a private whole-house rental, you can relax without worrying about noise.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">What is the cancellation policy?</button>
+        <div class="faq-a"><div class="faq-a-inner">14+ days before: full refund. 7–13 days before: 50% refund. Less than 7 days: no refund. Full details are provided at booking.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Do you offer station pickup?</button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, we offer free pickup from Azumi-Oiwake Station on the JR Oito Line (advance booking required). Just let us know your arrival time.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Do I need a passport to book?</button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Under Japanese law, international guests are required to present a valid passport at check-in. Please have a photo of your passport ready when booking.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">What's the Wi-Fi speed?</button>
+        <div class="faq-a"><div class="faq-a-inner">We have a fiber-optic connection with stable speeds suitable for remote work and video calls.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Are meals included?</button>
+        <div class="faq-a"><div class="faq-a-inner">We offer room-only stays. The house has a full kitchen for self-catering. Supermarkets and convenience stores are about 10 minutes away by car. We're happy to recommend local restaurants.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is there heating in winter?</button>
+        <div class="faq-a"><div class="faq-a-inner">Yes — air conditioning, kotatsu (heated table), and kerosene heaters are all available. The house stays warm even in the coldest months.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">What kitchen equipment is available?</button>
+        <div class="faq-a"><div class="faq-a-inner">IH stove, refrigerator, microwave, rice cooker, cookware, and tableware. Everything you need to prepare full meals.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is parking available?</button>
+        <div class="faq-a"><div class="faq-a-inner">Free parking is available for up to 2 cars. Please contact us in advance if you need more spaces.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is smoking allowed?</button>
+        <div class="faq-a"><div class="faq-a-inner">The entire property is non-smoking. There is no designated smoking area on the premises.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Are there quiet hours?</button>
+        <div class="faq-a"><div class="faq-a-inner">Please keep noise to a minimum after 10:00 PM out of consideration for the surrounding neighborhood.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="section-inner fade-in" style="max-width:720px;">
+    <p class="section-label">CONTACT</p>
+    <h2 class="section-title" style="text-align:center; color:white;">Inquiries & Booking</h2>
+    <p class="contact-text">Feel free to reach out with any questions.</p>
+    <div>
+      <a href="https://instagram.com/sasamorihouse" target="_blank" class="btn-contact">Instagram DM</a>
+      <a href="tel:090-6308-3620" class="btn-contact">Call Us</a>
+      <a href="mailto:ouga0315@gmail.com" class="btn-contact">Email</a>
+      <a href="#calendar" class="btn-contact">Check Availability</a>
+    </div>
+  </div>
+</div>
+
+<!-- ACCESS -->
+<div id="access">
+  <div class="section-inner fade-in">
+    <p class="section-label">ACCESS</p>
+    <h2 class="section-title">Getting Here</h2>
+    <div class="access-grid">
+      <dl class="access-info">
+        <dt>ADDRESS</dt>
+        <dd>Azumino Gakushamura, Azumino City, Nagano, Japan</dd>
+        <dt>TRAIN</dt>
+        <dd>Free pickup from Azumi-Oiwake Station (JR Oito Line, advance booking required)<br>~35 min from Matsumoto Station</dd>
+        <dt>CAR</dt>
+        <dd>~20 min from Azumino IC (Nagano Expressway)<br>Free parking available (up to 2 cars)</dd>
+        <dt>CHECK-IN</dt>
+        <dd>From 15:00 (please let us know if arriving late)</dd>
+        <dt>CHECK-OUT</dt>
+        <dd>By 10:00</dd>
+      </dl>
+      <iframe src="https://www.google.com/maps?q=長野県安曇野市穂高有明7403-30&output=embed" style="width:100%;height:360px;border:none;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-size:0.85rem; color:rgba(255,255,255,0.6); letter-spacing:0.2em;">Minshuku Sasamorihouse</p>
+  <p style="font-size:0.65rem; margin-top:4px; letter-spacing:0.3em;">7403-30 Hotaka-Ariake, Azumino, Nagano 399-8301</p>
+  <p style="font-size:0.65rem; margin-top:4px; letter-spacing:0.3em;">PACK VACATION CO., LTD.</p>
+  <div class="footer-links">
+    <a href="https://instagram.com/sasamorihouse" target="_blank">Instagram</a>
+    <a href="https://open.spotify.com/show/0i1LD1y7MnyzoptDa6PytJ" target="_blank">Podcast</a>
+    <a href="https://linktr.ee/sasamoriya" target="_blank">Linktree</a>
+    <a href="../ja/">日本語版</a>
+  </div>
+  <p>&copy; 2026 Pack Vacation Co., Ltd.</p>
+</footer>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Minshuku Sasamorihouse",
+  "description": "A private whole-house rental in the forest of Azumino Gakushamura. 100㎡ traditional house, pet-friendly, BBQ, home theater.",
+  "url": "https://ouga0315-cpu.github.io/pack-vacation-lp/sasamoriya/en/",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "7403-30 Hotaka-Ariake",
+    "addressLocality": "Azumino",
+    "addressRegion": "Nagano",
+    "postalCode": "399-8301",
+    "addressCountry": "JP"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 36.3425, "longitude": 137.8536 },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.79", "reviewCount": "61", "bestRating": "5" },
+  "checkinTime": "15:00",
+  "checkoutTime": "10:00",
+  "petsAllowed": true
+}
+</script>
+
+<script>
+function toggleMenu() {
+  var nav = document.getElementById('mobileNav');
+  var btn = document.querySelector('.hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('active');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+</script>
+
+<script>
+function toggleFAQ(el) {
+  el.classList.toggle('open');
+  var answer = el.nextElementSibling;
+  if (el.classList.contains('open')) {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  } else {
+    answer.style.maxHeight = '0';
+  }
+}
+</script>
+
+<script>
+(function(){
+  var slides = document.querySelectorAll('.hero-slide');
+  var current = 0;
+  var total = slides.length;
+  setInterval(function(){
+    slides[current].classList.remove('active');
+    current = (current + 1) % total;
+    slides[current].classList.add('active');
+  }, 5000);
+})();
+</script>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.fade-in');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function(el){ observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>

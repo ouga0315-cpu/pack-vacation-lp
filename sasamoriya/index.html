@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>民宿笹森家 | Pack Vacation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      color: #2d2d2d;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url('images/exterior-autumn.jpg') center/cover no-repeat;
+      z-index: -2;
+    }
+    .bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: -1;
+    }
+    .container {
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .logo { margin-bottom: 16px; }
+    .logo img { height: 72px; width: auto; filter: brightness(0) invert(1); }
+    h1 {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.15em;
+      margin-bottom: 48px;
+    }
+    .lang-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+    .lang-links a {
+      display: block;
+      width: 260px;
+      padding: 16px 0;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .lang-links a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .lang-jp {
+      background: #fff;
+      color: #2d2d2d;
+    }
+    .lang-en {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+    .lang-en:hover { border-color: #fff; }
+    .back {
+      margin-top: 48px;
+    }
+    .back a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .back a:hover { color: rgba(255,255,255,0.8); }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="container">
+    <div class="logo">
+      <img src="images/siro.png" alt="民宿笹森家">
+    </div>
+    <h1>民宿笹森家</h1>
+    <p class="sub">MINSHUKU SASAMORIHOUSE</p>
+    <div class="lang-links">
+      <a href="ja/index.html" class="lang-jp">日本語</a>
+      <a href="en/index.html" class="lang-en">English</a>
+    </div>
+    <div class="back">
+      <a href="../">&larr; Pack Vacation トップへ</a>
+    </div>
+  </div>
+</body>
+</html>

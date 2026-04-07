@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guesthouse Tomoshibi — A Quiet Inn at the Foot of the Alps</title>
+<meta name="description" content="A quiet onsen guesthouse with fusuma-partitioned rooms in a renovated 55-year-old wooden house at the foot of the Northern Alps. From ¥6,000 per person. Bilingual English-speaking host.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏮</text></svg>">
+<meta property="og:title" content="Guesthouse Tomoshibi — A Quiet Inn at the Foot of the Alps">
+<meta property="og:description" content="A quiet onsen guesthouse with fusuma-partitioned rooms in a renovated 55-year-old wooden house at the foot of the Northern Alps.">
+<meta property="og:image" content="../images/hero-reading.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1A2836;
+    --orange: #D4633A;
+    --light: #F4F6F8;
+    --gray: #6B7A8D;
+    --muted: #8A95A3;
+    --border: #E2E8F0;
+    --white: #FFFFFF;
+    --dark: #0F1419;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif;
+    color: var(--navy); background: var(--white);
+    letter-spacing: 0.06em; line-height: 2.0; font-weight: 400;
+  }
+  h1, h2, h3 { font-weight: 500; letter-spacing: 0.15em; line-height: 1.5; }
+
+  /* ===== FADE IN ===== */
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== HEADER ===== */
+  header {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(26,40,54,0.95); backdrop-filter: blur(12px);
+    padding: 20px 48px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo { color: rgba(255,255,255,0.85); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.2em; }
+  .logo strong { color: var(--orange); font-weight: 500; }
+  nav a { margin-left: 32px; text-decoration: none; color: rgba(255,255,255,0.45); font-size: 0.75rem; letter-spacing: 0.15em; transition: color 0.3s; }
+  nav a:hover { color: var(--orange); }
+  .btn-book {
+    background: transparent; color: white; padding: 9px 24px;
+    border: 1px solid rgba(255,255,255,0.3);
+    text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em;
+    transition: all 0.3s;
+  }
+  .btn-book:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ===== HERO ===== */
+  .hero { height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+  .hero-left {
+    background: var(--navy); color: white;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 72px 72px;
+  }
+  .hero-tag {
+    font-size: 0.6rem; letter-spacing: 0.3em; color: var(--orange);
+    margin-bottom: 32px;
+  }
+  .hero-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 400; line-height: 1.6; margin-bottom: 24px; letter-spacing: 0.15em; }
+  .hero-title strong { color: var(--orange); font-weight: 500; }
+  .hero-desc { color: rgba(255,255,255,0.45); font-size: 0.85rem; line-height: 2.0; margin-bottom: 48px; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--orange); color: white; padding: 14px 40px;
+    text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em;
+    transition: opacity 0.3s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); padding: 14px 40px;
+    text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: white; }
+  .hero-right {
+    background: url('../images/hero-reading.jpg') center/cover no-repeat;
+    position: relative;
+  }
+  .hero-right::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--navy) 0%, transparent 25%);
+  }
+
+  /* ===== STATS BAR ===== */
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); border-bottom: 1px solid var(--border); }
+  .stat { padding: 36px; text-align: center; border-right: 1px solid var(--border); }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-size: 1.3rem; color: var(--navy); font-weight: 500; letter-spacing: 0.1em; }
+  .stat-label { font-size: 0.68rem; color: var(--muted); margin-top: 6px; letter-spacing: 0.1em; }
+
+  /* ===== SECTIONS ===== */
+  .section-inner { max-width: 1000px; margin: 0 auto; padding: 100px 48px; }
+  .label { font-size: 0.6rem; letter-spacing: 0.4em; color: var(--orange); margin-bottom: 20px; }
+  h2.title { font-size: clamp(1.5rem, 2.5vw, 2.0rem); font-weight: 400; line-height: 1.6; margin-bottom: 28px; color: var(--navy); letter-spacing: 0.12em; }
+  .body-text { color: var(--gray); line-height: 2.0; font-size: 0.9rem; }
+
+  /* ===== ABOUT ===== */
+  .about { max-width: 1000px; margin: 0 auto; padding: 100px 48px; }
+  .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 40px; }
+  .about-img { overflow: hidden; }
+  .about-img img { width: 100%; height: auto; display: block; transition: transform 0.6s; }
+  .about-img:hover img { transform: scale(1.03); }
+  .about-text { display: flex; flex-direction: column; justify-content: center; }
+  .feature-list { list-style: none; margin-top: 32px; }
+  .feature-list li { padding: 12px 0; border-bottom: 1px solid var(--border); color: var(--gray); font-size: 0.85rem; letter-spacing: 0.05em; }
+
+  /* ===== ROOMS ===== */
+  .rooms { background: var(--light); }
+  .rooms-sub { text-align: center; color: var(--muted); margin-bottom: 48px; font-size: 0.85rem; }
+  .rooms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; max-width: 1000px; margin: 0 auto; }
+  .room-card { background: white; overflow: hidden; transition: transform 0.4s; }
+  .room-card:hover { transform: translateY(-4px); }
+  .room-img { width: 100%; height: 220px; object-fit: cover; }
+  .room-body { padding: 32px; }
+  .room-tag { font-size: 0.6rem; letter-spacing: 0.2em; color: var(--orange); }
+  .room-name { font-size: 1rem; margin: 12px 0 8px; letter-spacing: 0.1em; }
+  .room-price { color: var(--orange); font-weight: 500; font-size: 0.88rem; }
+  .room-note { font-size: 0.82rem; color: var(--muted); margin-top: 12px; line-height: 1.9; }
+
+  /* ===== REVIEWS ===== */
+  .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
+  .review-card { padding: 0; }
+  .review-stars { color: var(--orange); font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 16px; }
+  .review-text { color: var(--gray); font-size: 0.88rem; line-height: 2.0; margin-bottom: 20px; }
+  .review-author { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; }
+
+  /* ===== ACCESS ===== */
+  .access-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; }
+  .access-item { padding: 32px; background: var(--light); }
+  .access-title { font-size: 0.6rem; letter-spacing: 0.3em; color: var(--orange); margin-bottom: 12px; }
+  .access-text { color: var(--gray); font-size: 0.85rem; line-height: 1.9; }
+
+  /* ===== HAMBURGER MENU ===== */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .hamburger span { display: block; width: 20px; height: 1.5px; background: white; margin: 5px 0; transition: all 0.3s; }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+  .mobile-nav {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: rgba(26,40,54,0.97); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { text-decoration: none; color: rgba(255,255,255,0.8); font-size: 1.1rem; letter-spacing: 0.2em; }
+  .mobile-nav a:hover { color: var(--orange); }
+
+  /* ===== HOST ===== */
+  .host-section { background: var(--light); }
+  .host-wrap { display: grid; grid-template-columns: 240px 1fr; gap: 48px; align-items: center; }
+  .host-photo-placeholder { width: 240px; height: 240px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
+  .host-name { font-size: 1.1rem; color: var(--navy); margin-bottom: 6px; }
+  .host-role { font-size: 0.65rem; color: var(--orange); letter-spacing: 0.25em; margin-bottom: 20px; }
+  .host-text { color: var(--gray); font-size: 0.88rem; line-height: 2.2; }
+
+  /* ===== FAQ ===== */
+  .faq-list { max-width: 800px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 24px 0; font-family: inherit; font-size: 0.92rem; color: var(--navy); letter-spacing: 0.06em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; line-height: 1.8; }
+  .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--orange); transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
+  .faq-q.open::after { content: '−'; }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .faq-a-inner { padding: 0 0 24px; color: var(--gray); font-size: 0.85rem; line-height: 2.2; }
+
+  /* ===== SEASON PHOTOS ===== */
+  .season-photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .season-photo { position: relative; overflow: hidden; aspect-ratio: 3/4; }
+  .season-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+  .season-photo:hover img { transform: scale(1.05); }
+  .season-photo-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 24px 16px; background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  }
+  .season-photo-label { color: var(--orange); font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 8px; }
+  .season-photo-name { color: white; font-size: 1rem; letter-spacing: 0.1em; }
+  .season-photo-desc { color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-top: 6px; }
+
+  /* ===== REELS ===== */
+  .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+  .reel-item iframe { width: 100%; height: 360px; border: none; background: var(--light); }
+  .reel-caption { font-size: 0.8rem; color: var(--gray); text-align: center; margin-top: 12px; letter-spacing: 0.05em; }
+
+  /* ===== CONTACT ===== */
+  .contact-section { background: var(--navy); color: white; text-align: center; }
+  .contact-text { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 32px; }
+  .btn-contact {
+    display: inline-block; padding: 14px 44px; border: 1px solid rgba(255,255,255,0.25);
+    color: white; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.18em;
+    transition: all 0.3s; margin: 0 8px;
+  }
+  .btn-contact:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ===== FOOTER ===== */
+  footer { background: var(--dark); padding: 60px 48px; text-align: center; }
+  .footer-logo { color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.2em; }
+  .footer-logo strong { color: var(--orange); }
+  .footer-links { margin: 20px 0; }
+  .footer-links a { color: rgba(255,255,255,0.3); font-size: 0.7rem; margin: 0 16px; text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--orange); }
+  .footer-copy { font-size: 0.65rem; color: rgba(255,255,255,0.2); letter-spacing: 0.15em; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    header { padding: 14px 20px; }
+    nav { display: none; }
+    .hamburger { display: block; }
+    .host-wrap { grid-template-columns: 1fr; text-align: center; }
+    .host-photo-placeholder { margin: 0 auto 20px; width: 180px; height: 180px; }
+    .season-photo-grid { grid-template-columns: repeat(2, 1fr); }
+    .reel-grid { grid-template-columns: 1fr; }
+    .hero { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+    .hero-right { display: none; }
+    .hero-left {
+      padding: 100px 28px 60px;
+      background:
+        linear-gradient(rgba(26,40,54,0.88) 0%, rgba(26,40,54,0.75) 100%),
+        url('../images/hero-reading.jpg') center/cover no-repeat;
+    }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    .about { padding: 72px 24px; }
+    .about-content { grid-template-columns: 1fr; gap: 32px; }
+    .section-inner { padding: 72px 24px; }
+    .access-grid { grid-template-columns: 1fr; }
+    footer { padding: 48px 24px; }
+    .footer-links a { margin: 0 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="javascript:void(0)" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;"><img src="../images/ロゴ.png" alt="Guesthouse Tomoshibi" style="height:40px;width:auto;">Guesthouse <strong>Tomoshibi</strong></a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#access">Access</a>
+    <a href="../ja/" style="margin-left:24px;border:1px solid rgba(255,255,255,0.2);padding:5px 12px;">日本語</a>
+  </nav>
+  <a href="#calendar" class="btn-book">Check Availability</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#rooms" onclick="toggleMenu()">Rooms</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="#access" onclick="toggleMenu()">Access</a>
+  <a href="#calendar" onclick="toggleMenu()">Check Availability</a>
+  <a href="../ja/" onclick="toggleMenu()">日本語</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">A GUESTHOUSE IN AZUMINO</p>
+    <h1 class="hero-title">
+      A small light<br>
+      <strong>in Azumino.</strong>
+    </h1>
+    <p class="hero-desc">
+      A quiet guesthouse with rooms separated by fusuma sliding doors, an onsen bath, and shared spaces, nestled in a 55-year-old wooden house at the foot of the Northern Alps.<br>
+      Your host Ouga speaks English fluently and is always happy to help.
+    </p>
+    <div class="hero-btns">
+      <a href="#calendar" class="btn-primary">Check Availability</a>
+      <a href="#about" class="btn-secondary">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-right"></div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">Onsen Bath</div>
+    <div class="stat-label">Free access for all guests</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">Fusuma Rooms</div>
+    <div class="stat-label">2-person / 4-person / Shared spaces available</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about fade-in" id="about">
+  <p class="label">ABOUT / THE GUESTHOUSE</p>
+  <h2 class="title">A Casual Guesthouse<br>for Travelers</h2>
+  <div class="about-content">
+    <div class="about-img">
+      <img src="../images/lifestyle-bunk.jpg" alt="Inside Guesthouse Tomoshibi">
+    </div>
+    <div class="about-text">
+      <p class="body-text">
+        Guesthouse Tomoshibi is a quiet, welcoming space set in a beautifully renovated 55-year-old wooden house at the foot of the Northern Alps.<br><br>
+        The warm wooden interiors and soft lighting create a peaceful atmosphere. All guests enjoy free access to our <strong>shared onsen bath</strong>.
+        The shared kitchen and lounge are perfect for winding down after a day of exploring.<br><br>
+        Host Ouga welcomes you personally and loves helping guests discover the best of Azumino, from hiking tips to local recommendations.<br><br>
+        <em style="color:var(--muted); font-size:0.85rem;">Whether you're here to climb, hike, or simply enjoy the quiet mountain life, this is your home away from home.</em>
+      </p>
+      <ul class="feature-list">
+        <li>Shared onsen bath included / Free for all guests</li>
+        <li>Loved by returning guests</li>
+        <li>Bilingual host (English & Japanese)</li>
+        <li>Full kitchen & shared lounge</li>
+        <li>Perfect base for hiking & mountain activities</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ROOMS -->
+<div class="rooms" id="rooms">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;">
+      <p class="label" style="text-align:center">ROOMS</p>
+      <h2 class="title" style="text-align:center;">Your Stay</h2>
+      <p class="rooms-sub">Fusuma-partitioned rooms with shared kitchen and lounge.</p>
+    </div>
+    <div class="rooms-grid fade-in">
+      <div class="room-card">
+        <img class="room-img" src="../images/room-2bed.jpg" alt="2-Person Room with tatami flooring and bunk beds">
+        <div class="room-body">
+          <span class="room-tag">FOR 1–2 GUESTS</span>
+          <p class="room-name">2-Person Room</p>
+          <p class="room-price">¥6,000 per person / 2 people ¥8,000+</p>
+          <p class="room-note">A simple, peaceful tatami room with a bunk bed. Soft lighting and traditional Japanese aesthetic create a calm retreat.</p>
+          <a href="#calendar" style="display:inline-block;margin-top:16px;padding:10px 28px;background:var(--orange);color:white;text-decoration:none;font-size:0.72rem;letter-spacing:0.15em;">Check Availability</a>
+        </div>
+      </div>
+      <div class="room-card">
+        <img class="room-img" src="../images/room-4bed.jpg" alt="4-Person Room with tatami flooring and two bunk beds">
+        <div class="room-body">
+          <span class="room-tag">FOR 2–4 GUESTS</span>
+          <p class="room-name">4-Person Room</p>
+          <p class="room-price">Up to 3 people ¥12,000 / 4 people ¥16,000</p>
+          <p class="room-note">A spacious tatami room with two bunk beds. Perfect for groups, families, and friends traveling together.</p>
+          <a href="#calendar" style="display:inline-block;margin-top:16px;padding:10px 28px;background:var(--orange);color:white;text-decoration:none;font-size:0.72rem;letter-spacing:0.15em;">Check Availability</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div>
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="label" style="text-align:center;">GUEST REVIEWS</p>
+      <h2 class="title" style="text-align:center;">What Guests Say</h2>
+    </div>
+    <div class="review-grid fade-in">
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">Ouga is the most wonderful host! He arranged pickups, gave fantastic local recommendations, and went above and beyond to make our stay in Azumino truly unforgettable. The real magic of this guesthouse is Ouga himself.</p>
+        <p class="review-author">— Carter (USA) / 1+ week stay</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">We felt at home immediately. Ouga is incredibly kind and trustworthy. He even surprised us with a special local gift for our anniversary. We look forward to returning soon!</p>
+        <p class="review-author">— Deepak (India) / Family stay with children</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">Ouga is friendly and responsive, and he had plenty of blankets ready for the cold winter nights. Perfect base for skiing in Hakuba and exploring hiking trails. We'd recommend it to anyone!</p>
+        <p class="review-author">— Maxine / Multi-night stay</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR -->
+<div id="calendar" style="background: var(--light);">
+  <div class="section-inner fade-in" style="text-align: center;">
+    <p class="label">AVAILABILITY</p>
+    <h2 class="title" style="text-align:center;">Check Available Dates</h2>
+    <p style="color: var(--muted); margin-bottom: 32px; font-size: 0.85rem;">Select your desired dates below to check availability.</p>
+    <iframe src="../availability-calendar.html" style="width:100%;height:560px;border:none;"></iframe>
+  </div>
+</div>
+
+<!-- SEASONS -->
+<div>
+  <div class="section-inner fade-in" style="padding-bottom: 40px;">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <p class="label">SEASONS</p>
+      <h2 class="title" style="text-align:center;">Azumino Through the Seasons</h2>
+    </div>
+  </div>
+  <div class="season-photo-grid fade-in">
+    <div class="season-photo">
+      <img src="../../sasamoriya/images/season-winter.jpg" alt="Winter ice falls">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">WINTER</p>
+        <p class="season-photo-name">Winter — Ice Falls &amp; Snow</p>
+        <p class="season-photo-desc">Kurosawa Falls ice pillars, kotatsu evenings. Hakuba ski resorts 40 min by car</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../../sasamoriya/images/season-spring.jpg" alt="Spring cherry blossoms">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">SPRING</p>
+        <p class="season-photo-name">Spring — Cherry Blossoms &amp; Alps</p>
+        <p class="season-photo-desc">Snow-capped peaks and wasabi fields in bloom. Perfect for cycling</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../../sasamoriya/images/season-summer.jpg" alt="Summer rice fields">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">SUMMER</p>
+        <p class="season-photo-name">Summer — Rice Fields &amp; Starry Skies</p>
+        <p class="season-photo-desc">Endless green rice paddies with Alpine backdrop. Cool breeze at 600m elevation</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../../sasamoriya/images/season-autumn.jpg" alt="Autumn foliage">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">AUTUMN</p>
+        <p class="season-photo-name">Autumn — Fall Colors &amp; Fresh Soba</p>
+        <p class="season-photo-desc">Peak foliage season. Warm up in the onsen after a day of exploring</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPLORE AZUMINO -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <p class="label">EXPLORE AZUMINO</p>
+      <h2 class="title" style="text-align:center;">Things to Do in Azumino</h2>
+      <p class="body-text" style="max-width:600px;margin:0 auto;">Use Tomoshibi as your base to explore the nature and activities of Azumino.<br>Your host can guide you and suggest the best routes.</p>
+    </div>
+    <div class="reel-grid">
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/p/DP7ZOQzD6-o/embed" allowfullscreen></iframe>
+        <p class="reel-caption">Hiking — Stunning Northern Alps Views</p>
+      </div>
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/reel/DInijkPyVHV/embed" allowfullscreen></iframe>
+        <p class="reel-caption">Cycling — Through Rice Paddies</p>
+      </div>
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/reel/DMxFpW2yKPR/embed" allowfullscreen></iframe>
+        <p class="reel-caption">Canyoneering — River Adventures</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOST -->
+<div class="host-section">
+  <div class="section-inner fade-in">
+    <p class="label">YOUR HOST</p>
+    <h2 class="title" style="text-align:center;">Meet Ouga Sanjo</h2>
+    <div class="host-wrap" style="margin-top:40px;">
+      <img class="host-photo" src="../../sasamoriya/images/host-ouga.jpg" alt="Host Ouga Sanjo" style="width:240px;height:240px;border-radius:50%;object-fit:cover;">
+      <div>
+        <p class="host-name">Ouga Sanjo</p>
+        <p class="host-role">Founder, Pack Vacation</p>
+        <p class="host-text">
+          Born and raised in Tokyo, Ouga moved to Azumino at 23 and founded Minshuku Sasamorihouse, a whole-house rental. Since then, he has welcomed hundreds of guests from around the world. Later, he created Tomoshibi to expand his vision of sharing the beauty of mountain life with more travelers.<br><br>
+          Beyond hosting, Ouga is passionate about sharing Azumino's natural wonders and culture. He offers hiking guides, local recommendations, and personalized advice to help you experience the best of the region.<br><br>
+          <em style="color:var(--orange);font-size:0.82rem;">Ouga speaks English fluently and loves helping guests create unforgettable memories in Azumino.</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SNS -->
+<div>
+  <div class="section-inner fade-in" style="max-width: 720px; text-align: center;">
+    <p class="label">FOLLOW US</p>
+    <h2 class="title" style="text-align:center; margin-bottom: 32px;">Latest Updates</h2>
+    <div style="display:flex; justify-content:center; gap:4px; margin-bottom:32px;">
+      <button onclick="switchSNS('ig','tomoshibi')" id="tab-ig-t" style="padding:12px 28px;border:1px solid var(--navy);background:var(--navy);color:white;cursor:pointer;font-size:0.68rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Instagram</button>
+      <button onclick="switchSNS('podcast','tomoshibi')" id="tab-podcast-t" style="padding:12px 28px;border:1px solid var(--navy);background:transparent;color:var(--navy);cursor:pointer;font-size:0.68rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Podcast</button>
+    </div>
+    <div id="sns-ig-t" style="min-height:540px;">
+      <iframe src="https://www.instagram.com/guesthousetomoshibi/embed" style="width:100%;height:540px;border:none;overflow:hidden;background:white;"></iframe>
+    </div>
+    <div id="sns-podcast-t" style="display:none;min-height:540px;">
+      <iframe src="https://open.spotify.com/embed/show/0i1LD1y7MnyzoptDa6PytJ?theme=0" style="width:100%;height:540px;border:none;" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+<script>
+function switchSNS(type, site) {
+  var panels = ['ig','podcast'];
+  var s = site === 'sasamori' ? '-s' : '-t';
+  panels.forEach(function(p){
+    var el = document.getElementById('sns-'+p+s);
+    var tab = document.getElementById('tab-'+p+s);
+    if(el) el.style.display = p===type ? 'block' : 'none';
+    if(tab){
+      var color = site==='sasamori' ? 'var(--brown)' : 'var(--navy)';
+      tab.style.background = p===type ? color : 'transparent';
+      tab.style.color = p===type ? 'white' : color;
+    }
+  });
+}
+</script>
+
+<!-- FAQ -->
+<div id="faq" style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <p class="label">FAQ</p>
+    <h2 class="title" style="text-align:center;">Frequently Asked Questions</h2>
+    <div class="faq-list" style="margin-top:36px;">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is Wi-Fi available?</button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, free Wi-Fi is available throughout the guesthouse.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Are towels and toiletries provided?</button>
+        <div class="faq-a"><div class="faq-a-inner">Bath towels, shampoo, and body soap are provided. Please bring your own toothbrush and personal items.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Are there stores nearby?</button>
+        <div class="faq-a"><div class="faq-a-inner">Convenience stores and supermarkets are about 10 minutes away by car. Ask Ouga for recommendations or plan your shopping before arrival.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Can I use the onsen anytime?</button>
+        <div class="faq-a"><div class="faq-a-inner">Onsen hours are 3:00 PM to 11:00 PM. The bath is used privately — you won't be bathing at the same time as other guests.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Do you offer pickup service?</button>
+        <div class="faq-a"><div class="faq-a-inner">Free pickup from Azumi-Oiwake Station (JR Oito Line) is available. Please book in advance.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">What's the cancellation policy?</button>
+        <div class="faq-a"><div class="faq-a-inner">14+ days before: Full refund. 7–13 days before: 50% refund. Less than 7 days before: No refund. Details are provided at the time of booking.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Are children welcome?</button>
+        <div class="faq-a"><div class="faq-a-inner">Yes! Families with children are very welcome. The 4-person room is ideal for families.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Do I need a passport?</button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Under Japanese law, international guests must present a valid passport at check-in. Please have a photo ready when booking.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">What's the Wi-Fi speed?</button>
+        <div class="faq-a"><div class="faq-a-inner">We have a fiber-optic connection with stable speeds suitable for remote work and video calls.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Are meals included?</button>
+        <div class="faq-a"><div class="faq-a-inner">We offer room-only stays. The shared kitchen is available for self-catering. Supermarkets and convenience stores are about 10 minutes away by car. We're happy to recommend local restaurants.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is there heating in winter?</button>
+        <div class="faq-a"><div class="faq-a-inner">Air conditioning and kotatsu (heated table) are available. The guesthouse stays warm even in the coldest months.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is the bath shared?</button>
+        <div class="faq-a"><div class="faq-a-inner">The onsen bath is shared among guests but used privately — you won't be bathing at the same time as other guests.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is parking available?</button>
+        <div class="faq-a"><div class="faq-a-inner">Free parking is available for up to 2 cars. Please contact us in advance if you need more spaces.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is smoking allowed?</button>
+        <div class="faq-a"><div class="faq-a-inner">The entire property is non-smoking.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Are there quiet hours?</button>
+        <div class="faq-a"><div class="faq-a-inner">Please keep noise to a minimum after 10:00 PM.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="section-inner fade-in" style="max-width:720px;">
+    <p class="label" style="color:rgba(255,255,255,0.35);">CONTACT</p>
+    <h2 class="title" style="text-align:center;color:white;">Questions? Get in Touch</h2>
+    <p class="contact-text">Have questions or want to book? Reach out to Ouga directly via Instagram.<br>He's happy to help!</p>
+    <div>
+      <a href="https://instagram.com/guesthousetomoshibi" target="_blank" class="btn-contact">Instagram DM</a>
+      <a href="tel:090-6308-3620" class="btn-contact">Call Us</a>
+      <a href="mailto:ouga0315@gmail.com" class="btn-contact">Email</a>
+      <a href="#calendar" class="btn-contact">Check Availability</a>
+    </div>
+  </div>
+</div>
+
+<!-- ACCESS -->
+<div id="access" style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <p class="label">ACCESS</p>
+    <h2 class="title">How to Get Here</h2>
+    <div class="access-grid">
+      <div class="access-item">
+        <p class="access-title">BY TRAIN</p>
+        <p class="access-text">10 minutes by car from Azumi-Oiwake Station (JR Oito Line)<br>Free pickup available (advance booking required)<br>About 30 minutes from Matsumoto Station</p>
+      </div>
+      <div class="access-item">
+        <p class="access-title">BY CAR</p>
+        <p class="access-text">About 20 minutes from Azumino IC (Nagano Expressway)<br>Free parking available (up to 2 cars)</p>
+      </div>
+      <div class="access-item">
+        <p class="access-title">ADDRESS</p>
+        <p class="access-text">7403-30 Hotaka-Ariaké, Azumino, Nagano 399-8205, Japan</p>
+      </div>
+      <div class="access-item">
+        <p class="access-title">CHECK-IN / CHECK-OUT</p>
+        <p class="access-text">Check-in: 3:00 PM onwards<br>Check-out: Until 10:00 AM</p>
+      </div>
+      <div style="grid-column:1/-1;overflow:hidden;">
+        <iframe src="https://www.google.com/maps?q=Azumino+Hotaka-Ariaké+7403-30&output=embed" style="width:100%;height:320px;border:none;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Guesthouse <strong>Tomoshibi</strong></div>
+  <p style="font-size:0.6rem; color:rgba(255,255,255,0.2); letter-spacing:0.3em; margin-top:4px;">AZUMINO, NAGANO</p>
+  <div class="footer-links">
+    <a href="https://instagram.com/guesthousetomoshibi" target="_blank">Instagram</a>
+    <a href="https://open.spotify.com/show/0i1LD1y7MnyzoptDa6PytJ" target="_blank">Podcast</a>
+    <a href="../ja/">日本語版</a>
+    <a href="#calendar">Check Availability</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Pack Vacation Co., Ltd.</p>
+</footer>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Guesthouse Tomoshibi",
+  "description": "A quiet onsen guesthouse with fusuma-partitioned rooms in a renovated 55-year-old wooden house at the foot of the Northern Alps in Azumino. Bilingual English-speaking host.",
+  "url": "https://ouga0315-cpu.github.io/pack-vacation-lp/tomoshibi/en/",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "7403-30 Hotaka-Ariaké",
+    "addressLocality": "Azumino",
+    "addressRegion": "Nagano",
+    "addressCountry": "JP"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 36.3425,
+    "longitude": 137.8536
+  },
+  "checkinTime": "15:00",
+  "checkoutTime": "10:00",
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "Onsen bath", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Free Wi-Fi", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Free parking", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Shared kitchen", "value": true}
+  ],
+  "availableLanguage": ["en", "ja"]
+}
+</script>
+
+<!-- Hamburger Menu -->
+<script>
+function toggleMenu() {
+  var nav = document.getElementById('mobileNav');
+  var btn = document.querySelector('.hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('active');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+</script>
+
+<!-- FAQ Toggle -->
+<script>
+function toggleFAQ(el) {
+  el.classList.toggle('open');
+  var answer = el.nextElementSibling;
+  if (el.classList.contains('open')) {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  } else {
+    answer.style.maxHeight = '0';
+  }
+}
+</script>
+
+<!-- Scroll Animation -->
+<script>
+(function(){
+  var els = document.querySelectorAll('.fade-in');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function(el){ observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>

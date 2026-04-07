@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pack Vacation | 安曇野の宿</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      background: #f8f6f2;
+      color: #2d2d2d;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .logo { margin-bottom: 12px; }
+    .logo img { height: 64px; width: auto; }
+    h1 {
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: #888;
+      margin-bottom: 48px;
+    }
+    .properties {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 800px;
+      width: 100%;
+    }
+    .property {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 36px 32px;
+      min-width: 300px;
+      flex: 1;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .property:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+    .property h2 {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+    .property .sub {
+      font-size: 0.85rem;
+      color: #999;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: #2d2d2d;
+      padding: 14px 20px;
+      border-radius: 10px;
+      background: #f8f6f2;
+      font-size: 0.95rem;
+      transition: background 0.2s ease;
+    }
+    .links a:hover { background: #eee8e0; }
+    .links a .arrow {
+      font-size: 1.1rem;
+      color: #aaa;
+      transition: transform 0.2s ease;
+    }
+    .links a:hover .arrow { transform: translateX(4px); color: #666; }
+    .sasamori { border-top: 4px solid #4a7c59; }
+    .tomoshibi { border-top: 4px solid #1a3a5c; }
+    footer {
+      margin-top: 60px;
+      font-size: 0.8rem;
+      color: #bbb;
+      text-align: center;
+    }
+    @media (max-width: 680px) {
+      .properties { gap: 24px; }
+      .property { min-width: unset; padding: 32px 24px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <img src="sasamoriya/images/siro.png" alt="Pack Vacation">
+  </div>
+  <h1>PACK VACATION</h1>
+
+  <div class="properties">
+    <div class="property sasamori">
+      <h2>笹森家</h2>
+      <p class="sub">MINSHUKU SASAMORIHOUSE</p>
+      <div class="links">
+        <a href="sasamoriya/index.html">
+          <span>詳しく見る</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="property tomoshibi">
+      <h2>灯</h2>
+      <p class="sub">GUESTHOUSE TOMOSHIBI</p>
+      <div class="links">
+        <a href="tomoshibi/index.html">
+          <span>詳しく見る</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>&copy; 2026 Pack Vacation LLC</footer>
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guesthouse Tomoshibi｜ゲストハウス灯 in 安曇野</title>
+<meta name="description" content="安曇野の築55年の木造平屋を改装した温泉つきゲストハウス。1名¥6,000〜。日英対応ホスト。北アルプス登山の拠点にも。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏮</text></svg>">
+<meta property="og:title" content="Guesthouse Tomoshibi 灯｜安曇野の温泉つきゲストハウス">
+<meta property="og:description" content="築55年の木造平屋を改装した温泉つきゲストハウス。北アルプスの麓・安曇野。">
+<meta property="og:image" content="../images/hero-reading.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1A2836;
+    --orange: #D4633A;
+    --light: #F4F6F8;
+    --gray: #6B7A8D;
+    --muted: #8A95A3;
+    --border: #E2E8F0;
+    --white: #FFFFFF;
+    --dark: #0F1419;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif;
+    color: var(--navy); background: var(--white);
+    letter-spacing: 0.06em; line-height: 2.0; font-weight: 400;
+  }
+  h1, h2, h3 { font-weight: 500; letter-spacing: 0.15em; line-height: 1.5; }
+
+  /* ===== FADE IN ===== */
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== HEADER ===== */
+  header {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(26,40,54,0.95); backdrop-filter: blur(12px);
+    padding: 20px 48px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo { color: rgba(255,255,255,0.85); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.2em; }
+  .logo strong { color: var(--orange); font-weight: 500; }
+  nav a { margin-left: 32px; text-decoration: none; color: rgba(255,255,255,0.45); font-size: 0.75rem; letter-spacing: 0.15em; transition: color 0.3s; }
+  nav a:hover { color: var(--orange); }
+  .btn-book {
+    background: transparent; color: white; padding: 9px 24px;
+    border: 1px solid rgba(255,255,255,0.3);
+    text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em;
+    transition: all 0.3s;
+  }
+  .btn-book:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ===== HERO ===== */
+  .hero { height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+  .hero-left {
+    background: var(--navy); color: white;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 72px 72px;
+  }
+  .hero-tag {
+    font-size: 0.6rem; letter-spacing: 0.3em; color: var(--orange);
+    margin-bottom: 32px;
+  }
+  .hero-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 400; line-height: 1.6; margin-bottom: 24px; letter-spacing: 0.15em; }
+  .hero-title strong { color: var(--orange); font-weight: 500; }
+  .hero-desc { color: rgba(255,255,255,0.45); font-size: 0.85rem; line-height: 2.0; margin-bottom: 48px; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--orange); color: white; padding: 14px 40px;
+    text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em;
+    transition: opacity 0.3s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); padding: 14px 40px;
+    text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: white; }
+  .hero-right {
+    background: url('../images/hero-reading.jpg') center/cover no-repeat;
+    position: relative;
+  }
+  .hero-right::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--navy) 0%, transparent 25%);
+  }
+
+  /* ===== STATS BAR ===== */
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); border-bottom: 1px solid var(--border); }
+  .stat { padding: 36px; text-align: center; border-right: 1px solid var(--border); }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-size: 1.3rem; color: var(--navy); font-weight: 500; letter-spacing: 0.1em; }
+  .stat-label { font-size: 0.68rem; color: var(--muted); margin-top: 6px; letter-spacing: 0.1em; }
+
+  /* ===== SECTIONS ===== */
+  .section-inner { max-width: 1000px; margin: 0 auto; padding: 100px 48px; }
+  .label { font-size: 0.6rem; letter-spacing: 0.4em; color: var(--orange); margin-bottom: 20px; }
+  h2.title { font-size: clamp(1.5rem, 2.5vw, 2.0rem); font-weight: 400; line-height: 1.6; margin-bottom: 28px; color: var(--navy); letter-spacing: 0.12em; }
+  .body-text { color: var(--gray); line-height: 2.0; font-size: 0.9rem; }
+
+  /* ===== ABOUT ===== */
+  .about { max-width: 1000px; margin: 0 auto; padding: 100px 48px; }
+  .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 40px; }
+  .about-img { overflow: hidden; }
+  .about-img img { width: 100%; height: auto; display: block; transition: transform 0.6s; }
+  .about-img:hover img { transform: scale(1.03); }
+  .about-text { display: flex; flex-direction: column; justify-content: center; }
+  .feature-list { list-style: none; margin-top: 32px; }
+  .feature-list li { padding: 12px 0; border-bottom: 1px solid var(--border); color: var(--gray); font-size: 0.85rem; letter-spacing: 0.05em; }
+
+  /* ===== ROOMS ===== */
+  .rooms { background: var(--light); }
+  .rooms-sub { text-align: center; color: var(--muted); margin-bottom: 48px; font-size: 0.85rem; }
+  .rooms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; max-width: 1000px; margin: 0 auto; }
+  .room-card { background: white; overflow: hidden; transition: transform 0.4s; }
+  .room-card:hover { transform: translateY(-4px); }
+  .room-img { width: 100%; height: 220px; object-fit: cover; }
+  .room-body { padding: 32px; }
+  .room-tag { font-size: 0.6rem; letter-spacing: 0.2em; color: var(--orange); }
+  .room-name { font-size: 1rem; margin: 12px 0 8px; letter-spacing: 0.1em; }
+  .room-price { color: var(--orange); font-weight: 500; font-size: 0.88rem; }
+  .room-note { font-size: 0.82rem; color: var(--muted); margin-top: 12px; line-height: 1.9; }
+
+  /* ===== REVIEWS ===== */
+  .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
+  .review-card { padding: 0; }
+  .review-stars { color: var(--orange); font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 16px; }
+  .review-text { color: var(--gray); font-size: 0.88rem; line-height: 2.0; margin-bottom: 20px; }
+  .review-author { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; }
+
+  /* ===== ACCESS ===== */
+  .access-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; }
+  .access-item { padding: 32px; background: var(--light); }
+  .access-title { font-size: 0.6rem; letter-spacing: 0.3em; color: var(--orange); margin-bottom: 12px; }
+  .access-text { color: var(--gray); font-size: 0.85rem; line-height: 1.9; }
+
+  /* ===== HAMBURGER MENU ===== */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .hamburger span { display: block; width: 20px; height: 1.5px; background: white; margin: 5px 0; transition: all 0.3s; }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+  .mobile-nav {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: rgba(26,40,54,0.97); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { text-decoration: none; color: rgba(255,255,255,0.8); font-size: 1.1rem; letter-spacing: 0.2em; }
+  .mobile-nav a:hover { color: var(--orange); }
+
+  /* ===== HOST ===== */
+  .host-section { background: var(--light); }
+  .host-wrap { display: grid; grid-template-columns: 240px 1fr; gap: 48px; align-items: center; }
+  .host-photo-placeholder { width: 240px; height: 240px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
+  .host-name { font-size: 1.1rem; color: var(--navy); margin-bottom: 6px; }
+  .host-role { font-size: 0.65rem; color: var(--orange); letter-spacing: 0.25em; margin-bottom: 20px; }
+  .host-text { color: var(--gray); font-size: 0.88rem; line-height: 2.2; }
+
+  /* ===== FAQ ===== */
+  .faq-list { max-width: 800px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 24px 0; font-family: inherit; font-size: 0.92rem; color: var(--navy); letter-spacing: 0.06em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; line-height: 1.8; }
+  .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--orange); transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
+  .faq-q.open::after { content: '−'; }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .faq-a-inner { padding: 0 0 24px; color: var(--gray); font-size: 0.85rem; line-height: 2.2; }
+
+  /* ===== SEASON PHOTOS ===== */
+  .season-photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .season-photo { position: relative; overflow: hidden; aspect-ratio: 3/4; }
+  .season-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+  .season-photo:hover img { transform: scale(1.05); }
+  .season-photo-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 24px 16px; background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  }
+  .season-photo-label { color: var(--orange); font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 8px; }
+  .season-photo-name { color: white; font-size: 1rem; letter-spacing: 0.1em; }
+  .season-photo-desc { color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-top: 6px; }
+
+  /* ===== REELS ===== */
+  .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+  .reel-item iframe { width: 100%; height: 360px; border: none; background: var(--light); }
+  .reel-caption { font-size: 0.8rem; color: var(--gray); text-align: center; margin-top: 12px; letter-spacing: 0.05em; }
+
+  /* ===== CONTACT ===== */
+  .contact-section { background: var(--navy); color: white; text-align: center; }
+  .contact-text { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 32px; }
+  .btn-contact {
+    display: inline-block; padding: 14px 44px; border: 1px solid rgba(255,255,255,0.25);
+    color: white; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.18em;
+    transition: all 0.3s; margin: 0 8px;
+  }
+  .btn-contact:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ===== FOOTER ===== */
+  footer { background: var(--dark); padding: 60px 48px; text-align: center; }
+  .footer-logo { color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.2em; }
+  .footer-logo strong { color: var(--orange); }
+  .footer-links { margin: 20px 0; }
+  .footer-links a { color: rgba(255,255,255,0.3); font-size: 0.7rem; margin: 0 16px; text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--orange); }
+  .footer-copy { font-size: 0.65rem; color: rgba(255,255,255,0.2); letter-spacing: 0.15em; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    header { padding: 14px 20px; }
+    nav { display: none; }
+    .hamburger { display: block; }
+    .host-wrap { grid-template-columns: 1fr; text-align: center; }
+    .host-photo-placeholder { margin: 0 auto 20px; width: 180px; height: 180px; }
+    .season-photo-grid { grid-template-columns: repeat(2, 1fr); }
+    .reel-grid { grid-template-columns: 1fr; }
+    .hero { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+    .hero-right { display: none; }
+    .hero-left {
+      padding: 100px 28px 60px;
+      background:
+        linear-gradient(rgba(26,40,54,0.88) 0%, rgba(26,40,54,0.75) 100%),
+        url('../images/hero-reading.jpg') center/cover no-repeat;
+    }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    .about { padding: 72px 24px; }
+    .about-content { grid-template-columns: 1fr; gap: 32px; }
+    .section-inner { padding: 72px 24px; }
+    .access-grid { grid-template-columns: 1fr; }
+    footer { padding: 48px 24px; }
+    .footer-links a { margin: 0 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="javascript:void(0)" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="display:flex;align-items:center;gap:10px;text-decoration:none;"><img src="../images/ロゴ.png" alt="ゲストハウス灯" style="height:40px;width:auto;">ゲストハウス<strong>灯</strong></a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#access">Access</a>
+    <a href="../en/" style="margin-left:24px;border:1px solid rgba(255,255,255,0.2);padding:5px 12px;">English</a>
+  </nav>
+  <a href="#calendar" class="btn-book">空きを見る</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#rooms" onclick="toggleMenu()">Rooms</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="#access" onclick="toggleMenu()">Access</a>
+  <a href="#calendar" onclick="toggleMenu()">空き状況</a>
+  <a href="../en/" onclick="toggleMenu()">English</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">安曇野のゲストハウス</p>
+    <h1 class="hero-title">
+      安曇野に灯る、<br>
+      <strong>小さな宿。</strong>
+    </h1>
+    <p class="hero-desc">
+      北アルプスの麓・安曇野に佇む、築55年の木造平屋を改装したゲストハウス。<br>
+      温泉つき。ふすまで仕切られたお部屋。ホストの桜芽が丁寧にお出迎えします。<br>
+      <br>
+      A quiet guesthouse with an onsen bath, private rooms,<br>
+      and a host who goes above and beyond.
+    </p>
+    <div class="hero-btns">
+      <a href="#calendar" class="btn-primary">空きを見る / Check Availability</a>
+      <a href="#about" class="btn-secondary">詳しく見る</a>
+    </div>
+  </div>
+  <div class="hero-right"></div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">温泉</div>
+    <div class="stat-label">宿泊者が自由に使える温泉つき</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">ふすま仕切り</div>
+    <div class="stat-label">2人部屋 ／ 4人部屋 ／ 共有部あり</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about fade-in" id="about">
+  <p class="label">ABOUT / 宿について</p>
+  <h2 class="title">旅人が集まる<br>カジュアルな宿</h2>
+  <div class="about-content">
+    <div class="about-img">
+      <img src="../images/lifestyle-bunk.jpg" alt="ゲストハウス灯の室内">
+    </div>
+    <div class="about-text">
+      <p class="body-text">
+        ゲストハウス灯は、築55年の木造平屋を改装した、北アルプスの麓・安曇野に佇む宿です。<br><br>
+        木の質感と暖色の照明が灯る落ち着いた和空間。宿泊者で共有する<strong>温泉（浴室）</strong>つき（時間制で貸切利用）。
+        共有キッチン・ラウンジでのんびりと過ごす時間も、旅の大切な一部。<br><br>
+        ホスト桜芽が直接お出迎えし、登山・ハイキング・安曇野の地元情報を丁寧にご案内します。<br><br>
+        <em style="color:var(--muted); font-size:0.85rem;">A quiet wooden guesthouse with an onsen bath. Your host Ouga speaks English and is always happy to help make your stay unforgettable.</em>
+      </p>
+      <ul class="feature-list">
+        <li>温泉（浴室）つき ／ 宿泊者で共有（時間制）</li>
+        <li>リピーター多数</li>
+        <li>日本語・英語対応ホスト（送迎相談可）</li>
+        <li>フルキッチン・共有ラウンジあり</li>
+        <li>登山・ハイキング・安曇野観光を丁寧に案内</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ROOMS -->
+<div class="rooms" id="rooms">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;">
+      <p class="label" style="text-align:center">ROOMS / お部屋</p>
+      <h2 class="title" style="text-align:center;">ご宿泊プラン</h2>
+      <p class="rooms-sub">ふすまで仕切られたお部屋。共有キッチン・ラウンジもあります。</p>
+    </div>
+    <div class="rooms-grid fade-in">
+      <div class="room-card">
+        <img class="room-img" src="../images/room-2bed.jpg" alt="2人部屋 – 畳の和室・二段ベッド">
+        <div class="room-body">
+          <span class="room-tag">FOR 1–2 GUESTS</span>
+          <p class="room-name">2人部屋</p>
+          <p class="room-price">1名 ¥6,000〜 ／ 2名 ¥8,000〜</p>
+          <p class="room-note">畳の和室に二段ベッド。掛け軸と丸ランプが灯る、シンプルで落ち着いた空間。</p>
+          <a href="#calendar" style="display:inline-block;margin-top:16px;padding:10px 28px;background:var(--orange);color:white;text-decoration:none;font-size:0.72rem;letter-spacing:0.15em;">空きを確認する</a>
+        </div>
+      </div>
+      <div class="room-card">
+        <img class="room-img" src="../images/room-4bed.jpg" alt="4人部屋 – 広い和室・二段ベッド×2">
+        <div class="room-body">
+          <span class="room-tag">FOR 2–4 GUESTS</span>
+          <p class="room-name">4人部屋</p>
+          <p class="room-price">1〜3名 ¥12,000〜 ／ 4名 ¥16,000〜</p>
+          <p class="room-note">広い和室に二段ベッド×2。グループ旅行・ファミリーにも。</p>
+          <a href="#calendar" style="display:inline-block;margin-top:16px;padding:10px 28px;background:var(--orange);color:white;text-decoration:none;font-size:0.72rem;letter-spacing:0.15em;">空きを確認する</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div>
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="label" style="text-align:center;">GUEST REVIEWS / お客様の声</p>
+      <h2 class="title" style="text-align:center;">お客様の声</h2>
+    </div>
+    <div class="review-grid fade-in">
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「Ougaさんは最も素晴らしいホストです！送迎・おすすめスポット案内・移動手段の手配まで、安曇野での滞在を本当に素晴らしい体験にしてくれました。この宿の本当の魅力は、ホストのOugaさんです。」</p>
+        <p class="review-author">— Carter（アメリカ） ／ 1週間以上滞在</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「全般、とても at home でした。ホストの桜芽さんは非常に親切で、とても信頼できるホストさん。結婚記念日に長野県産のお飲み物をプレゼントしてもらいました。またの機会で会えれば嬉しい。」</p>
+        <p class="review-author">— Deepak（インド） ／ お子様連れで滞在</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「ホストはとてもフレンドリーで親しみやすく、メッセージに素早く対応してくれました。冬の寒さに備えて毛布をたくさん用意してくれていて、白馬・ハイキングの拠点にも最適でした。」</p>
+        <p class="review-author">— Maxine ／ 数泊滞在</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR -->
+<div id="calendar" style="background: var(--light);">
+  <div class="section-inner fade-in" style="text-align: center;">
+    <p class="label">AVAILABILITY</p>
+    <h2 class="title" style="text-align:center;">空き状況カレンダー / Availability</h2>
+    <p style="color: var(--muted); margin-bottom: 32px; font-size: 0.85rem;">ご希望の日程をご確認ください。Check dates below.</p>
+    <iframe src="../availability-calendar.html" style="width:100%;height:560px;border:none;"></iframe>
+  </div>
+</div>
+
+<!-- SEASONS（写真+オーバーレイ） -->
+<div>
+  <div class="section-inner fade-in" style="padding-bottom: 40px;">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <p class="label">SEASONS</p>
+      <h2 class="title" style="text-align:center;">四季の安曇野を楽しむ</h2>
+    </div>
+  </div>
+  <div class="season-photo-grid fade-in">
+    <div class="season-photo">
+      <img src="../../sasamoriya/images/season-winter.jpg" alt="冬の黒沢滝 氷瀑">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">WINTER</p>
+        <p class="season-photo-name">冬 ─ 氷瀑と雪景色</p>
+        <p class="season-photo-desc">黒沢滝の氷瀑、こたつ時間。白馬スキー場まで車40分</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../../sasamoriya/images/season-spring.jpg" alt="春の安曇野">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">SPRING</p>
+        <p class="season-photo-name">春 ─ 桜と北アルプス</p>
+        <p class="season-photo-desc">残雪の山々とわさび田の花。サイクリングにも最適</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../../sasamoriya/images/season-summer.jpg" alt="夏の安曇野 田園風景">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">SUMMER</p>
+        <p class="season-photo-name">夏 ─ 田園と星空</p>
+        <p class="season-photo-desc">一面の田園風景と北アルプス。標高600mの涼しい風</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../../sasamoriya/images/season-autumn.jpg" alt="秋の安曇野">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">AUTUMN</p>
+        <p class="season-photo-name">秋 ─ 紅葉と新そば</p>
+        <p class="season-photo-desc">学者村の紅葉がピーク。温泉で温まる夜</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 安曇野でできる体験（Reels 3本・横一列） -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <p class="label">EXPLORE AZUMINO</p>
+      <h2 class="title" style="text-align:center;">安曇野でできる体験</h2>
+      <p class="body-text" style="max-width:600px;margin:0 auto;">灯を拠点に、安曇野の自然とアクティビティを満喫。<br>ホストがガイドやおすすめルートのご案内もいたします。</p>
+    </div>
+    <div class="reel-grid">
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/p/DP7ZOQzD6-o/embed" allowfullscreen></iframe>
+        <p class="reel-caption">登山 ─ 北アルプスの絶景へ</p>
+      </div>
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/reel/DInijkPyVHV/embed" allowfullscreen></iframe>
+        <p class="reel-caption">サイクリング ─ 田園風景を駆ける</p>
+      </div>
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/reel/DMxFpW2yKPR/embed" allowfullscreen></iframe>
+        <p class="reel-caption">キャニオニング ─ 渓谷で水遊び</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOST -->
+<div class="host-section">
+  <div class="section-inner fade-in">
+    <p class="label">YOUR HOST / ホスト紹介</p>
+    <h2 class="title" style="text-align:center;">ホストの桜芽です</h2>
+    <div class="host-wrap" style="margin-top:40px;">
+      <img class="host-photo" src="../../sasamoriya/images/host-ouga.jpg" alt="ホスト 三條桜芽" style="width:240px;height:240px;border-radius:50%;object-fit:cover;">
+      <div>
+        <p class="host-name">三條 桜芽（Ouga Sanjo）</p>
+        <p class="host-role">PACK VACATION 代表</p>
+        <p class="host-text">
+          東京生まれ、東京育ち。23歳で安曇野に移住し、一棟貸しの宿「民宿笹森家」を開業。以来、数百組のゲストをお迎えしてきました。<br>
+          同年に法人化し、翌年には2軒目となる「ゲストハウス灯」をオープン。<br><br>
+          宿の運営と並行して、安曇野の自然や文化の魅力を伝えるべく、SNSでの発信や登山・観光のガイド業にも力を注いでいます。
+          日本語・英語に対応しています。海外からのゲストもお気軽にどうぞ。<br><br>
+          <em style="color:var(--orange);font-size:0.82rem;">I speak English fluently and love helping guests discover the best of Azumino!</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SNS -->
+<div>
+  <div class="section-inner fade-in" style="max-width: 720px; text-align: center;">
+    <p class="label">SNS</p>
+    <h2 class="title" style="text-align:center; margin-bottom: 32px;">最新の様子 / Latest Posts</h2>
+    <div style="display:flex; justify-content:center; gap:4px; margin-bottom:32px;">
+      <button onclick="switchSNS('ig','tomoshibi')" id="tab-ig-t" style="padding:12px 28px;border:1px solid var(--navy);background:var(--navy);color:white;cursor:pointer;font-size:0.68rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Instagram</button>
+      <button onclick="switchSNS('note','tomoshibi')" id="tab-note-t" style="padding:12px 28px;border:1px solid var(--navy);background:transparent;color:var(--navy);cursor:pointer;font-size:0.68rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">note</button>
+      <button onclick="switchSNS('podcast','tomoshibi')" id="tab-podcast-t" style="padding:12px 28px;border:1px solid var(--navy);background:transparent;color:var(--navy);cursor:pointer;font-size:0.68rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Podcast</button>
+    </div>
+    <div id="sns-ig-t" style="min-height:540px;">
+      <iframe src="https://www.instagram.com/guesthousetomoshibi/embed" style="width:100%;height:540px;border:none;overflow:hidden;background:white;"></iframe>
+    </div>
+    <div id="sns-note-t" style="display:none;min-height:540px;">
+      <div style="width:100%;height:540px;background:var(--light);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px;box-sizing:border-box;">
+        <div style="width:64px;height:64px;background:#41c9b4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:28px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <h3 style="margin:0 0 8px;font-size:1.1rem;color:var(--navy);letter-spacing:0.1em;">Pack Vacation</h3>
+        <p style="margin:0 0 4px;font-size:0.82rem;color:var(--muted);letter-spacing:0.1em;">@ouga_sanjo</p>
+        <p style="margin:0 0 36px;font-size:0.78rem;color:var(--muted);max-width:320px;line-height:1.8;">宿の裏話やゲストとのエピソード、安曇野の暮らしをnoteで発信中。</p>
+        <a href="https://note.com/ouga_sanjo" target="_blank" style="display:inline-block;padding:14px 48px;background:var(--navy);color:white;text-decoration:none;font-size:0.72rem;letter-spacing:0.2em;transition:opacity 0.3s;">noteを読む</a>
+      </div>
+    </div>
+    <div id="sns-podcast-t" style="display:none;min-height:540px;">
+      <iframe src="https://open.spotify.com/embed/show/0i1LD1y7MnyzoptDa6PytJ?theme=0" style="width:100%;height:540px;border:none;" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+<script>
+function switchSNS(type, site) {
+  var panels = ['ig','note','podcast'];
+  var s = site === 'sasamori' ? '-s' : '-t';
+  panels.forEach(function(p){
+    var el = document.getElementById('sns-'+p+s);
+    var tab = document.getElementById('tab-'+p+s);
+    if(el) el.style.display = p===type ? 'block' : 'none';
+    if(tab){
+      var color = site==='sasamori' ? 'var(--brown)' : 'var(--navy)';
+      tab.style.background = p===type ? color : 'transparent';
+      tab.style.color = p===type ? 'white' : color;
+    }
+  });
+}
+</script>
+
+<!-- FAQ -->
+<div id="faq" style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <p class="label">FAQ / よくある質問</p>
+    <h2 class="title" style="text-align:center;">よくある質問</h2>
+    <div class="faq-list" style="margin-top:36px;">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Wi-Fiは使えますか？ / Is Wi-Fi available?</button>
+        <div class="faq-a"><div class="faq-a-inner">はい、無料Wi-Fiを完備しています。Yes, free Wi-Fi is available throughout the guesthouse.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">タオル・アメニティはありますか？ / Are towels provided?</button>
+        <div class="faq-a"><div class="faq-a-inner">バスタオル・シャンプー・ボディソープをご用意しています。歯ブラシはご持参ください。<br>Towels, shampoo, and body soap are provided. Please bring your own toothbrush.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">近くにコンビニやスーパーはありますか？ / Are there stores nearby?</button>
+        <div class="faq-a"><div class="faq-a-inner">車で約10分の場所にコンビニ・スーパーがあります。お買い物が必要な方は到着前にお済ませいただくか、ホストにご相談ください。<br>Convenience stores and supermarkets are about 10 min by car. Ask your host for recommendations!</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">温泉はいつでも入れますか？ / Can I use the onsen anytime?</button>
+        <div class="faq-a"><div class="faq-a-inner">温泉のご利用時間は15:00〜23:00です。貸切でのご利用となりますので、他のゲストと同時にお入りいただくことはありません。<br>Onsen hours: 3:00 PM – 11:00 PM. Used privately (not shared with other guests at the same time).</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">駐車場はありますか？ / Is parking available?</button>
+        <div class="faq-a"><div class="faq-a-inner">無料駐車場あり（2台まで）。3台以上の場合は事前にご相談ください。<br>Free parking for up to 2 cars. Please contact us if you need more spaces.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">送迎はお願いできますか？ / Do you offer pickup service?</button>
+        <div class="faq-a"><div class="faq-a-inner">JR大糸線「安曇追分駅」まで無料送迎を行っています（要事前予約）。<br>Free pickup from Azumi-Oiwake Station (JR Oito Line). Please book in advance.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">喫煙はできますか？ / Is smoking allowed?</button>
+        <div class="faq-a"><div class="faq-a-inner">全館禁煙です。<br>The entire property is non-smoking.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">キャンセルポリシーは？ / What's the cancellation policy?</button>
+        <div class="faq-a"><div class="faq-a-inner">14日前まで：全額返金、7日前まで：50%返金、7日以内：返金不可となります。詳細はご予約時にお知らせいたします。<br>14+ days: full refund. 7-13 days: 50% refund. Less than 7 days: no refund.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">子連れでも泊まれますか？ / Are children welcome?</button>
+        <div class="faq-a"><div class="faq-a-inner">はい、お子様連れ歓迎です。4人部屋はファミリーにもおすすめです。<br>Yes! Families with children are welcome. The 4-person room is ideal for families.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Wi-Fiの速度は？ / What's the Wi-Fi speed?</button>
+        <div class="faq-a"><div class="faq-a-inner">光回線で安定した速度です。リモートワークやオンライン会議も問題なくご利用いただけます。Fiber-optic, stable enough for remote work and video calls.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">食事はつきますか？ / Are meals included?</button>
+        <div class="faq-a"><div class="faq-a-inner">素泊まりのみとなります。共有キッチン完備で自炊可能です。車で約10分の場所にスーパー・コンビニがあります。<br>Room-only stays. Shared kitchen available for self-catering. Stores are about 10 min by car.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">冬の暖房は？ / Is there heating in winter?</button>
+        <div class="faq-a"><div class="faq-a-inner">エアコン・こたつを完備しています。真冬でも暖かくお過ごしいただけます。<br>Air conditioning and kotatsu (heated table) are available. The house stays warm even in winter.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">お風呂は共用ですか？ / Is the bath shared?</button>
+        <div class="faq-a"><div class="faq-a-inner">はい、温泉浴室は宿泊者全員で共有です。貸切でのご利用となりますので、他のゲストと同時に入ることはありません。<br>The onsen bath is shared among guests but used privately (not at the same time as others).</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">静粛時間はありますか？ / Are there quiet hours?</button>
+        <div class="faq-a"><div class="faq-a-inner">22:00以降はお静かにお過ごしください。<br>Please keep noise to a minimum after 10:00 PM.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="section-inner fade-in" style="max-width:720px;">
+    <p class="label" style="color:rgba(255,255,255,0.35);">CONTACT / お問い合わせ</p>
+    <h2 class="title" style="text-align:center;color:white;">お問い合わせ・ご予約</h2>
+    <p class="contact-text">ご不明点やご相談はお気軽にどうぞ。<br>Feel free to reach out via Instagram DM or email.</p>
+    <div>
+      <a href="https://instagram.com/guesthousetomoshibi" target="_blank" class="btn-contact">Instagram DM</a>
+      <a href="tel:090-6308-3620" class="btn-contact">電話で問い合わせる</a>
+      <a href="mailto:ouga0315@gmail.com" class="btn-contact">メールで問い合わせる</a>
+      <a href="#calendar" class="btn-contact">空き状況を確認する</a>
+    </div>
+  </div>
+</div>
+
+<!-- ACCESS -->
+<div id="access" style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <p class="label">ACCESS / アクセス</p>
+    <h2 class="title">アクセス</h2>
+    <div class="access-grid">
+      <div class="access-item">
+        <p class="access-title">TRAIN / 電車</p>
+        <p class="access-text">JR大糸線「安曇追分駅」から車で約10分<br>送迎無料（要予約）<br>松本駅から電車で約30分</p>
+      </div>
+      <div class="access-item">
+        <p class="access-title">CAR / お車</p>
+        <p class="access-text">長野自動車道「安曇野IC」から約20分<br>駐車場あり（無料・2台まで）</p>
+      </div>
+      <div class="access-item">
+        <p class="access-title">ADDRESS / 住所</p>
+        <p class="access-text">長野県安曇野市穂高有明 7403-30<br>7403-30 Hotaka-Ariaké, Azumino, Nagano</p>
+      </div>
+      <div class="access-item">
+        <p class="access-title">HOURS / 時間</p>
+        <p class="access-text">チェックイン：15:00〜<br>チェックアウト：〜10:00</p>
+      </div>
+      <div style="grid-column:1/-1;overflow:hidden;">
+        <iframe src="https://www.google.com/maps?q=長野県安曇野市穂高有明7403-30&output=embed" style="width:100%;height:320px;border:none;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Guesthouse <strong>Tomoshibi</strong> 灯</div>
+  <p style="font-size:0.6rem; color:rgba(255,255,255,0.2); letter-spacing:0.3em; margin-top:4px;">AZUMINO, NAGANO</p>
+  <div class="footer-links">
+    <a href="https://instagram.com/guesthousetomoshibi" target="_blank">Instagram</a>
+    <a href="https://note.com/ouga_sanjo" target="_blank">note</a>
+    <a href="https://open.spotify.com/show/0i1LD1y7MnyzoptDa6PytJ" target="_blank">Podcast</a>
+    <a href="https://tiktok.com/@guesthousetomoshibi" target="_blank">TikTok</a>
+    <a href="https://linktr.ee/guesthousetomoshibi" target="_blank">Linktree</a>
+    <a href="#calendar">空き状況</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Pack Vacation Co., Ltd.</p>
+</footer>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Guesthouse Tomoshibi 灯",
+  "description": "安曇野の築55年の木造平屋を改装した温泉つきゲストハウス。日英対応ホスト。",
+  "url": "https://ouga0315-cpu.github.io/pack-vacation-lp/tomoshibi/",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "穂高有明 7403-30",
+    "addressLocality": "安曇野市",
+    "addressRegion": "長野県",
+    "addressCountry": "JP"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 36.3425,
+    "longitude": 137.8536
+  },
+  "checkinTime": "15:00",
+  "checkoutTime": "10:00",
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "温泉", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "無料Wi-Fi", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "無料駐車場", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "共有キッチン", "value": true}
+  ],
+  "availableLanguage": ["ja", "en"]
+}
+</script>
+
+<!-- Hamburger Menu -->
+<script>
+function toggleMenu() {
+  var nav = document.getElementById('mobileNav');
+  var btn = document.querySelector('.hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('active');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+</script>
+
+<!-- FAQ Toggle -->
+<script>
+function toggleFAQ(el) {
+  el.classList.toggle('open');
+  var answer = el.nextElementSibling;
+  if (el.classList.contains('open')) {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  } else {
+    answer.style.maxHeight = '0';
+  }
+}
+</script>
+
+<!-- Scroll Animation -->
+<script>
+(function(){
+  var els = document.querySelectorAll('.fade-in');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function(el){ observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>

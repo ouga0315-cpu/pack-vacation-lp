@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>民宿笹森家｜安曇野・森の中の一棟貸し</title>
+<meta name="description" content="安曇野学者村の森の中、2LDK一棟まるごと貸切。ペットOK・BBQ・100インチホームシアター・2025年新設浴室。素泊まり1泊¥15,000〜">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏡</text></svg>">
+<meta property="og:title" content="民宿笹森家｜安曇野の森に佇む一棟貸しの宿">
+<meta property="og:description" content="安曇野学者村の森の中、2LDK一棟まるごと貸切。ペットOK・BBQ・ホームシアター・2025年新設浴室。">
+<meta property="og:image" content="../images/exterior-autumn.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown: #5C3D2E;
+    --cream: #F8F5F0;
+    --green: #3C5A3A;
+    --gold: #B89B5E;
+    --text: #2C2C2C;
+    --muted: #7A7368;
+    --light: #EFEBE4;
+    --dark: #1A1A18;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Zen Old Mincho', 'Hiragino Mincho ProN', serif;
+    color: var(--text); background: var(--cream);
+    letter-spacing: 0.06em; line-height: 2.0; font-weight: 400;
+  }
+  h1, h2, h3 { font-weight: 500; letter-spacing: 0.15em; line-height: 1.6; }
+
+  /* ===== FADE IN ===== */
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== HEADER ===== */
+  header {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(248,245,240,0.92); backdrop-filter: blur(12px);
+    padding: 20px 48px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-img { height: 56px; width: auto; }
+  .logo-text { font-size: 1.1rem; color: var(--brown); letter-spacing: 0.2em; font-weight: 500; }
+  .logo-text span { font-size: 0.65rem; display: block; color: var(--muted); letter-spacing: 0.3em; margin-top: 2px; }
+  nav a { margin-left: 32px; text-decoration: none; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.15em; transition: color 0.3s; }
+  nav a:hover { color: var(--brown); }
+  .btn-book {
+    background: var(--brown); color: white; padding: 10px 28px;
+    text-decoration: none; font-size: 0.75rem; letter-spacing: 0.2em;
+    transition: opacity 0.3s;
+  }
+  .btn-book:hover { opacity: 0.8; }
+
+  /* ===== HERO ===== */
+  .hero {
+    height: 100vh; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    filter: brightness(0.45);
+    opacity: 0; transition: opacity 1.2s ease-in-out;
+  }
+  .hero-slide.active { opacity: 1; }
+  .hero-content { position: relative; text-align: center; color: white; padding: 0 24px; }
+  .hero-sub { font-size: 0.7rem; letter-spacing: 0.5em; margin-bottom: 24px; opacity: 0.7; }
+  .hero-title { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.5; margin-bottom: 24px; letter-spacing: 0.2em; font-weight: 400; }
+  .hero-desc { font-size: 0.85rem; letter-spacing: 0.2em; opacity: 0.6; margin-bottom: 48px; }
+  .hero-btn {
+    display: inline-block; padding: 16px 56px;
+    border: 1px solid rgba(255,255,255,0.4); color: white;
+    text-decoration: none; letter-spacing: 0.25em; font-size: 0.75rem;
+    transition: all 0.4s;
+  }
+  .hero-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+  .scroll-hint {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,0.4); font-size: 0.65rem; letter-spacing: 0.4em;
+  }
+  .scroll-hint::after {
+    content: ''; display: block; width: 1px; height: 40px;
+    background: rgba(255,255,255,0.3); margin: 12px auto 0;
+  }
+
+  /* ===== SECTIONS ===== */
+  .section-inner { max-width: 1000px; margin: 0 auto; padding: 100px 48px; }
+  .section-label { font-size: 0.65rem; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 20px; }
+  .section-title { font-size: clamp(1.5rem, 2.5vw, 2.2rem); color: var(--brown); margin-bottom: 32px; }
+  .section-text { color: var(--muted); font-size: 0.92rem; }
+  .divider { border: none; border-top: 1px solid var(--gold); width: 40px; margin: 0; }
+
+  /* ===== ABOUT ===== */
+  .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .about-img { width: 100%; height: 400px; object-fit: cover; }
+  .badge { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 16px; display: block; }
+
+  /* ===== ROOMS ===== */
+  .rooms-section { background: var(--light); }
+  .room-card { background: white; max-width: 900px; margin: 0 auto; overflow: hidden; }
+  .room-img-main { width: 100%; height: 340px; object-fit: cover; }
+  .room-info { padding: 48px; }
+  .room-name { font-size: 1.2rem; color: var(--brown); margin-bottom: 24px; letter-spacing: 0.15em; }
+  .room-details { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 24px; }
+  .room-details-label { font-size: 0.65rem; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 12px; }
+  .room-details ul { list-style: none; font-size: 0.88rem; color: var(--muted); line-height: 2.2; }
+  .room-price { font-size: 0.88rem; color: var(--green); margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--light); }
+  .room-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 32px; }
+  .room-gallery img { width: 100%; height: 160px; object-fit: cover; }
+  .room-gallery figcaption { font-size: 0.68rem; color: var(--muted); text-align: center; margin-top: 8px; letter-spacing: 0.1em; }
+
+  /* ===== ACTIVITIES ===== */
+  .act-photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 4px; }
+  .act-photo { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+  .act-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+  .act-photo:hover img { transform: scale(1.05); }
+  .act-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
+  }
+  .act-photo-label { color: var(--gold); font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 8px; }
+  .act-photo-name { color: white; font-size: 1rem; letter-spacing: 0.1em; }
+  .act-photo-desc { color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-top: 6px; }
+  .act-tags { display: flex; flex-wrap: wrap; gap: 12px; max-width: 1000px; margin: 48px auto 0; padding: 0 48px; justify-content: center; }
+  .act-tag { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; padding: 10px 24px; border: 1px solid var(--light); }
+
+  /* ===== AZUMINO ACTIVITIES (Reels) ===== */
+  .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; padding: 0 48px; }
+  .reel-item { text-align: center; }
+  .reel-item iframe { width: 100%; height: 360px; border: none; border-radius: 12px; }
+  .reel-caption { font-size: 0.8rem; color: var(--muted); margin-top: 12px; letter-spacing: 0.1em; }
+
+  /* ===== REVIEWS ===== */
+  .reviews-section { background: white; }
+  .review-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+  .review-card { padding: 32px; background: var(--cream); border-radius: 8px; }
+  .review-stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 16px; }
+  .review-text { color: var(--muted); font-size: 0.88rem; line-height: 2.0; margin-bottom: 20px; }
+  .review-author { font-size: 0.75rem; color: var(--brown); letter-spacing: 0.1em; }
+
+  /* ===== SEASONS (same UI as activities) ===== */
+  .season-photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .season-photo { position: relative; overflow: hidden; aspect-ratio: 3/4; }
+  .season-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+  .season-photo:hover img { transform: scale(1.05); }
+  .season-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
+  }
+  .season-photo-label { color: var(--gold); font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 8px; }
+  .season-photo-name { color: white; font-size: 1rem; letter-spacing: 0.1em; }
+  .season-photo-desc { color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-top: 6px; }
+
+  /* ===== ACCESS ===== */
+  .access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 32px; }
+  .access-info dt { font-size: 0.65rem; color: var(--gold); letter-spacing: 0.2em; margin-top: 28px; }
+  .access-info dt:first-child { margin-top: 0; }
+  .access-info dd { color: var(--muted); line-height: 1.9; margin-top: 8px; font-size: 0.9rem; }
+
+  /* ===== FOOTER ===== */
+  footer { background: var(--dark); color: rgba(255,255,255,0.4); text-align: center; padding: 60px 48px; font-size: 0.75rem; letter-spacing: 0.15em; }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; }
+  footer a:hover { color: var(--gold); }
+  .footer-links { margin: 20px 0; }
+  .footer-links a { margin: 0 16px; }
+
+  /* ===== HAMBURGER MENU ===== */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .hamburger span { display: block; width: 20px; height: 1.5px; background: var(--brown); margin: 5px 0; transition: all 0.3s; }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+  .mobile-nav {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: rgba(248,245,240,0.97); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { text-decoration: none; color: var(--brown); font-size: 1.1rem; letter-spacing: 0.2em; }
+
+  /* ===== HOST ===== */
+  .host-wrap { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: center; }
+  .host-photo { width: 280px; height: 280px; border-radius: 50%; object-fit: cover; background: var(--light); }
+  .host-name { font-size: 1.2rem; color: var(--brown); margin-bottom: 8px; }
+  .host-role { font-size: 0.72rem; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 20px; }
+  .host-text { color: var(--muted); font-size: 0.9rem; line-height: 2.2; }
+
+  /* ===== FAQ ===== */
+  .faq-list { max-width: 800px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--light); }
+  .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 24px 0; font-family: inherit; font-size: 0.95rem; color: var(--brown); letter-spacing: 0.08em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; line-height: 1.8; }
+  .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--gold); transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
+  .faq-q.open::after { content: '−'; }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
+  .faq-a-inner { padding: 0 0 24px; color: var(--muted); font-size: 0.88rem; line-height: 2.2; }
+
+  /* ===== CONTACT ===== */
+  .contact-section { background: var(--brown); color: white; text-align: center; }
+  .contact-section .section-label { color: rgba(255,255,255,0.4); }
+  .contact-section h2 { color: white; }
+  .contact-text { color: rgba(255,255,255,0.6); font-size: 0.88rem; margin-bottom: 36px; }
+  .btn-contact {
+    display: inline-block; padding: 16px 48px; border: 1px solid rgba(255,255,255,0.3);
+    color: white; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.2em;
+    transition: all 0.3s; margin: 0 8px;
+  }
+  .btn-contact:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+  .lang-switch { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.15em; margin-left: 24px; text-decoration: none; border: 1px solid var(--light); padding: 6px 14px; transition: all 0.3s; }
+  .lang-switch:hover { color: var(--brown); border-color: var(--brown); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    header { padding: 14px 20px; }
+    nav { display: none; }
+    .hamburger { display: block; }
+    .section-inner { padding: 72px 24px; }
+    .about-wrap, .access-grid, .room-details { grid-template-columns: 1fr; }
+    .about-img { height: 280px; }
+    .room-info { padding: 32px 24px; }
+    .room-gallery img { height: 120px; }
+    .act-tags { padding: 0 24px; }
+    .reel-grid { padding: 0 24px; grid-template-columns: 1fr; }
+    .reel-item iframe { height: 320px; }
+    .host-wrap { grid-template-columns: 1fr; text-align: center; }
+    .host-photo { margin: 0 auto 24px; width: 200px; height: 200px; }
+    .review-grid { grid-template-columns: 1fr; }
+    .season-photo-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">
+    <img class="logo-img" src="../images/siro.png" alt="民宿笹森家 ロゴ">
+    <div class="logo-text">
+      民宿笹森家
+      <span>MINSHUKU SASAMORIHOUSE</span>
+    </div>
+  </a>
+  <nav>
+    <a href="#about">宿について</a>
+    <a href="#rooms">お部屋</a>
+    <a href="#activities">体験</a>
+    <a href="#access">アクセス</a>
+    <a href="../en/" class="lang-switch">English</a>
+  </nav>
+  <a href="#calendar" class="btn-book">予約する</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="toggleMenu()">宿について</a>
+  <a href="#rooms" onclick="toggleMenu()">お部屋</a>
+  <a href="#activities" onclick="toggleMenu()">体験</a>
+  <a href="#faq" onclick="toggleMenu()">よくある質問</a>
+  <a href="#access" onclick="toggleMenu()">アクセス</a>
+  <a href="#calendar" onclick="toggleMenu()">予約する</a>
+  <a href="../en/" onclick="toggleMenu()">English</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-slide active" style="background-image:url('../images/exterior-autumn.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/garden.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/living-kitchen.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-winter.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-spring.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-summer.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-autumn.jpg')"></div>
+  <div class="hero-content">
+    <p class="hero-sub">AZUMINO GAKUSHAMURA, NAGANO</p>
+    <h1 class="hero-title">きこえてくるのは<br>森の揺らぎと、鳥の声</h1>
+    <p class="hero-desc">安曇野学者村の森の中に佇む、一棟貸しの静かな宿</p>
+    <a href="#calendar" class="hero-btn">空き状況を確認する</a>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</div>
+
+<!-- ABOUT -->
+<div id="about">
+  <div class="section-inner">
+    <div class="about-wrap fade-in">
+      <div>
+        <p class="section-label">ABOUT</p>
+        <span class="badge">★4.79 ／ 口コミ61件の高評価宿</span>
+        <h2 class="section-title">森の中の別荘地に<br>あなただけの空間を</h2>
+        <hr class="divider" style="margin-bottom: 28px;">
+        <p class="section-text">
+          民宿笹森家は、安曇野学者村の森の中に佇む一棟貸しの宿です。<br><br>
+          2LDK・100㎡の二階建て古民家を、あなただけの空間として丸ごとお貸しします。
+          100インチ以上のホームシアター、吹き抜けのリビング、2025年に新設した浴室。
+          750㎡超の広大な庭ではBBQも楽しめます。ペットも大歓迎。<br><br>
+          このエリアの静けさは格別なほど。聞こえてくるのは木々の揺らぎと鳥のさえずり、
+          そして遠くを走る電車の音だけ。日常から完全に切り離された時間をどうぞ。
+        </p>
+      </div>
+      <img class="about-img" src="../images/living-kitchen.jpg" alt="民宿笹森家のリビングダイニング">
+    </div>
+  </div>
+</div>
+
+<!-- ROOMS -->
+<div class="rooms-section" id="rooms">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">ROOMS</p>
+      <h2 class="section-title" style="text-align:center;">お部屋</h2>
+    </div>
+    <div class="room-card fade-in">
+      <img class="room-img-main" src="../images/exterior-autumn.jpg" alt="笹森家 外観（秋）">
+      <div class="room-info">
+        <p class="room-name">笹森家まるごとプラン（一棟貸し）</p>
+        <div class="room-details">
+          <div>
+            <p class="room-details-label">FLOOR PLAN</p>
+            <ul>
+              <li>和寝室（布団4組）</li>
+              <li>洋寝室 兼 シアタールーム（ダブルベッド）</li>
+              <li>吹き抜けのリビングダイニング</li>
+              <li>専用バスルーム（2025年新設）</li>
+            </ul>
+          </div>
+          <div>
+            <p class="room-details-label">DETAILS</p>
+            <ul>
+              <li>100㎡・750㎡超の広大な庭</li>
+              <li>安曇野学者村 森の中の別荘地</li>
+              <li>ペットOK ／ BBQエリアあり</li>
+              <li>100インチ以上のホームシアター</li>
+              <li>安曇追分駅より無料送迎（相談可）</li>
+              <li>無料駐車場3台分</li>
+            </ul>
+          </div>
+        </div>
+        <p class="room-price">素泊まり 1泊 ¥15,000〜（人数・時期により変動） ／ <a href="#calendar" style="color:var(--green);text-decoration:underline;">空き状況を確認・予約する</a><br><span style="font-size:0.82rem;color:var(--brown);margin-top:8px;display:inline-block;">定員：最大6名（和寝室4名＋洋寝室2名）</span></p>
+        <div class="room-gallery">
+          <figure>
+            <img src="../images/kitchen-detail.jpg" alt="フルキッチン">
+            <figcaption>フルキッチン</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/bedroom-western.jpg" alt="洋寝室">
+            <figcaption>洋寝室</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/bathroom-new.jpg" alt="浴室（2025年新設）">
+            <figcaption>浴室（2025年新設）</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTIVITIES: 笹森家でしかできない体験 -->
+<div id="activities">
+  <div class="section-inner" style="padding-bottom: 40px;">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">ACTIVITIES</p>
+      <h2 class="section-title" style="text-align:center;">笹森家でしかできない体験</h2>
+    </div>
+  </div>
+  <div class="act-photo-grid fade-in">
+    <div class="act-photo">
+      <img src="../images/theater.jpg" alt="ホームシアター">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">CINEMA</p>
+        <p class="act-photo-name">100インチ ホームシアター</p>
+        <p class="act-photo-desc">映画・アニメ・スポーツ観戦を大画面で</p>
+      </div>
+    </div>
+    <div class="act-photo">
+      <img src="../images/garden.jpg" alt="森の庭">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">OUTDOOR</p>
+        <p class="act-photo-name">森の庭でBBQ・ピクニック</p>
+        <p class="act-photo-desc">750㎡超の広大な庭。木漏れ日の中でゆっくりと</p>
+      </div>
+    </div>
+    <div class="act-photo">
+      <img src="../images/lifestyle-pet.jpg" alt="ペットと過ごす">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">PET FRIENDLY</p>
+        <p class="act-photo-name">ペットと一緒に泊まれる</p>
+        <p class="act-photo-desc">こたつでぬくぬく。雪景色を眺めながら</p>
+      </div>
+    </div>
+    <div class="act-photo">
+      <img src="../images/pet-dog.jpg" alt="ペット歓迎">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">WELCOME</p>
+        <p class="act-photo-name">小型犬・猫 大歓迎</p>
+        <p class="act-photo-desc">家族みんなで、ペットも一緒に安曇野へ</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEASONS（笹森家体験と同じUI） -->
+<div>
+  <div class="section-inner fade-in" style="padding-bottom: 40px;">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">SEASONS</p>
+      <h2 class="section-title" style="text-align:center;">四季の安曇野を楽しむ</h2>
+    </div>
+  </div>
+  <div class="season-photo-grid fade-in">
+    <div class="season-photo">
+      <img src="../images/season-winter.jpg" alt="冬の黒沢滝 氷瀑">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">WINTER</p>
+        <p class="season-photo-name">冬 ─ 氷瀑と雪景色</p>
+        <p class="season-photo-desc">黒沢滝の氷瀑、こたつ時間。白馬スキー場まで車40分</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../images/season-spring.jpg" alt="春の安曇野">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">SPRING</p>
+        <p class="season-photo-name">春 ─ 桜と北アルプス</p>
+        <p class="season-photo-desc">残雪の山々とわさび田の花。サイクリングにも最適</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../images/season-summer.jpg" alt="夏の安曇野 田園風景">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">SUMMER</p>
+        <p class="season-photo-name">夏 ─ 田園と星空</p>
+        <p class="season-photo-desc">一面の田園風景と北アルプス。標高600mの涼しい風</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../images/season-autumn.jpg" alt="秋の安曇野">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">AUTUMN</p>
+        <p class="season-photo-name">秋 ─ 紅葉と新そば</p>
+        <p class="season-photo-desc">学者村の紅葉がピーク。焚き火とホームシアターの夜</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 安曇野でできる体験（Reels 3本・横一列） -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">EXPLORE AZUMINO</p>
+      <h2 class="section-title" style="text-align:center;">安曇野でできる体験</h2>
+      <p class="section-text" style="max-width:600px;margin:0 auto;">笹森家を拠点に、安曇野の自然とアクティビティを満喫。<br>ホストがガイドやおすすめルートのご案内もいたします。</p>
+    </div>
+    <div class="reel-grid">
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/p/DP7ZOQzD6-o/embed" allowfullscreen></iframe>
+        <p class="reel-caption">登山 ─ 北アルプスの絶景へ</p>
+      </div>
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/reel/DInijkPyVHV/embed" allowfullscreen></iframe>
+        <p class="reel-caption">サイクリング ─ 田園風景を駆ける</p>
+      </div>
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/reel/DMxFpW2yKPR/embed" allowfullscreen></iframe>
+        <p class="reel-caption">キャニオニング ─ 渓谷で水遊び</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="reviews-section">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">GUEST REVIEWS</p>
+      <h2 class="section-title" style="text-align:center;">お客様の声</h2>
+    </div>
+    <div class="review-grid fade-in">
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「オーナーの方がとても親切で、安曇追分駅まで迎えに来てくださり、行き道に景色の綺麗な道で車を止めて南アルプスを見せてくれたりこの辺りの特色を説明しながらの送迎でとても楽しかったです。宿の細かいところにオーナーの配慮が感じられ、是非また来たいと思いました。」</p>
+        <p class="review-author">— 丸野 さま</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「綺麗な緑に囲まれた静かな空間。そんなところを求めてる方には大変訪れてほしいと感じるところでした。お部屋も木に囲まれていて、落ち着く空間でした。また訪れたい場所の一つになりました。」</p>
+        <p class="review-author">— 弥寿々 さま ／ 数泊滞在</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「ホストさんはとても親しみやすい方で、質問の返答も早く、安心して滞在できました。部屋は綺麗で清潔、お風呂も広く、夜も全然寒くならず、朝まで快適に過ごせました。シチュエーションは最高でした。」</p>
+        <p class="review-author">— Shigeru さま ／ ペット同伴で滞在</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「安曇野の森の中にある木造の家で、暖かくて快適でした。冬の陽射しが森から差し込み、周辺の景色も楽しめます。交通の便は良いとは言えませんが、無料駐車場があるので問題なし。森の中の静けさを求めるなら最高の場所です。」</p>
+        <p class="review-author">— Shaokang さま ／ 3泊滞在</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR -->
+<div id="calendar">
+  <div class="section-inner fade-in" style="text-align: center;">
+    <p class="section-label">AVAILABILITY</p>
+    <h2 class="section-title" style="text-align:center;">空き状況カレンダー</h2>
+    <p class="section-text" style="margin-bottom: 40px;">ご希望の日程をご確認ください。</p>
+    <iframe src="../availability-calendar.html" style="width:100%;height:560px;border:none;"></iframe>
+  </div>
+</div>
+
+<!-- SNS -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in" style="max-width: 720px; text-align: center;">
+    <p class="section-label">SNS</p>
+    <h2 class="section-title" style="text-align:center; margin-bottom: 32px;">最新の様子をチェック</h2>
+    <div style="display:flex; justify-content:center; gap:4px; margin-bottom:32px;">
+      <button onclick="switchSNS('ig','sasamori')" id="tab-ig-s" style="padding:12px 28px;border:1px solid var(--brown);background:var(--brown);color:white;cursor:pointer;font-size:0.72rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Instagram</button>
+      <button onclick="switchSNS('note','sasamori')" id="tab-note-s" style="padding:12px 28px;border:1px solid var(--brown);background:transparent;color:var(--brown);cursor:pointer;font-size:0.72rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">note</button>
+      <button onclick="switchSNS('podcast','sasamori')" id="tab-podcast-s" style="padding:12px 28px;border:1px solid var(--brown);background:transparent;color:var(--brown);cursor:pointer;font-size:0.72rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Podcast</button>
+    </div>
+    <div id="sns-ig-s" style="min-height:540px;">
+      <iframe src="https://www.instagram.com/sasamorihouse/embed" style="width:100%;height:540px;border:none;overflow:hidden;background:white;"></iframe>
+    </div>
+    <div id="sns-note-s" style="display:none;min-height:540px;">
+      <div style="width:100%;height:540px;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px;box-sizing:border-box;">
+        <div style="width:64px;height:64px;background:#41c9b4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:28px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <h3 style="margin:0 0 8px;font-size:1.1rem;color:var(--text);letter-spacing:0.1em;">Pack Vacation</h3>
+        <p style="margin:0 0 4px;font-size:0.82rem;color:var(--muted);letter-spacing:0.1em;">@ouga_sanjo</p>
+        <p style="margin:0 0 36px;font-size:0.8rem;color:var(--muted);max-width:320px;line-height:1.8;">宿の裏話やゲストとのエピソード、安曇野の暮らしをnoteで発信中。</p>
+        <a href="https://note.com/ouga_sanjo" target="_blank" style="display:inline-block;padding:14px 48px;background:var(--brown);color:white;text-decoration:none;font-size:0.78rem;letter-spacing:0.2em;transition:opacity 0.3s;">noteを読む</a>
+      </div>
+    </div>
+    <div id="sns-podcast-s" style="display:none;min-height:540px;">
+      <iframe src="https://open.spotify.com/embed/show/0i1LD1y7MnyzoptDa6PytJ?theme=0" style="width:100%;height:540px;border:none;" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+<script>
+function switchSNS(type, site) {
+  var panels = ['ig','note','podcast'];
+  var s = site === 'sasamori' ? '-s' : '-t';
+  panels.forEach(function(p){
+    var el = document.getElementById('sns-'+p+s);
+    var tab = document.getElementById('tab-'+p+s);
+    if(el) el.style.display = p===type ? 'block' : 'none';
+    if(tab){
+      var color = site==='sasamori' ? 'var(--brown)' : 'var(--navy)';
+      tab.style.background = p===type ? color : 'transparent';
+      tab.style.color = p===type ? 'white' : color;
+    }
+  });
+}
+</script>
+
+<!-- HOST -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <p class="section-label">HOST</p>
+    <h2 class="section-title" style="text-align:center;">ホスト紹介</h2>
+    <div class="host-wrap" style="margin-top:48px;">
+      <img class="host-photo" src="../images/host-ouga.jpg" alt="ホスト 三條桜芽">
+      <div>
+        <p class="host-name">三條 桜芽（さんじょう おうが）</p>
+        <p class="host-role">PACK VACATION 代表</p>
+        <p class="host-text">
+          東京生まれ、東京育ち。23歳で安曇野に移住し、一棟貸しの宿「民宿笹森家」を開業。以来、数百組のゲストをお迎えしてきました。<br>
+          同年に法人化し、翌年には2軒目となる「ゲストハウス灯」をオープン。<br><br>
+          宿の運営と並行して、安曇野の自然や文化の魅力を伝えるべく、SNSでの発信や登山・観光のガイド業にも力を注いでいます。<br><br>
+          お越しの際は安曇追分駅までの送迎はもちろん、地元のおすすめスポットや登山ルートのご案内もお任せください。
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div id="faq" style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title" style="text-align:center;">よくある質問</h2>
+    <div class="faq-list" style="margin-top:40px;">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Wi-Fiは使えますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">はい、無料Wi-Fiを完備しています。リモートワークにも対応できる速度です。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">タオルやアメニティはありますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">バスタオル・シャンプー・ボディソープをご用意しています。歯ブラシはご持参ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">近くにコンビニやスーパーはありますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">車で約10分の場所にコンビニ・スーパーがあります。到着前の買い出しがおすすめです。BBQ食材の調達先もご案内できます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">ペットの種類やサイズに制限はありますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">小型犬・猫は歓迎です。ペット同伴の場合、清掃費として1匹 ¥3,000、2匹目以降 ¥1,000/匹を頂戴しております。大型犬はご予約前にご相談ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">子連れ・赤ちゃんでも泊まれますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">はい、お子様連れ大歓迎です。一棟貸しなので周りを気にせずお過ごしいただけます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">キャンセルポリシーはどうなっていますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">14日前まで：全額返金、7日前まで：50%返金、7日以内：返金不可となります。詳細はご予約時にお知らせいたします。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">送迎はお願いできますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">JR大糸線「安曇追分駅」まで無料送迎を行っています（要事前予約）。到着時間をお知らせください。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Wi-Fiの速度は？</button>
+        <div class="faq-a"><div class="faq-a-inner">光回線で安定した速度です。リモートワークやオンライン会議も問題なくご利用いただけます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">食事はつきますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">素泊まりのみとなります。フルキッチン完備ですので自炊が可能です。車で約10分の場所にスーパー・コンビニがあります。近隣のおすすめ飲食店もご案内します。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">冬の暖房は？</button>
+        <div class="faq-a"><div class="faq-a-inner">エアコン・こたつ・石油ストーブを完備しています。真冬でも暖かくお過ごしいただけます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">キッチンの設備は？</button>
+        <div class="faq-a"><div class="faq-a-inner">IHコンロ・冷蔵庫・電子レンジ・炊飯器・調理器具・食器類を完備。食材をお持ち込みいただければ本格的な料理も可能です。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">駐車場はありますか？ / Is parking available?</button>
+        <div class="faq-a"><div class="faq-a-inner">無料駐車場あり（2台まで）。3台以上の場合は事前にご相談ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">喫煙はできますか？ / Is smoking allowed?</button>
+        <div class="faq-a"><div class="faq-a-inner">全館禁煙です。敷地内に喫煙スペースはございません。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">静粛時間はありますか？ / Are there quiet hours?</button>
+        <div class="faq-a"><div class="faq-a-inner">22:00以降はお静かにお過ごしください。近隣への配慮をお願いしております。</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="section-inner fade-in" style="max-width:720px;">
+    <p class="section-label">CONTACT</p>
+    <h2 class="section-title" style="text-align:center; color:white;">お問い合わせ・ご予約</h2>
+    <p class="contact-text">ご不明点やご相談はお気軽にどうぞ。</p>
+    <div>
+      <a href="https://instagram.com/sasamorihouse" target="_blank" class="btn-contact">Instagram DM</a>
+      <a href="tel:090-6308-3620" class="btn-contact">電話で問い合わせる</a>
+      <a href="mailto:ouga0315@gmail.com" class="btn-contact">メールで問い合わせる</a>
+      <a href="#calendar" class="btn-contact">空き状況を確認する</a>
+    </div>
+  </div>
+</div>
+
+<!-- ACCESS -->
+<div id="access">
+  <div class="section-inner fade-in">
+    <p class="section-label">ACCESS</p>
+    <h2 class="section-title">アクセス</h2>
+    <div class="access-grid">
+      <dl class="access-info">
+        <dt>ADDRESS</dt>
+        <dd>長野県安曇野市穂高有明7403-30</dd>
+        <dt>TRAIN</dt>
+        <dd>JR大糸線「安曇追分駅」より送迎無料（要予約）<br>松本駅から電車で約35分</dd>
+        <dt>CAR</dt>
+        <dd>長野自動車道「安曇野IC」から約20分<br>無料駐車場あり（無料・2台まで）</dd>
+        <dt>CHECK-IN</dt>
+        <dd>15:00〜（ご到着が遅れる場合はご連絡ください）</dd>
+        <dt>CHECK-OUT</dt>
+        <dd>〜10:00</dd>
+      </dl>
+      <iframe src="https://www.google.com/maps?q=長野県安曇野市穂高有明7403-30&output=embed" style="width:100%;height:360px;border:none;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-size:0.85rem; color:rgba(255,255,255,0.6); letter-spacing:0.2em;">民宿笹森家</p>
+  <p style="font-size:0.65rem; margin-top:4px; letter-spacing:0.3em;">MINSHUKU SASAMORIHOUSE</p>
+  <div class="footer-links">
+    <a href="https://instagram.com/sasamorihouse" target="_blank">Instagram</a>
+    <a href="https://note.com/ouga_sanjo" target="_blank">note</a>
+    <a href="https://open.spotify.com/show/0i1LD1y7MnyzoptDa6PytJ" target="_blank">Podcast</a>
+    <a href="https://linktr.ee/sasamoriya" target="_blank">Linktree</a>
+  </div>
+  <p>&copy; 2026 Pack Vacation Co., Ltd.</p>
+</footer>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "民宿笹森家",
+  "description": "安曇野学者村の森の中に佇む一棟貸しの宿。2LDK・100㎡の古民家を丸ごと貸切。ペットOK・BBQ・ホームシアター完備。",
+  "url": "https://ouga0315-cpu.github.io/pack-vacation-lp/sasamoriya/",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "安曇野市",
+    "addressRegion": "長野県",
+    "addressCountry": "JP"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 36.3425,
+    "longitude": 137.8536
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.79",
+    "reviewCount": "61",
+    "bestRating": "5"
+  },
+  "checkinTime": "15:00",
+  "checkoutTime": "10:00",
+  "petsAllowed": true,
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "無料Wi-Fi", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "無料駐車場", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "BBQエリア", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "ホームシアター", "value": true}
+  ]
+}
+</script>
+
+<!-- Hamburger Menu -->
+<script>
+function toggleMenu() {
+  var nav = document.getElementById('mobileNav');
+  var btn = document.querySelector('.hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('active');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+</script>
+
+<!-- FAQ Toggle -->
+<script>
+function toggleFAQ(el) {
+  el.classList.toggle('open');
+  var answer = el.nextElementSibling;
+  if (el.classList.contains('open')) {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  } else {
+    answer.style.maxHeight = '0';
+  }
+}
+</script>
+
+<!-- Hero Slideshow -->
+<script>
+(function(){
+  var slides = document.querySelectorAll('.hero-slide');
+  var current = 0;
+  var total = slides.length;
+  setInterval(function(){
+    slides[current].classList.remove('active');
+    current = (current + 1) % total;
+    slides[current].classList.add('active');
+  }, 5000);
+})();
+</script>
+
+<!-- Scroll Animation -->
+<script>
+(function(){
+  var els = document.querySelectorAll('.fade-in');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function(el){ observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>
