@@ -16,8 +16,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #2B2B2B;
-    --orange: #EE5A1F;
+    --navy: #1A2836;
+    --orange: #D4633A;
     --light: #F4F6F8;
     --gray: #6B7A8D;
     --muted: #8A95A3;
@@ -30,10 +30,8 @@
     font-family: 'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif;
     color: var(--navy); background: var(--white);
     letter-spacing: 0.06em; line-height: 2.0; font-weight: 400;
-    word-break: auto-phrase; line-break: strict; overflow-wrap: break-word;
   }
-  h1, h2, h3, p { text-wrap: pretty; }
-  h1, h2, h3 { font-weight: 500; letter-spacing: 0.15em; line-height: 1.5; text-wrap: balance; }
+  h1, h2, h3 { font-weight: 500; letter-spacing: 0.15em; line-height: 1.5; }
 
   /* ===== FADE IN ===== */
   .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -196,11 +194,9 @@
   .contact-section { background: var(--navy); color: white; text-align: center; }
   .contact-text { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 32px; }
   .btn-contact {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 260px; box-sizing: border-box;
-    padding: 14px 20px; border: 1px solid rgba(255,255,255,0.25);
+    display: inline-block; padding: 14px 44px; border: 1px solid rgba(255,255,255,0.25);
     color: white; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.18em;
-    transition: all 0.3s; margin: 8px;
+    transition: all 0.3s; margin: 0 8px;
   }
   .btn-contact:hover { border-color: var(--orange); color: var(--orange); }
 
@@ -245,7 +241,7 @@
 
 <!-- HEADER -->
 <header>
-  <a href="javascript:void(0)" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="display:flex;align-items:center;gap:10px;text-decoration:none;"><img src="../images/ロゴマーク横.png" alt="ゲストハウス灯" style="height:52px;width:auto;background:#ffffff;padding:10px 16px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.18);"></a>
+  <a href="javascript:void(0)" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="display:flex;align-items:center;gap:10px;text-decoration:none;"><img src="../images/ロゴ.png" alt="ゲストハウス灯" style="height:40px;width:auto;">ゲストハウス<strong>灯</strong></a>
   <nav>
     <a href="#about">About</a>
     <a href="#rooms">Rooms</a>
@@ -654,6 +650,11 @@ function switchSNS(type, site) {
     <a href="https://tiktok.com/@guesthousetomoshibi" target="_blank">TikTok</a>
     <a href="https://linktr.ee/guesthousetomoshibi" target="_blank">Linktree</a>
     <a href="#calendar">空き状況</a>
+  </div>
+  <div class="footer-links" style="margin-top:8px;">
+    <a href="/terms.html">利用規約</a>
+    <a href="/cancellation-policy.html">キャンセルポリシー</a>
+    <a href="/privacy.html">プライバシー</a>
   </div>
   <p class="footer-copy" style="font-size:0.65rem; margin:16px 0 8px; line-height:1.8;">
     ご予約のキャンセルは、予約確定メール内の「予約をキャンセルする」リンクから承っております。<br>

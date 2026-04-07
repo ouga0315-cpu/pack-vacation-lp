@@ -144,15 +144,29 @@
           <input type="text" id="fName" placeholder="山田 太郎">
           <label>電話番号 *</label>
           <input type="tel" id="fContact" placeholder="090-1234-5678">
-          <label>メールアドレス（確認メール送付用）</label>
+          <label>メールアドレス *（確認メール送付用）</label>
           <input type="email" id="fEmail" placeholder="example@mail.com">
+          <label>住所 *<span style="font-size:10px;color:#aaa;font-weight:normal">（旅館業法に基づく宿泊者名簿の法定記載事項）</span></label>
+          <input type="text" id="fAddress" placeholder="長野県松本市〇〇1-2-3">
+          <label>職業 *</label>
+          <input type="text" id="fOccupation" placeholder="会社員、学生、自営業 など">
+          <label>国籍 <span style="font-size:10px;color:#aaa;font-weight:normal">（日本国籍以外の方は旅券番号も）</span></label>
+          <input type="text" id="fNationality" placeholder="例: 日本 / USA Passport No.123456789">
           <div id="passportField" style="display:none;">
             <label>Passport photo (required for international guests) *</label>
             <input type="file" id="fPassport" accept="image/*" style="padding:8px 0;">
             <p style="font-size:0.7rem;color:#999;margin-top:4px;">Under Japanese law, international guests must present a valid passport at check-in.</p>
           </div>
           <label>備考</label>
-          <textarea id="fNote" placeholder="ペット同伴、到着時間など"></textarea>
+          <textarea id="fNote" placeholder="到着時間、特別なご要望など"></textarea>
+          <!-- ハニーポット (Bot対策) -->
+          <div style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+            <label>Website <input type="text" id="fHp" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:8px;margin-top:14px;font-size:12px;line-height:1.6;font-weight:normal;">
+            <input type="checkbox" id="fAgree" style="margin-top:3px;flex-shrink:0;">
+            <span><a href="/terms.html" target="_blank" style="color:#4a6741;">利用規約</a>・<a href="/cancellation-policy.html" target="_blank" style="color:#4a6741;">キャンセルポリシー</a>・<a href="/privacy.html" target="_blank" style="color:#4a6741;">プライバシーポリシー</a>に同意します</span>
+          </label>
           <div style="margin-top:16px">
             <button class="btn-submit" id="btnSubmit" onclick="submitBooking()">この内容で予約する</button>
           </div>
@@ -551,13 +565,27 @@
   window.submitBooking = function() {
     var name = document.getElementById('fName').value.trim();
     var contact = document.getElementById('fContact').value.trim();
+    var email = document.getElementById('fEmail').value.trim();
+    var address = document.getElementById('fAddress').value.trim();
+    var occupation = document.getElementById('fOccupation').value.trim();
+    var nationality = document.getElementById('fNationality').value.trim();
     var checkin = document.getElementById('fCheckin').value;
     var checkout = document.getElementById('fCheckout').value;
     var guests = document.getElementById('fGuests').value;
+    var agreed = document.getElementById('fAgree').checked;
+    var hp = document.getElementById('fHp').value;
 
     if (!name) { alert('お名前を入力してください'); return; }
     if (!contact) { alert('連絡先を入力してください'); return; }
+    if (!email) { alert('メールアドレスを入力してください'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('メールアドレスの形式が正しくありません'); return; }
+    if (!address) { alert('住所は宿泊者名簿の法定記載事項です。ご入力をお願いします'); return; }
+    if (!occupation) { alert('職業は宿泊者名簿の法定記載事項です。ご入力をお願いします'); return; }
+    if (!agreed) { alert('利用規約・キャンセルポリシー・プライバシーポリシーへのご同意が必要です'); return; }
     if (!checkin || !checkout || new Date(checkout) <= new Date(checkin)) { alert('日程を正しく入力してください'); return; }
+    // リードタイムチェック
+    var leadHours = (new Date(checkin + 'T15:00:00+09:00') - new Date()) / 36e5;
+    if (leadHours < 24) { alert('チェックイン24時間前を過ぎているため、Webからの予約は承れません。Instagram DMかお電話でお問い合わせください。'); return; }
 
     var btn = document.getElementById('btnSubmit');
     btn.disabled = true;
@@ -573,7 +601,13 @@
       guests: guests + '名',
       name: name,
       contact: contact,
-      email: document.getElementById('fEmail').value.trim(),
+      email: email,
+      address: address,
+      occupation: occupation,
+      nationality: nationality,
+      agreed: agreed,
+      website: hp,
+      lang: 'ja',
       note: document.getElementById('fNote').value.trim(),
       totalPrice: formatYen(total) + '（' + nights + '泊）'
     };

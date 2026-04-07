@@ -30,10 +30,8 @@
     font-family: 'Zen Old Mincho', 'Hiragino Mincho ProN', serif;
     color: var(--text); background: var(--cream);
     letter-spacing: 0.06em; line-height: 2.0; font-weight: 400;
-    word-break: auto-phrase; line-break: strict; overflow-wrap: break-word;
   }
-  h1, h2, h3, p { text-wrap: pretty; }
-  h1, h2, h3 { font-weight: 500; letter-spacing: 0.15em; line-height: 1.6; text-wrap: balance; }
+  h1, h2, h3 { font-weight: 500; letter-spacing: 0.15em; line-height: 1.6; }
 
   /* ===== FADE IN ===== */
   .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -209,11 +207,9 @@
   .contact-section h2 { color: white; }
   .contact-text { color: rgba(255,255,255,0.6); font-size: 0.88rem; margin-bottom: 36px; }
   .btn-contact {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 280px; box-sizing: border-box;
-    padding: 16px 20px; border: 1px solid rgba(255,255,255,0.3);
+    display: inline-block; padding: 16px 48px; border: 1px solid rgba(255,255,255,0.3);
     color: white; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.2em;
-    transition: all 0.3s; margin: 8px;
+    transition: all 0.3s; margin: 0 8px;
   }
   .btn-contact:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
 
@@ -701,6 +697,11 @@ function switchSNS(type, site) {
     <a href="https://note.com/ouga_sanjo" target="_blank">note</a>
     <a href="https://open.spotify.com/show/0i1LD1y7MnyzoptDa6PytJ" target="_blank">Podcast</a>
     <a href="https://linktr.ee/sasamoriya" target="_blank">Linktree</a>
+  </div>
+  <div class="footer-links" style="margin-top:8px;">
+    <a href="/terms.html">利用規約</a>
+    <a href="/cancellation-policy.html">キャンセルポリシー</a>
+    <a href="/privacy.html">プライバシー</a>
   </div>
   <p style="font-size:0.65rem; color:rgba(255,255,255,0.45); margin:16px 0 8px; letter-spacing:0.1em; line-height:1.8;">
     ご予約のキャンセルは、予約確定メール内の「予約をキャンセルする」リンクから承っております。<br>
