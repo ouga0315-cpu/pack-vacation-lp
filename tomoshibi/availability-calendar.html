@@ -1,6 +1,73 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2RVQXQ0S68"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-2RVQXQ0S68');
+
+/* --- Pack Vacation カスタムイベント追跡 --- */
+(function(){
+  /* 1. スクロール深度 (25/50/75/100%) */
+  var scrollFired={};
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body;
+    var pct=Math.round((h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight)*100);
+    [25,50,75,100].forEach(function(t){
+      if(pct>=t&&!scrollFired[t]){scrollFired[t]=true;gtag('event','scroll_depth',{depth:t+'%'});}
+    });
+  },{passive:true});
+
+  /* 2. 電話タップ */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="tel:"]');
+    if(a)gtag('event','phone_tap',{phone_number:a.getAttribute('href').replace('tel:','')});
+  });
+
+  /* 3. 予約ボタン / CTA クリック */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="#calendar"],a[href*="availability"],button,.btn,.tel-btn');
+    if(a){
+      var txt=(a.textContent||'').trim().slice(0,40);
+      gtag('event','cta_click',{cta_text:txt,cta_href:a.getAttribute('href')||''});
+    }
+  });
+
+  /* 4. 予約フォーム送信完了 */
+  var origConfirm=window.confirmBooking;
+  if(typeof origConfirm==='function'){
+    window.confirmBooking=function(){
+      gtag('event','booking_submit',{property:window.currentProp||''});
+      return origConfirm.apply(this,arguments);
+    };
+  }
+
+  /* 5. 言語切替 */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="/ja/"],a[href*="/en/"],a.lang-jp,a.lang-en');
+    if(a){
+      var lang=a.getAttribute('href').indexOf('/en/')!==-1?'en':'ja';
+      gtag('event','language_switch',{language:lang});
+    }
+  });
+
+  /* 6. セクション到達 (Intersection Observer) */
+  if('IntersectionObserver' in window){
+    var secFired={};
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting&&!secFired[en.target.id]){
+          secFired[en.target.id]=true;
+          gtag('event','section_view',{section:en.target.id});
+        }
+      });
+    },{threshold:0.3});
+    document.querySelectorAll('section[id]').forEach(function(s){obs.observe(s);});
+  }
+})();
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>空き状況カレンダー</title>
