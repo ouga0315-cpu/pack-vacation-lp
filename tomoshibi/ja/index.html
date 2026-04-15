@@ -1,6 +1,73 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2RVQXQ0S68"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-2RVQXQ0S68');
+
+/* --- Pack Vacation カスタムイベント追跡 --- */
+(function(){
+  /* 1. スクロール深度 (25/50/75/100%) */
+  var scrollFired={};
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body;
+    var pct=Math.round((h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight)*100);
+    [25,50,75,100].forEach(function(t){
+      if(pct>=t&&!scrollFired[t]){scrollFired[t]=true;gtag('event','scroll_depth',{depth:t+'%'});}
+    });
+  },{passive:true});
+
+  /* 2. 電話タップ */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="tel:"]');
+    if(a)gtag('event','phone_tap',{phone_number:a.getAttribute('href').replace('tel:','')});
+  });
+
+  /* 3. 予約ボタン / CTA クリック */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="#calendar"],a[href*="availability"],button,.btn,.tel-btn');
+    if(a){
+      var txt=(a.textContent||'').trim().slice(0,40);
+      gtag('event','cta_click',{cta_text:txt,cta_href:a.getAttribute('href')||''});
+    }
+  });
+
+  /* 4. 予約フォーム送信完了 */
+  var origConfirm=window.confirmBooking;
+  if(typeof origConfirm==='function'){
+    window.confirmBooking=function(){
+      gtag('event','booking_submit',{property:window.currentProp||''});
+      return origConfirm.apply(this,arguments);
+    };
+  }
+
+  /* 5. 言語切替 */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="/ja/"],a[href*="/en/"],a.lang-jp,a.lang-en');
+    if(a){
+      var lang=a.getAttribute('href').indexOf('/en/')!==-1?'en':'ja';
+      gtag('event','language_switch',{language:lang});
+    }
+  });
+
+  /* 6. セクション到達 (Intersection Observer) */
+  if('IntersectionObserver' in window){
+    var secFired={};
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting&&!secFired[en.target.id]){
+          secFired[en.target.id]=true;
+          gtag('event','section_view',{section:en.target.id});
+        }
+      });
+    },{threshold:0.3});
+    document.querySelectorAll('section[id]').forEach(function(s){obs.observe(s);});
+  }
+})();
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guesthouse Tomoshibi｜ゲストハウス灯 in 安曇野</title>
@@ -43,14 +110,14 @@
     background: rgba(26,40,54,0.95); backdrop-filter: blur(12px);
     padding: 20px 48px; display: flex; justify-content: space-between; align-items: center;
   }
-  .logo { color: rgba(255,255,255,0.85); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.2em; }
+  .logo { color: rgba(255,255,255,0.85); font-size:1.125rem; font-weight: 400; letter-spacing: 0.2em; }
   .logo strong { color: var(--orange); font-weight: 500; }
-  nav a { margin-left: 32px; text-decoration: none; color: rgba(255,255,255,0.45); font-size: 0.75rem; letter-spacing: 0.15em; transition: color 0.3s; }
+  nav a { margin-left: 32px; text-decoration: none; color: rgba(255,255,255,0.45); font-size:1.125rem; letter-spacing: 0.15em; transition: color 0.3s; }
   nav a:hover { color: var(--orange); }
   .btn-book {
     background: transparent; color: white; padding: 9px 24px;
     border: 1px solid rgba(255,255,255,0.3);
-    text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em;
+    text-decoration: none; font-size:1.125rem; letter-spacing: 0.2em;
     transition: all 0.3s;
   }
   .btn-book:hover { border-color: var(--orange); color: var(--orange); }
@@ -63,22 +130,22 @@
     padding: 120px 72px 72px;
   }
   .hero-tag {
-    font-size: 0.6rem; letter-spacing: 0.3em; color: var(--orange);
+    font-size:1.125rem; letter-spacing: 0.3em; color: var(--orange);
     margin-bottom: 32px;
   }
   .hero-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 400; line-height: 1.6; margin-bottom: 24px; letter-spacing: 0.15em; }
   .hero-title strong { color: var(--orange); font-weight: 500; }
-  .hero-desc { color: rgba(255,255,255,0.45); font-size: 0.85rem; line-height: 2.0; margin-bottom: 48px; }
+  .hero-desc { color: rgba(255,255,255,0.92); font-size:1.15rem; line-height: 2.0; margin-bottom: 48px; }
   .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
   .btn-primary {
     background: var(--orange); color: white; padding: 14px 40px;
-    text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em;
+    text-decoration: none; font-size:1.125rem; letter-spacing: 0.15em;
     transition: opacity 0.3s;
   }
   .btn-primary:hover { opacity: 0.85; }
   .btn-secondary {
     border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); padding: 14px 40px;
-    text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em;
+    text-decoration: none; font-size:1.125rem; letter-spacing: 0.15em;
     transition: all 0.3s;
   }
   .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: white; }
@@ -95,14 +162,14 @@
   .stats { display: grid; grid-template-columns: repeat(2, 1fr); border-bottom: 1px solid var(--border); }
   .stat { padding: 36px; text-align: center; border-right: 1px solid var(--border); }
   .stat:last-child { border-right: none; }
-  .stat-num { font-size: 1.3rem; color: var(--navy); font-weight: 500; letter-spacing: 0.1em; }
-  .stat-label { font-size: 0.68rem; color: var(--muted); margin-top: 6px; letter-spacing: 0.1em; }
+  .stat-num { font-size:1.3rem; color: var(--navy); font-weight: 500; letter-spacing: 0.1em; }
+  .stat-label { font-size:1.125rem; color: var(--muted); margin-top: 6px; letter-spacing: 0.1em; }
 
   /* ===== SECTIONS ===== */
   .section-inner { max-width: 1000px; margin: 0 auto; padding: 100px 48px; }
-  .label { font-size: 0.6rem; letter-spacing: 0.4em; color: var(--orange); margin-bottom: 20px; }
+  .label { font-size:1.125rem; letter-spacing: 0.4em; color: var(--orange); margin-bottom: 20px; }
   h2.title { font-size: clamp(1.5rem, 2.5vw, 2.0rem); font-weight: 400; line-height: 1.6; margin-bottom: 28px; color: var(--navy); letter-spacing: 0.12em; }
-  .body-text { color: var(--gray); line-height: 2.0; font-size: 0.9rem; }
+  .body-text { color: var(--gray); line-height: 2.0; font-size:1.125rem; }
 
   /* ===== ABOUT ===== */
   .about { max-width: 1000px; margin: 0 auto; padding: 100px 48px; }
@@ -112,33 +179,33 @@
   .about-img:hover img { transform: scale(1.03); }
   .about-text { display: flex; flex-direction: column; justify-content: center; }
   .feature-list { list-style: none; margin-top: 32px; }
-  .feature-list li { padding: 12px 0; border-bottom: 1px solid var(--border); color: var(--gray); font-size: 0.85rem; letter-spacing: 0.05em; }
+  .feature-list li { padding: 12px 0; border-bottom: 1px solid var(--border); color: var(--gray); font-size:1.125rem; letter-spacing: 0.05em; }
 
   /* ===== ROOMS ===== */
   .rooms { background: var(--light); }
-  .rooms-sub { text-align: center; color: var(--muted); margin-bottom: 48px; font-size: 0.85rem; }
+  .rooms-sub { text-align: center; color: var(--muted); margin-bottom: 48px; font-size:1.125rem; }
   .rooms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; max-width: 1000px; margin: 0 auto; }
   .room-card { background: white; overflow: hidden; transition: transform 0.4s; }
   .room-card:hover { transform: translateY(-4px); }
   .room-img { width: 100%; height: 220px; object-fit: cover; }
   .room-body { padding: 32px; }
-  .room-tag { font-size: 0.6rem; letter-spacing: 0.2em; color: var(--orange); }
-  .room-name { font-size: 1rem; margin: 12px 0 8px; letter-spacing: 0.1em; }
-  .room-price { color: var(--orange); font-weight: 500; font-size: 0.88rem; }
-  .room-note { font-size: 0.82rem; color: var(--muted); margin-top: 12px; line-height: 1.9; }
+  .room-tag { font-size:1.125rem; letter-spacing: 0.2em; color: var(--orange); }
+  .room-name { font-size:1.125rem; margin: 12px 0 8px; letter-spacing: 0.1em; }
+  .room-price { color: var(--orange); font-weight: 500; font-size:1.125rem; }
+  .room-note { font-size:1.125rem; color: var(--muted); margin-top: 12px; line-height: 1.9; }
 
   /* ===== REVIEWS ===== */
   .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
   .review-card { padding: 0; }
-  .review-stars { color: var(--orange); font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 16px; }
-  .review-text { color: var(--gray); font-size: 0.88rem; line-height: 2.0; margin-bottom: 20px; }
-  .review-author { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; }
+  .review-stars { color: var(--orange); font-size:1.125rem; letter-spacing: 0.2em; margin-bottom: 16px; }
+  .review-text { color: var(--gray); font-size:1.125rem; line-height: 2.0; margin-bottom: 20px; }
+  .review-author { font-size:1.125rem; color: var(--muted); letter-spacing: 0.1em; }
 
   /* ===== ACCESS ===== */
   .access-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; }
   .access-item { padding: 32px; background: var(--light); }
-  .access-title { font-size: 0.6rem; letter-spacing: 0.3em; color: var(--orange); margin-bottom: 12px; }
-  .access-text { color: var(--gray); font-size: 0.85rem; line-height: 1.9; }
+  .access-title { font-size:1.125rem; letter-spacing: 0.3em; color: var(--orange); margin-bottom: 12px; }
+  .access-text { color: var(--gray); font-size:1.125rem; line-height: 1.9; }
 
   /* ===== HAMBURGER MENU ===== */
   .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
@@ -152,25 +219,25 @@
     flex-direction: column; align-items: center; justify-content: center; gap: 32px;
   }
   .mobile-nav.open { display: flex; }
-  .mobile-nav a { text-decoration: none; color: rgba(255,255,255,0.8); font-size: 1.1rem; letter-spacing: 0.2em; }
+  .mobile-nav a { text-decoration: none; color: rgba(255,255,255,0.8); font-size:1.125rem; letter-spacing: 0.2em; }
   .mobile-nav a:hover { color: var(--orange); }
 
   /* ===== HOST ===== */
   .host-section { background: var(--light); }
   .host-wrap { display: grid; grid-template-columns: 240px 1fr; gap: 48px; align-items: center; }
-  .host-photo-placeholder { width: 240px; height: 240px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
-  .host-name { font-size: 1.1rem; color: var(--navy); margin-bottom: 6px; }
-  .host-role { font-size: 0.65rem; color: var(--orange); letter-spacing: 0.25em; margin-bottom: 20px; }
-  .host-text { color: var(--gray); font-size: 0.88rem; line-height: 2.2; }
+  .host-photo-placeholder { width: 240px; height: 240px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size:3.5rem; }
+  .host-name { font-size:1.125rem; color: var(--navy); margin-bottom: 6px; }
+  .host-role { font-size:1.125rem; color: var(--orange); letter-spacing: 0.25em; margin-bottom: 20px; }
+  .host-text { color: var(--gray); font-size:1.125rem; line-height: 2.2; }
 
   /* ===== FAQ ===== */
   .faq-list { max-width: 800px; margin: 0 auto; }
   .faq-item { border-bottom: 1px solid var(--border); }
-  .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 24px 0; font-family: inherit; font-size: 0.92rem; color: var(--navy); letter-spacing: 0.06em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; line-height: 1.8; }
-  .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--orange); transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
+  .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 24px 0; font-family: inherit; font-size:1.125rem; color: var(--navy); letter-spacing: 0.06em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; line-height: 1.8; }
+  .faq-q::after { content: '+'; font-size:1.2rem; color: var(--orange); transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
   .faq-q.open::after { content: '−'; }
   .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-  .faq-a-inner { padding: 0 0 24px; color: var(--gray); font-size: 0.85rem; line-height: 2.2; }
+  .faq-a-inner { padding: 0 0 24px; color: var(--gray); font-size:1.125rem; line-height: 2.2; }
 
   /* ===== SEASON PHOTOS ===== */
   .season-photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
@@ -181,33 +248,33 @@
     position: absolute; bottom: 0; left: 0; right: 0;
     padding: 24px 16px; background: linear-gradient(transparent, rgba(0,0,0,0.7));
   }
-  .season-photo-label { color: var(--orange); font-size: 0.6rem; letter-spacing: 0.3em; margin-bottom: 8px; }
-  .season-photo-name { color: white; font-size: 1rem; letter-spacing: 0.1em; }
-  .season-photo-desc { color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-top: 6px; }
+  .season-photo-label { color: var(--orange); font-size:1.125rem; letter-spacing: 0.3em; margin-bottom: 8px; }
+  .season-photo-name { color: white; font-size:1.125rem; letter-spacing: 0.1em; }
+  .season-photo-desc { color: rgba(255,255,255,0.6); font-size:1.125rem; margin-top: 6px; }
 
   /* ===== REELS ===== */
-  .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+  .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1240px; margin: 0 auto; }
   .reel-item iframe { width: 100%; height: 360px; border: none; background: var(--light); }
-  .reel-caption { font-size: 0.8rem; color: var(--gray); text-align: center; margin-top: 12px; letter-spacing: 0.05em; }
+  .reel-caption { font-size:1.125rem; color: var(--gray); text-align: center; margin-top: 12px; letter-spacing: 0.02em; white-space: nowrap; }
 
   /* ===== CONTACT ===== */
   .contact-section { background: var(--navy); color: white; text-align: center; }
-  .contact-text { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 32px; }
+  .contact-text { color: rgba(255,255,255,0.5); font-size:1.125rem; margin-bottom: 32px; }
   .btn-contact {
     display: inline-block; padding: 14px 44px; border: 1px solid rgba(255,255,255,0.25);
-    color: white; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.18em;
+    color: white; text-decoration: none; font-size:1.125rem; letter-spacing: 0.18em;
     transition: all 0.3s; margin: 0 8px;
   }
   .btn-contact:hover { border-color: var(--orange); color: var(--orange); }
 
   /* ===== FOOTER ===== */
   footer { background: var(--dark); padding: 60px 48px; text-align: center; }
-  .footer-logo { color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.2em; }
+  .footer-logo { color: rgba(255,255,255,0.6); font-size:1.125rem; font-weight: 400; letter-spacing: 0.2em; }
   .footer-logo strong { color: var(--orange); }
   .footer-links { margin: 20px 0; }
-  .footer-links a { color: rgba(255,255,255,0.3); font-size: 0.7rem; margin: 0 16px; text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+  .footer-links a { color: rgba(255,255,255,0.3); font-size:1.125rem; margin: 0 16px; text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
   .footer-links a:hover { color: var(--orange); }
-  .footer-copy { font-size: 0.65rem; color: rgba(255,255,255,0.2); letter-spacing: 0.15em; }
+  .footer-copy { font-size:1.125rem; color: rgba(255,255,255,0.2); letter-spacing: 0.15em; }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
@@ -309,7 +376,7 @@
         木の質感と暖色の照明が灯る落ち着いた和空間。宿泊者で共有する<strong>温泉（浴室）</strong>つき（時間制で貸切利用）。
         共有キッチン・ラウンジでのんびりと過ごす時間も、旅の大切な一部。<br><br>
         ホスト桜芽が直接お出迎えし、登山・ハイキング・安曇野の地元情報を丁寧にご案内します。<br><br>
-        <em style="color:var(--muted); font-size:0.85rem;">A quiet wooden guesthouse with an onsen bath. Your host Ouga speaks English and is always happy to help make your stay unforgettable.</em>
+        <em style="color:var(--muted); font-size:1.125rem;">A quiet wooden guesthouse with an onsen bath. Your host Ouga speaks English and is always happy to help make your stay unforgettable.</em>
       </p>
       <ul class="feature-list">
         <li>温泉（浴室）つき ／ 宿泊者で共有（時間制）</li>
@@ -338,7 +405,7 @@
           <p class="room-name">2人部屋</p>
           <p class="room-price">1名 ¥6,000〜 ／ 2名 ¥8,000〜</p>
           <p class="room-note">畳の和室に二段ベッド。掛け軸と丸ランプが灯る、シンプルで落ち着いた空間。</p>
-          <a href="#calendar" style="display:inline-block;margin-top:16px;padding:10px 28px;background:var(--orange);color:white;text-decoration:none;font-size:0.72rem;letter-spacing:0.15em;">空きを確認する</a>
+          <a href="#calendar" style="display:inline-block;margin-top:16px;padding:10px 28px;background:var(--orange);color:white;text-decoration:none;font-size:1.125rem;letter-spacing:0.15em;">空きを確認する</a>
         </div>
       </div>
       <div class="room-card">
@@ -348,7 +415,7 @@
           <p class="room-name">4人部屋</p>
           <p class="room-price">1〜3名 ¥12,000〜 ／ 4名 ¥16,000〜</p>
           <p class="room-note">広い和室に二段ベッド×2。グループ旅行・ファミリーにも。</p>
-          <a href="#calendar" style="display:inline-block;margin-top:16px;padding:10px 28px;background:var(--orange);color:white;text-decoration:none;font-size:0.72rem;letter-spacing:0.15em;">空きを確認する</a>
+          <a href="#calendar" style="display:inline-block;margin-top:16px;padding:10px 28px;background:var(--orange);color:white;text-decoration:none;font-size:1.125rem;letter-spacing:0.15em;">空きを確認する</a>
         </div>
       </div>
     </div>
@@ -387,7 +454,7 @@
   <div class="section-inner fade-in" style="text-align: center;">
     <p class="label">AVAILABILITY</p>
     <h2 class="title" style="text-align:center;">空き状況カレンダー / Availability</h2>
-    <p style="color: var(--muted); margin-bottom: 32px; font-size: 0.85rem;">ご希望の日程をご確認ください。Check dates below.</p>
+    <p style="color: var(--muted); margin-bottom: 32px; font-size:1.125rem;">ご希望の日程をご確認ください。Check dates below.</p>
     <iframe src="../availability-calendar.html" style="width:100%;height:560px;border:none;"></iframe>
   </div>
 </div>
@@ -447,15 +514,15 @@
     <div class="reel-grid">
       <div class="reel-item">
         <iframe src="https://www.instagram.com/p/DP7ZOQzD6-o/embed" allowfullscreen></iframe>
-        <p class="reel-caption">登山 ─ 北アルプスの絶景へ</p>
+        <p class="reel-caption">登山 ─ 北アルプスの絶景</p>
       </div>
       <div class="reel-item">
         <iframe src="https://www.instagram.com/reel/DInijkPyVHV/embed" allowfullscreen></iframe>
-        <p class="reel-caption">サイクリング ─ 田園風景を駆ける</p>
+        <p class="reel-caption">サイクリング ─ 田園を駆ける</p>
       </div>
       <div class="reel-item">
         <iframe src="https://www.instagram.com/reel/DMxFpW2yKPR/embed" allowfullscreen></iframe>
-        <p class="reel-caption">キャニオニング ─ 渓谷で水遊び</p>
+        <p class="reel-caption">キャニオニング ─ 渓流遊び</p>
       </div>
     </div>
   </div>
@@ -476,7 +543,7 @@
           同年に法人化し、翌年には2軒目となる「ゲストハウス灯」をオープン。<br><br>
           宿の運営と並行して、安曇野の自然や文化の魅力を伝えるべく、SNSでの発信や登山・観光のガイド業にも力を注いでいます。
           日本語・英語に対応しています。海外からのゲストもお気軽にどうぞ。<br><br>
-          <em style="color:var(--orange);font-size:0.82rem;">I speak English fluently and love helping guests discover the best of Azumino!</em>
+          <em style="color:var(--orange);font-size:1.125rem;">I speak English fluently and love helping guests discover the best of Azumino!</em>
         </p>
       </div>
     </div>
@@ -489,9 +556,9 @@
     <p class="label">SNS</p>
     <h2 class="title" style="text-align:center; margin-bottom: 32px;">最新の様子 / Latest Posts</h2>
     <div style="display:flex; justify-content:center; gap:4px; margin-bottom:32px;">
-      <button onclick="switchSNS('ig','tomoshibi')" id="tab-ig-t" style="padding:12px 28px;border:1px solid var(--navy);background:var(--navy);color:white;cursor:pointer;font-size:0.68rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Instagram</button>
-      <button onclick="switchSNS('note','tomoshibi')" id="tab-note-t" style="padding:12px 28px;border:1px solid var(--navy);background:transparent;color:var(--navy);cursor:pointer;font-size:0.68rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">note</button>
-      <button onclick="switchSNS('podcast','tomoshibi')" id="tab-podcast-t" style="padding:12px 28px;border:1px solid var(--navy);background:transparent;color:var(--navy);cursor:pointer;font-size:0.68rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Podcast</button>
+      <button onclick="switchSNS('ig','tomoshibi')" id="tab-ig-t" style="padding:12px 28px;border:1px solid var(--navy);background:var(--navy);color:white;cursor:pointer;font-size:1.125rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Instagram</button>
+      <button onclick="switchSNS('note','tomoshibi')" id="tab-note-t" style="padding:12px 28px;border:1px solid var(--navy);background:transparent;color:var(--navy);cursor:pointer;font-size:1.125rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">note</button>
+      <button onclick="switchSNS('podcast','tomoshibi')" id="tab-podcast-t" style="padding:12px 28px;border:1px solid var(--navy);background:transparent;color:var(--navy);cursor:pointer;font-size:1.125rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Podcast</button>
     </div>
     <div id="sns-ig-t" style="min-height:540px;">
       <iframe src="https://www.instagram.com/guesthousetomoshibi/embed" style="width:100%;height:540px;border:none;overflow:hidden;background:white;"></iframe>
@@ -501,10 +568,10 @@
         <div style="width:64px;height:64px;background:#41c9b4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:28px;">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </div>
-        <h3 style="margin:0 0 8px;font-size:1.1rem;color:var(--navy);letter-spacing:0.1em;">Pack Vacation</h3>
-        <p style="margin:0 0 4px;font-size:0.82rem;color:var(--muted);letter-spacing:0.1em;">@ouga_sanjo</p>
-        <p style="margin:0 0 36px;font-size:0.78rem;color:var(--muted);max-width:320px;line-height:1.8;">宿の裏話やゲストとのエピソード、安曇野の暮らしをnoteで発信中。</p>
-        <a href="https://note.com/ouga_sanjo" target="_blank" style="display:inline-block;padding:14px 48px;background:var(--navy);color:white;text-decoration:none;font-size:0.72rem;letter-spacing:0.2em;transition:opacity 0.3s;">noteを読む</a>
+        <h3 style="margin:0 0 8px;font-size:1.125rem;color:var(--navy);letter-spacing:0.1em;">Pack Vacation</h3>
+        <p style="margin:0 0 4px;font-size:1.125rem;color:var(--muted);letter-spacing:0.1em;">@ouga_sanjo</p>
+        <p style="margin:0 0 36px;font-size:1.125rem;color:var(--muted);max-width:320px;line-height:1.8;">宿の裏話やゲストとのエピソード、安曇野の暮らしをnoteで発信中。</p>
+        <a href="https://note.com/ouga_sanjo" target="_blank" style="display:inline-block;padding:14px 48px;background:var(--navy);color:white;text-decoration:none;font-size:1.125rem;letter-spacing:0.2em;transition:opacity 0.3s;">noteを読む</a>
       </div>
     </div>
     <div id="sns-podcast-t" style="display:none;min-height:540px;">
@@ -642,7 +709,7 @@ function switchSNS(type, site) {
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Guesthouse <strong>Tomoshibi</strong> 灯</div>
-  <p style="font-size:0.6rem; color:rgba(255,255,255,0.2); letter-spacing:0.3em; margin-top:4px;">AZUMINO, NAGANO</p>
+  <p style="font-size:1.125rem; color:rgba(255,255,255,0.2); letter-spacing:0.3em; margin-top:4px;">AZUMINO, NAGANO</p>
   <div class="footer-links">
     <a href="https://instagram.com/guesthousetomoshibi" target="_blank">Instagram</a>
     <a href="https://note.com/ouga_sanjo" target="_blank">note</a>
@@ -651,6 +718,15 @@ function switchSNS(type, site) {
     <a href="https://linktr.ee/guesthousetomoshibi" target="_blank">Linktree</a>
     <a href="#calendar">空き状況</a>
   </div>
+  <div class="footer-links" style="margin-top:8px;">
+    <a href="/pack-vacation-lp/terms.html">利用規約</a>
+    <a href="/pack-vacation-lp/cancellation-policy.html">キャンセルポリシー</a>
+    <a href="/pack-vacation-lp/privacy.html">プライバシー</a>
+  </div>
+  <p class="footer-copy" style="font-size:1.125rem; margin:16px 0 8px; line-height:1.8;">
+    ご予約のキャンセルは、予約確定メール内の「予約をキャンセルする」リンクから承っております。<br>
+    メールが見当たらない場合は <a href="https://instagram.com/guesthousetomoshibi" target="_blank">Instagram DM</a> までご連絡ください。
+  </p>
   <p class="footer-copy">&copy; 2026 Pack Vacation Co., Ltd.</p>
 </footer>
 

@@ -1,132 +1,873 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pack Vacation | 安曇野の宿</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Zen Kaku Gothic New', sans-serif;
-      background: #f8f6f2;
-      color: #2d2d2d;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-    .logo { margin-bottom: 12px; }
-    .logo img { height: 64px; width: auto; }
-    h1 {
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      color: #888;
-      margin-bottom: 48px;
-    }
-    .properties {
-      display: flex;
-      gap: 48px;
-      flex-wrap: wrap;
-      justify-content: center;
-      max-width: 800px;
-      width: 100%;
-    }
-    .property {
-      background: #fff;
-      border-radius: 16px;
-      padding: 40px 36px 32px;
-      min-width: 300px;
-      flex: 1;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .property:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-    }
-    .property h2 {
-      font-size: 1.5rem;
-      margin-bottom: 4px;
-    }
-    .property .sub {
-      font-size: 0.85rem;
-      color: #999;
-      margin-bottom: 24px;
-      letter-spacing: 0.05em;
-    }
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .links a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      text-decoration: none;
-      color: #2d2d2d;
-      padding: 14px 20px;
-      border-radius: 10px;
-      background: #f8f6f2;
-      font-size: 0.95rem;
-      transition: background 0.2s ease;
-    }
-    .links a:hover { background: #eee8e0; }
-    .links a .arrow {
-      font-size: 1.1rem;
-      color: #aaa;
-      transition: transform 0.2s ease;
-    }
-    .links a:hover .arrow { transform: translateX(4px); color: #666; }
-    .sasamori { border-top: 4px solid #4a7c59; }
-    .tomoshibi { border-top: 4px solid #1a3a5c; }
-    footer {
-      margin-top: 60px;
-      font-size: 0.8rem;
-      color: #bbb;
-      text-align: center;
-    }
-    @media (max-width: 680px) {
-      .properties { gap: 24px; }
-      .property { min-width: unset; padding: 32px 24px 24px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHOKUDO &amp; CAFÉ yum-yum｜松本市美術館内のレストラン・カフェ</title>
+<meta name="description" content="松本市美術館の中にある SHOKUDO & CAFÉ yum-yum。昼はカジュアルに、夜は特別な時間に。信州の食材を活かしたランチと、完全予約制のディナーコース。">
+<meta property="og:title" content="SHOKUDO & CAFÉ yum-yum">
+<meta property="og:description" content="昼はカジュアルに、夜は特別な時間に。松本市美術館内のレストラン・カフェ。">
+<meta property="og:image" content="assets/hero-exterior.jpg">
+<style>
+:root{
+  --navy:#1b2a4a;
+  --navy-deep:#0f1a33;
+  --navy-black:#070d1c;
+  --ink:#2c3347;
+  --line:#e7e8ec;
+  --bg:#ffffff;
+  --soft:#f7f8fa;
+  --muted:#7a8194;
+  --accent:#c9a96e;
+  --accent-glow:#e6c98a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  color:var(--ink);
+  background:#ffffff;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* === Daylight → Night gradient backdrop ===
+   Page top is bright/white (daytime lunch),
+   gradually darkens into deep navy (dinner / museum at night). */
+.page{
+  background:linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #fbfaf6 14%,
+    #f4efe3 26%,
+    #e8dcc0 38%,
+    #b9a98a 48%,
+    #6a6a7a 58%,
+    #2a3150 68%,
+    #151c38 78%,
+    #0a1126 88%,
+    #050918 100%
+  );
+  position:relative;
+  overflow:hidden;
+}
+/* Warm lamp glow highlights in the dark lower half */
+.page::before{
+  content:"";position:absolute;left:-10%;top:55%;width:55%;height:55%;
+  background:radial-gradient(ellipse at center,rgba(230,201,138,.18),rgba(230,201,138,0) 65%);
+  pointer-events:none;
+}
+.page::after{
+  content:"";position:absolute;right:-10%;top:72%;width:60%;height:55%;
+  background:radial-gradient(ellipse at center,rgba(230,201,138,.14),rgba(230,201,138,0) 65%);
+  pointer-events:none;
+}
+
+img{max-width:100%;display:block}
+a{color:var(--navy);text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+.sans{font-family:"Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+
+/* Header */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;padding-top:0}
+header .brand{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;color:var(--navy);letter-spacing:.08em;font-size:15px}
+header nav{display:flex;gap:22px;font-size:13px}
+header nav a{color:var(--ink);letter-spacing:.08em}
+header nav a:hover{color:var(--navy)}
+.tel-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--navy);color:#fff!important;
+  padding:9px 18px;border-radius:999px;
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:13px;letter-spacing:.05em;
+}
+.tel-btn:hover{background:var(--navy-deep)}
+@media(max-width:820px){header nav{display:none}}
+
+/* Hero */
+.hero{
+  position:relative;
+  min-height:92vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:120px 24px 80px;
+  background:linear-gradient(180deg,rgba(255,255,255,.0),rgba(27,42,74,.35) 90%),
+             url("assets/hero-exterior.jpg") center/cover no-repeat,
+             #dfe3ec;
+  color:#fff;
+}
+.hero .logo-mark{width:220px;margin:0 auto 28px;opacity:.98;filter:drop-shadow(0 2px 14px rgba(0,0,0,.35))}
+.hero h1{
+  font-size:clamp(26px,4.4vw,44px);
+  margin:0 0 16px;letter-spacing:.14em;font-weight:500;
+  text-shadow:0 2px 20px rgba(0,0,0,.45);
+}
+.hero p.lead{
+  font-size:clamp(13px,1.5vw,16px);
+  letter-spacing:.1em;margin:0 auto;max-width:680px;
+  text-shadow:0 1px 8px rgba(0,0,0,.5);
+}
+.hero .tagline{
+  margin-top:28px;font-size:13px;letter-spacing:.2em;
+  color:#fff;opacity:.9;font-family:"Helvetica Neue",sans-serif;
+}
+.hero .scroll{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  font-family:"Helvetica Neue",sans-serif;font-size:11px;letter-spacing:.3em;
+  color:#fff;opacity:.85;
+}
+
+/* Section base */
+section{padding:96px 0;position:relative}
+.section-head{text-align:center;margin-bottom:48px}
+.section-head .en{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  color:var(--accent);letter-spacing:.35em;font-size:12px;
+  text-transform:uppercase;
+}
+.section-head h2{
+  font-size:clamp(22px,3vw,30px);
+  margin:10px 0 0;letter-spacing:.12em;font-weight:500;color:var(--navy);
+}
+.section-head .rule{
+  width:40px;height:1px;background:var(--accent);margin:18px auto 0;
+}
+.on-dark .section-head h2{color:#fff}
+.on-dark .section-head .en{color:var(--accent-glow)}
+.on-dark{color:#e9ecf4}
+.on-dark p{color:#cfd5e4}
+
+/* Concept strip */
+.concept{text-align:center;padding:80px 0 40px}
+.concept .copy{
+  font-size:clamp(16px,2.2vw,22px);
+  letter-spacing:.15em;line-height:2.2;color:var(--navy);
+  max-width:760px;margin:0 auto;
+}
+.concept .copy .sun{color:#b5902e}
+.concept .copy .moon{color:#3a476b}
+.concept .copy .divider{
+  display:block;width:1px;height:36px;background:var(--accent);margin:26px auto;
+}
+
+/* About */
+.about .grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about p{margin:0 0 18px;font-size:15px}
+.about .photo{
+  aspect-ratio:4/5;background:#d8dde6 center/cover no-repeat;
+  background-image:url("assets/about-interior.jpg");
+  border-radius:2px;box-shadow:0 30px 60px -30px rgba(27,42,74,.3);
+}
+@media(max-width:820px){.about .grid{grid-template-columns:1fr;gap:32px}}
+
+/* Lunch vs Dinner comparison */
+.lunch-dinner{padding:80px 0 96px}
+.ld-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch}
+.ld-col{
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--line);
+  padding:44px 36px;border-radius:4px;
+  box-shadow:0 40px 80px -50px rgba(10,15,35,.5);
+  display:flex;flex-direction:column;
+}
+.ld-col.dinner{
+  background:linear-gradient(180deg,#152040 0%,#0a1126 100%);
+  border-color:rgba(201,169,110,.35);color:#e9ecf4;
+}
+.ld-col .tag{
+  font-family:"Helvetica Neue",sans-serif;font-size:11px;letter-spacing:.35em;
+  color:var(--accent);text-transform:uppercase;
+}
+.ld-col h3{
+  font-size:22px;margin:10px 0 6px;letter-spacing:.1em;color:var(--navy);font-weight:500;
+}
+.ld-col.dinner h3{color:#fff}
+.ld-col .hours{font-size:12px;color:var(--muted);letter-spacing:.1em;font-family:sans-serif}
+.ld-col.dinner .hours{color:#a9b0c3}
+.ld-col .lead{margin:18px 0 22px;font-size:14px;line-height:1.9}
+.ld-col.dinner .lead{color:#cfd5e4}
+
+.ld-menu{border-top:1px solid var(--line);padding-top:18px;margin-top:6px}
+.ld-col.dinner .ld-menu{border-top-color:rgba(255,255,255,.15)}
+.ld-menu .item{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:12px 0;border-bottom:1px dashed var(--line);font-size:13px;
+}
+.ld-col.dinner .ld-menu .item{border-bottom-color:rgba(255,255,255,.12)}
+.ld-menu .item:last-child{border-bottom:none}
+.ld-menu .item .name{font-weight:600;color:var(--navy)}
+.ld-col.dinner .ld-menu .item .name{color:#fff}
+.ld-menu .item .price{
+  font-family:"Helvetica Neue",sans-serif;font-size:13px;color:var(--accent);
+  white-space:nowrap;
+}
+.ld-col .scene{
+  margin-top:22px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted);font-family:sans-serif;letter-spacing:.06em;
+}
+.ld-col.dinner .scene{border-top-color:rgba(255,255,255,.15);color:#a9b0c3}
+.ld-col .scene strong{color:var(--navy);font-weight:600;display:block;margin-bottom:4px;font-family:inherit}
+.ld-col.dinner .scene strong{color:var(--accent-glow)}
+@media(max-width:820px){.ld-wrap{grid-template-columns:1fr}}
+
+/* Dishes */
+.dishes{padding:80px 0}
+.dishes .list{display:grid;grid-template-columns:repeat(2,1fr);gap:44px}
+.dish{background:rgba(255,255,255,.92);padding:22px;border-radius:3px;box-shadow:0 30px 60px -40px rgba(10,15,35,.3)}
+.dish .img{
+  aspect-ratio:4/3;background:#eef0f4 center/cover no-repeat;margin-bottom:18px;
+}
+.dish h3{
+  margin:0 0 8px;font-size:16px;letter-spacing:.06em;color:var(--navy);font-weight:600;
+}
+.dish h3 .sub{display:block;font-size:11px;color:var(--accent);letter-spacing:.25em;margin-bottom:6px;font-family:"Helvetica Neue",sans-serif}
+.dish p{margin:0;font-size:13px;color:var(--ink)}
+.dish.d1 .img{background-image:url("assets/dish-roastbeef-new.jpg")}
+.dish.d2 .img{background-image:url("assets/dish-curry.jpg")}
+.dish.d3 .img{background-image:url("assets/dish-pate.jpg")}
+.dish.d4 .img{background-image:url("assets/dish-cheesecake.jpg")}
+@media(max-width:720px){.dishes .list{grid-template-columns:1fr;gap:30px}}
+
+/* Course */
+.course{padding:100px 0 110px}
+.course .section-head h2{color:#fff}
+.course .section-head .en{color:var(--accent-glow)}
+.course .intro{text-align:center;max-width:680px;margin:0 auto 52px;font-size:14px;color:#cfd5e4}
+.course .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.course .card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(201,169,110,.3);
+  border-radius:3px;overflow:hidden;
+  backdrop-filter:blur(4px);
+}
+.course .card .img{
+  aspect-ratio:4/3;background:#1a2340 center/cover no-repeat;position:relative;
+}
+.course .card.c1 .img{background-image:url("assets/course-a.jpg")}
+.course .card.c2 .img{background-image:url("assets/course-b.jpg")}
+.course .card.c3 .img{background-image:url("assets/course-c.jpg")}
+.course .card .img::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(5,9,24,0) 55%,rgba(5,9,24,.85) 100%);
+}
+.course .card .body{padding:26px 24px 32px;text-align:center}
+.course .card .label{
+  font-family:"Helvetica Neue",sans-serif;font-size:11px;letter-spacing:.3em;color:var(--accent-glow);
+}
+.course .card .price{font-size:30px;margin:12px 0 4px;letter-spacing:.04em;color:#fff}
+.course .card .price .yen{font-size:16px;margin-right:2px}
+.course .card .desc{font-size:13px;color:#cfd5e4;margin:10px 0 0;line-height:1.8}
+.course .note{
+  text-align:center;margin-top:40px;font-size:12px;color:#9ea6b9;letter-spacing:.05em;
+}
+@media(max-width:820px){.course .cards{grid-template-columns:1fr}}
+
+/* Scenes */
+.scenes{padding:80px 0 60px}
+.scenes .section-head h2{color:#fff}
+.scenes .section-head .en{color:var(--accent-glow)}
+.scenes .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.scene-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);
+  padding:36px 32px;border-radius:3px;color:#e9ecf4;
+}
+.scene-card h3{margin:0 0 10px;font-size:17px;letter-spacing:.1em;color:#fff;font-weight:500}
+.scene-card .when{
+  font-family:"Helvetica Neue",sans-serif;font-size:11px;letter-spacing:.3em;color:var(--accent-glow);
+}
+.scene-card ul{margin:16px 0 0;padding:0;list-style:none}
+.scene-card li{
+  padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.15);font-size:13px;color:#cfd5e4;
+}
+.scene-card li:last-child{border-bottom:none}
+@media(max-width:720px){.scenes .grid{grid-template-columns:1fr}}
+
+/* ===== 逆グラデーション 視認性レイヤー ===== */
+/* 背景が明→暗にグラデしているため、テキスト側に暗→明の逆グラデで可読性を確保 */
+.course, .scenes{position:relative;isolation:isolate}
+.course::before, .scenes::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,9,24,0) 0%,rgba(5,9,24,.35) 40%,rgba(5,9,24,.55) 100%);
+}
+.course .intro{color:#f4f6fb!important;text-shadow:0 2px 12px rgba(0,0,0,.7),0 0 2px rgba(0,0,0,.5)}
+.course .card{background:rgba(10,17,38,.55)!important;border-color:rgba(230,201,138,.5)!important}
+.course .card .label{color:#f0d9a6!important;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.course .card .price{color:#ffffff!important;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.course .card .desc{color:#f4f6fb!important;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.course .note{color:#e6ebf5!important;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.course .section-head h2, .scenes .section-head h2{text-shadow:0 2px 14px rgba(0,0,0,.6)}
+.scenes .scene-card{background:rgba(10,17,38,.6)!important;border-color:rgba(255,255,255,.2)!important}
+.scenes .scene-card h3{color:#fff!important;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.scenes .scene-card li{color:#f4f6fb!important;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+.scenes .scene-card .when{color:#f0d9a6!important}
+/* コース画像は未入稿のため一旦非表示にし、カード本体で見せる */
+.course .card .img{display:none}
+.course .card{padding:32px 24px 36px}
+.course .card .body{padding:0}
+
+/* ABOUT / DISHES 帯の本文は背景が明るい部分に乗るので濃い色に */
+.about p{color:#2a3150!important}
+.dish h3{color:#0a1126!important}
+.dish p{color:#2a3150!important}
+.atmos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.atmos figure{margin:0;border-radius:3px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(0,0,0,.55)}
+.atmos img{display:block;width:100%;height:260px;object-fit:cover;transition:transform .6s ease}
+.atmos figure:hover img{transform:scale(1.04)}
+@media(max-width:820px){.atmos{grid-template-columns:1fr}.atmos img{height:220px}}
+
+/* Booking */
+.booking{padding:90px 0}
+.booking .section-head h2{color:#fff}
+.booking .section-head .en{color:var(--accent-glow)}
+.booking .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.booking .card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(201,169,110,.3);
+  padding:40px 34px;border-radius:3px;color:#e9ecf4;
+  backdrop-filter:blur(4px);
+}
+.booking .card h3{
+  margin:0 0 12px;font-size:18px;color:#fff;letter-spacing:.08em;font-weight:600;
+}
+.booking .card .en{
+  font-family:"Helvetica Neue",sans-serif;font-size:11px;letter-spacing:.3em;color:var(--accent-glow);
+}
+.booking .card p{font-size:14px;margin:6px 0 20px;color:#cfd5e4}
+.booking .tel{
+  font-family:"Helvetica Neue",sans-serif;
+  font-size:28px;color:#fff;letter-spacing:.05em;font-weight:500;
+  display:block;margin:18px 0 8px;
+}
+.booking .btn{
+  display:inline-block;background:var(--accent);color:#0a1126;
+  padding:14px 32px;border-radius:999px;font-size:13px;letter-spacing:.1em;
+  font-family:"Helvetica Neue",sans-serif;font-weight:600;
+}
+.booking .btn:hover{background:var(--accent-glow)}
+.booking .btn.outline{background:transparent;color:var(--accent-glow);border:1px solid var(--accent)}
+.booking .btn.outline:hover{background:rgba(201,169,110,.15)}
+.booking .badge{
+  display:inline-block;background:rgba(201,169,110,.15);color:var(--accent-glow);
+  border:1px solid var(--accent);font-size:11px;padding:4px 10px;border-radius:3px;
+  letter-spacing:.08em;margin-bottom:14px;font-family:sans-serif;
+}
+@media(max-width:820px){.booking .grid{grid-template-columns:1fr;gap:24px}}
+
+/* Consultation form */
+.cform-wrap{display:none;margin-top:28px;padding-top:28px;border-top:1px solid rgba(255,255,255,.15)}
+.cform-wrap.open{display:block}
+.cform label{display:block;font-size:12px;color:#a9b0c3;margin:14px 0 6px;letter-spacing:.06em;font-family:sans-serif}
+.cform input,.cform textarea,.cform select{
+  width:100%;padding:11px 13px;border:1px solid rgba(255,255,255,.2);border-radius:2px;
+  font-size:14px;font-family:inherit;background:rgba(255,255,255,.06);color:#fff;
+}
+.cform input::placeholder,.cform textarea::placeholder{color:#7a8194}
+.cform textarea{min-height:110px;resize:vertical}
+.cform .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.cform .row{grid-template-columns:1fr}}
+.cform .submit{margin-top:22px;width:100%;background:var(--accent);color:#0a1126;border:none;padding:14px;border-radius:999px;font-size:13px;letter-spacing:.1em;cursor:pointer;font-family:"Helvetica Neue",sans-serif;font-weight:600}
+.cform .submit:hover{background:var(--accent-glow)}
+.cform .hp{position:absolute;left:-9999px}
+.cform-note{font-size:11px;color:#a9b0c3;margin-top:12px;line-height:1.7;font-family:sans-serif}
+
+/* SNS / Instagram */
+.sns-section{padding:90px 0}
+.sns-section .section-head h2{color:#fff}
+.sns-section .section-head .en{color:var(--accent-glow)}
+.sns-box{
+  max-width:760px;margin:0 auto;text-align:center;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(201,169,110,.3);
+  padding:56px 40px;border-radius:3px;color:#e9ecf4;
+}
+.sns-box .ig-icon{
+  display:inline-block;width:56px;height:56px;margin-bottom:18px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+  position:relative;
+}
+.sns-box .ig-icon::before{
+  content:"";position:absolute;inset:12px;border:2px solid #fff;border-radius:9px;
+}
+.sns-box .ig-icon::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:16px;height:16px;border:2px solid #fff;border-radius:50%;
+}
+.sns-box h3{margin:0 0 10px;font-size:18px;letter-spacing:.1em;color:#fff;font-weight:500}
+.sns-box p{font-size:14px;color:#cfd5e4;margin:0 auto 24px;max-width:520px;line-height:1.9}
+.sns-box .handle{
+  font-family:"Helvetica Neue",sans-serif;font-size:15px;letter-spacing:.15em;color:var(--accent-glow);
+  display:block;margin:10px 0 24px;
+}
+.sns-box .btn{
+  display:inline-block;background:#fff;color:#0a1126;
+  padding:14px 36px;border-radius:999px;font-size:13px;letter-spacing:.1em;
+  font-family:"Helvetica Neue",sans-serif;font-weight:600;
+}
+.sns-box .btn:hover{background:var(--accent-glow)}
+
+/* Info */
+.info{padding:80px 0 100px}
+.info .section-head h2{color:#fff}
+.info .section-head .en{color:var(--accent-glow)}
+.info dl{
+  max-width:720px;margin:0 auto;
+  display:grid;grid-template-columns:160px 1fr;gap:0;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.12);
+  padding:20px 32px;border-radius:3px;
+}
+.info dt,.info dd{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.1);margin:0;font-size:14px}
+.info dt{color:var(--accent-glow);letter-spacing:.1em;font-weight:600}
+.info dd{color:#e9ecf4}
+.info dd a{color:var(--accent-glow)}
+.info dd small{color:#a9b0c3;display:block;margin-top:4px;font-size:12px}
+.info dl > dt:last-of-type,.info dl > dd:last-of-type{border-bottom:none}
+@media(max-width:620px){
+  .info dl{grid-template-columns:1fr}
+  .info dt{padding-bottom:4px;border-bottom:none}
+  .info dd{padding-top:4px}
+}
+
+/* Suggestion block (placeholder notice) */
+.sugg{
+  margin:40px auto 0;max-width:760px;
+  border:1px dashed var(--accent);background:rgba(230,201,138,.08);
+  padding:18px 22px;border-radius:3px;
+  font-family:sans-serif;font-size:12px;color:var(--accent-glow);line-height:1.8;
+}
+.sugg strong{color:#fff;display:block;margin-bottom:4px}
+.sugg.light{
+  background:#fffaf0;color:#7a5a1e;border-color:#c9a96e;
+}
+.sugg.light strong{color:#5a3e00}
+
+/* Footer */
+footer{
+  background:#050918;color:#a9b0c3;padding:48px 0 36px;
+  text-align:center;font-family:sans-serif;font-size:12px;letter-spacing:.05em;
+  position:relative;z-index:2;
+}
+footer .brand{color:#fff;font-size:14px;letter-spacing:.15em;margin-bottom:10px;font-family:"Helvetica Neue",sans-serif}
+footer a{color:#cfd5e4}
+footer .sns{margin:14px 0 18px}
+footer .copy{color:#6c7387;margin-top:20px;font-size:11px}
+</style>
 </head>
 <body>
-  <div class="logo">
-    <img src="sasamoriya/images/siro.png" alt="Pack Vacation">
-  </div>
-  <h1>PACK VACATION</h1>
 
-  <div class="properties">
-    <div class="property sasamori">
-      <h2>笹森家</h2>
-      <p class="sub">MINSHUKU SASAMORIHOUSE</p>
-      <div class="links">
-        <a href="sasamoriya/index.html">
-          <span>詳しく見る</span>
-          <span class="arrow">→</span>
-        </a>
+<header>
+  <div class="wrap">
+    <div class="brand">SHOKUDO &amp; CAFÉ yum-yum</div>
+    <nav>
+      <a href="#about">ABOUT</a>
+      <a href="#lunch-dinner">LUNCH / DINNER</a>
+      <a href="#course">COURSE</a>
+      <a href="#booking">RESERVATION</a>
+      <a href="#info">INFO</a>
+    </nav>
+    <a class="tel-btn" href="tel:09077538686">TEL 090-7753-8686</a>
+  </div>
+</header>
+
+<div class="page">
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <img class="logo-mark" src="assets/logo-2.png" alt="SHOKUDO & CAFÉ yum-yum">
+    <h1>昼はカジュアルに。<br>夜は、美術館の特別な時間に。</h1>
+    <p class="lead">松本市美術館の中にある、レストラン &amp; カフェ。<br>信州の恵みを、シェフのひと手間で。</p>
+    <div class="tagline">— DAY &amp; NIGHT AT THE MUSEUM —</div>
+  </div>
+  <div class="scroll">SCROLL</div>
+</section>
+
+<!-- CONCEPT STRIP -->
+<section class="concept">
+  <div class="wrap">
+    <p class="copy">
+      <span class="sun">昼は、家族連れやお一人でも立ち寄れる、ひらかれた食堂＆カフェ。</span>
+      <span class="divider"></span>
+      <span class="moon">夜は、静けさに包まれた美術館のなかで、<br>ゆっくりと味わうコース料理。</span>
+    </p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="en">About</div>
+      <h2>美術館の中の食卓</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="grid">
+      <div>
+        <p>松本市美術館の中にひっそりと佇む、SHOKUDO &amp; CAFÉ yum-yum。</p>
+        <p>ランチタイムは、お子さまからご年配の方まで気軽に立ち寄っていただけるカジュアルなメニューを。夜は完全予約制のコース料理で、美術館という特別な空間だからこそ生まれる、静かで豊かな時間をお届けします。</p>
+        <p>信州の土地で育まれた食材を、シェフのひと手間でご用意します。美術館で心を満たしたあと、ここでお腹も満たしていただけたら。そんな場所を目指しています。</p>
+      </div>
+      <div class="photo" aria-label="店内の雰囲気"></div>
+    </div>
+    <div class="sugg light">
+      <strong>【制作メモ｜画像のご提案】</strong>
+      ここには店内の雰囲気がわかる写真（カウンター越しのシェフ、テラス席、窓から差し込む光など）を1枚入れると、来店意欲が大きく上がります。スタッフの笑顔が写った写真があるとさらに効果的です。ご提供いただければ差し替えます。
+    </div>
+  </div>
+</section>
+
+<!-- LUNCH vs DINNER -->
+<section id="lunch-dinner" class="lunch-dinner">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="en">Lunch &amp; Dinner</div>
+      <h2>昼と夜、ふたつの顔</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="ld-wrap">
+      <!-- LUNCH -->
+      <div class="ld-col lunch">
+        <div class="tag">LUNCH &amp; CAFÉ</div>
+        <h3>お昼のカジュアルタイム</h3>
+        <div class="hours">10:00 – 17:00（L.O. 16:30）</div>
+        <p class="lead">美術館でのひとときに、気軽に立ち寄れるカジュアルなお食事を。お子さまからご年配の方まで、どなたでも美味しく召し上がっていただけるやさしい味わいが揃います。</p>
+
+        <div class="ld-menu">
+          <div class="item"><span class="name">信州山麓牛のローストビーフプレート</span></div>
+          <div class="item"><span class="name">クリームトマトチキンカレー</span></div>
+          <div class="item"><span class="name">信州米豚のパテドカンパーニュ</span></div>
+          <div class="item"><span class="name">北海道産クリームチーズのチーズケーキ</span></div>
+        </div>
+        <div style="text-align:center;margin-top:14px;font-family:sans-serif;font-size:12px;color:var(--muted);letter-spacing:.08em">ご予算の目安｜¥2,000 〜 ¥3,000</div>
+
+        <div class="scene">
+          <strong>こんなシーンに</strong>
+          ご家族でのお食事／お一人のカフェタイム／友人とのランチ／美術館鑑賞の合間に
+        </div>
+      </div>
+
+      <!-- DINNER -->
+      <div class="ld-col dinner">
+        <div class="tag">DINNER COURSE</div>
+        <h3>夜の美術館で、特別な時間を</h3>
+        <div class="hours">18:00 –（3日前までの完全予約制）</div>
+        <p class="lead">閉館後の美術館だからこそ生まれる、静けさとあかり。季節の仕入れに合わせたコース料理で、昼とはまるで別のお店のような、ゆったりとした時間をお届けします。</p>
+
+        <div class="ld-menu">
+          <div class="item"><span class="name">Course A｜全5品（メイン：肉）</span><span class="price">¥5,000</span></div>
+          <div class="item"><span class="name">Course B｜全6品（肉と魚）</span><span class="price">¥6,500</span></div>
+          <div class="item"><span class="name">Course C｜全7品（肉と魚）</span><span class="price">¥8,000</span></div>
+          <div class="item"><span class="name">団体様貸切（宴会・パーティ）承ります</span></div>
+        </div>
+
+        <div class="scene">
+          <strong>こんなシーンに</strong>
+          デート／記念日・誕生日／接待・会食／貸切での宴会・パーティ
+        </div>
       </div>
     </div>
 
-    <div class="property tomoshibi">
-      <h2>灯</h2>
-      <p class="sub">GUESTHOUSE TOMOSHIBI</p>
-      <div class="links">
-        <a href="tomoshibi/index.html">
-          <span>詳しく見る</span>
-          <span class="arrow">→</span>
-        </a>
+    <div style="margin-top:36px;text-align:center;padding:22px 24px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:3px;box-shadow:0 30px 60px -40px rgba(10,15,35,.3)">
+      <div style="font-family:'Helvetica Neue',sans-serif;font-size:11px;letter-spacing:.3em;color:var(--accent)">PICK UP DRINK</div>
+      <div style="margin-top:8px;font-size:15px;letter-spacing:.08em;color:var(--navy)">長野県のクラフトビール 〈 インドの青鬼 〉</div>
+      <div style="margin-top:6px;font-size:12px;color:var(--muted);font-family:sans-serif">信州産の食材とご一緒に、地元のクラフトビールをどうぞ。</div>
+    </div>
+
+    <div class="sugg">
+      <strong>【制作メモ｜写真と人物描写のご提案】</strong>
+      ＜ロゴについて＞現在お預かりしているロゴは背景が白のJPEG画像のため、ヒーローの写真上で白い四角として表示されています。<strong style="color:#fff">透過PNG（背景が透けるロゴ）</strong>をご用意いただければ、写真に自然に溶け込む仕上がりになります。<strong style="color:#fff">もしデータがない場合は、こちらで既存ロゴから透過処理を行い、新規作成することも可能です</strong>。<br>
+      ＜写真について＞現在この比較セクションは文字とメニュー一覧で構成していますが、<em>ランチの家族連れ・お一人のカフェタイム</em>、<em>ディナーでグラスを傾けるお客様やシェフが料理を供する瞬間</em>など「人が入った描写」の写真があると、空気感が一気に伝わります。特にディナーは夜の美術館の静けさを映したシーン写真があると訴求力が大きく上がります。後日、撮影も含めご相談可能です。
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE DISHES -->
+<section id="dishes" class="dishes">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="en">Signature Dishes</div>
+      <h2>シェフのおすすめ</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="list">
+      <div class="dish d1">
+        <div class="img" aria-label="信州山麓牛のローストビーフプレート"></div>
+        <h3><span class="sub">ROAST BEEF</span>信州山麓牛のローストビーフプレート</h3>
+        <p>信州山麓牛の内モモを使用。低温でゆっくりと火を入れ、しっとりとした食感に仕上げた一皿です。</p>
+      </div>
+      <div class="dish d2">
+        <div class="img" aria-label="クリームトマトチキンカレー"></div>
+        <h3><span class="sub">CURRY</span>クリームトマトチキンカレー</h3>
+        <p>お子さまからご年配の方まで、どなたでも美味しく召し上がっていただける、やさしい味わいのカレーです。</p>
+      </div>
+      <div class="dish d3">
+        <div class="img" aria-label="信州米豚のパテドカンパーニュ"></div>
+        <h3><span class="sub">PÂTÉ DE CAMPAGNE</span>信州米豚のパテドカンパーニュ</h3>
+        <p>信州米豚を贅沢に使った、当店自慢のパテ。白ワインやさっぱりとしたドリンクとご一緒に。</p>
+      </div>
+      <div class="dish d4">
+        <div class="img" aria-label="北海道産クリームチーズのチーズケーキ"></div>
+        <h3><span class="sub">CHEESE CAKE</span>北海道産クリームチーズのチーズケーキ</h3>
+        <p>しっとりと、そして濃厚に。レモンのコンフィチュールを添えて、最後のひと口まで楽しんでいただけます。</p>
       </div>
     </div>
   </div>
+</section>
 
-  <footer>&copy; 2026 Pack Vacation LLC</footer>
+<!-- COURSE -->
+<section id="course" class="course">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="en">Dinner Course</div>
+      <h2>夜の美術館で、ゆっくりと。</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="intro">ディナーは完全予約制。季節の仕入れに合わせて、コースの内容をお作りします。ご予約時に苦手な食材やアレルギーをお伺いし、お客様だけの一皿をご用意いたします。</p>
+
+    <div class="cards">
+      <div class="card c1">
+        <div class="img" aria-label="Course A イメージ"></div>
+        <div class="body">
+          <div class="label">COURSE A / 5 dishes</div>
+          <div class="price"><span class="yen">¥</span>5,000</div>
+          <div class="desc">メインは肉料理<br>全5品</div>
+        </div>
+      </div>
+      <div class="card c2">
+        <div class="img" aria-label="Course B イメージ"></div>
+        <div class="body">
+          <div class="label">COURSE B / 6 dishes</div>
+          <div class="price"><span class="yen">¥</span>6,500</div>
+          <div class="desc">メインは肉と魚<br>全6品</div>
+        </div>
+      </div>
+      <div class="card c3">
+        <div class="img" aria-label="Course C イメージ"></div>
+        <div class="body">
+          <div class="label">COURSE C / 7 dishes</div>
+          <div class="price"><span class="yen">¥</span>8,000</div>
+          <div class="desc">メインは肉と魚<br>全7品</div>
+        </div>
+      </div>
+    </div>
+    <p class="note">※ 3日前までの完全予約制 ／ 団体様貸切可 ／ 価格はすべて税込</p>
+
+    <div class="sugg">
+      <strong>【制作メモ｜画像のご提案】</strong>
+      各コースカードの上部に料理写真を配置しています。現在は空きになっているため、コースごとのメイン料理／前菜盛り合わせ／デザートなど1枚ずつあると、価格差の納得感が大きく変わります。撮影もご相談可能です。
+    </div>
+  </div>
+</section>
+
+<!-- SCENES -->
+<section class="scenes">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="en">For Your Moment</div>
+      <h2>こんなシーンにおすすめ</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="grid">
+      <div class="scene-card">
+        <div class="when">DAY</div>
+        <h3>ランチ・カフェ</h3>
+        <ul>
+          <li>ご家族でのお食事</li>
+          <li>お一人でのカフェタイム</li>
+          <li>ご友人とのランチ会</li>
+          <li>美術館鑑賞の合間に</li>
+        </ul>
+      </div>
+      <div class="scene-card">
+        <div class="when">NIGHT</div>
+        <h3>ディナー</h3>
+        <ul>
+          <li>デートや記念日</li>
+          <li>お誕生日のお祝い</li>
+          <li>接待・会食</li>
+          <li>貸切での宴会・パーティ</li>
+        </ul>
+      </div>
+    </div>
+    <div class="atmos">
+      <figure><img src="assets/interior-hall.jpg" alt="yum-yum 店内 ホール"></figure>
+      <figure><img src="assets/interior-seats.jpg" alt="yum-yum 店内 テーブル席"></figure>
+      <figure><img src="assets/exterior-terrace.jpg" alt="yum-yum 店外 テラス席と看板"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking" class="booking">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="en">Reservation</div>
+      <h2>ご予約・ご相談</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="grid">
+      <!-- Phone booking -->
+      <div class="card">
+        <div class="en">By Phone</div>
+        <h3>お電話でのご予約</h3>
+        <p>ランチのご予約・お問い合わせは、お電話で直接承っております。</p>
+        <a class="tel" href="tel:09077538686">090-7753-8686</a>
+        <p style="font-size:12px">営業時間内（10:00〜17:00）にお願いいたします。</p>
+        <a class="btn" href="tel:09077538686">今すぐ電話する</a>
+      </div>
+
+      <!-- Consultation form -->
+      <div class="card">
+        <div class="badge">NEW</div>
+        <div class="en">Consultation</div>
+        <h3>コース・記念日のご相談</h3>
+        <p>コース内容のご相談、記念日・特別なシーンでのご利用、貸切のご相談は、こちらのフォームからお気軽にどうぞ。</p>
+        <p style="font-size:12px">※ご来店日の<strong style="color:var(--accent-glow)">1週間前まで</strong>にご相談ください。<br>※当日・直近のご予約はお電話をお願いいたします。</p>
+        <button class="btn outline" type="button" onclick="document.getElementById('cform-wrap').classList.toggle('open');this.style.display='none'">相談フォームを開く</button>
+
+        <div id="cform-wrap" class="cform-wrap">
+          <form class="cform" id="cform" onsubmit="return submitCForm(event)">
+            <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off">
+            <label>お名前</label>
+            <input type="text" name="name" required>
+            <div class="row">
+              <div>
+                <label>電話番号</label>
+                <input type="tel" name="tel" required>
+              </div>
+              <div>
+                <label>メールアドレス</label>
+                <input type="email" name="email" required>
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label>ご希望日（1週間以上先）</label>
+                <input type="date" name="date" required>
+              </div>
+              <div>
+                <label>ご人数</label>
+                <input type="number" name="guests" min="1" max="40" required>
+              </div>
+            </div>
+            <label>ご予算（お一人様）</label>
+            <select name="budget">
+              <option value="">選択してください</option>
+              <option>¥5,000 コース（5品・肉）</option>
+              <option>¥6,500 コース（6品・肉と魚）</option>
+              <option>¥8,000 コース（7品・肉と魚）</option>
+              <option>ご相談したい</option>
+            </select>
+            <label>ご利用シーン</label>
+            <select name="occasion">
+              <option value="">選択してください</option>
+              <option>記念日・誕生日</option>
+              <option>接待・会食</option>
+              <option>ご家族・親族のお祝い</option>
+              <option>貸切でのご利用</option>
+              <option>その他</option>
+            </select>
+            <label>苦手な食材・アレルギー</label>
+            <input type="text" name="allergy" placeholder="例：甲殻類、生もの、乳製品 など">
+            <label>ご要望・ご質問（任意）</label>
+            <textarea name="message" placeholder="サプライズのご希望、お花の手配、その他ご要望などご自由にどうぞ"></textarea>
+            <button type="submit" class="submit">送信する</button>
+            <p class="cform-note">送信後、店舗より2〜3営業日以内にお電話またはメールでご連絡いたします。<br>キャンセルポリシー：前日50%／当日100%</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SNS -->
+<section id="sns" class="sns-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="en">Follow Us</div>
+      <h2>日々の一皿を、Instagramで。</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="sns-box">
+      <div class="ig-icon" aria-hidden="true"></div>
+      <h3>Instagram</h3>
+      <p>季節の新メニュー、ディナーコースの一皿、店内のあかり、美術館まわりの風景。日々の"yum-yum"をお届けしています。フォローしてお気軽にご覧ください。</p>
+      <span class="handle">@shokudo_cafe_yumyum</span>
+      <a class="btn" href="https://instagram.com/shokudo_cafe_yumyum" target="_blank" rel="noopener">Instagramでフォローする</a>
+    </div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section id="info" class="info">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="en">Information</div>
+      <h2>店舗情報</h2>
+      <div class="rule"></div>
+    </div>
+    <dl>
+      <dt>店名</dt><dd>SHOKUDO &amp; CAFÉ yum-yum<small>しょくどう あんど かふぇ やむやむ</small></dd>
+      <dt>住所</dt><dd>〒390-0811 長野県松本市中央4丁目2-22 松本市美術館内</dd>
+      <dt>アクセス</dt><dd>JR松本駅より徒歩約15分</dd>
+      <dt>営業時間</dt><dd>
+        ランチ・カフェ 10:00〜17:00（L.O. 16:30）<small>ディナー 18:00〜（3日前までの完全予約制）</small>
+      </dd>
+      <dt>定休日</dt><dd>毎週月曜日（美術館休館日）</dd>
+      <dt>席数</dt><dd>店内23席 ／ テラス8席<small>ディナーは団体様貸切も承ります</small></dd>
+      <dt>予算</dt><dd>ランチ ¥2,000〜¥3,000 ／ ディナー ¥6,000〜¥10,000</dd>
+      <dt>お支払い</dt><dd>現金 ／ 各種クレジットカード ／ QR決済</dd>
+      <dt>TEL</dt><dd><a href="tel:09077538686">090-7753-8686</a></dd>
+      <dt>Instagram</dt><dd><a href="https://instagram.com/shokudo_cafe_yumyum" target="_blank" rel="noopener">@shokudo_cafe_yumyum</a></dd>
+    </dl>
+  </div>
+</section>
+
+</div><!-- /.page -->
+
+<footer>
+  <div class="brand">SHOKUDO &amp; CAFÉ yum-yum</div>
+  <div>松本市美術館内 ／ TEL 090-7753-8686</div>
+  <div class="sns"><a href="https://instagram.com/shokudo_cafe_yumyum" target="_blank" rel="noopener">Instagram @shokudo_cafe_yumyum</a></div>
+  <div class="copy">© SHOKUDO &amp; CAFÉ yum-yum. All Rights Reserved.</div>
+</footer>
+
+<script>
+function submitCForm(e){
+  e.preventDefault();
+  var f = e.target;
+  if(f.website.value){return false;} // honeypot
+  var d = new Date(f.date.value);
+  var min = new Date();
+  min.setHours(0,0,0,0);
+  min.setDate(min.getDate()+7);
+  if(d < min){
+    alert('ご希望日は1週間以上先の日付をご指定ください。直近のご予約はお電話(090-7753-8686)をお願いいたします。');
+    return false;
+  }
+  var body = 'お名前: '+f.name.value+'\n'
+           + '電話: '+f.tel.value+'\n'
+           + 'メール: '+f.email.value+'\n'
+           + 'ご希望日: '+f.date.value+'\n'
+           + '人数: '+f.guests.value+'\n'
+           + 'ご予算: '+f.budget.value+'\n'
+           + 'ご利用シーン: '+f.occasion.value+'\n'
+           + 'アレルギー: '+f.allergy.value+'\n'
+           + 'ご要望:\n'+f.message.value+'\n';
+  var subj = '【yum-yum コース相談】'+f.name.value+' 様 '+f.date.value;
+  window.location.href = 'mailto:yumyum.0421@icloud.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+  return false;
+}
+</script>
+
 </body>
 </html>
