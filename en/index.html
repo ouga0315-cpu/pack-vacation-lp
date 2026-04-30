@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pack Vacation | 安曇野の宿</title>
-  <meta name="description" content="Pack Vacation — 安曇野・松本エリアの小さな宿。一棟貸しログハウス「民宿笹森家」と少人数ゲストハウス「灯」。">
+  <title>Pack Vacation | Stays in Azumino, Japan</title>
+  <meta name="description" content="Pack Vacation — Two small accommodations in Azumino, Nagano. A whole-house log cabin 'Sasamori House' and a cozy two-room guesthouse 'Tomoshibi'.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap" rel="stylesheet">
   <!-- Google Analytics 4 -->
@@ -14,12 +14,11 @@
   gtag('js',new Date());gtag('config','G-2RVQXQ0S68');
   </script>
   <script>
-  // 前回選択した言語を読み込み、英語の場合は /en/ にリダイレクト
   (function(){
     try {
       var lang = localStorage.getItem('packVacationLang');
-      if (lang === 'en' && !window.location.pathname.includes('/en/')) {
-        window.location.replace('en/');
+      if (lang === 'ja') {
+        window.location.replace('../');
       }
     } catch(e) {}
   })();
@@ -38,12 +37,7 @@
       overflow-x: hidden;
     }
 
-    /* Background Slideshow */
-    .bg {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-    }
+    .bg { position: fixed; inset: 0; z-index: -2; }
     .bg-slide {
       position: absolute;
       inset: 0;
@@ -52,9 +46,7 @@
       opacity: 0;
       transition: opacity 2s ease-in-out;
     }
-    .bg-slide.active {
-      opacity: 1;
-    }
+    .bg-slide.active { opacity: 1; }
     .bg::after {
       content: '';
       position: absolute;
@@ -69,7 +61,6 @@
       z-index: 2;
     }
 
-    /* Lang Toggle */
     .lang-toggle {
       position: fixed;
       top: 16px;
@@ -107,7 +98,6 @@
       color: #fff;
     }
 
-    /* Layout */
     .container {
       width: 100%;
       max-width: 900px;
@@ -130,7 +120,6 @@
       font-weight: 300;
     }
 
-    /* Cards */
     .cards {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -162,9 +151,7 @@
       z-index: 0;
       transition: transform 0.5s ease;
     }
-    .card:hover .card-img {
-      transform: scale(1.05);
-    }
+    .card:hover .card-img { transform: scale(1.05); }
 
     .card::after {
       content: '';
@@ -174,11 +161,7 @@
       z-index: 1;
     }
 
-    .card-body {
-      position: relative;
-      z-index: 2;
-      padding: 24px 18px 20px;
-    }
+    .card-body { position: relative; z-index: 2; padding: 24px 18px 20px; }
 
     .card-label {
       display: inline-block;
@@ -198,7 +181,6 @@
       margin-bottom: 6px;
       line-height: 1.3;
     }
-
     .card-sub {
       font-size: 0.8rem;
       color: rgba(255,255,255,0.7);
@@ -207,11 +189,7 @@
       line-height: 1.6;
     }
 
-    .card-buttons {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .card-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -227,25 +205,16 @@
       flex: 1;
       min-width: 0;
     }
-    .btn-primary {
-      background: #fff;
-      color: #1a1a1a;
-    }
-    .btn-primary:hover {
-      background: #f0e6d2;
-      transform: translateY(-1px);
-    }
+    .btn-primary { background: #fff; color: #1a1a1a; }
+    .btn-primary:hover { background: #f0e6d2; transform: translateY(-1px); }
     .btn-secondary {
       background: rgba(255,255,255,0.15);
       color: #fff;
       border: 1px solid rgba(255,255,255,0.4);
       backdrop-filter: blur(4px);
     }
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.25);
-    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.25); }
 
-    /* "迷ったら？" Section */
     .which {
       background: rgba(0,0,0,0.35);
       backdrop-filter: blur(10px);
@@ -262,7 +231,7 @@
       margin-bottom: 4px;
       font-weight: 700;
     }
-    .which-title-en {
+    .which-title-ja {
       font-size: 0.7rem;
       letter-spacing: 0.18em;
       color: rgba(255,255,255,0.5);
@@ -309,10 +278,7 @@
     }
 
     @media (max-width: 640px) {
-      .cards {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
+      .cards { grid-template-columns: 1fr; gap: 16px; }
       .card { aspect-ratio: 16/10; }
       .card-body { padding: 20px 18px 18px; }
       .brand { font-size: 1.6rem; }
@@ -335,56 +301,56 @@
     <div class="bg-overlay"></div>
   </div>
 
-  <!-- 言語切替 -->
+  <!-- Language toggle -->
   <div class="lang-toggle">
-    <button class="active" onclick="setLang('ja')">日本語</button>
-    <button onclick="setLang('en')">English</button>
+    <button onclick="setLang('ja')">日本語</button>
+    <button class="active" onclick="setLang('en')">English</button>
   </div>
 
   <div class="container">
     <h1 class="brand">Pack Vacation</h1>
-    <p class="tagline">安曇野のちいさな宿</p>
+    <p class="tagline">Small Stays in Azumino, Japan</p>
 
     <div class="cards">
       <div class="card card--sasa">
-        <div class="card-img" style="background-image: url('sasamoriya/images/exterior-autumn.jpg');"></div>
+        <div class="card-img" style="background-image: url('../sasamoriya/images/exterior-autumn.jpg');"></div>
         <div class="card-body">
           <span class="card-label">LOG HOUSE</span>
-          <h2 class="card-title">民宿笹森家</h2>
-          <p class="card-sub">一棟貸しログハウス<br>最大6名・北アルプスの森</p>
+          <h2 class="card-title">Sasamori House</h2>
+          <p class="card-sub">Whole-house log cabin<br>Up to 6 guests · Forest of the Northern Alps</p>
           <div class="card-buttons">
-            <a href="sasamoriya/" class="btn btn-secondary">詳しく見る</a>
-            <a href="sasamoriya/ja/index.html#calendar" class="btn btn-primary">空きを見る</a>
+            <a href="../sasamoriya/en/" class="btn btn-secondary">Details</a>
+            <a href="../sasamoriya/en/index.html#calendar" class="btn btn-primary">Availability</a>
           </div>
         </div>
       </div>
 
       <div class="card card--tomo">
-        <div class="card-img" style="background-image: url('tomoshibi/images/hero-reading.jpg');"></div>
+        <div class="card-img" style="background-image: url('../tomoshibi/images/hero-reading.jpg');"></div>
         <div class="card-body">
           <span class="card-label">GUEST HOUSE</span>
-          <h2 class="card-title">ゲストハウス灯</h2>
-          <p class="card-sub">2室のゲストハウス<br>少人数・カップル向け</p>
+          <h2 class="card-title">Guesthouse Tomoshibi</h2>
+          <p class="card-sub">Two-room guesthouse<br>For solo travelers and couples</p>
           <div class="card-buttons">
-            <a href="tomoshibi/" class="btn btn-secondary">詳しく見る</a>
-            <a href="tomoshibi/ja/index.html#calendar" class="btn btn-primary">空きを見る</a>
+            <a href="../tomoshibi/en/" class="btn btn-secondary">Details</a>
+            <a href="../tomoshibi/en/index.html#calendar" class="btn btn-primary">Availability</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 迷ったら？ -->
+    <!-- Which one is for you? -->
     <div class="which">
-      <div class="which-title">迷ったら？</div>
-      <div class="which-title-en">Which one is for you?</div>
+      <div class="which-title">Which one is for you?</div>
+      <div class="which-title-ja">迷ったら？</div>
       <div class="which-grid">
-        <a href="sasamoriya/" class="which-item">
-          <div class="which-item-tags">家族・グループ・ペットと</div>
-          <div class="which-item-arrow">民宿笹森家</div>
+        <a href="../sasamoriya/en/" class="which-item">
+          <div class="which-item-tags">Family / Group / With pets</div>
+          <div class="which-item-arrow">Sasamori House</div>
         </a>
-        <a href="tomoshibi/" class="which-item">
-          <div class="which-item-tags">ソロ・カップル・温泉好き</div>
-          <div class="which-item-arrow">ゲストハウス灯</div>
+        <a href="../tomoshibi/en/" class="which-item">
+          <div class="which-item-tags">Solo / Couple / Onsen lover</div>
+          <div class="which-item-arrow">Guesthouse Tomoshibi</div>
         </a>
       </div>
     </div>
@@ -395,28 +361,28 @@
   <script>
   function setLang(lang) {
     try { localStorage.setItem('packVacationLang', lang); } catch(e) {}
-    if (lang === 'en') {
-      window.location.href = 'en/';
+    if (lang === 'ja') {
+      window.location.href = '../';
     }
   }
 
   (function(){
     var images = [
-      'sasamoriya/images/exterior-autumn.jpg',
-      'tomoshibi/images/hero-reading.jpg',
-      'sasamoriya/images/season-spring.jpg',
-      'tomoshibi/images/room-2bed.jpg',
-      'sasamoriya/images/season-summer.jpg',
-      'tomoshibi/images/lifestyle-bunk.jpg',
-      'sasamoriya/images/living-kitchen.jpg',
-      'tomoshibi/images/room-4bed.jpg',
-      'sasamoriya/images/season-autumn.jpg',
-      'sasamoriya/images/garden.jpg',
-      'sasamoriya/images/bedroom-western.jpg',
-      'sasamoriya/images/season-winter.jpg',
-      'sasamoriya/images/theater.jpg',
-      'sasamoriya/images/bathroom-new.jpg',
-      'sasamoriya/images/kitchen-detail.jpg'
+      '../sasamoriya/images/exterior-autumn.jpg',
+      '../tomoshibi/images/hero-reading.jpg',
+      '../sasamoriya/images/season-spring.jpg',
+      '../tomoshibi/images/room-2bed.jpg',
+      '../sasamoriya/images/season-summer.jpg',
+      '../tomoshibi/images/lifestyle-bunk.jpg',
+      '../sasamoriya/images/living-kitchen.jpg',
+      '../tomoshibi/images/room-4bed.jpg',
+      '../sasamoriya/images/season-autumn.jpg',
+      '../sasamoriya/images/garden.jpg',
+      '../sasamoriya/images/bedroom-western.jpg',
+      '../sasamoriya/images/season-winter.jpg',
+      '../sasamoriya/images/theater.jpg',
+      '../sasamoriya/images/bathroom-new.jpg',
+      '../sasamoriya/images/kitchen-detail.jpg'
     ];
     var slides = document.querySelectorAll('.bg-slide');
     var current = 0;
