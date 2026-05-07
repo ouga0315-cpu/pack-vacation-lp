@@ -105,7 +105,7 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --navy: #2B2B2B;
@@ -378,7 +378,140 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     .reel-caption { font-size: 0.8rem; }
 
     footer { font-size: 0.75rem; }
+  
+    /* Morning Tour - mobile */
+    .mt-section .mt-inner { padding: 72px 24px; }
+    .mt-section .mt-hero { height: 50vh; min-height: 320px; }
+    .mt-section .mt-hero-title { font-size: 1.5rem; }
+    .mt-section .mt-hero-catch { font-size: 1.0rem; }
+    .mt-section .mt-story p { font-size: 0.95rem; }
+    .mt-section .mt-detail-grid { grid-template-columns: 1fr; }
+    .mt-section .mt-weather-grid { grid-template-columns: 1fr; }
+    .mt-section .mt-photo-placeholder { height: 200px; }
+}
+  /* ===== MORNING TOUR SECTION ===== */
+  .mt-section { background: #F5F1E8; }
+  .mt-section .mt-hero {
+    height: 60vh; min-height: 400px;
+    position: relative; display: flex;
+    align-items: center; justify-content: center; overflow: hidden;
   }
+  .mt-section .mt-hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #2C3E50 0%, #1a2a3a 60%, #E8826B 100%);
+  }
+  .mt-section .mt-hero-content {
+    position: relative; z-index: 1;
+    text-align: center; padding: 0 24px; max-width: 700px;
+  }
+  .mt-section .mt-hero-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.5em;
+    color: #E8826B; margin-bottom: 24px; font-weight: 500;
+  }
+  .mt-section .mt-hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+    color: #fff; font-weight: 600;
+    line-height: 1.8; margin-bottom: 28px; letter-spacing: 0.12em;
+  }
+  .mt-section .mt-hero-catch {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.2rem; color: rgba(255,255,255,0.85);
+    letter-spacing: 0.1em; line-height: 1.8;
+  }
+  .mt-section .mt-inner {
+    max-width: 800px; margin: 0 auto; padding: 80px 48px;
+  }
+  .mt-section .mt-story { text-align: center; margin-bottom: 64px; }
+  .mt-section .mt-story p {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.05rem; color: #2C3E50;
+    line-height: 2.4; letter-spacing: 0.06em;
+  }
+  .mt-section .mt-highlight { color: #E8826B; font-weight: 600; }
+  .mt-section .mt-photo-placeholder {
+    width: 100%; height: 300px;
+    background: linear-gradient(135deg, #ddd, #eee);
+    border: 2px dashed #bbb;
+    display: flex; align-items: center; justify-content: center;
+    margin: 48px 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #999; font-size: 0.85rem; letter-spacing: 0.1em;
+  }
+  .mt-section .mt-sub-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.3rem; color: #2C3E50;
+    letter-spacing: 0.12em; margin-bottom: 32px;
+    text-align: center; font-weight: 600;
+  }
+  .mt-section .mt-detail-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; margin-bottom: 48px;
+  }
+  .mt-section .mt-detail-item {
+    background: #fff; padding: 20px 24px;
+    border-left: 3px solid #E8826B;
+  }
+  .mt-section .mt-detail-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.3em;
+    color: #9CAFB7; margin-bottom: 6px; font-weight: 500;
+  }
+  .mt-section .mt-detail-value {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.95rem; color: #2C3E50; line-height: 1.8;
+  }
+  .mt-section .mt-weather-title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.3em;
+    color: #9CAFB7; text-align: center;
+    margin-bottom: 20px; font-weight: 500;
+  }
+  .mt-section .mt-weather-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-bottom: 48px;
+  }
+  .mt-section .mt-weather-card {
+    background: #fff; padding: 24px 20px; text-align: center;
+  }
+  .mt-section .mt-weather-icon { font-size: 1.6rem; margin-bottom: 8px; }
+  .mt-section .mt-weather-type {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85rem; color: #E8826B;
+    letter-spacing: 0.15em; margin-bottom: 8px; font-weight: 500;
+  }
+  .mt-section .mt-weather-desc {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85rem; color: #2C3E50; line-height: 1.8;
+  }
+  .mt-section .mt-note-box {
+    background: #fff; padding: 28px 32px; margin-bottom: 24px;
+  }
+  .mt-section .mt-note-title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.3em;
+    color: #9CAFB7; margin-bottom: 12px; font-weight: 500;
+  }
+  .mt-section .mt-note-text {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.9rem; color: #2C3E50; line-height: 2.0;
+  }
+  .mt-section .mt-booking {
+    text-align: center; margin-top: 56px; padding: 40px;
+    background: #2C3E50;
+  }
+  .mt-section .mt-booking-text {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem; color: #fff;
+    letter-spacing: 0.1em; margin-bottom: 8px;
+  }
+  .mt-section .mt-booking-sub {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.8rem; color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+  }
+
 </style>
 </head>
 <body>
@@ -389,6 +522,7 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
   <nav>
     <a href="#about">About</a>
     <a href="#rooms">Rooms</a>
+    <a href="#morning-tour">朝ツアー</a>
     <a href="#access">Access</a>
     <a href="../en/" style="margin-left:24px;border:1px solid rgba(255,255,255,0.2);padding:5px 12px;">English</a>
   </nav>
@@ -398,6 +532,7 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
 <div class="mobile-nav" id="mobileNav">
   <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#rooms" onclick="toggleMenu()">Rooms</a>
+  <a href="#morning-tour" onclick="toggleMenu()">朝ツアー</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="#access" onclick="toggleMenu()">Access</a>
   <a href="#calendar" onclick="toggleMenu()">空き状況</a>
@@ -673,6 +808,108 @@ function switchSNS(type, site) {
 }
 </script>
 
+
+
+<!-- MORNING TOUR -->
+<section id="morning-tour" class="mt-section">
+  <div class="mt-hero">
+    <div class="mt-hero-bg"></div>
+    <div class="mt-hero-content">
+      <p class="mt-hero-label">MORNING TOUR</p>
+      <h2 class="mt-hero-title">移住者と歩く、<br>安曇野の朝</h2>
+      <p class="mt-hero-catch">明日の朝、一緒に山頂に行きませんか？</p>
+    </div>
+  </div>
+
+  <div class="mt-inner">
+    <!-- Story -->
+    <div class="mt-story fade-in">
+      <p>
+        私は東京生まれ・東京育ち。25歳のとき、安曇野に移住しました。<br><br>
+        最初の朝、長峰山の頂上で見た景色を、今でも覚えています。<br>
+        空が変わる瞬間、北アルプスが赤く染まる時間。<br><br>
+        <span class="mt-highlight">「東京に戻れなくなる」</span>と、あの朝に思いました。<br><br>
+        北アルプスが見えるかどうかは、その日の雲次第。<br>
+        見えない朝もあります。<br>
+        でも、見えた朝は、一生忘れない。
+      </p>
+    </div>
+
+    <!-- Photo placeholder -->
+    <div class="mt-photo-placeholder fade-in">
+      写真スペース（長峰山からの朝焼け等）
+    </div>
+
+    <!-- Tour Details -->
+    <h3 class="mt-sub-title fade-in">ツアー詳細</h3>
+    <div class="mt-detail-grid fade-in">
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">所要時間</p>
+        <p class="mt-detail-value">約3時間<br>（朝4:30〜7:30頃／季節により調整）</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">料金</p>
+        <p class="mt-detail-value">1人 2,500円<br>（送迎・撮影サービス込み）</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">最低催行人数</p>
+        <p class="mt-detail-value">2名</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">開催期間</p>
+        <p class="mt-detail-value">通年<br>（冬季は道路閉鎖のため要相談）</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">朝食オプション</p>
+        <p class="mt-detail-value">+1,500円<br>（ツアー後に宿で）</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">持ち物</p>
+        <p class="mt-detail-value">歩きやすい靴・暖かい羽織もの<br>（夏でも朝は冷え込みます）</p>
+      </div>
+    </div>
+
+    <!-- Photo Service -->
+    <div class="mt-note-box fade-in">
+      <p class="mt-note-title">撮影サービス</p>
+      <p class="mt-note-text">ツアー中の写真は後日Googleフォトでお渡しします。</p>
+    </div>
+
+    <!-- Weather Plans -->
+    <p class="mt-weather-title fade-in">天候別プラン</p>
+    <div class="mt-weather-grid fade-in">
+      <div class="mt-weather-card">
+        <div class="mt-weather-icon">☀️</div>
+        <p class="mt-weather-type">晴れ</p>
+        <p class="mt-weather-desc">長峰山・京ヶ倉へ。<br>北アルプスの朝焼け</p>
+      </div>
+      <div class="mt-weather-card">
+        <div class="mt-weather-icon">☁️</div>
+        <p class="mt-weather-type">曇り</p>
+        <p class="mt-weather-desc">中房湖・森の中へ。<br>静かな朝とコーヒータイム</p>
+      </div>
+      <div class="mt-weather-card">
+        <div class="mt-weather-icon">🌧️</div>
+        <p class="mt-weather-type">雨</p>
+        <p class="mt-weather-desc">わさび田・水路、または黒沢の滝<br>（雨の日こそ迫力が増す穴場）</p>
+      </div>
+    </div>
+
+    <!-- Cancellation & Booking -->
+    <div class="mt-note-box fade-in">
+      <p class="mt-note-title">キャンセル規定</p>
+      <p class="mt-note-text">
+        悪天候による中止：全額返金<br>
+        お客様都合のキャンセル：半額徴収
+      </p>
+    </div>
+
+    <div class="mt-booking fade-in">
+      <p class="mt-booking-text">チェックイン時にホストへ直接お申し込みください。</p>
+      <p class="mt-booking-sub">※前日20時までにご相談いただくとスムーズです。</p>
+    </div>
+  </div>
+</section>
 <!-- FAQ -->
 <div id="faq" style="background: var(--light);">
   <div class="section-inner fade-in">
