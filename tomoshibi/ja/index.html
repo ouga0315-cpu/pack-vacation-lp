@@ -379,15 +379,6 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
 
     footer { font-size: 0.75rem; }
   
-    /* Morning Tour - mobile */
-    .mt-section .mt-inner { padding: 72px 24px; }
-    .mt-section .mt-hero { height: 50vh; min-height: 320px; }
-    .mt-section .mt-hero-title { font-size: 1.5rem; }
-    .mt-section .mt-hero-catch { font-size: 1.0rem; }
-    .mt-section .mt-story p { font-size: 0.95rem; }
-    .mt-section .mt-detail-grid { grid-template-columns: 1fr; }
-    .mt-section .mt-weather-grid { grid-template-columns: 1fr; }
-    .mt-section .mt-photo-placeholder { height: 200px; }
 }
   /* ===== MORNING TOUR SECTION ===== */
   .mt-section { background: #F5F1E8; }
@@ -512,6 +503,28 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     letter-spacing: 0.05em;
   }
 
+
+  /* ===== MORNING TOUR - MOBILE ===== */
+  @media (max-width: 768px) {
+    .mt-section .mt-hero { height: 45vh; min-height: 300px; }
+    .mt-section .mt-hero-title { font-size: 1.4rem; letter-spacing: 0.08em; }
+    .mt-section .mt-hero-catch { font-size: 0.95rem; }
+    .mt-section .mt-inner { padding: 56px 20px; }
+    .mt-section .mt-story p { font-size: 0.95rem; line-height: 2.2; text-align: left; }
+    .mt-section .mt-sub-title { font-size: 1.1rem; margin-bottom: 24px; }
+    .mt-section .mt-detail-grid { grid-template-columns: 1fr !important; gap: 12px; }
+    .mt-section .mt-detail-item { padding: 16px 20px; }
+    .mt-section .mt-detail-value { font-size: 0.9rem; }
+    .mt-section .mt-photo-placeholder { height: 200px; margin: 32px 0; }
+    .mt-section .mt-note-box { padding: 20px 24px; }
+    .mt-section .mt-note-text { font-size: 0.85rem; }
+    .mt-section .mt-weather-title { margin-bottom: 16px; }
+    .mt-section .mt-weather-grid { grid-template-columns: 1fr !important; gap: 12px; }
+    .mt-section .mt-weather-card { padding: 20px 24px; }
+    .mt-section .mt-weather-desc { font-size: 0.9rem; line-height: 1.8; }
+    .mt-section .mt-booking { padding: 32px 20px; margin-top: 40px; }
+    .mt-section .mt-booking-text { font-size: 0.95rem; }
+  }
 </style>
 </head>
 <body>
