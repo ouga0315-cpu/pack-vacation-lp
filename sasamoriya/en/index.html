@@ -924,38 +924,35 @@ function toggleFAQ(el) {
 (function(){
   var COLORS = { sight: '#D97706', nature: '#3C5A3A', onsen: '#B91C1C', food: '#7C4A03', around: '#1E40AF', inn: '#5C3D2E' };
   var SPOTS = [
-    ['Sasamoriya (our location)', 36.3389, 137.9024, 'inn', 'Whole-house rental in Azumino Scholar Village forest'],
-    ['Guesthouse Tomoshibi', 36.3411, 137.8989, 'inn', 'Our sister property with onsen'],
-    ['Daio Wasabi Farm', 36.3424, 137.9069, 'sight', "Japan's largest wasabi farm. Early morning (before 6 AM) along the Tate River is breathtaking and truly quiet"],
-    ['Chihiro Art Museum', 36.4099, 137.8654, 'sight', 'Picture-book illustrations by Chihiro Iwasaki. Beautiful gardens'],
-    ['Rokuzan Museum', 36.3169, 137.9070, 'sight', 'Modern sculptor Rokuzan Ogiwara. Atmospheric church-style building'],
-    ['Alps Azumino National Park', 36.3431, 137.8597, 'sight', 'Vast grounds. Winter illumination is a must-see'],
-    ['Hotaka Shrine', 36.3417, 137.8772, 'sight', 'Ancient shrine with the Northern Alps as its sacred body'],
-    ['Azumino Art Hills Museum', 36.3270, 137.8838, 'sight', 'Glass art museum with hands-on glass blowing'],
-    ['Northern Alps Observatory', 36.3554, 137.8473, 'sight', 'Ikeda Town. Spectacular Northern Alps panorama'],
-    ['Karasugawa Valley', 36.3328, 137.8266, 'nature', 'Middle reaches are a local secret. Stunning new green and autumn foliage'],
-    ['Susawatari Valley', 36.3517, 137.7912, 'nature', 'Closest mountain stream to Azumino'],
-    ['Tsubame-dake Trailhead', 36.4011, 137.7194, 'nature', 'Gateway to the Northern Alps. Starting point for Omote-Ginza traverse'],
-    ['Mitsumata Trailhead (Chogatake)', 36.3186, 137.7461, 'nature', "Day-trippable 3,000m peak from Azumino"],
-    ['Nakabusa Onsen', 36.4011, 137.7194, 'onsen', 'Secret hot spring at Tsubame trailhead. Day-use available'],
-    ['Shakunage-so', 36.3528, 137.8378, 'onsen', 'Hotaka Onsen district. Favored by locals'],
-    ['Holiday-yu Shiki-no-Sato', 36.3589, 137.8233, 'onsen', 'Day-use onsen with restaurant'],
-    ['Shalom Hutte', 36.3194, 137.8514, 'food', 'Forest restaurant serving organic cuisine. Magical atmosphere'],
-    ['Hachimen-Daio Shokudo', 36.3414, 137.8954, 'food', 'Local soba & Shinshu cuisine'],
-    ['Cafe Kaze', 36.3578, 137.8694, 'food', 'Terrace cafe with Northern Alps view'],
-    ['Soan', 36.3408, 137.8819, 'food', '100+ year old converted storehouse serving soba'],
-    ['Matsumoto Castle', 36.2384, 137.9694, 'around', 'National Treasure. One of 12 original castle keeps. 30 min by car'],
-    ['Kamikochi', 36.2519, 137.6358, 'around', "Japan's premier alpine scenery. Spring-Autumn only"],
-    ['Norikura Highlands', 36.1158, 137.6164, 'around', 'Cool plateau even in summer. Many sunrise spots'],
-    ['Hakuba Village', 36.6981, 137.8328, 'around', 'Ski in winter, trekking in summer'],
-    ['Kamaike Pond (Otari)', 36.7367, 137.7878, 'around', 'Spectacular autumn foliage. Early morning mirror reflections']
+    ['Sasamoriya (our location)', 36.377849, 137.846334, 'inn', 'Whole-house rental in Azumino Scholar Village forest'],
+    ['Guesthouse Tomoshibi', 36.377849, 137.846334, 'inn', 'Our sister property with onsen'],
+    ['Daio Wasabi Farm', 36.3262, 137.8989, 'sight', "Japan's largest wasabi farm. Early morning along the Tate River is breathtaking"],
+    ['Hotaka Shrine', 36.3411, 137.8851, 'sight', 'Ancient shrine with the Northern Alps as its sacred body'],
+    ['Rokuzan Museum', 36.3370, 137.8881, 'sight', 'Modern sculpture museum in atmospheric church-style building'],
+    ['Chihiro Art Museum', 36.4094, 137.8639, 'sight', 'Matsukawa Village. Picture-book illustrations by Chihiro Iwasaki'],
+    ['Alps Azumino National Park', 36.3204, 137.8331, 'sight', 'Vast grounds. Winter illumination is a must-see'],
+    ['Azumino Art Hills Museum', 36.4106, 137.8767, 'sight', 'Ikeda Town. Glass art with hands-on blowing experience'],
+    ['Northern Alps Observatory', 36.3994, 137.8581, 'sight', 'Ikeda Town. Spectacular Northern Alps panorama'],
+    ['Karasugawa Valley', 36.3083, 137.7820, 'nature', 'Locals-only middle reaches. Stunning new green and autumn'],
+    ['Susawatari', 36.3206, 137.7858, 'nature', 'Closest mountain stream to Azumino'],
+    ['Tsubame-dake Trailhead', 36.4017, 137.7150, 'nature', 'Gateway to the Northern Alps'],
+    ['Mitsumata Trailhead (Chogatake)', 36.3219, 137.7350, 'nature', "Day-trippable 3,000m peak"],
+    ['Nakabusa Onsen', 36.4017, 137.7150, 'onsen', 'Secret hot spring at Tsubame trailhead'],
+    ['Shakunage-so', 36.3411, 137.8076, 'onsen', 'Hotaka Onsen district, locals favorite'],
+    ['Holiday-yu Shiki-no-Sato', 36.3206, 137.7858, 'onsen', 'Day-use onsen with restaurant'],
+    ['Shalom Hutte', 36.3389, 137.7989, 'food', 'Forest restaurant serving organic cuisine'],
+    ['Matsumoto Castle', 36.2381, 137.9689, 'around', 'National Treasure. 30 min by car'],
+    ['Kamikochi', 36.2520, 137.6358, 'around', "Premier alpine scenery. Spring-Autumn only"],
+    ['Norikura Highlands', 36.1158, 137.6164, 'around', 'Cool summer plateau'],
+    ['Hakuba Village (Happo)', 36.6953, 137.8367, 'around', 'Ski/trekking destination'],
+    ['Kamaike Pond (Otari)', 36.7300, 137.7833, 'around', 'Spectacular autumn foliage and mirror reflections']
   ];
   function makeIcon(color){ return L.divIcon({ className: 'custom-marker', html: '<div style="background:'+color+';width:18px;height:18px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.4);"></div>', iconSize:[18,18], iconAnchor:[9,9] }); }
   function initMap(){
     if (typeof L === 'undefined') return;
     var container = document.getElementById('map-container');
     if (!container) return;
-    var map = L.map(container, { scrollWheelZoom: false }).setView([36.3500, 137.8800], 11);
+    var map = L.map(container, { scrollWheelZoom: false }).setView([36.3778, 137.8463], 11);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap', maxZoom: 18 }).addTo(map);
     var bounds = [];
     SPOTS.forEach(function(s){
