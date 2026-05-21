@@ -445,6 +445,39 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     font-family: 'Noto Sans JP', sans-serif;
     color: #999; font-size: 0.85rem; letter-spacing: 0.1em;
   }
+  /* ===== MORNING TOUR SLIDESHOW ===== */
+  .mt-section .mt-slideshow {
+    position: relative; width: 100%; height: 480px;
+    margin: 48px 0; overflow: hidden; border-radius: 4px;
+    background: #1a1a1a;
+  }
+  .mt-section .mt-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0; transition: opacity 1.2s ease-in-out;
+  }
+  .mt-section .mt-slide.active { opacity: 1; }
+  .mt-section .mt-slide-nav {
+    position: absolute; bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 8px; z-index: 2;
+  }
+  .mt-section .mt-slide-dot {
+    width: 32px; height: 3px; background: rgba(255,255,255,0.35);
+    border: 0; cursor: pointer; padding: 0;
+    transition: background 0.3s;
+  }
+  .mt-section .mt-slide-dot.active { background: #fff; }
+  .mt-section .mt-slide-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(0,0,0,0.4); color: #fff; border: 0;
+    cursor: pointer; font-size: 18px; z-index: 2;
+    transition: background 0.3s;
+  }
+  .mt-section .mt-slide-arrow:hover { background: rgba(0,0,0,0.7); }
+  .mt-section .mt-slide-arrow.prev { left: 16px; }
+  .mt-section .mt-slide-arrow.next { right: 16px; }
   .mt-section .mt-sub-title {
     font-family: 'Noto Serif JP', serif;
     font-size: 1.3rem; color: #2C3E50;
@@ -652,54 +685,18 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
         </div>
         <p class="room-price">素泊まり 1泊 ¥15,000〜（人数・時期により変動） ／ <a href="#calendar" style="color:var(--green);text-decoration:underline;">空き状況を確認・予約する</a><br><span style="font-size:1.125rem;color:var(--brown);margin-top:8px;display:inline-block;">定員：最大6名（和寝室4名＋洋寝室2名）</span></p>
         <div class="room-gallery">
-          <figure>
-            <img src="../images/room-living-1.jpg" alt="吹き抜けのリビングダイニング">
-            <figcaption>リビングダイニング</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/kitchen-bar.jpg" alt="フルキッチン＆カウンター">
-            <figcaption>キッチン＆バー</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/kitchen-detail.jpg" alt="フルキッチン">
-            <figcaption>調理器具完備</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/room-western-1.jpg" alt="洋寝室・庭側">
-            <figcaption>洋寝室（庭側）</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/room-western-2.jpg" alt="洋寝室・別アングル">
-            <figcaption>洋寝室（別角度）</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/bedroom-western.jpg" alt="洋寝室・夜">
-            <figcaption>洋寝室（夜）</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/room-japanese-1.jpg" alt="和寝室・障子と紅葉">
-            <figcaption>和寝室（4組布団）</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/bathroom-new.jpg" alt="浴室（2025年新設）">
-            <figcaption>浴室（2025年新設）</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/window-view-1.jpg" alt="窓から望む森">
-            <figcaption>窓辺から望む森</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/atmosphere-wine.jpg" alt="夜のカウンター">
-            <figcaption>夜のカウンター</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/atmosphere-sake.jpg" alt="地酒と肴">
-            <figcaption>地酒と地のもの</figcaption>
-          </figure>
-          <figure>
-            <img src="../images/exterior-winter.jpg" alt="冬の外観">
-            <figcaption>冬の外観</figcaption>
-          </figure>
+          <img src="../images/living-kitchen.jpg" alt="">
+          <img src="../images/room-living-1.jpg" alt="">
+          <img src="../images/room-living-2.jpg" alt="">
+          <img src="../images/kitchen-detail.jpg" alt="">
+          <img src="../images/bedroom-western.jpg" alt="">
+          <img src="../images/room-western-2.jpg" alt="">
+          <img src="../images/room-japanese-1.jpg" alt="">
+          <img src="../images/bathroom-new.jpg" alt="">
+          <img src="../images/window-view-1.jpg" alt="">
+          <img src="../images/atmosphere-wine.jpg" alt="">
+          <img src="../images/atmosphere-sake.jpg" alt="">
+          <img src="../images/exterior-winter.jpg" alt="">
         </div>
       </div>
     </div>
@@ -955,9 +952,18 @@ function switchSNS(type, site) {
       </p>
     </div>
 
-    <!-- Photo placeholder -->
-    <div class="mt-photo-placeholder fade-in">
-      写真スペース（長峰山からの朝焼け等）
+    <!-- Slideshow -->
+    <div class="mt-slideshow fade-in" id="mt-slides">
+      <div class="mt-slide active" style="background-image:url('../images/morning-tour-1.jpg');"></div>
+      <div class="mt-slide" style="background-image:url('../images/morning-tour-2.jpg');"></div>
+      <div class="mt-slide" style="background-image:url('../images/morning-tour-3.jpg');"></div>
+      <button class="mt-slide-arrow prev" onclick="mtSlide(-1)" aria-label="前へ">‹</button>
+      <button class="mt-slide-arrow next" onclick="mtSlide(1)" aria-label="次へ">›</button>
+      <div class="mt-slide-nav">
+        <button class="mt-slide-dot active" onclick="mtGoto(0)" aria-label="1"></button>
+        <button class="mt-slide-dot" onclick="mtGoto(1)" aria-label="2"></button>
+        <button class="mt-slide-dot" onclick="mtGoto(2)" aria-label="3"></button>
+      </div>
     </div>
 
     <!-- Tour Details -->
@@ -1251,6 +1257,32 @@ function toggleFAQ(el) {
     current = (current + 1) % total;
     slides[current].classList.add('active');
   }, 5000);
+})();
+</script>
+
+<!-- Morning Tour Slideshow -->
+<script>
+(function(){
+  var slides = document.querySelectorAll('#mt-slides .mt-slide');
+  var dots = document.querySelectorAll('#mt-slides .mt-slide-dot');
+  if (!slides.length) return;
+  var current = 0;
+  var auto;
+
+  function show(i){
+    slides[current].classList.remove('active');
+    dots[current] && dots[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current] && dots[current].classList.add('active');
+  }
+  function restart(){
+    clearInterval(auto);
+    auto = setInterval(function(){ show(current + 1); }, 5500);
+  }
+  window.mtSlide = function(d){ show(current + d); restart(); };
+  window.mtGoto = function(i){ show(i); restart(); };
+  restart();
 })();
 </script>
 
