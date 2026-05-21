@@ -653,16 +653,52 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
         <p class="room-price">素泊まり 1泊 ¥15,000〜（人数・時期により変動） ／ <a href="#calendar" style="color:var(--green);text-decoration:underline;">空き状況を確認・予約する</a><br><span style="font-size:1.125rem;color:var(--brown);margin-top:8px;display:inline-block;">定員：最大6名（和寝室4名＋洋寝室2名）</span></p>
         <div class="room-gallery">
           <figure>
-            <img src="../images/kitchen-detail.jpg" alt="フルキッチン">
-            <figcaption>フルキッチン</figcaption>
+            <img src="../images/room-living-1.jpg" alt="吹き抜けのリビングダイニング">
+            <figcaption>リビングダイニング</figcaption>
           </figure>
           <figure>
-            <img src="../images/bedroom-western.jpg" alt="洋寝室">
-            <figcaption>洋寝室</figcaption>
+            <img src="../images/kitchen-bar.jpg" alt="フルキッチン＆カウンター">
+            <figcaption>キッチン＆バー</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/kitchen-detail.jpg" alt="フルキッチン">
+            <figcaption>調理器具完備</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/room-western-1.jpg" alt="洋寝室・庭側">
+            <figcaption>洋寝室（庭側）</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/room-western-2.jpg" alt="洋寝室・別アングル">
+            <figcaption>洋寝室（別角度）</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/bedroom-western.jpg" alt="洋寝室・夜">
+            <figcaption>洋寝室（夜）</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/room-japanese-1.jpg" alt="和寝室・障子と紅葉">
+            <figcaption>和寝室（4組布団）</figcaption>
           </figure>
           <figure>
             <img src="../images/bathroom-new.jpg" alt="浴室（2025年新設）">
             <figcaption>浴室（2025年新設）</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/window-view-1.jpg" alt="窓から望む森">
+            <figcaption>窓辺から望む森</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/atmosphere-wine.jpg" alt="夜のカウンター">
+            <figcaption>夜のカウンター</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/atmosphere-sake.jpg" alt="地酒と肴">
+            <figcaption>地酒と地のもの</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/exterior-winter.jpg" alt="冬の外観">
+            <figcaption>冬の外観</figcaption>
           </figure>
         </div>
       </div>
@@ -994,6 +1030,29 @@ function switchSNS(type, site) {
     </div>
   </div>
 </section>
+
+<!-- AZUMINO MAP: ホストおすすめスポット -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<div id="azumino-map">
+  <div class="section-inner fade-in">
+    <div style="text-align:center; margin-bottom: 24px;">
+      <p class="section-label">AZUMINO MAP</p>
+      <h2 class="section-title" style="text-align:center;">ホストが案内できる安曇野の場所</h2>
+      <p class="section-text" style="max-width:640px;margin:16px auto 0;">観光ガイドには載っていない穴場も含めて、桜芽が実際に通っている場所をマップにまとめました。タップで詳細が見れます。</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:24px 0 32px;font-size:0.85rem;">
+      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#D97706;margin-right:6px;vertical-align:middle;"></span>観光・文化</span>
+      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#3C5A3A;margin-right:6px;vertical-align:middle;"></span>自然・登山</span>
+      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#B91C1C;margin-right:6px;vertical-align:middle;"></span>温泉</span>
+      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#7C4A03;margin-right:6px;vertical-align:middle;"></span>カフェ・食</span>
+      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#1E40AF;margin-right:6px;vertical-align:middle;"></span>周辺エリア</span>
+      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#5C3D2E;margin-right:6px;vertical-align:middle;"></span>宿</span>
+    </div>
+    <div id="map-container" style="width:100%;height:560px;border-radius:8px;overflow:hidden;border:1px solid var(--light);"></div>
+    <p style="text-align:center;margin-top:16px;font-size:0.85rem;color:var(--muted);">© OpenStreetMap contributors</p>
+  </div>
+</div>
+
 <!-- FAQ -->
 <div id="faq" style="background: var(--light);">
   <div class="section-inner fade-in">
@@ -1205,6 +1264,92 @@ function toggleFAQ(el) {
     });
   }, { threshold: 0.1 });
   els.forEach(function(el){ observer.observe(el); });
+})();
+</script>
+
+<!-- Azumino Map (Leaflet) -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  var COLORS = {
+    sight: '#D97706',
+    nature: '#3C5A3A',
+    onsen: '#B91C1C',
+    food: '#7C4A03',
+    around: '#1E40AF',
+    inn: '#5C3D2E'
+  };
+
+  // [name, lat, lng, category, description]
+  var SPOTS = [
+    // 宿
+    ['民宿笹森家（拠点）', 36.3389, 137.9024, 'inn', '安曇野学者村内・森の中の一棟貸し'],
+    ['ゲストハウス灯', 36.3411, 137.8989, 'inn', '姉妹店・温泉つきゲストハウス'],
+    // 観光・文化
+    ['大王わさび農場', 36.3424, 137.9069, 'sight', '日本最大のわさび園。早朝（6時前）の蓼川沿いが絶景。地元で本当に静か'],
+    ['安曇野ちひろ美術館', 36.4099, 137.8654, 'sight', 'いわさきちひろの絵本原画。庭園も美しい'],
+    ['碌山美術館', 36.3169, 137.9070, 'sight', '近代彫刻家・荻原碌山。教会風の建物が雰囲気抜群'],
+    ['国営アルプスあづみの公園', 36.3431, 137.8597, 'sight', '広大な敷地。冬のイルミネーションが見もの'],
+    ['穂高神社', 36.3417, 137.8772, 'sight', '北アルプスを御神体とする由緒ある神社'],
+    ['安曇野アートヒルズミュージアム', 36.3270, 137.8838, 'sight', 'ガラス工芸・ガラス吹き体験あり'],
+    ['北アルプス展望美術館', 36.3554, 137.8473, 'sight', '池田町。北アルプスを一望できる絶景美術館'],
+    // 自然・登山
+    ['烏川渓谷緑地', 36.3328, 137.8266, 'nature', '中流域が地元の人だけが知る穴場。新緑・紅葉が美しい'],
+    ['須砂渡渓谷', 36.3517, 137.7912, 'nature', '安曇野から最短の渓流スポット'],
+    ['燕岳登山口（中房温泉）', 36.4011, 137.7194, 'nature', '北アルプス入門。表銀座縦走の起点'],
+    ['三股登山口（蝶ヶ岳）', 36.3186, 137.7461, 'nature', '安曇野から日帰りも可能な3千m峰'],
+    // 温泉
+    ['中房温泉', 36.4011, 137.7194, 'onsen', '燕岳登山口の秘湯。日帰り入浴可'],
+    ['しゃくなげ荘', 36.3528, 137.8378, 'onsen', '穂高温泉郷。地元の人の御用達'],
+    ['ほりでーゆ〜四季の郷', 36.3589, 137.8233, 'onsen', '日帰り温泉＋食事処'],
+    // カフェ・食
+    ['シャロムヒュッテ', 36.3194, 137.8514, 'food', '森の中の自然食レストラン。雰囲気が最高'],
+    ['八面大王食堂', 36.3414, 137.8954, 'food', '地元産そばと信州料理'],
+    ['cafe 風', 36.3578, 137.8694, 'food', '北アルプスを望むテラスカフェ'],
+    ['草庵', 36.3408, 137.8819, 'food', '築100年超の蔵を改装した蕎麦処'],
+    // 周辺エリア
+    ['松本城', 36.2384, 137.9694, 'around', '国宝・現存12天守の一つ。車で約30分'],
+    ['上高地', 36.2519, 137.6358, 'around', '日本屈指の山岳景勝地。春〜秋限定'],
+    ['乗鞍高原', 36.1158, 137.6164, 'around', '夏でも涼しい高原。日の出スポット多数'],
+    ['白馬村', 36.6981, 137.8328, 'around', '冬はスキー、夏はトレッキング'],
+    ['鎌池（小谷村）', 36.7367, 137.7878, 'around', '秋の紅葉が圧巻。早朝の鏡面映りが絶景']
+  ];
+
+  function makeIcon(color){
+    return L.divIcon({
+      className: 'custom-marker',
+      html: '<div style="background:' + color + ';width:18px;height:18px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.4);"></div>',
+      iconSize: [18, 18],
+      iconAnchor: [9, 9]
+    });
+  }
+
+  function initMap(){
+    if (typeof L === 'undefined') return;
+    var container = document.getElementById('map-container');
+    if (!container) return;
+
+    var map = L.map(container, { scrollWheelZoom: false }).setView([36.3500, 137.8800], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap',
+      maxZoom: 18
+    }).addTo(map);
+
+    var bounds = [];
+    SPOTS.forEach(function(s){
+      var marker = L.marker([s[1], s[2]], { icon: makeIcon(COLORS[s[3]]) }).addTo(map);
+      marker.bindPopup('<strong style="font-size:1rem;color:#5C3D2E;">' + s[0] + '</strong><br><span style="font-size:0.85rem;color:#7A7368;line-height:1.6;">' + s[4] + '</span>');
+      bounds.push([s[1], s[2]]);
+    });
+
+    map.fitBounds(bounds, { padding: [40, 40] });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMap);
+  } else {
+    initMap();
+  }
 })();
 </script>
 
