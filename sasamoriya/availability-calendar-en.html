@@ -3,6 +3,16 @@
 <head>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJSJFMXPX"></script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wxh6i8m022");
+</script>
+
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
@@ -67,16 +77,6 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   }
 })();
 </script>
-
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wxh6i8m022");
-</script>
-
 
 
 <meta charset="UTF-8">
@@ -209,7 +209,7 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
               <input type="date" id="fCheckout" onchange="updateTotal()">
             </div>
           </div>
-          <label>Guests</label>
+          <label>Adults (13+) *</label>
           <select id="fGuests" onchange="updateTotal()">
             <option value="1">1</option>
             <option value="2" selected>2</option>
@@ -218,6 +218,41 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
             <option value="5">5</option>
             <option value="6">6</option>
           </select>
+          <div class="row" style="margin-top:8px;">
+            <div>
+              <label style="margin-top:0;">Children (4–12)</label>
+              <select id="fChildren" onchange="updateTotal()">
+                <option value="0" selected>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div>
+              <label style="margin-top:0;">Infants (0–3)</label>
+              <select id="fInfants" onchange="updateTotal()">
+                <option value="0" selected>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <label>Pets</label>
+          <select id="fPets" onchange="updateTotal()">
+            <option value="0" selected>None</option>
+            <option value="1">1 pet</option>
+            <option value="2">2 pets</option>
+            <option value="3">3 pets</option>
+            <option value="4">4 pets</option>
+            <option value="5">5+ (please contact us)</option>
+          </select>
+          <p style="font-size:14px;color:#8a7e6e;margin-top:6px;line-height:1.6;">
+            Children: ages 4–12 ¥4,000 / child / night　·　ages 0–3 free<br>
+            Pets: 1st ¥3,000 / stay　·　each additional ¥1,000 / stay
+          </p>
           <div class="book-total" id="fTotal"></div>
           <label>Name *</label>
           <input type="text" id="fName" placeholder="Taro Yamada">
@@ -574,6 +609,11 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     sasamori: { base: 23000, perExtra: 10000, maxGuests: 6 }
   };
 
+  // Extra fees
+  var CHILD_FEE_PER_NIGHT = 4000;   // ages 4-12: per child per night
+  var PET_FEE_FIRST = 3000;          // 1st pet: per stay (cleaning)
+  var PET_FEE_ADDITIONAL = 1000;     // each additional pet: per stay
+
   function getSeasonInfo(dateStr) {
     var d = new Date(dateStr);
     var m = d.getMonth() + 1;
@@ -591,18 +631,31 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   function formatYen(n) { return '¥' + n.toLocaleString(); }
 
   // Calculate total over nights (seasonal rate varies per day)
-  function calcTotalPrice(checkin, checkout, guests) {
+  // adults / children (4-12) / pets
+  function calcTotalPrice(checkin, checkout, adults, children, pets) {
+    adults = parseInt(adults) || 0;
+    children = parseInt(children) || 0;
+    pets = parseInt(pets) || 0;
     var p = PRICING[currentProp];
     var ci = new Date(checkin); var co = new Date(checkout);
-    var total = 0; var d = new Date(ci);
+    var roomTotal = 0; var nights = 0; var d = new Date(ci);
     while (d < co) {
       var season = getSeasonInfo(formatDate(d));
       var base = Math.round(p.base * season.rate / 100) * 100;
-      var extra = parseInt(guests) > 2 ? Math.round(p.perExtra * season.rate / 100) * 100 * (parseInt(guests) - 2) : 0;
-      total += base + extra;
+      var extra = adults > 2 ? Math.round(p.perExtra * season.rate / 100) * 100 * (adults - 2) : 0;
+      roomTotal += base + extra;
+      nights++;
       d.setDate(d.getDate() + 1);
     }
-    return total;
+    var childFee = children * CHILD_FEE_PER_NIGHT * nights;
+    var petFee = pets > 0 ? PET_FEE_FIRST + (pets - 1) * PET_FEE_ADDITIONAL : 0;
+    return {
+      room: roomTotal,
+      child: childFee,
+      pet: petFee,
+      total: roomTotal + childFee + petFee,
+      nights: nights
+    };
   }
 
   window.showPricePopup = function(dateStr) {
@@ -636,6 +689,9 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     document.getElementById('fCheckin').value = dateStr;
     document.getElementById('fCheckout').value = formatDate(co);
     document.getElementById('fGuests').value = '2';
+    document.getElementById('fChildren').value = '0';
+    document.getElementById('fInfants').value = '0';
+    document.getElementById('fPets').value = '0';
     document.getElementById('fName').value = '';
     document.getElementById('fContact').value = '';
     document.getElementById('fEmail').value = '';
@@ -648,14 +704,20 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   window.updateTotal = function() {
     var ci = document.getElementById('fCheckin').value;
     var co = document.getElementById('fCheckout').value;
-    var guests = document.getElementById('fGuests').value;
+    var adults = document.getElementById('fGuests').value;
+    var children = document.getElementById('fChildren').value;
+    var pets = document.getElementById('fPets').value;
     if (!ci || !co || new Date(co) <= new Date(ci)) {
       document.getElementById('fTotal').innerHTML = '';
       return;
     }
-    var nights = Math.round((new Date(co) - new Date(ci)) / 86400000);
-    var total = calcTotalPrice(ci, co, guests);
-    document.getElementById('fTotal').innerHTML = formatYen(total) + ' <small>(' + nights + ' nights × ' + guests + ' guests)</small>';
+    var r = calcTotalPrice(ci, co, adults, children, pets);
+    var breakdown = '<small style="display:block;margin-top:6px;line-height:1.7;">'
+      + 'Room: ' + formatYen(r.room) + ' (' + r.nights + ' nights × ' + adults + ' adults)';
+    if (r.child > 0) breakdown += '<br>Children: ' + formatYen(r.child) + ' (' + children + ' × ' + r.nights + ' nights)';
+    if (r.pet > 0) breakdown += '<br>Pets: ' + formatYen(r.pet) + ' (' + pets + ')';
+    breakdown += '</small>';
+    document.getElementById('fTotal').innerHTML = '<strong>Total ' + formatYen(r.total) + '</strong>' + breakdown;
   };
 
   window.closePricePopup = function() {
@@ -675,6 +737,9 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     var checkin = document.getElementById('fCheckin').value;
     var checkout = document.getElementById('fCheckout').value;
     var guests = document.getElementById('fGuests').value;
+    var children = document.getElementById('fChildren').value;
+    var infants = document.getElementById('fInfants').value;
+    var pets = document.getElementById('fPets').value;
     var agreed = document.getElementById('fAgree').checked;
     var hp = document.getElementById('fHp').value;
 
@@ -687,18 +752,36 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     if (!payment) { alert('Please select a payment method'); return; }
     if (!agreed) { alert('You must agree to the Terms, Cancellation Policy, and Privacy Policy'); return; }
     if (!checkin || !checkout || new Date(checkout) <= new Date(checkin)) { alert('Please enter valid dates'); return; }
+    // Capacity check (adults + children 4-12 must not exceed 6)
+    var occupants = parseInt(guests) + parseInt(children);
+    if (occupants > 6) { alert('Adults + children (4–12) cannot exceed 6 guests.'); return; }
     // Lead time check
     var leadHours = (new Date(checkin + 'T15:00:00+09:00') - new Date()) / 36e5;
     if (leadHours < 24) { alert('Online booking closed within 24 hours of check-in. Please contact us via Instagram DM or phone.'); return; }
 
-    var nights = Math.round((new Date(checkout) - new Date(checkin)) / 86400000);
-    var total = calcTotalPrice(checkin, checkout, guests);
+    var r = calcTotalPrice(checkin, checkout, guests, children, pets);
+    var nights = r.nights;
+
+    var guestSummary = guests + ' adults'
+      + (parseInt(children) > 0 ? ' / ' + children + ' children' : '')
+      + (parseInt(infants) > 0 ? ' / ' + infants + ' infants' : '');
+    var petSummary = parseInt(pets) > 0 ? pets + (parseInt(pets) === 1 ? ' pet' : ' pets') : 'None';
+
+    var priceSummary = formatYen(r.total) + ' (' + nights + ' nights'
+      + ' / room ' + formatYen(r.room)
+      + (r.child > 0 ? ' + children ' + formatYen(r.child) : '')
+      + (r.pet > 0 ? ' + pets ' + formatYen(r.pet) : '')
+      + ')';
 
     pendingBookingData = {
       property: currentProp,
       checkin: checkin,
       checkout: checkout,
-      guests: guests + ' guests',
+      guests: guestSummary,
+      adults: guests,
+      children: children,
+      infants: infants,
+      pets: pets,
       name: name,
       contact: contact,
       email: email,
@@ -710,16 +793,26 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
       website: hp,
       lang: 'en',
       note: document.getElementById('fNote').value.trim(),
-      totalPrice: formatYen(total) + ' (' + nights + ' nights)'
+      totalPrice: priceSummary,
+      priceBreakdown: { room: r.room, child: r.child, pet: r.pet, total: r.total }
     };
 
     var esc = function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+    var priceCell = '<div>' + esc(formatYen(r.total)) + '</div>'
+      + '<div style="font-size:13px;color:#8a7e6e;margin-top:4px;">'
+      + 'Room ' + esc(formatYen(r.room))
+      + (r.child > 0 ? ' + Children ' + esc(formatYen(r.child)) : '')
+      + (r.pet > 0 ? ' + Pets ' + esc(formatYen(r.pet)) : '')
+      + '</div>';
     var rows = [
       ['Property', esc(CONFIG[currentProp].name || currentProp)],
       ['Check-in', esc(checkin)],
       ['Check-out', esc(checkout) + ' (' + nights + ' nights)'],
-      ['Guests', esc(guests)],
-      ['Total', esc(formatYen(total))],
+      ['Adults', esc(guests)],
+      ['Children (4–12)', parseInt(children) > 0 ? esc(children) : '0'],
+      ['Infants (0–3)', parseInt(infants) > 0 ? esc(infants) : '0'],
+      ['Pets', esc(petSummary)],
+      ['Total', priceCell],
       ['Name', esc(name)],
       ['Phone', esc(contact)],
       ['Email', esc(email)],

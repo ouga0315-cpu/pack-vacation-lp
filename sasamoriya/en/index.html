@@ -67,7 +67,6 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   }
 })();
 </script>
-
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -102,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
 src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -314,6 +312,7 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     footer { padding: 48px 24px; }
 
     /* ===== MOBILE FONT SIZE OVERRIDES ===== */
+    /* Header */
     header { padding: 10px 16px; }
     .logo-img { height: 40px; }
     .logo-text { font-size: 0.85rem; letter-spacing: 0.12em; line-height: 1.3; }
@@ -323,47 +322,57 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     .mobile-nav a { font-size: 1rem; }
     .lang-switch { font-size: 0.7rem; padding: 4px 10px; margin-left: 12px; }
 
+    /* Hero */
     .hero-sub { font-size: 0.65rem; letter-spacing: 0.3em; margin-bottom: 18px; }
     .hero-title { font-size: 1.6rem; letter-spacing: 0.03em; line-height: 1.4; margin-bottom: 20px; }
     .hero-desc { font-size: 0.95rem; letter-spacing: 0.05em; margin-bottom: 36px; }
     .hero-btn { font-size: 0.85rem; padding: 14px 32px; letter-spacing: 0.18em; }
     .scroll-hint { font-size: 0.65rem; letter-spacing: 0.3em; bottom: 28px; }
 
+    /* Sections */
     .section-label { font-size: 0.7rem; letter-spacing: 0.35em; margin-bottom: 14px; }
     .section-title { font-size: 1.4rem; letter-spacing: 0.08em; margin-bottom: 24px; }
     .section-text { font-size: 0.95rem; line-height: 1.9; }
     .badge { font-size: 0.7rem; letter-spacing: 0.18em; margin-bottom: 12px; }
 
+    /* Rooms */
     .room-name { font-size: 1.05rem; letter-spacing: 0.1em; margin-bottom: 18px; }
     .room-details-label { font-size: 0.75rem; letter-spacing: 0.18em; margin-bottom: 8px; }
     .room-details ul { font-size: 0.9rem; line-height: 2.0; }
     .room-price { font-size: 0.9rem; }
     .room-gallery figcaption { font-size: 0.75rem; }
 
+    /* Activities */
     .act-photo-label { font-size: 0.7rem; letter-spacing: 0.25em; }
     .act-photo-name { font-size: 0.95rem; }
     .act-photo-desc { font-size: 0.8rem; }
     .act-tag { font-size: 0.8rem; padding: 8px 18px; }
 
+    /* Reels */
     .reel-caption { font-size: 0.8rem; }
 
+    /* Reviews */
     .review-stars { font-size: 0.9rem; }
     .review-text { font-size: 0.9rem; line-height: 1.9; }
     .review-author { font-size: 0.85rem; }
 
+    /* Seasons */
     .season-photo-label { font-size: 0.65rem; letter-spacing: 0.25em; }
     .season-photo-name { font-size: 0.85rem; }
     .season-photo-desc { font-size: 0.75rem; }
 
+    /* Access */
     .access-info dt { font-size: 0.75rem; letter-spacing: 0.18em; margin-top: 22px; }
     .access-info dd { font-size: 0.9rem; }
 
+    /* Host & FAQ */
     .host-name { font-size: 1.05rem; }
     .host-role { font-size: 0.75rem; letter-spacing: 0.18em; }
     .host-text { font-size: 0.9rem; line-height: 2.0; }
     .faq-q { font-size: 0.95rem; padding: 20px 0; }
     .faq-a-inner { font-size: 0.9rem; line-height: 2.0; }
 
+    /* Contact & Footer */
     .contact-text { font-size: 0.9rem; }
     .btn-contact { font-size: 0.85rem; padding: 14px 28px; letter-spacing: 0.15em; }
     footer { font-size: 0.75rem; letter-spacing: 0.1em; }
@@ -386,6 +395,7 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     <a href="#about">About</a>
     <a href="#rooms">Rooms</a>
     <a href="#activities">Activities</a>
+    <a href="pet.html">Stay with Pets</a>
     <a href="#access">Access</a>
     <a href="../ja/" class="lang-switch">日本語</a>
   </nav>
@@ -396,6 +406,7 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
   <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#rooms" onclick="toggleMenu()">Rooms</a>
   <a href="#activities" onclick="toggleMenu()">Activities</a>
+  <a href="pet.html">Stay with Pets</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="#access" onclick="toggleMenu()">Access</a>
   <a href="#calendar" onclick="toggleMenu()">Book Now</a>
@@ -477,19 +488,33 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
           </div>
         </div>
         <p class="room-price"><strong>Up to 6 guests</strong> ／ From ¥15,000/night (varies by guests & season) ／ <a href="#calendar" style="color:var(--green);text-decoration:underline;">Check availability & book</a></p>
+        <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--light);">
+          <p class="room-details-label" style="margin-bottom:12px;">Children</p>
+          <ul style="margin-bottom:20px;">
+            <li>Ages 0–3: Free</li>
+            <li>Ages 4–12: ¥4,000 / child</li>
+            <li>Ages 13+: Adult rate</li>
+          </ul>
+          <p class="room-details-label" style="margin-bottom:12px;">Pets <a href="pet.html" style="color:var(--green);text-decoration:underline;font-size:0.9rem;font-weight:normal;letter-spacing:normal;">Stay with Pets ▶</a></p>
+          <ul>
+            <li>1st pet: ¥3,000</li>
+            <li>Each additional pet: ¥1,000</li>
+            <li>No limit on number of pets (small dogs & cats; please ask about large dogs)</li>
+          </ul>
+        </div>
         <div class="room-gallery">
-          <img src="../images/living-kitchen.jpg" alt="">
-          <img src="../images/room-living-1.jpg" alt="">
-          <img src="../images/room-living-2.jpg" alt="">
-          <img src="../images/kitchen-detail.jpg" alt="">
-          <img src="../images/bedroom-western.jpg" alt="">
-          <img src="../images/room-western-2.jpg" alt="">
-          <img src="../images/room-japanese-1.jpg" alt="">
-          <img src="../images/bathroom-new.jpg" alt="">
-          <img src="../images/window-view-1.jpg" alt="">
-          <img src="../images/atmosphere-wine.jpg" alt="">
-          <img src="../images/atmosphere-sake.jpg" alt="">
-          <img src="../images/exterior-winter.jpg" alt="">
+          <figure>
+            <img src="../images/kitchen-detail.jpg" alt="Full kitchen">
+            <figcaption>Full Kitchen</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/bedroom-western.jpg" alt="Western bedroom">
+            <figcaption>Western Bedroom</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/bathroom-new.jpg" alt="Bathroom (new 2025)">
+            <figcaption>Bathroom (New 2025)</figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -704,28 +729,6 @@ function switchSNS(type, site) {
   </div>
 </div>
 
-<!-- AZUMINO MAP: Host's recommended spots -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<div id="azumino-map">
-  <div class="section-inner fade-in">
-    <div style="text-align:center; margin-bottom: 24px;">
-      <p class="section-label">AZUMINO MAP</p>
-      <h2 class="section-title" style="text-align:center;">Spots Your Host Can Guide You To</h2>
-      <p class="section-text" style="max-width:640px;margin:16px auto 0;">Ouga's personal map of Azumino — including hidden gems not in any guidebook. Tap any pin for details.</p>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:24px 0 32px;font-size:0.85rem;">
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#D97706;margin-right:6px;vertical-align:middle;"></span>Sights & Culture</span>
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#3C5A3A;margin-right:6px;vertical-align:middle;"></span>Nature & Hiking</span>
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#B91C1C;margin-right:6px;vertical-align:middle;"></span>Onsen</span>
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#7C4A03;margin-right:6px;vertical-align:middle;"></span>Cafes & Food</span>
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#1E40AF;margin-right:6px;vertical-align:middle;"></span>Nearby Areas</span>
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#5C3D2E;margin-right:6px;vertical-align:middle;"></span>Our Inns</span>
-    </div>
-    <div id="map-container" style="width:100%;height:560px;border-radius:8px;overflow:hidden;border:1px solid var(--light);"></div>
-    <p style="text-align:center;margin-top:16px;font-size:0.85rem;color:var(--muted);">© OpenStreetMap contributors</p>
-  </div>
-</div>
-
 <!-- FAQ -->
 <div id="faq" style="background: var(--light);">
   <div class="section-inner fade-in">
@@ -746,11 +749,11 @@ function switchSNS(type, site) {
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFAQ(this)">Are there restrictions on pet type or size?</button>
-        <div class="faq-a"><div class="faq-a-inner">Small dogs and cats are welcome. A cleaning fee applies: ¥3,000 for the first pet, ¥1,000 for each additional pet. Please contact us before booking if you have a large dog.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Small dogs and cats are very welcome — there is no limit on the number of pets. Fee: ¥3,000 for the first pet, ¥1,000 for each additional pet. Please contact us before booking if you have a large dog. We kindly ask that pets are not allowed on beds or futons. See our <a href="pet.html" style="color:var(--green);text-decoration:underline;">Stay with Pets</a> page for details.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFAQ(this)">Is it suitable for families with young children?</button>
-        <div class="faq-a"><div class="faq-a-inner">Absolutely! Families with children are very welcome. Since it's a private whole-house rental, you can relax without worrying about noise.</div></div>
+        <button class="faq-q" onclick="toggleFAQ(this)">Is it suitable for families with young children? What's the rate?</button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely! Families with children are very welcome. Since it's a private whole-house rental, you can relax without worrying about noise. Rates: Ages 0–3 free / Ages 4–12 ¥4,000 / Ages 13+ adult rate.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFAQ(this)">What is the cancellation policy?</button>
@@ -925,54 +928,6 @@ function toggleFAQ(el) {
     });
   }, { threshold: 0.1 });
   els.forEach(function(el){ observer.observe(el); });
-})();
-</script>
-
-<!-- Azumino Map (Leaflet) -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-(function(){
-  var COLORS = { sight: '#D97706', nature: '#3C5A3A', onsen: '#B91C1C', food: '#7C4A03', around: '#1E40AF', inn: '#5C3D2E' };
-  var SPOTS = [
-    ['Sasamoriya (our location)', 36.377849, 137.846334, 'inn', 'Whole-house rental in Azumino Scholar Village forest'],
-    ['Guesthouse Tomoshibi', 36.377849, 137.846334, 'inn', 'Our sister property with onsen'],
-    ['Daio Wasabi Farm', 36.3262, 137.8989, 'sight', "Japan's largest wasabi farm. Early morning along the Tate River is breathtaking"],
-    ['Hotaka Shrine', 36.3411, 137.8851, 'sight', 'Ancient shrine with the Northern Alps as its sacred body'],
-    ['Rokuzan Museum', 36.3370, 137.8881, 'sight', 'Modern sculpture museum in atmospheric church-style building'],
-    ['Chihiro Art Museum', 36.4094, 137.8639, 'sight', 'Matsukawa Village. Picture-book illustrations by Chihiro Iwasaki'],
-    ['Alps Azumino National Park', 36.3204, 137.8331, 'sight', 'Vast grounds. Winter illumination is a must-see'],
-    ['Azumino Art Hills Museum', 36.4106, 137.8767, 'sight', 'Ikeda Town. Glass art with hands-on blowing experience'],
-    ['Northern Alps Observatory', 36.3994, 137.8581, 'sight', 'Ikeda Town. Spectacular Northern Alps panorama'],
-    ['Karasugawa Valley', 36.3083, 137.7820, 'nature', 'Locals-only middle reaches. Stunning new green and autumn'],
-    ['Susawatari', 36.3206, 137.7858, 'nature', 'Closest mountain stream to Azumino'],
-    ['Tsubame-dake Trailhead', 36.4017, 137.7150, 'nature', 'Gateway to the Northern Alps'],
-    ['Mitsumata Trailhead (Chogatake)', 36.3219, 137.7350, 'nature', "Day-trippable 3,000m peak"],
-    ['Nakabusa Onsen', 36.4017, 137.7150, 'onsen', 'Secret hot spring at Tsubame trailhead'],
-    ['Shakunage-so', 36.3411, 137.8076, 'onsen', 'Hotaka Onsen district, locals favorite'],
-    ['Holiday-yu Shiki-no-Sato', 36.3206, 137.7858, 'onsen', 'Day-use onsen with restaurant'],
-    ['Shalom Hutte', 36.3389, 137.7989, 'food', 'Forest restaurant serving organic cuisine'],
-    ['Matsumoto Castle', 36.2381, 137.9689, 'around', 'National Treasure. 30 min by car'],
-    ['Kamikochi', 36.2520, 137.6358, 'around', "Premier alpine scenery. Spring-Autumn only"],
-    ['Norikura Highlands', 36.1158, 137.6164, 'around', 'Cool summer plateau'],
-    ['Hakuba Village (Happo)', 36.6953, 137.8367, 'around', 'Ski/trekking destination'],
-    ['Kamaike Pond (Otari)', 36.7300, 137.7833, 'around', 'Spectacular autumn foliage and mirror reflections']
-  ];
-  function makeIcon(color){ return L.divIcon({ className: 'custom-marker', html: '<div style="background:'+color+';width:18px;height:18px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.4);"></div>', iconSize:[18,18], iconAnchor:[9,9] }); }
-  function initMap(){
-    if (typeof L === 'undefined') return;
-    var container = document.getElementById('map-container');
-    if (!container) return;
-    var map = L.map(container, { scrollWheelZoom: false }).setView([36.3778, 137.8463], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap', maxZoom: 18 }).addTo(map);
-    var bounds = [];
-    SPOTS.forEach(function(s){
-      L.marker([s[1], s[2]], { icon: makeIcon(COLORS[s[3]]) }).addTo(map)
-        .bindPopup('<strong style="font-size:1rem;color:#5C3D2E;">'+s[0]+'</strong><br><span style="font-size:0.85rem;color:#7A7368;line-height:1.6;">'+s[4]+'</span>');
-      bounds.push([s[1], s[2]]);
-    });
-    map.fitBounds(bounds, { padding: [40, 40] });
-  }
-  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMap); } else { initMap(); }
 })();
 </script>
 

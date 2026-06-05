@@ -67,7 +67,6 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   }
 })();
 </script>
-
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -102,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
 src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -319,6 +317,78 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
   .lang-switch { font-size:1.125rem; color: var(--muted); letter-spacing: 0.15em; margin-left: 24px; text-decoration: none; border: 1px solid var(--light); padding: 6px 14px; transition: all 0.3s; }
   .lang-switch:hover { color: var(--brown); border-color: var(--brown); }
 
+  /* ===== HERO BADGES & META ===== */
+  .hero-badges { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin: 24px 0 28px; }
+  .hero-badge {
+    display:inline-block; padding:6px 14px;
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(6px);
+    border:1px solid rgba(255,255,255,0.3);
+    color:#fff; font-size:0.85rem; letter-spacing:0.08em; border-radius:999px;
+  }
+  .hero-meta {
+    display:flex; justify-content:center; gap:32px;
+    margin: 0 auto 36px; padding:18px 28px;
+    background: rgba(0,0,0,0.35); backdrop-filter: blur(6px);
+    border-radius:8px; max-width:560px;
+  }
+  .hero-meta-item { display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .hero-meta-label { color: var(--gold); font-size:0.7rem; letter-spacing:0.3em; }
+  .hero-meta-value { color:#fff; font-size:1rem; font-weight:500; letter-spacing:0.05em; }
+
+  /* ===== PRICING TABLE SECTION ===== */
+  .pricing-section { background: var(--cream); }
+  .pricing-table-wrap { max-width: 880px; margin: 0 auto; background:#fff; padding:48px; box-shadow: 0 2px 16px rgba(0,0,0,0.04); }
+  .pricing-table { width:100%; border-collapse:collapse; }
+  .pricing-table th, .pricing-table td {
+    padding:16px 12px; text-align:center; border-bottom:1px solid var(--light);
+    font-size:1rem;
+  }
+  .pricing-table thead th {
+    background: var(--brown); color:#fff; font-weight:500; letter-spacing:0.1em;
+    font-size:0.9rem;
+  }
+  .pricing-table tbody th {
+    background: var(--light); color: var(--brown); font-weight:500;
+    text-align:left; padding-left:20px;
+  }
+  .pricing-table td { color: var(--text); }
+  .pricing-table td.highlight { color: var(--green); font-weight:600; }
+  .pricing-note { margin-top:24px; color: var(--muted); font-size:0.9rem; line-height:1.9; }
+  .pricing-note ul { list-style:none; padding:0; }
+  .pricing-note li::before { content:"・"; color: var(--gold); }
+  .pricing-cta { text-align:center; margin-top:32px; }
+  .pricing-cta a {
+    display:inline-block; padding:16px 48px; background: var(--green); color:#fff;
+    text-decoration:none; letter-spacing:0.2em; font-size:1rem;
+    transition: opacity 0.3s;
+  }
+  .pricing-cta a:hover { opacity:0.85; }
+
+  /* ===== MOBILE STICKY BOOK BAR ===== */
+  .sticky-book-bar { display:none; }
+
+  /* ===== LIGHTBOX ===== */
+  .lightbox {
+    position:fixed; inset:0; background: rgba(0,0,0,0.92);
+    z-index:9999; display:none; align-items:center; justify-content:center;
+    padding:24px; cursor: zoom-out;
+  }
+  .lightbox.open { display:flex; }
+  .lightbox img { max-width:96vw; max-height:90vh; object-fit:contain; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+  .lightbox-close {
+    position:absolute; top:20px; right:24px;
+    background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;
+    line-height:1; padding:8px 12px;
+  }
+  .lightbox-prev, .lightbox-next {
+    position:absolute; top:50%; transform:translateY(-50%);
+    background: rgba(255,255,255,0.1); border:none; color:#fff;
+    font-size:2rem; cursor:pointer; padding:16px 20px; user-select:none;
+  }
+  .lightbox-prev { left:16px; } .lightbox-next { right:16px; }
+  .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.2); }
+  .lightboxable { cursor: zoom-in; }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
     header { padding: 14px 20px; }
@@ -350,11 +420,41 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     .lang-switch { font-size: 0.7rem; padding: 4px 10px; margin-left: 12px; }
 
     /* Hero */
-    .hero-sub { font-size: 0.7rem; letter-spacing: 0.3em; margin-bottom: 18px; }
-    .hero-title { font-size: 1.5rem; letter-spacing: 0.05em; line-height: 1.7; margin-bottom: 20px; }
-    .hero-desc { font-size: 0.95rem; letter-spacing: 0.05em; margin-bottom: 36px; }
+    .hero-sub { font-size: 0.7rem; letter-spacing: 0.3em; margin-bottom: 14px; }
+    .hero-title { font-size: 1.4rem; letter-spacing: 0.05em; line-height: 1.6; margin-bottom: 14px; }
+    .hero-desc { font-size: 0.85rem; letter-spacing: 0.05em; margin-bottom: 18px; }
     .hero-btn { font-size: 0.85rem; padding: 14px 32px; letter-spacing: 0.18em; }
-    .scroll-hint { font-size: 0.65rem; letter-spacing: 0.3em; bottom: 28px; }
+    .scroll-hint { display:none; }
+    .hero-badges { gap:6px; margin: 14px 0 18px; }
+    .hero-badge { font-size: 0.7rem; padding: 4px 10px; }
+    .hero-meta { gap: 16px; padding: 12px 16px; margin-bottom: 22px; }
+    .hero-meta-label { font-size: 0.55rem; letter-spacing: 0.2em; }
+    .hero-meta-value { font-size: 0.8rem; }
+
+    /* Pricing */
+    .pricing-table-wrap { padding: 24px 16px; }
+    .pricing-table th, .pricing-table td { padding: 10px 6px; font-size: 0.85rem; }
+    .pricing-table tbody th { padding-left: 10px; }
+    .pricing-cta a { padding: 14px 32px; font-size: 0.9rem; letter-spacing: 0.15em; }
+
+    /* Sticky book bar - mobile only */
+    .sticky-book-bar {
+      display:flex; position:fixed; bottom:0; left:0; right:0; z-index:90;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
+      border-top: 1px solid var(--light);
+      padding: 10px 14px; padding-bottom: calc(10px + env(safe-area-inset-bottom));
+      align-items:center; justify-content:space-between; gap:12px;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+    }
+    .sticky-book-info { display:flex; flex-direction:column; line-height:1.2; }
+    .sticky-book-price { font-size: 1rem; color: var(--brown); font-weight:700; }
+    .sticky-book-sub { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+    .sticky-book-btn {
+      background: var(--green); color:#fff; text-decoration:none;
+      padding: 14px 24px; font-size: 0.9rem; font-weight:700;
+      letter-spacing: 0.1em; border-radius: 6px; white-space:nowrap;
+    }
+    body { padding-bottom: 76px; }
 
     /* Sections */
     .section-label { font-size: 0.7rem; letter-spacing: 0.35em; margin-bottom: 14px; }
@@ -403,8 +503,9 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     .contact-text { font-size: 0.9rem; }
     .btn-contact { font-size: 0.85rem; padding: 14px 28px; letter-spacing: 0.15em; }
     footer { font-size: 0.75rem; letter-spacing: 0.1em; }
-  
-}
+
+  }
+
   /* ===== MORNING TOUR SECTION ===== */
   .mt-section { background: #F5F1E8; }
   .mt-section .mt-hero {
@@ -414,7 +515,8 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
   }
   .mt-section .mt-hero-bg {
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, #2C3E50 0%, #1a2a3a 60%, #E8826B 100%);
+    background: url('../../images/morning-tour/hero.jpg') center/cover no-repeat;
+    filter: brightness(0.4);
   }
   .mt-section .mt-hero-content {
     position: relative; z-index: 1;
@@ -448,46 +550,9 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
   .mt-section .mt-highlight { color: #E8826B; font-weight: 600; }
   .mt-section .mt-photo-placeholder {
     width: 100%; height: 300px;
-    background: linear-gradient(135deg, #ddd, #eee);
-    border: 2px dashed #bbb;
     display: flex; align-items: center; justify-content: center;
     margin: 48px 0;
-    font-family: 'Noto Sans JP', sans-serif;
-    color: #999; font-size: 0.85rem; letter-spacing: 0.1em;
   }
-  /* ===== MORNING TOUR SLIDESHOW ===== */
-  .mt-section .mt-slideshow {
-    position: relative; width: 100%; height: 480px;
-    margin: 48px 0; overflow: hidden; border-radius: 4px;
-    background: #1a1a1a;
-  }
-  .mt-section .mt-slide {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center;
-    opacity: 0; transition: opacity 1.2s ease-in-out;
-  }
-  .mt-section .mt-slide.active { opacity: 1; }
-  .mt-section .mt-slide-nav {
-    position: absolute; bottom: 20px; left: 50%;
-    transform: translateX(-50%);
-    display: flex; gap: 8px; z-index: 2;
-  }
-  .mt-section .mt-slide-dot {
-    width: 32px; height: 3px; background: rgba(255,255,255,0.35);
-    border: 0; cursor: pointer; padding: 0;
-    transition: background 0.3s;
-  }
-  .mt-section .mt-slide-dot.active { background: #fff; }
-  .mt-section .mt-slide-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    width: 44px; height: 44px; border-radius: 50%;
-    background: rgba(0,0,0,0.4); color: #fff; border: 0;
-    cursor: pointer; font-size: 18px; z-index: 2;
-    transition: background 0.3s;
-  }
-  .mt-section .mt-slide-arrow:hover { background: rgba(0,0,0,0.7); }
-  .mt-section .mt-slide-arrow.prev { left: 16px; }
-  .mt-section .mt-slide-arrow.next { right: 16px; }
   .mt-section .mt-sub-title {
     font-family: 'Noto Serif JP', serif;
     font-size: 1.3rem; color: #2C3E50;
@@ -561,25 +626,35 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     letter-spacing: 0.05em;
   }
 
-
   /* ===== MORNING TOUR - MOBILE ===== */
   @media (max-width: 768px) {
     .mt-section .mt-hero { height: 45vh; min-height: 300px; }
     .mt-section .mt-hero-title { font-size: 1.4rem; letter-spacing: 0.08em; }
     .mt-section .mt-hero-catch { font-size: 0.95rem; }
     .mt-section .mt-inner { padding: 56px 20px; }
-    .mt-section .mt-story p { font-size: 0.95rem; line-height: 2.2; text-align: left; }
+    .mt-section .mt-story p {
+      font-size: 0.95rem; line-height: 2.2;
+      text-align: left;
+    }
     .mt-section .mt-sub-title { font-size: 1.1rem; margin-bottom: 24px; }
-    .mt-section .mt-detail-grid { grid-template-columns: 1fr !important; gap: 12px; }
+    .mt-section .mt-detail-grid {
+      grid-template-columns: 1fr !important;
+      gap: 12px;
+    }
     .mt-section .mt-detail-item { padding: 16px 20px; }
     .mt-section .mt-detail-value { font-size: 0.9rem; }
     .mt-section .mt-photo-placeholder { height: 200px; margin: 32px 0; }
     .mt-section .mt-note-box { padding: 20px 24px; }
     .mt-section .mt-note-text { font-size: 0.85rem; }
     .mt-section .mt-weather-title { margin-bottom: 16px; }
-    .mt-section .mt-weather-grid { grid-template-columns: 1fr !important; gap: 12px; }
+    .mt-section .mt-weather-grid {
+      grid-template-columns: 1fr !important;
+      gap: 12px;
+    }
     .mt-section .mt-weather-card { padding: 20px 24px; }
-    .mt-section .mt-weather-desc { font-size: 0.9rem; line-height: 1.8; }
+    .mt-section .mt-weather-desc {
+      font-size: 0.9rem; line-height: 1.8;
+    }
     .mt-section .mt-booking { padding: 32px 20px; margin-top: 40px; }
     .mt-section .mt-booking-text { font-size: 0.95rem; }
   }
@@ -602,6 +677,7 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     <a href="#rooms">お部屋</a>
     <a href="#activities">体験</a>
     <a href="#morning-tour">朝ツアー</a>
+    <a href="pet.html">ペットと泊まる</a>
     <a href="#access">アクセス</a>
     <a href="../en/" class="lang-switch">English</a>
   </nav>
@@ -613,6 +689,7 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
   <a href="#rooms" onclick="toggleMenu()">お部屋</a>
   <a href="#activities" onclick="toggleMenu()">体験</a>
   <a href="#morning-tour" onclick="toggleMenu()">朝ツアー</a>
+  <a href="pet.html">ペットと泊まる</a>
   <a href="#faq" onclick="toggleMenu()">よくある質問</a>
   <a href="#access" onclick="toggleMenu()">アクセス</a>
   <a href="#calendar" onclick="toggleMenu()">予約する</a>
@@ -632,7 +709,18 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     <p class="hero-sub">AZUMINO GAKUSHAMURA, NAGANO</p>
     <h1 class="hero-title">きこえてくるのは<br>森の揺らぎと、鳥の声</h1>
     <p class="hero-desc">安曇野学者村の森の中に佇む、一棟貸しの静かな宿</p>
-    <a href="#calendar" class="hero-btn">空き状況を確認する</a>
+    <div class="hero-badges">
+      <span class="hero-badge">🐾 ペットOK</span>
+      <span class="hero-badge">👶 子連れ歓迎</span>
+      <span class="hero-badge">🚗 駅から無料送迎</span>
+      <span class="hero-badge">🎬 100" シアター</span>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="hero-meta-label">料金</span><span class="hero-meta-value">1泊 ¥15,000〜</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">定員</span><span class="hero-meta-value">最大6名</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">評価</span><span class="hero-meta-value">★4.79 / 61件</span></div>
+    </div>
+    <a href="#calendar" class="hero-btn">今すぐ空き状況を確認する</a>
   </div>
   <div class="scroll-hint">SCROLL</div>
 </div>
@@ -694,19 +782,33 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
           </div>
         </div>
         <p class="room-price">素泊まり 1泊 ¥15,000〜（人数・時期により変動） ／ <a href="#calendar" style="color:var(--green);text-decoration:underline;">空き状況を確認・予約する</a><br><span style="font-size:1.125rem;color:var(--brown);margin-top:8px;display:inline-block;">定員：最大6名（和寝室4名＋洋寝室2名）</span></p>
+        <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--light);">
+          <p class="room-details-label" style="margin-bottom:12px;">子ども料金</p>
+          <ul style="margin-bottom:20px;">
+            <li>0〜3歳：無料</li>
+            <li>4〜12歳：¥4,000 / 名</li>
+            <li>13歳以上：大人料金</li>
+          </ul>
+          <p class="room-details-label" style="margin-bottom:12px;">ペット料金 <a href="pet.html" style="color:var(--green);text-decoration:underline;font-size:0.9rem;font-weight:normal;letter-spacing:normal;">ペットと泊まる ▶</a></p>
+          <ul>
+            <li>1頭目：¥3,000</li>
+            <li>2頭目以降：¥1,000 / 頭</li>
+            <li>頭数制限なし（小型犬・猫を想定。大型犬は要相談）</li>
+          </ul>
+        </div>
         <div class="room-gallery">
-          <img src="../images/living-kitchen.jpg" alt="">
-          <img src="../images/room-living-1.jpg" alt="">
-          <img src="../images/room-living-2.jpg" alt="">
-          <img src="../images/kitchen-detail.jpg" alt="">
-          <img src="../images/bedroom-western.jpg" alt="">
-          <img src="../images/room-western-2.jpg" alt="">
-          <img src="../images/room-japanese-1.jpg" alt="">
-          <img src="../images/bathroom-new.jpg" alt="">
-          <img src="../images/window-view-1.jpg" alt="">
-          <img src="../images/atmosphere-wine.jpg" alt="">
-          <img src="../images/atmosphere-sake.jpg" alt="">
-          <img src="../images/exterior-winter.jpg" alt="">
+          <figure>
+            <img src="../images/kitchen-detail.jpg" alt="フルキッチン">
+            <figcaption>フルキッチン</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/bedroom-western.jpg" alt="洋寝室">
+            <figcaption>洋寝室</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/bathroom-new.jpg" alt="浴室（2025年新設）">
+            <figcaption>浴室（2025年新設）</figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -935,8 +1037,6 @@ function switchSNS(type, site) {
   </div>
 </div>
 
-
-
 <!-- MORNING TOUR -->
 <section id="morning-tour" class="mt-section">
   <div class="mt-hero">
@@ -962,18 +1062,20 @@ function switchSNS(type, site) {
       </p>
     </div>
 
-    <!-- Slideshow -->
-    <div class="mt-slideshow fade-in" id="mt-slides">
-      <div class="mt-slide active" style="background-image:url('../images/morning-tour-1.jpg');"></div>
-      <div class="mt-slide" style="background-image:url('../images/morning-tour-2.jpg');"></div>
-      <div class="mt-slide" style="background-image:url('../images/morning-tour-3.jpg');"></div>
-      <button class="mt-slide-arrow prev" onclick="mtSlide(-1)" aria-label="前へ">‹</button>
-      <button class="mt-slide-arrow next" onclick="mtSlide(1)" aria-label="次へ">›</button>
-      <div class="mt-slide-nav">
-        <button class="mt-slide-dot active" onclick="mtGoto(0)" aria-label="1"></button>
-        <button class="mt-slide-dot" onclick="mtGoto(1)" aria-label="2"></button>
-        <button class="mt-slide-dot" onclick="mtGoto(2)" aria-label="3"></button>
-      </div>
+    <!-- Tour Video & Photo -->
+    <div class="fade-in" style="margin: 48px 0;">
+      <video src="../../images/morning-tour/tour-drone.mp4"
+             poster="../../images/morning-tour/tour-preview.jpg"
+             autoplay muted loop playsinline
+             style="width:100%; height:auto; display:block;">
+      </video>
+      <p style="font-family:'Noto Sans JP',sans-serif; font-size:0.75rem; color:#9CAFB7; text-align:center; margin-top:8px; letter-spacing:0.1em;">長峰山展望台からの眺望</p>
+    </div>
+    <div class="fade-in" style="margin: 0 0 48px;">
+      <img src="../../images/morning-tour/observatory.jpg"
+           alt="長峰山展望台から安曇野と北アルプスを一望"
+           style="width:100%; height:auto; display:block;">
+      <p style="font-family:'Noto Sans JP',sans-serif; font-size:0.75rem; color:#9CAFB7; text-align:center; margin-top:8px; letter-spacing:0.1em;">朝焼けの展望台にて</p>
     </div>
 
     <!-- Tour Details -->
@@ -1047,28 +1149,6 @@ function switchSNS(type, site) {
   </div>
 </section>
 
-<!-- AZUMINO MAP: ホストおすすめスポット -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<div id="azumino-map">
-  <div class="section-inner fade-in">
-    <div style="text-align:center; margin-bottom: 24px;">
-      <p class="section-label">AZUMINO MAP</p>
-      <h2 class="section-title" style="text-align:center;">ホストが案内できる安曇野の場所</h2>
-      <p class="section-text" style="max-width:640px;margin:16px auto 0;">観光ガイドには載っていない穴場も含めて、桜芽が実際に通っている場所をマップにまとめました。タップで詳細が見れます。</p>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:24px 0 32px;font-size:0.85rem;">
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#D97706;margin-right:6px;vertical-align:middle;"></span>観光・文化</span>
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#3C5A3A;margin-right:6px;vertical-align:middle;"></span>自然・登山</span>
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#B91C1C;margin-right:6px;vertical-align:middle;"></span>温泉</span>
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#7C4A03;margin-right:6px;vertical-align:middle;"></span>カフェ・食</span>
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#1E40AF;margin-right:6px;vertical-align:middle;"></span>周辺エリア</span>
-      <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#5C3D2E;margin-right:6px;vertical-align:middle;"></span>宿</span>
-    </div>
-    <div id="map-container" style="width:100%;height:560px;border-radius:8px;overflow:hidden;border:1px solid var(--light);"></div>
-    <p style="text-align:center;margin-top:16px;font-size:0.85rem;color:var(--muted);">© OpenStreetMap contributors</p>
-  </div>
-</div>
-
 <!-- FAQ -->
 <div id="faq" style="background: var(--light);">
   <div class="section-inner fade-in">
@@ -1089,11 +1169,11 @@ function switchSNS(type, site) {
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFAQ(this)">ペットの種類やサイズに制限はありますか？</button>
-        <div class="faq-a"><div class="faq-a-inner">小型犬・猫は歓迎です。ペット同伴の場合、清掃費として1匹 ¥3,000、2匹目以降 ¥1,000/匹を頂戴しております。大型犬はご予約前にご相談ください。</div></div>
+        <div class="faq-a"><div class="faq-a-inner">小型犬・猫を中心に歓迎です。頭数制限はありません。料金は1頭目 ¥3,000、2頭目以降 ¥1,000/頭。大型犬はご予約前にご相談ください。ベッドやお布団の上にペットを上げないようご協力をお願いします。詳しくは<a href="pet.html" style="color:var(--green);text-decoration:underline;">ペットと泊まる</a>をご覧ください。</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFAQ(this)">子連れ・赤ちゃんでも泊まれますか？</button>
-        <div class="faq-a"><div class="faq-a-inner">はい、お子様連れ大歓迎です。一棟貸しなので周りを気にせずお過ごしいただけます。</div></div>
+        <button class="faq-q" onclick="toggleFAQ(this)">子連れ・赤ちゃんでも泊まれますか？料金は？</button>
+        <div class="faq-a"><div class="faq-a-inner">はい、お子様連れ大歓迎です。一棟貸しなので周りを気にせずお過ごしいただけます。料金は0〜3歳：無料／4〜12歳：¥4,000／13歳以上：大人料金となります。</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFAQ(this)">キャンセルポリシーはどうなっていますか？</button>
@@ -1270,32 +1350,6 @@ function toggleFAQ(el) {
 })();
 </script>
 
-<!-- Morning Tour Slideshow -->
-<script>
-(function(){
-  var slides = document.querySelectorAll('#mt-slides .mt-slide');
-  var dots = document.querySelectorAll('#mt-slides .mt-slide-dot');
-  if (!slides.length) return;
-  var current = 0;
-  var auto;
-
-  function show(i){
-    slides[current].classList.remove('active');
-    dots[current] && dots[current].classList.remove('active');
-    current = (i + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    dots[current] && dots[current].classList.add('active');
-  }
-  function restart(){
-    clearInterval(auto);
-    auto = setInterval(function(){ show(current + 1); }, 5500);
-  }
-  window.mtSlide = function(d){ show(current + d); restart(); };
-  window.mtGoto = function(i){ show(i); restart(); };
-  restart();
-})();
-</script>
-
 <!-- Scroll Animation -->
 <script>
 (function(){
@@ -1307,92 +1361,52 @@ function toggleFAQ(el) {
   }, { threshold: 0.1 });
   els.forEach(function(el){ observer.observe(el); });
 })();
-</script>
 
-<!-- Azumino Map (Leaflet) -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
+/* ===== LIGHTBOX ===== */
 (function(){
-  var COLORS = {
-    sight: '#D97706',
-    nature: '#3C5A3A',
-    onsen: '#B91C1C',
-    food: '#7C4A03',
-    around: '#1E40AF',
-    inn: '#5C3D2E'
-  };
+  var selectors = '.room-img-main, .room-gallery img, .act-photo img, .about-img, .season-photo img';
+  var imgs = Array.prototype.slice.call(document.querySelectorAll(selectors));
+  if(!imgs.length) return;
+  imgs.forEach(function(img){ img.classList.add('lightboxable'); });
 
-  // [name, lat, lng, category, description]
-  // 座標は [緯度, 経度] 形式。Googleマップで右クリック→座標コピーで取得可能。
-  // 不正確なものは編集してください。
-  var SPOTS = [
-    // 宿
-    ['民宿笹森家（拠点）', 36.377849, 137.846334, 'inn', '安曇野学者村内・森の中の一棟貸し'],
-    ['ゲストハウス灯', 36.377849, 137.846334, 'inn', '姉妹店・温泉つきゲストハウス'],
-    // 観光・文化
-    ['大王わさび農場', 36.3262, 137.8989, 'sight', '日本最大のわさび園。早朝（6時前）の蓼川沿いが絶景'],
-    ['穂高神社', 36.3411, 137.8851, 'sight', '北アルプスを御神体とする由緒ある神社'],
-    ['碌山美術館', 36.3370, 137.8881, 'sight', '近代彫刻家・荻原碌山。教会風の建物が雰囲気抜群'],
-    ['安曇野ちひろ美術館', 36.4094, 137.8639, 'sight', '松川村。いわさきちひろの絵本原画。庭園も美しい'],
-    ['国営アルプスあづみの公園（堀金・穂高地区）', 36.3204, 137.8331, 'sight', '広大な敷地。冬のイルミネーションが見もの'],
-    ['安曇野アートヒルズミュージアム', 36.4106, 137.8767, 'sight', '池田町。ガラス工芸・ガラス吹き体験あり'],
-    ['北アルプス展望美術館', 36.3994, 137.8581, 'sight', '池田町。北アルプスを一望できる絶景美術館'],
-    // 自然・登山
-    ['烏川渓谷緑地', 36.3083, 137.7820, 'nature', '中流域が地元の人だけが知る穴場。新緑・紅葉が美しい'],
-    ['須砂渡', 36.3206, 137.7858, 'nature', '安曇野から最短の渓流スポット'],
-    ['燕岳登山口（中房温泉）', 36.4017, 137.7150, 'nature', '北アルプス入門。表銀座縦走の起点'],
-    ['三股登山口（蝶ヶ岳）', 36.3219, 137.7350, 'nature', '安曇野から日帰りも可能な3千m峰'],
-    // 温泉
-    ['中房温泉', 36.4017, 137.7150, 'onsen', '燕岳登山口の秘湯。日帰り入浴可'],
-    ['しゃくなげ荘', 36.3411, 137.8076, 'onsen', '穂高温泉郷。地元の人の御用達'],
-    ['ほりでーゆ〜四季の郷', 36.3206, 137.7858, 'onsen', '日帰り温泉＋食事処'],
-    // カフェ・食
-    ['シャロムヒュッテ', 36.3389, 137.7989, 'food', '森の中の自然食レストラン。雰囲気が最高'],
-    // 周辺エリア
-    ['松本城', 36.2381, 137.9689, 'around', '国宝・現存12天守の一つ。車で約30分'],
-    ['上高地', 36.2520, 137.6358, 'around', '日本屈指の山岳景勝地。春〜秋限定'],
-    ['乗鞍高原', 36.1158, 137.6164, 'around', '夏でも涼しい高原。日の出スポット多数'],
-    ['白馬村（八方）', 36.6953, 137.8367, 'around', '冬はスキー、夏はトレッキング'],
-    ['鎌池（小谷村）', 36.7300, 137.7833, 'around', '秋の紅葉が圧巻。早朝の鏡面映りが絶景']
-  ];
-
-  function makeIcon(color){
-    return L.divIcon({
-      className: 'custom-marker',
-      html: '<div style="background:' + color + ';width:18px;height:18px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.4);"></div>',
-      iconSize: [18, 18],
-      iconAnchor: [9, 9]
-    });
+  var lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.innerHTML = '<button class="lightbox-close" aria-label="閉じる">×</button>' +
+                 '<button class="lightbox-prev" aria-label="前へ">‹</button>' +
+                 '<img alt="">' +
+                 '<button class="lightbox-next" aria-label="次へ">›</button>';
+  document.body.appendChild(lb);
+  var lbImg = lb.querySelector('img');
+  var idx = 0;
+  function show(i){
+    idx = (i + imgs.length) % imgs.length;
+    lbImg.src = imgs[idx].src;
+    lbImg.alt = imgs[idx].alt || '';
   }
-
-  function initMap(){
-    if (typeof L === 'undefined') return;
-    var container = document.getElementById('map-container');
-    if (!container) return;
-
-    var map = L.map(container, { scrollWheelZoom: false }).setView([36.3778, 137.8463], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap',
-      maxZoom: 18
-    }).addTo(map);
-
-    var bounds = [];
-    SPOTS.forEach(function(s){
-      var marker = L.marker([s[1], s[2]], { icon: makeIcon(COLORS[s[3]]) }).addTo(map);
-      marker.bindPopup('<strong style="font-size:1rem;color:#5C3D2E;">' + s[0] + '</strong><br><span style="font-size:0.85rem;color:#7A7368;line-height:1.6;">' + s[4] + '</span>');
-      bounds.push([s[1], s[2]]);
-    });
-
-    map.fitBounds(bounds, { padding: [40, 40] });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMap);
-  } else {
-    initMap();
-  }
+  function open(i){ show(i); lb.classList.add('open'); document.body.style.overflow='hidden'; }
+  function close(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+  imgs.forEach(function(img,i){ img.addEventListener('click', function(){ open(i); }); });
+  lb.querySelector('.lightbox-close').addEventListener('click', function(e){ e.stopPropagation(); close(); });
+  lb.querySelector('.lightbox-prev').addEventListener('click', function(e){ e.stopPropagation(); show(idx-1); });
+  lb.querySelector('.lightbox-next').addEventListener('click', function(e){ e.stopPropagation(); show(idx+1); });
+  lb.addEventListener('click', function(e){ if(e.target===lb || e.target===lbImg) close(); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1);
+  });
 })();
 </script>
+
+<!-- STICKY MOBILE BOOK BAR -->
+<a href="#calendar" class="sticky-book-bar" style="text-decoration:none;">
+  <div class="sticky-book-info">
+    <span class="sticky-book-price">1泊 ¥15,000〜</span>
+    <span class="sticky-book-sub">最大6名 / ペット・子連れOK</span>
+  </div>
+  <span class="sticky-book-btn">今すぐ予約</span>
+</a>
 
 </body>
 </html>

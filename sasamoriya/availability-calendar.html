@@ -3,6 +3,16 @@
 <head>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJSJFMXPX"></script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wxh6i8m022");
+</script>
+
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
@@ -67,16 +77,6 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   }
 })();
 </script>
-
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wxh6i8m022");
-</script>
-
 
 
 <meta charset="UTF-8">
@@ -174,16 +174,16 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   <!-- タイトル -->
   <div style="text-align:center;margin-bottom:16px;font-size:18px;font-weight:700;color:#4a6741;">🏠 民宿笹森家 ／ 空き状況</div>
 
-  <!-- 凡例（カレンダー上部） -->
+  <!-- カレンダー描画エリア -->
+  <div id="cal-container">
+    <div class="loading"><div class="spinner"></div><br>カレンダーを読み込み中...</div>
+  </div>
+
+  <!-- 凡例 -->
   <div class="legend">
     <span><span class="legend-dot av"></span>空き</span>
     <span><span class="legend-dot bk"></span>予約済</span>
     <span><span class="legend-dot td"></span>今日</span>
-  </div>
-
-  <!-- カレンダー描画エリア -->
-  <div id="cal-container">
-    <div class="loading"><div class="spinner"></div><br>カレンダーを読み込み中...</div>
   </div>
 
   <!-- 予約ポップアップ -->
@@ -209,7 +209,7 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
               <input type="date" id="fCheckout" onchange="updateTotal()">
             </div>
           </div>
-          <label>人数</label>
+          <label>大人（13歳以上） *</label>
           <select id="fGuests" onchange="updateTotal()">
             <option value="1">1名</option>
             <option value="2" selected>2名</option>
@@ -218,6 +218,41 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
             <option value="5">5名</option>
             <option value="6">6名</option>
           </select>
+          <div class="row" style="margin-top:8px;">
+            <div>
+              <label style="margin-top:0;">子ども（4〜12歳）</label>
+              <select id="fChildren" onchange="updateTotal()">
+                <option value="0" selected>0名</option>
+                <option value="1">1名</option>
+                <option value="2">2名</option>
+                <option value="3">3名</option>
+                <option value="4">4名</option>
+                <option value="5">5名</option>
+              </select>
+            </div>
+            <div>
+              <label style="margin-top:0;">幼児（0〜3歳）</label>
+              <select id="fInfants" onchange="updateTotal()">
+                <option value="0" selected>0名</option>
+                <option value="1">1名</option>
+                <option value="2">2名</option>
+                <option value="3">3名</option>
+              </select>
+            </div>
+          </div>
+          <label>ペット（頭数）</label>
+          <select id="fPets" onchange="updateTotal()">
+            <option value="0" selected>なし</option>
+            <option value="1">1頭</option>
+            <option value="2">2頭</option>
+            <option value="3">3頭</option>
+            <option value="4">4頭</option>
+            <option value="5">5頭以上（事前ご相談ください）</option>
+          </select>
+          <p style="font-size:14px;color:#8a7e6e;margin-top:6px;line-height:1.6;">
+            子ども：4〜12歳 ¥4,000／名・泊　0〜3歳 無料<br>
+            ペット：1頭目 ¥3,000／滞在　2頭目以降 ¥1,000／頭・滞在
+          </p>
           <div class="book-total" id="fTotal"></div>
           <label>お名前 *</label>
           <input type="text" id="fName" placeholder="山田 太郎">
@@ -292,11 +327,7 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     </div>
   </div>
 
-
-</div>
-
-<!-- Instagram CTA（カレンダー外） -->
-<div style="max-width:600px;margin:24px auto 0;padding:0 16px;">
+  <!-- Instagram CTA -->
   <div class="cta-area">
     <a id="cta-btn" class="cta-btn sasamori" href="#" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -311,6 +342,7 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     予約確定メールに記載の「予約をキャンセルする」ボタンから、ご宿泊の48時間前までキャンセルが可能です。<br>
     メールが見当たらない場合は、Instagram DMまたはお電話にてご連絡ください。
   </div>
+
 </div>
 
 <script>
@@ -577,6 +609,11 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     sasamori: { base: 23000, perExtra: 10000, maxGuests: 6 }
   };
 
+  // 追加料金
+  var CHILD_FEE_PER_NIGHT = 4000;   // 4〜12歳：1名・1泊あたり
+  var PET_FEE_FIRST = 3000;          // 1頭目：滞在あたり清掃費
+  var PET_FEE_ADDITIONAL = 1000;     // 2頭目以降：1頭あたり滞在
+
   function getSeasonInfo(dateStr) {
     var d = new Date(dateStr);
     var m = d.getMonth() + 1;
@@ -594,18 +631,31 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   function formatYen(n) { return '¥' + n.toLocaleString(); }
 
   // 泊数分の合計を計算（日ごとに季節係数が変わる）
-  function calcTotalPrice(checkin, checkout, guests) {
+  // adults: 大人人数 / children: 子ども(4-12歳) / pets: ペット頭数
+  function calcTotalPrice(checkin, checkout, adults, children, pets) {
+    adults = parseInt(adults) || 0;
+    children = parseInt(children) || 0;
+    pets = parseInt(pets) || 0;
     var p = PRICING[currentProp];
     var ci = new Date(checkin); var co = new Date(checkout);
-    var total = 0; var d = new Date(ci);
+    var roomTotal = 0; var nights = 0; var d = new Date(ci);
     while (d < co) {
       var season = getSeasonInfo(formatDate(d));
       var base = Math.round(p.base * season.rate / 100) * 100;
-      var extra = parseInt(guests) > 2 ? Math.round(p.perExtra * season.rate / 100) * 100 * (parseInt(guests) - 2) : 0;
-      total += base + extra;
+      var extra = adults > 2 ? Math.round(p.perExtra * season.rate / 100) * 100 * (adults - 2) : 0;
+      roomTotal += base + extra;
+      nights++;
       d.setDate(d.getDate() + 1);
     }
-    return total;
+    var childFee = children * CHILD_FEE_PER_NIGHT * nights;
+    var petFee = pets > 0 ? PET_FEE_FIRST + (pets - 1) * PET_FEE_ADDITIONAL : 0;
+    return {
+      room: roomTotal,
+      child: childFee,
+      pet: petFee,
+      total: roomTotal + childFee + petFee,
+      nights: nights
+    };
   }
 
   window.showPricePopup = function(dateStr) {
@@ -639,6 +689,9 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     document.getElementById('fCheckin').value = dateStr;
     document.getElementById('fCheckout').value = formatDate(co);
     document.getElementById('fGuests').value = '2';
+    document.getElementById('fChildren').value = '0';
+    document.getElementById('fInfants').value = '0';
+    document.getElementById('fPets').value = '0';
     document.getElementById('fName').value = '';
     document.getElementById('fContact').value = '';
     document.getElementById('fEmail').value = '';
@@ -651,14 +704,20 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   window.updateTotal = function() {
     var ci = document.getElementById('fCheckin').value;
     var co = document.getElementById('fCheckout').value;
-    var guests = document.getElementById('fGuests').value;
+    var adults = document.getElementById('fGuests').value;
+    var children = document.getElementById('fChildren').value;
+    var pets = document.getElementById('fPets').value;
     if (!ci || !co || new Date(co) <= new Date(ci)) {
       document.getElementById('fTotal').innerHTML = '';
       return;
     }
-    var nights = Math.round((new Date(co) - new Date(ci)) / 86400000);
-    var total = calcTotalPrice(ci, co, guests);
-    document.getElementById('fTotal').innerHTML = formatYen(total) + ' <small>（' + nights + '泊 × ' + guests + '名）</small>';
+    var r = calcTotalPrice(ci, co, adults, children, pets);
+    var breakdown = '<small style="display:block;margin-top:6px;line-height:1.7;">'
+      + '宿泊料：' + formatYen(r.room) + '（' + r.nights + '泊 × 大人' + adults + '名）';
+    if (r.child > 0) breakdown += '<br>子ども料金：' + formatYen(r.child) + '（' + children + '名 × ' + r.nights + '泊）';
+    if (r.pet > 0) breakdown += '<br>ペット料金：' + formatYen(r.pet) + '（' + pets + '頭）';
+    breakdown += '</small>';
+    document.getElementById('fTotal').innerHTML = '<strong>合計 ' + formatYen(r.total) + '</strong>' + breakdown;
   };
 
   window.closePricePopup = function() {
@@ -678,6 +737,9 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     var checkin = document.getElementById('fCheckin').value;
     var checkout = document.getElementById('fCheckout').value;
     var guests = document.getElementById('fGuests').value;
+    var children = document.getElementById('fChildren').value;
+    var infants = document.getElementById('fInfants').value;
+    var pets = document.getElementById('fPets').value;
     var agreed = document.getElementById('fAgree').checked;
     var hp = document.getElementById('fHp').value;
 
@@ -690,18 +752,36 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     if (!payment) { alert('お支払い方法を選択してください'); return; }
     if (!agreed) { alert('利用規約・キャンセルポリシー・プライバシーポリシーへのご同意が必要です'); return; }
     if (!checkin || !checkout || new Date(checkout) <= new Date(checkin)) { alert('日程を正しく入力してください'); return; }
+    // 定員チェック（大人＋4-12歳子ども ≤ 6）
+    var occupants = parseInt(guests) + parseInt(children);
+    if (occupants > 6) { alert('大人と子ども（4〜12歳）の合計が定員（6名）を超えています'); return; }
     // リードタイムチェック
     var leadHours = (new Date(checkin + 'T15:00:00+09:00') - new Date()) / 36e5;
     if (leadHours < 24) { alert('チェックイン24時間前を過ぎているため、Webからの予約は承れません。Instagram DMかお電話でお問い合わせください。'); return; }
 
-    var nights = Math.round((new Date(checkout) - new Date(checkin)) / 86400000);
-    var total = calcTotalPrice(checkin, checkout, guests);
+    var r = calcTotalPrice(checkin, checkout, guests, children, pets);
+    var nights = r.nights;
+
+    var guestSummary = guests + '名（大人）'
+      + (parseInt(children) > 0 ? ' / 子ども' + children + '名' : '')
+      + (parseInt(infants) > 0 ? ' / 幼児' + infants + '名' : '');
+    var petSummary = parseInt(pets) > 0 ? pets + '頭' : 'なし';
+
+    var priceSummary = formatYen(r.total) + '（' + nights + '泊'
+      + ' / 宿泊' + formatYen(r.room)
+      + (r.child > 0 ? ' + 子ども' + formatYen(r.child) : '')
+      + (r.pet > 0 ? ' + ペット' + formatYen(r.pet) : '')
+      + '）';
 
     pendingBookingData = {
       property: currentProp,
       checkin: checkin,
       checkout: checkout,
-      guests: guests + '名',
+      guests: guestSummary,
+      adults: guests,
+      children: children,
+      infants: infants,
+      pets: pets,
       name: name,
       contact: contact,
       email: email,
@@ -713,17 +793,27 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
       website: hp,
       lang: 'ja',
       note: document.getElementById('fNote').value.trim(),
-      totalPrice: formatYen(total) + '（' + nights + '泊）'
+      totalPrice: priceSummary,
+      priceBreakdown: { room: r.room, child: r.child, pet: r.pet, total: r.total }
     };
 
     // 確認リスト描画
     var esc = function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+    var priceCell = '<div>' + esc(formatYen(r.total)) + '</div>'
+      + '<div style="font-size:13px;color:#8a7e6e;margin-top:4px;">'
+      + '宿泊 ' + esc(formatYen(r.room))
+      + (r.child > 0 ? ' + 子ども ' + esc(formatYen(r.child)) : '')
+      + (r.pet > 0 ? ' + ペット ' + esc(formatYen(r.pet)) : '')
+      + '</div>';
     var rows = [
       ['ご宿泊', esc(CONFIG[currentProp].name || currentProp)],
       ['チェックイン', esc(checkin)],
       ['チェックアウト', esc(checkout) + '（' + nights + '泊）'],
-      ['人数', esc(guests) + '名'],
-      ['合計金額', esc(formatYen(total))],
+      ['大人', esc(guests) + '名'],
+      ['子ども（4〜12歳）', parseInt(children) > 0 ? esc(children) + '名' : '0名'],
+      ['幼児（0〜3歳）', parseInt(infants) > 0 ? esc(infants) + '名' : '0名'],
+      ['ペット', esc(petSummary)],
+      ['合計金額', priceCell],
       ['お名前', esc(name)],
       ['電話番号', esc(contact)],
       ['メール', esc(email)],
