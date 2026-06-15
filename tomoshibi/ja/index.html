@@ -509,6 +509,21 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
   .mt-section .mt-weather-card {
     background: #fff; padding: 24px 20px; text-align: center;
   }
+  .mt-section .mt-route-card { padding: 0; overflow: hidden; }
+  .mt-section .mt-route-img {
+    position: relative; width: 100%; aspect-ratio: 4/3;
+    background-size: cover; background-position: center;
+    margin-bottom: 16px;
+  }
+  .mt-section .mt-route-badge {
+    position: absolute; top: 10px; left: 10px;
+    background: rgba(238, 90, 31, 0.95); color: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.7rem; padding: 4px 10px; letter-spacing: 0.08em;
+    border-radius: 2px; font-weight: 500;
+  }
+  .mt-section .mt-route-card .mt-weather-type { padding: 0 16px; }
+  .mt-section .mt-route-card .mt-weather-desc { padding: 0 16px 20px; }
   .mt-section .mt-weather-icon { font-size: 1.6rem; margin-bottom: 8px; }
   .mt-section .mt-weather-type {
     font-family: 'Noto Sans JP', sans-serif;
@@ -942,31 +957,31 @@ function switchSNS(type, site) {
 
     <!-- 5 Routes -->
     <p class="mt-weather-title fade-in">5つの早朝ルート — 天気と体力で当日選びます</p>
-    <div class="mt-weather-grid fade-in" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
-      <div class="mt-weather-card">
-        <div class="mt-weather-icon">🏔️</div>
+    <div class="mt-weather-grid fade-in" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+      <div class="mt-weather-card mt-route-card">
+        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-1.jpg');"><span class="mt-route-badge">晴れ・初心者</span></div>
         <p class="mt-weather-type">長峰山展望台</p>
-        <p class="mt-weather-desc">晴れ・初心者向け<br>北アルプス全景を一望</p>
+        <p class="mt-weather-desc">北アルプス全景を一望<br>朝焼けのメインルート</p>
       </div>
-      <div class="mt-weather-card">
-        <div class="mt-weather-icon">🌄</div>
+      <div class="mt-weather-card mt-route-card">
+        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-2.jpg');"><span class="mt-route-badge">晴れ・体力あり</span></div>
         <p class="mt-weather-type">京ヶ倉</p>
-        <p class="mt-weather-desc">晴れ・体力ある方<br>雲海と稜線</p>
+        <p class="mt-weather-desc">雲海と稜線<br>登った人だけの絶景</p>
       </div>
-      <div class="mt-weather-card">
-        <div class="mt-weather-icon">🌫️</div>
+      <div class="mt-weather-card mt-route-card">
+        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-3.jpg');"><span class="mt-route-badge">曇り・静寂</span></div>
         <p class="mt-weather-type">中房湖</p>
-        <p class="mt-weather-desc">曇り・静寂<br>鏡面の水面と森</p>
+        <p class="mt-weather-desc">鏡面の水面と森<br>音の消える朝</p>
       </div>
-      <div class="mt-weather-card">
-        <div class="mt-weather-icon">💧</div>
+      <div class="mt-weather-card mt-route-card">
+        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/garden.jpg');"><span class="mt-route-badge">雨・水景</span></div>
         <p class="mt-weather-type">わさび田・水路</p>
-        <p class="mt-weather-desc">雨・水景<br>安曇野の原風景</p>
+        <p class="mt-weather-desc">安曇野の原風景<br>雨が育てる水の街</p>
       </div>
-      <div class="mt-weather-card">
-        <div class="mt-weather-icon">🌊</div>
+      <div class="mt-weather-card mt-route-card">
+        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/season-autumn.jpg');"><span class="mt-route-badge">雨・迫力</span></div>
         <p class="mt-weather-type">黒沢の滝</p>
-        <p class="mt-weather-desc">雨・迫力<br>雨の日こそ姿を現す穴場</p>
+        <p class="mt-weather-desc">雨の日こそ姿を現す<br>知る人ぞ知る穴場</p>
       </div>
     </div>
 
