@@ -525,6 +525,69 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
   .mt-section .mt-route-card .mt-weather-type { padding: 0 16px; }
   .mt-section .mt-route-card .mt-weather-desc { padding: 0 16px 20px; }
 
+  /* FOCUS TOUR – 5 ROUTES (group-based, no photos) */
+  .ft-routes {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    margin-bottom: 32px;
+  }
+  .ft-group {
+    background: #fff; overflow: hidden;
+    border: 1px solid #E2E8F0;
+  }
+  .ft-group-header {
+    padding: 20px 24px;
+    display: flex; align-items: baseline; gap: 16px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  .ft-group-early { background: linear-gradient(135deg, #1A1A18 0%, #2B2B2B 100%); }
+  .ft-group-morning { background: linear-gradient(135deg, #EE5A1F 0%, #C84410 100%); }
+  .ft-group-time {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: #fff; letter-spacing: 0.12em;
+  }
+  .ft-group-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.8rem; color: rgba(255,255,255,0.85);
+    letter-spacing: 0.18em;
+  }
+  .ft-route-list { padding: 8px 0; }
+  .ft-route {
+    display: flex; gap: 16px;
+    padding: 18px 24px;
+    border-bottom: 1px solid #F4F6F8;
+  }
+  .ft-route:last-child { border-bottom: none; }
+  .ft-route-num {
+    flex: 0 0 auto;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.6rem; font-weight: 600;
+    color: #EE5A1F; line-height: 1;
+    letter-spacing: 0.05em; min-width: 36px;
+  }
+  .ft-route-body { flex: 1; }
+  .ft-route-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: #2B2B2B; letter-spacing: 0.08em;
+    margin-bottom: 6px; line-height: 1.4;
+  }
+  .ft-route-desc {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85rem; color: #6B7A8D;
+    line-height: 1.8; letter-spacing: 0.02em;
+  }
+  @media (max-width: 768px) {
+    .ft-routes { grid-template-columns: 1fr; gap: 16px; }
+    .ft-group-header { padding: 16px 20px; gap: 12px; }
+    .ft-group-time { font-size: 0.95rem; }
+    .ft-group-label { font-size: 0.7rem; }
+    .ft-route { padding: 14px 20px; gap: 12px; }
+    .ft-route-num { font-size: 1.35rem; min-width: 30px; }
+    .ft-route-name { font-size: 0.95rem; }
+    .ft-route-desc { font-size: 0.8rem; }
+  }
+
   /* FOCUS TOUR BOOKING FORM */
   .ft-book {
     background: #2B2B2B; color: #fff;
@@ -1048,33 +1111,61 @@ function switchSNS(type, site) {
     </div>
 
     <!-- 5 Routes -->
-    <p class="mt-weather-title fade-in">5つのルート — 天気と体力で当日ガイドが決めます</p>
-    <p style="font-family:'Noto Sans JP',sans-serif; font-size:0.85rem; color:#6B7A8D; text-align:center; margin: -10px 0 24px; letter-spacing:0.05em; line-height:1.8;">場所はあえて公開していません。<br>"観光地化"されていない場所を守るためです。</p>
-    <div class="mt-weather-grid fade-in" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-      <div class="mt-weather-card mt-route-card">
-        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-1.jpg');"><span class="mt-route-badge">早朝枠 4時台</span></div>
-        <p class="mt-weather-type">ROUTE 01　尾根の全景</p>
-        <p class="mt-weather-desc">北アルプスの稜線を眼下に<br>登山口から1時間の展望地</p>
+    <p class="mt-weather-title fade-in">5つのルート — 天気と体力でガイドが当日決めます</p>
+    <p style="font-family:'Noto Sans JP',sans-serif; font-size:0.85rem; color:#6B7A8D; text-align:center; margin: -10px 0 32px; letter-spacing:0.05em; line-height:1.8;">場所は公開していません。<br>"観光地化"されていない場所と、そこに棲む生き物を守るため。</p>
+
+    <div class="ft-routes fade-in">
+      <div class="ft-group">
+        <div class="ft-group-header ft-group-early">
+          <span class="ft-group-time">04:00 START</span>
+          <span class="ft-group-label">早朝グループ</span>
+        </div>
+        <div class="ft-route-list">
+          <div class="ft-route">
+            <span class="ft-route-num">01</span>
+            <div class="ft-route-body">
+              <p class="ft-route-name">尾根の全景</p>
+              <p class="ft-route-desc">登山口から1時間。北アルプスを眼下に望む展望地。</p>
+            </div>
+          </div>
+          <div class="ft-route">
+            <span class="ft-route-num">02</span>
+            <div class="ft-route-body">
+              <p class="ft-route-name">稜線スカイライン</p>
+              <p class="ft-route-desc">山々を縫う眺望の道。朝焼けに染まる峰々を車窓と徒歩で。</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="mt-weather-card mt-route-card">
-        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-2.jpg');"><span class="mt-route-badge">早朝枠 4時台</span></div>
-        <p class="mt-weather-type">ROUTE 02　稜線スカイライン</p>
-        <p class="mt-weather-desc">山々を縫う眺望ライン<br>朝焼けに染まる峰々</p>
-      </div>
-      <div class="mt-weather-card mt-route-card">
-        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/season-autumn.jpg');"><span class="mt-route-badge">朝枠 6時台</span></div>
-        <p class="mt-weather-type">ROUTE 03　落差と水煙</p>
-        <p class="mt-weather-desc">雨の翌朝こそ姿を現す<br>知る人ぞ知る滝</p>
-      </div>
-      <div class="mt-weather-card mt-route-card">
-        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/garden.jpg');"><span class="mt-route-badge">朝枠 6時台</span></div>
-        <p class="mt-weather-type">ROUTE 04　渓流と森</p>
-        <p class="mt-weather-desc">川面に映る朝日<br>水音と苔の朝</p>
-      </div>
-      <div class="mt-weather-card mt-route-card">
-        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-3.jpg');"><span class="mt-route-badge">朝枠 6時台</span></div>
-        <p class="mt-weather-type">ROUTE 05　草原と鳥</p>
-        <p class="mt-weather-desc">朝霧の高原<br>野鳥の声が響く時間</p>
+
+      <div class="ft-group">
+        <div class="ft-group-header ft-group-morning">
+          <span class="ft-group-time">06:00 START</span>
+          <span class="ft-group-label">朝グループ</span>
+        </div>
+        <div class="ft-route-list">
+          <div class="ft-route">
+            <span class="ft-route-num">03</span>
+            <div class="ft-route-body">
+              <p class="ft-route-name">落差と水煙</p>
+              <p class="ft-route-desc">雨の翌朝こそ姿を現す、知る人ぞ知る滝。</p>
+            </div>
+          </div>
+          <div class="ft-route">
+            <span class="ft-route-num">04</span>
+            <div class="ft-route-body">
+              <p class="ft-route-name">渓流と森</p>
+              <p class="ft-route-desc">川面に映る朝日、水音と苔。五感を澄ます場所。</p>
+            </div>
+          </div>
+          <div class="ft-route">
+            <span class="ft-route-num">05</span>
+            <div class="ft-route-body">
+              <p class="ft-route-name">草原と鳥</p>
+              <p class="ft-route-desc">朝霧の高原。野鳥の声と、足元の小さな花。</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
