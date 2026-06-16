@@ -659,6 +659,14 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
     transition: opacity 0.3s;
   }
   .ft-submit:hover { opacity: 0.88; }
+  .ft-cta {
+    display: inline-block; padding: 18px 56px;
+    background: #EE5A1F; color: #fff; text-decoration: none;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 1rem;
+    letter-spacing: 0.18em; font-weight: 700;
+    border-radius: 4px; transition: opacity 0.3s, transform 0.3s;
+  }
+  .ft-cta:hover { opacity: 0.88; transform: translateY(-2px); }
   .ft-or {
     margin-top: 20px; font-family: 'Noto Sans JP', sans-serif;
     font-size: 0.8rem; color: rgba(255,255,255,0.6);
@@ -1178,63 +1186,15 @@ function switchSNS(type, site) {
       </p>
     </div>
 
-    <!-- Booking Form -->
+    <!-- Booking CTA -->
     <div class="ft-book fade-in" id="focus-tour-book">
       <p class="ft-book-label">BOOKING</p>
       <h3 class="ft-book-title">FOCUS MORNING TOUR を予約する</h3>
-      <p class="ft-book-sub">宿泊者限定。ご希望日・グループ・人数をお知らせください。</p>
-
-      <form id="ftForm" class="ft-form" onsubmit="return submitFocusTour(event)">
-        <div class="ft-row">
-          <label>お名前 *
-            <input type="text" name="name" required placeholder="山田 太郎">
-          </label>
-          <label>メールアドレス *
-            <input type="email" name="email" required placeholder="example@mail.com">
-          </label>
-        </div>
-        <div class="ft-row">
-          <label>ご宿泊日 *
-            <input type="date" name="stayDate" required>
-          </label>
-          <label>ツアー希望日 *
-            <input type="date" name="tourDate" required>
-          </label>
-        </div>
-        <fieldset class="ft-fieldset">
-          <legend>ご希望グループ *</legend>
-          <label class="ft-radio"><input type="radio" name="group" value="早朝枠（4時台スタート）" required> 早朝枠（4時台）</label>
-          <label class="ft-radio"><input type="radio" name="group" value="朝枠（6時台スタート）"> 朝枠（6時台）</label>
-          <label class="ft-radio"><input type="radio" name="group" value="どちらでも可"> どちらでも可</label>
-        </fieldset>
-        <div class="ft-row">
-          <label>大人（13歳以上） *
-            <select name="adults" required>
-              <option value="1">1名</option>
-              <option value="2" selected>2名</option>
-              <option value="3">3名</option>
-              <option value="4">4名</option>
-              <option value="5">5名</option>
-              <option value="6">6名</option>
-            </select>
-          </label>
-          <label>子ども（同伴無料）
-            <select name="children">
-              <option value="0" selected>0名</option>
-              <option value="1">1名</option>
-              <option value="2">2名</option>
-              <option value="3">3名</option>
-              <option value="4">4名</option>
-            </select>
-          </label>
-        </div>
-        <label>備考・アレルギー等
-          <textarea name="note" rows="3" placeholder="食物アレルギー、ご希望のルート、その他"></textarea>
-        </label>
-        <div class="ft-estimate" id="ftEstimate"></div>
-        <button type="submit" class="ft-submit">予約リクエストを送信</button>
-        <p class="ft-or">送信後、ホストの三條桜芽より24時間以内にご返信します。<br>急ぎの場合は <a href="https://instagram.com/guesthousetomoshibi" target="_blank" rel="noopener">Instagram DM</a> へも併せてご連絡ください。</p>
-      </form>
+      <p class="ft-book-sub">宿泊者限定。宿泊予約と一緒にお申し込みいただきます。<br>カレンダーから日付を選び、予約時にツアー希望をお知らせください。</p>
+      <div style="text-align:center; margin-top: 28px;">
+        <a href="../availability-calendar.html" class="ft-cta">予約状況を見る ▶</a>
+      </div>
+      <p class="ft-or">急ぎの場合は <a href="https://instagram.com/guesthousetomoshibi" target="_blank" rel="noopener">Instagram DM</a> もご利用ください。</p>
     </div>
   </div>
 </section>
@@ -1488,80 +1448,6 @@ function toggleFAQ(el) {
   restart();
 })();
 
-/* ===== FOCUS MORNING TOUR – Booking ===== */
-(function(){
-  var form = document.getElementById('ftForm');
-  if(!form) return;
-  var estimate = document.getElementById('ftEstimate');
-
-  function fee(adults){
-    adults = parseInt(adults) || 0;
-    if(adults <= 0) return 0;
-    if(adults === 1) return 6000;
-    return adults * 3000;
-  }
-  function fmt(n){ return '¥' + n.toLocaleString(); }
-
-  function updateEstimate(){
-    var fd = new FormData(form);
-    var adults = parseInt(fd.get('adults')) || 0;
-    var children = parseInt(fd.get('children')) || 0;
-    if(adults <= 0){ estimate.classList.remove('show'); return; }
-    var total = fee(adults);
-    var perPerson = adults === 1 ? '6,000' : '3,000';
-    estimate.innerHTML = 'お見積もり：<strong>' + fmt(total) + '</strong>'
-      + '<br><small>大人 ' + adults + '名 × ¥' + perPerson
-      + (children > 0 ? '　／　子ども ' + children + '名（無料）' : '')
-      + '　／　軽食（地元スコーン + ほうじ茶）込み</small>';
-    estimate.classList.add('show');
-  }
-  form.addEventListener('change', updateEstimate);
-  form.addEventListener('input', updateEstimate);
-  updateEstimate();
-
-  window.submitFocusTour = function(e){
-    e.preventDefault();
-    var fd = new FormData(form);
-    var adults = parseInt(fd.get('adults')) || 0;
-    var children = parseInt(fd.get('children')) || 0;
-    var total = fee(adults);
-
-    var subject = '【FOCUS MORNING TOUR 予約リクエスト】' + (fd.get('name') || '');
-    var body = [
-      '■ FOCUS MORNING TOUR 予約リクエスト',
-      '',
-      'お名前：' + (fd.get('name') || ''),
-      'メール：' + (fd.get('email') || ''),
-      'ご宿泊日：' + (fd.get('stayDate') || ''),
-      'ツアー希望日：' + (fd.get('tourDate') || ''),
-      'ご希望グループ：' + (fd.get('group') || ''),
-      '大人：' + adults + '名',
-      '子ども：' + children + '名（無料）',
-      '',
-      'お見積もり：' + fmt(total) + '（軽食込み）',
-      '',
-      '備考：',
-      (fd.get('note') || '（なし）')
-    ].join('\n');
-
-    var mailto = 'mailto:ouga0315@gmail.com'
-      + '?subject=' + encodeURIComponent(subject)
-      + '&body=' + encodeURIComponent(body);
-
-    if(typeof gtag === 'function'){
-      gtag('event', 'focus_tour_request', {
-        adults: adults, children: children, total: total,
-        group: fd.get('group') || ''
-      });
-    }
-    if(typeof fbq === 'function'){
-      fbq('track', 'Lead', { content_name: 'focus_morning_tour', value: total, currency: 'JPY' });
-    }
-
-    window.location.href = mailto;
-    return false;
-  };
-})();
 </script>
 
 <!-- Azumino Map (Leaflet) -->
