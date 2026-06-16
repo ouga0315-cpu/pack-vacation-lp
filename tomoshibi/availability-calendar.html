@@ -164,6 +164,25 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   .book-done-icon{font-size:48px;margin-bottom:12px}
   .book-done-title{font-size:18px;font-weight:700;color:#8b6914;margin-bottom:8px}
   .book-done-text{font-size:18px;color:#8a7e6e;line-height:1.9}
+
+  /* FOCUS MORNING TOUR Option */
+  .ft-option{margin-top:18px;padding:18px;background:#fffaf0;border:1.5px solid #c49a2a;border-radius:10px}
+  .ft-option-toggle{display:flex !important;align-items:flex-start;gap:10px;cursor:pointer;font-weight:normal !important;margin:0 !important;font-size:18px;line-height:1.5}
+  .ft-option-toggle input[type="checkbox"]{margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:#EE5A1F}
+  .ft-option-title{font-weight:700;color:#2B2B2B;display:block;font-size:16px;letter-spacing:0.03em}
+  .ft-option-tag{display:inline-block;margin-top:4px;font-size:12px;color:#EE5A1F;background:rgba(238,90,31,0.1);padding:2px 8px;border-radius:3px;letter-spacing:0.05em;font-weight:500}
+  .ft-option-desc{font-size:14px;color:#6B7A8D;margin:10px 0 0 28px;line-height:1.8}
+  .ft-option-desc strong{color:#2B2B2B;font-weight:700}
+  .ft-option-body{display:none;margin-top:14px;padding-top:14px;border-top:1px dashed #d4c9b8}
+  .ft-option-body.show{display:block}
+  .ft-option-body label{font-size:14px !important;color:#2B2B2B !important;margin-top:10px !important}
+  .ft-group-radios{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .ft-radio{display:inline-flex !important;align-items:center;gap:6px;padding:8px 12px;background:#fff;border:1.5px solid #d4c9b8;border-radius:6px;font-size:14px !important;color:#2B2B2B !important;font-weight:500 !important;cursor:pointer;margin:0 !important;flex:1;min-width:120px;justify-content:center}
+  .ft-radio input{margin:0;accent-color:#EE5A1F}
+  .ft-radio:has(input:checked){background:rgba(238,90,31,0.08);border-color:#EE5A1F}
+  .ft-fee{margin-top:12px;padding:10px 12px;background:rgba(238,90,31,0.1);border-left:3px solid #EE5A1F;font-size:14px;color:#2B2B2B;line-height:1.7;display:none}
+  .ft-fee.show{display:block}
+  .ft-fee strong{color:#EE5A1F;font-size:16px}
 </style>
 </head>
 <body>
@@ -233,6 +252,39 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
           </select>
           <label>備考 / Notes</label>
           <textarea id="fNote" placeholder="到着時間、送迎希望など / Arrival time, pickup request, etc."></textarea>
+
+          <!-- FOCUS MORNING TOUR Option -->
+          <div class="ft-option" id="ftOption">
+            <label class="ft-option-toggle">
+              <input type="checkbox" id="fTour" onchange="toggleTourOption()">
+              <span>
+                <span class="ft-option-title">FOCUS MORNING TOUR を申し込む</span>
+                <span class="ft-option-tag">宿泊者限定オプション</span>
+              </span>
+            </label>
+            <p class="ft-option-desc">
+              早朝、移住者ガイドと自然の中へ。<br>
+              <strong>1名 ¥6,000　／　2名以上 ¥3,000/名</strong>（軽食付・子ども同伴無料）
+            </p>
+            <div class="ft-option-body" id="ftOptionBody">
+              <label>ご希望グループ *</label>
+              <div class="ft-group-radios">
+                <label class="ft-radio"><input type="radio" name="ftGroup" value="早朝枠（4時台スタート）" checked>早朝枠 4:00台</label>
+                <label class="ft-radio"><input type="radio" name="ftGroup" value="朝枠（6時台スタート）">朝枠 6:00台</label>
+                <label class="ft-radio"><input type="radio" name="ftGroup" value="どちらでも可">どちらでも可</label>
+              </div>
+              <label>子ども同行（同伴無料）</label>
+              <select id="fTourChildren" onchange="updateTotal()">
+                <option value="0">0名</option>
+                <option value="1">1名</option>
+                <option value="2">2名</option>
+                <option value="3">3名</option>
+                <option value="4">4名</option>
+              </select>
+              <div class="ft-fee" id="ftFee"></div>
+            </div>
+          </div>
+
           <div style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
             <label>Website <input type="text" id="fHp" name="website" tabindex="-1" autocomplete="off"></label>
           </div>
@@ -618,6 +670,20 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     return total;
   }
 
+  // FOCUS MORNING TOUR 料金（1名¥6,000 / 2名以上は人数×¥3,000）
+  function calcTourFee(adults) {
+    adults = parseInt(adults) || 0;
+    if (adults <= 0) return 0;
+    if (adults === 1) return 6000;
+    return adults * 3000;
+  }
+
+  window.toggleTourOption = function() {
+    var on = document.getElementById('fTour').checked;
+    document.getElementById('ftOptionBody').classList.toggle('show', on);
+    updateTotal();
+  };
+
   window.showPricePopup = function(dateStr) {
     document.getElementById('bookStep1').style.display = '';
     document.getElementById('bookStep2').style.display = 'none';
@@ -660,6 +726,12 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     document.getElementById('fContact').value = '';
     document.getElementById('fEmail').value = '';
     document.getElementById('fNote').value = '';
+    // ツアーオプションをリセット
+    document.getElementById('fTour').checked = false;
+    document.getElementById('ftOptionBody').classList.remove('show');
+    document.getElementById('fTourChildren').value = '0';
+    var defaultGroup = document.querySelector('input[name="ftGroup"][value="早朝枠（4時台スタート）"]');
+    if (defaultGroup) defaultGroup.checked = true;
     updateTotal();
 
     document.getElementById('priceOverlay').classList.add('show');
@@ -669,10 +741,36 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     var ci = document.getElementById('fCheckin').value;
     var co = document.getElementById('fCheckout').value;
     var guests = document.getElementById('fGuests').value;
-    if (!ci || !co || new Date(co) <= new Date(ci)) { document.getElementById('fTotal').innerHTML=''; return; }
+    if (!ci || !co || new Date(co) <= new Date(ci)) {
+      document.getElementById('fTotal').innerHTML = '';
+      document.getElementById('ftFee').classList.remove('show');
+      return;
+    }
     var nights = Math.round((new Date(co)-new Date(ci))/86400000);
-    var total = calcTotalPrice(ci, co, guests);
-    document.getElementById('fTotal').innerHTML = formatYen(total) + ' <small>（'+nights+'泊 × '+guests+'名）</small>';
+    var stayTotal = calcTotalPrice(ci, co, guests);
+
+    // ツアーオプション
+    var tourOn = document.getElementById('fTour') && document.getElementById('fTour').checked;
+    var tourFee = 0, tourChildren = 0;
+    if (tourOn) {
+      tourFee = calcTourFee(guests);
+      tourChildren = parseInt(document.getElementById('fTourChildren').value) || 0;
+      var perPerson = parseInt(guests) === 1 ? '6,000' : '3,000';
+      var feeHtml = 'ツアー料金：<strong>' + formatYen(tourFee) + '</strong>'
+        + '<br><span style="font-size:13px;color:#6B7A8D;">大人 ' + guests + '名 × ¥' + perPerson
+        + (tourChildren > 0 ? '　／　子ども ' + tourChildren + '名（無料）' : '')
+        + '　／　軽食込み</span>';
+      document.getElementById('ftFee').innerHTML = feeHtml;
+      document.getElementById('ftFee').classList.add('show');
+    } else {
+      document.getElementById('ftFee').classList.remove('show');
+    }
+
+    var total = stayTotal + tourFee;
+    var breakdown = '<small style="display:block;margin-top:4px;font-weight:400;line-height:1.7;">宿泊 ' + formatYen(stayTotal) + '（'+nights+'泊 × '+guests+'名）';
+    if (tourFee > 0) breakdown += '<br>+ ツアー ' + formatYen(tourFee);
+    breakdown += '</small>';
+    document.getElementById('fTotal').innerHTML = '<strong>合計 ' + formatYen(total) + '</strong>' + breakdown;
   };
 
   window.closePricePopup = function() {
@@ -706,7 +804,18 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     if (leadHours < 24) { alert('チェックイン24時間前を過ぎています / Less than 24h before check-in. Please contact via Instagram DM.'); return; }
 
     var nights = Math.round((new Date(checkout)-new Date(checkin))/86400000);
-    var total = calcTotalPrice(checkin, checkout, guests);
+    var stayTotal = calcTotalPrice(checkin, checkout, guests);
+
+    // FOCUS MORNING TOUR オプション
+    var tourOn = document.getElementById('fTour').checked;
+    var tourGroup = '', tourChildren = 0, tourFee = 0;
+    if (tourOn) {
+      var groupInput = document.querySelector('input[name="ftGroup"]:checked');
+      tourGroup = groupInput ? groupInput.value : '';
+      tourChildren = parseInt(document.getElementById('fTourChildren').value) || 0;
+      tourFee = calcTourFee(guests);
+    }
+    var total = stayTotal + tourFee;
 
     pendingBookingData = {
       property: currentProp,
@@ -716,16 +825,28 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
       payment: payment,
       agreed: agreed, website: hp, lang: 'ja',
       note: document.getElementById('fNote').value.trim(),
-      totalPrice: formatYen(total) + '（'+nights+'泊）'
+      tourRequested: tourOn ? 'あり' : 'なし',
+      tourGroup: tourGroup,
+      tourChildren: tourChildren,
+      tourFee: tourFee,
+      stayPrice: formatYen(stayTotal),
+      tourPrice: tourOn ? formatYen(tourFee) : '',
+      totalPrice: formatYen(total) + '（'+nights+'泊'
+        + (tourOn ? ' + FOCUS MORNING TOUR' : '') + '）'
     };
 
     var esc = function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+    var totalCell = '<div>' + esc(formatYen(total)) + '</div>'
+      + '<div style="font-size:13px;color:#8a7e6e;margin-top:4px;">'
+      + '宿泊 ' + esc(formatYen(stayTotal))
+      + (tourOn ? ' + ツアー ' + esc(formatYen(tourFee)) : '')
+      + '</div>';
     var rows = [
       ['Property', esc(CONFIG[currentProp].name || currentProp)],
       ['Check-in', esc(checkin)],
       ['Check-out', esc(checkout) + '（'+nights+'泊 / nights）'],
       ['Guests', esc(guests) + '名'],
-      ['Total', esc(formatYen(total))],
+      ['Total', totalCell],
       ['Name', esc(name)],
       ['Phone', esc(contact)],
       ['Email', esc(email)],
@@ -733,7 +854,13 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
       ['Occupation', esc(occupation)],
       ['Nationality', esc(nationality) || '（未入力 / N/A）'],
       ['Payment', esc(payment)],
-      ['Notes', esc(pendingBookingData.note) || '（なし / None）']
+      ['Notes', esc(pendingBookingData.note) || '（なし / None）'],
+      ['FOCUS MORNING TOUR', tourOn
+        ? '<strong style="color:#EE5A1F;">申込あり</strong><br>' +
+          'グループ: ' + esc(tourGroup) + '<br>' +
+          '大人 ' + esc(guests) + '名 / 子ども ' + tourChildren + '名（無料）<br>' +
+          'ツアー料金: ' + esc(formatYen(tourFee))
+        : '<span style="color:#aaa;">申込なし</span>']
     ];
     document.getElementById('confirmList').innerHTML = rows.map(function(r){
       return '<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px dashed #e0d8c5"><div style="flex:0 0 110px;color:#8a7e6e;font-weight:700">'+r[0]+'</div><div style="flex:1;word-break:break-word">'+r[1]+'</div></div>';
