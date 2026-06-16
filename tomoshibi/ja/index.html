@@ -524,6 +524,89 @@ src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
   }
   .mt-section .mt-route-card .mt-weather-type { padding: 0 16px; }
   .mt-section .mt-route-card .mt-weather-desc { padding: 0 16px 20px; }
+
+  /* FOCUS TOUR BOOKING FORM */
+  .ft-book {
+    background: #2B2B2B; color: #fff;
+    padding: 48px 40px; margin-top: 56px;
+  }
+  .ft-book-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.5em;
+    color: #EE5A1F; text-align:center; margin-bottom: 16px; font-weight:500;
+  }
+  .ft-book-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.4rem; text-align:center; letter-spacing: 0.12em;
+    margin-bottom: 12px; color:#fff; font-weight:600; line-height:1.6;
+  }
+  .ft-book-sub {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.9rem; color: rgba(255,255,255,0.7);
+    text-align:center; margin-bottom: 32px; line-height: 1.8;
+  }
+  .ft-form label {
+    display:block; font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.8rem; color: rgba(255,255,255,0.85);
+    letter-spacing: 0.08em; margin-top: 14px; line-height:1.6;
+  }
+  .ft-form input[type=text], .ft-form input[type=email],
+  .ft-form input[type=date], .ft-form select, .ft-form textarea {
+    width: 100%; margin-top: 6px;
+    padding: 10px 12px; border: 1px solid #555;
+    background: #1A1A18; color: #fff;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 0.95rem;
+    border-radius: 4px;
+  }
+  .ft-form input:focus, .ft-form select:focus, .ft-form textarea:focus {
+    outline: none; border-color: #EE5A1F;
+  }
+  .ft-form textarea { resize: vertical; min-height: 60px; }
+  .ft-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ft-fieldset {
+    border: 1px solid #555; padding: 14px 16px;
+    margin-top: 16px; border-radius: 4px;
+  }
+  .ft-fieldset legend {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.8rem; color: rgba(255,255,255,0.85);
+    letter-spacing: 0.08em; padding: 0 8px;
+  }
+  .ft-radio {
+    display:inline-flex; align-items:center; gap:6px;
+    margin: 8px 16px 8px 0;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem;
+    color: rgba(255,255,255,0.9); letter-spacing: 0.04em;
+  }
+  .ft-radio input { accent-color: #EE5A1F; margin: 0; }
+  .ft-estimate {
+    margin-top: 20px; padding: 14px 18px;
+    background: rgba(238,90,31,0.12); border-left: 3px solid #EE5A1F;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 0.95rem;
+    color: #fff; line-height: 1.8; display:none;
+  }
+  .ft-estimate.show { display:block; }
+  .ft-estimate strong { color: #EE5A1F; font-size: 1.1rem; }
+  .ft-submit {
+    width: 100%; margin-top: 24px;
+    padding: 16px; background: #EE5A1F; color: #fff;
+    border: none; border-radius: 4px; cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 1rem;
+    letter-spacing: 0.15em; font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  .ft-submit:hover { opacity: 0.88; }
+  .ft-or {
+    margin-top: 20px; font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.8rem; color: rgba(255,255,255,0.6);
+    text-align: center; line-height: 1.9;
+  }
+  .ft-or a { color: #EE5A1F; text-decoration: underline; }
+  @media (max-width: 768px) {
+    .ft-book { padding: 32px 20px; }
+    .ft-book-title { font-size: 1.15rem; }
+    .ft-row { grid-template-columns: 1fr; gap: 0; }
+  }
   .mt-section .mt-weather-icon { font-size: 1.6rem; margin-bottom: 8px; }
   .mt-section .mt-weather-type {
     font-family: 'Noto Sans JP', sans-serif;
@@ -886,9 +969,9 @@ function switchSNS(type, site) {
   <div class="mt-hero">
     <div class="mt-hero-bg"></div>
     <div class="mt-hero-content">
-      <p class="mt-hero-label">GREEN SEASON MORNING TOUR</p>
-      <h2 class="mt-hero-title">絶景は、見るものじゃなく<br>入るものだった</h2>
-      <p class="mt-hero-catch">上高地で満足できなかった、あなたへ。</p>
+      <p class="mt-hero-label">FOCUS MORNING TOUR</p>
+      <h2 class="mt-hero-title">自然の解像度が<br>上がる朝</h2>
+      <p class="mt-hero-catch">遠くから眺めて、満足していませんか？</p>
     </div>
   </div>
 
@@ -896,13 +979,14 @@ function switchSNS(type, site) {
     <!-- Story -->
     <div class="mt-story fade-in">
       <p>
-        長野の絶景。北アルプス、上高地、安曇野。<br>
-        一度は行ったことが、あるかもしれません。<br><br>
-        でも——駐車場の渋滞、観光バスの列、写真スポットの順番待ち。<br>
-        <span class="mt-highlight">「自然の中に入った」気がしましたか？</span><br><br>
-        早朝5時。観光客は、誰もいません。<br>
-        あなたと、ガイドと、北アルプスと、鳥の声だけ。<br><br>
-        入り込んだ"つもり"から、本当に入り込む3時間。
+        北アルプス、上高地、安曇野。<br>
+        名前なら、知っている。地図でも、分かる。<br><br>
+        でも——遠くから眺めるだけ、写真スポットで撮るだけ。<br>
+        <span class="mt-highlight">それは、自然の表面しか見ていない。</span><br><br>
+        FOCUS MORNING TOURは、自然の中に実際に入り込む3時間。<br>
+        木の名前、鳥の声、空気の温度、苔の手触り。<br>
+        移住者ガイドと、宿泊者だけで歩く朝。<br><br>
+        自然の解像度が、上がる。
       </p>
     </div>
 
@@ -924,28 +1008,36 @@ function switchSNS(type, site) {
     <h3 class="mt-sub-title fade-in">ツアー詳細</h3>
     <div class="mt-detail-grid fade-in">
       <div class="mt-detail-item">
-        <p class="mt-detail-label">所要時間</p>
-        <p class="mt-detail-value">約3時間<br>（朝4:30〜7:30頃／季節により調整）</p>
-      </div>
-      <div class="mt-detail-item">
         <p class="mt-detail-label">料金</p>
-        <p class="mt-detail-value">1人 2,500円<br>（送迎・撮影サービス込み）</p>
+        <p class="mt-detail-value"><strong style="color:#EE5A1F;">1名 ¥6,000</strong><br>2名以上 ¥3,000／名<br>子ども同伴 無料</p>
       </div>
       <div class="mt-detail-item">
-        <p class="mt-detail-label">最低催行人数</p>
-        <p class="mt-detail-value">2名</p>
+        <p class="mt-detail-label">所要時間</p>
+        <p class="mt-detail-value">約3時間<br>（季節により調整）</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">スタート時刻</p>
+        <p class="mt-detail-value">早朝枠：4時台<br>朝枠：6時台</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">定員</p>
+        <p class="mt-detail-value">最大6名<br>宿泊者限定</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">軽食</p>
+        <p class="mt-detail-value">地元スコーン<br>＋ほうじ茶 付き</p>
       </div>
       <div class="mt-detail-item">
         <p class="mt-detail-label">ベストシーズン</p>
-        <p class="mt-detail-value"><strong style="color:#EE5A1F;">4月〜11月（グリーンシーズン限定）</strong><br>冬季は道路閉鎖のため催行困難</p>
+        <p class="mt-detail-value"><strong style="color:#EE5A1F;">4月〜11月</strong><br>グリーンシーズン限定</p>
       </div>
       <div class="mt-detail-item">
-        <p class="mt-detail-label">朝食オプション</p>
-        <p class="mt-detail-value">+1,500円<br>（ツアー後に宿で）</p>
+        <p class="mt-detail-label">ガイド</p>
+        <p class="mt-detail-value">移住者ガイドが同行<br>木・鳥・地形を解説</p>
       </div>
       <div class="mt-detail-item">
         <p class="mt-detail-label">持ち物</p>
-        <p class="mt-detail-value">歩きやすい靴・暖かい羽織もの<br>（夏でも朝は冷え込みます）</p>
+        <p class="mt-detail-value">歩きやすい靴・羽織もの<br>（夏でも朝は冷えます）</p>
       </div>
     </div>
 
@@ -956,36 +1048,37 @@ function switchSNS(type, site) {
     </div>
 
     <!-- 5 Routes -->
-    <p class="mt-weather-title fade-in">5つの早朝ルート — 天気と体力で当日選びます</p>
+    <p class="mt-weather-title fade-in">5つのルート — 天気と体力で当日ガイドが決めます</p>
+    <p style="font-family:'Noto Sans JP',sans-serif; font-size:0.85rem; color:#6B7A8D; text-align:center; margin: -10px 0 24px; letter-spacing:0.05em; line-height:1.8;">場所はあえて公開していません。<br>"観光地化"されていない場所を守るためです。</p>
     <div class="mt-weather-grid fade-in" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
       <div class="mt-weather-card mt-route-card">
-        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-1.jpg');"><span class="mt-route-badge">晴れ・初心者</span></div>
-        <p class="mt-weather-type">長峰山展望台</p>
-        <p class="mt-weather-desc">北アルプス全景を一望<br>朝焼けのメインルート</p>
+        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-1.jpg');"><span class="mt-route-badge">早朝枠 4時台</span></div>
+        <p class="mt-weather-type">ROUTE 01　尾根の全景</p>
+        <p class="mt-weather-desc">北アルプスの稜線を眼下に<br>登山口から1時間の展望地</p>
       </div>
       <div class="mt-weather-card mt-route-card">
-        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-2.jpg');"><span class="mt-route-badge">晴れ・体力あり</span></div>
-        <p class="mt-weather-type">京ヶ倉</p>
-        <p class="mt-weather-desc">雲海と稜線<br>登った人だけの絶景</p>
+        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-2.jpg');"><span class="mt-route-badge">早朝枠 4時台</span></div>
+        <p class="mt-weather-type">ROUTE 02　稜線スカイライン</p>
+        <p class="mt-weather-desc">山々を縫う眺望ライン<br>朝焼けに染まる峰々</p>
       </div>
       <div class="mt-weather-card mt-route-card">
-        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-3.jpg');"><span class="mt-route-badge">曇り・静寂</span></div>
-        <p class="mt-weather-type">中房湖</p>
-        <p class="mt-weather-desc">鏡面の水面と森<br>音の消える朝</p>
+        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/season-autumn.jpg');"><span class="mt-route-badge">朝枠 6時台</span></div>
+        <p class="mt-weather-type">ROUTE 03　落差と水煙</p>
+        <p class="mt-weather-desc">雨の翌朝こそ姿を現す<br>知る人ぞ知る滝</p>
       </div>
       <div class="mt-weather-card mt-route-card">
-        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/garden.jpg');"><span class="mt-route-badge">雨・水景</span></div>
-        <p class="mt-weather-type">わさび田・水路</p>
-        <p class="mt-weather-desc">安曇野の原風景<br>雨が育てる水の街</p>
+        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/garden.jpg');"><span class="mt-route-badge">朝枠 6時台</span></div>
+        <p class="mt-weather-type">ROUTE 04　渓流と森</p>
+        <p class="mt-weather-desc">川面に映る朝日<br>水音と苔の朝</p>
       </div>
       <div class="mt-weather-card mt-route-card">
-        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/season-autumn.jpg');"><span class="mt-route-badge">雨・迫力</span></div>
-        <p class="mt-weather-type">黒沢の滝</p>
-        <p class="mt-weather-desc">雨の日こそ姿を現す<br>知る人ぞ知る穴場</p>
+        <div class="mt-route-img" style="background-image:url('../../sasamoriya/images/morning-tour-3.jpg');"><span class="mt-route-badge">朝枠 6時台</span></div>
+        <p class="mt-weather-type">ROUTE 05　草原と鳥</p>
+        <p class="mt-weather-desc">朝霧の高原<br>野鳥の声が響く時間</p>
       </div>
     </div>
 
-    <!-- Cancellation & Booking -->
+    <!-- Cancellation -->
     <div class="mt-note-box fade-in">
       <p class="mt-note-title">キャンセル規定</p>
       <p class="mt-note-text">
@@ -994,9 +1087,63 @@ function switchSNS(type, site) {
       </p>
     </div>
 
-    <div class="mt-booking fade-in">
-      <p class="mt-booking-text">チェックイン時にホストへ直接お申し込みください。</p>
-      <p class="mt-booking-sub">※前日20時までにご相談いただくとスムーズです。</p>
+    <!-- Booking Form -->
+    <div class="ft-book fade-in" id="focus-tour-book">
+      <p class="ft-book-label">BOOKING</p>
+      <h3 class="ft-book-title">FOCUS MORNING TOUR を予約する</h3>
+      <p class="ft-book-sub">宿泊者限定。ご希望日・グループ・人数をお知らせください。</p>
+
+      <form id="ftForm" class="ft-form" onsubmit="return submitFocusTour(event)">
+        <div class="ft-row">
+          <label>お名前 *
+            <input type="text" name="name" required placeholder="山田 太郎">
+          </label>
+          <label>メールアドレス *
+            <input type="email" name="email" required placeholder="example@mail.com">
+          </label>
+        </div>
+        <div class="ft-row">
+          <label>ご宿泊日 *
+            <input type="date" name="stayDate" required>
+          </label>
+          <label>ツアー希望日 *
+            <input type="date" name="tourDate" required>
+          </label>
+        </div>
+        <fieldset class="ft-fieldset">
+          <legend>ご希望グループ *</legend>
+          <label class="ft-radio"><input type="radio" name="group" value="早朝枠（4時台スタート）" required> 早朝枠（4時台）</label>
+          <label class="ft-radio"><input type="radio" name="group" value="朝枠（6時台スタート）"> 朝枠（6時台）</label>
+          <label class="ft-radio"><input type="radio" name="group" value="どちらでも可"> どちらでも可</label>
+        </fieldset>
+        <div class="ft-row">
+          <label>大人（13歳以上） *
+            <select name="adults" required>
+              <option value="1">1名</option>
+              <option value="2" selected>2名</option>
+              <option value="3">3名</option>
+              <option value="4">4名</option>
+              <option value="5">5名</option>
+              <option value="6">6名</option>
+            </select>
+          </label>
+          <label>子ども（同伴無料）
+            <select name="children">
+              <option value="0" selected>0名</option>
+              <option value="1">1名</option>
+              <option value="2">2名</option>
+              <option value="3">3名</option>
+              <option value="4">4名</option>
+            </select>
+          </label>
+        </div>
+        <label>備考・アレルギー等
+          <textarea name="note" rows="3" placeholder="食物アレルギー、ご希望のルート、その他"></textarea>
+        </label>
+        <div class="ft-estimate" id="ftEstimate"></div>
+        <button type="submit" class="ft-submit">予約リクエストを送信</button>
+        <p class="ft-or">送信後、ホストの三條桜芽より24時間以内にご返信します。<br>急ぎの場合は <a href="https://instagram.com/guesthousetomoshibi" target="_blank" rel="noopener">Instagram DM</a> へも併せてご連絡ください。</p>
+      </form>
     </div>
   </div>
 </section>
@@ -1248,6 +1395,81 @@ function toggleFAQ(el) {
   window.mtSlide = function(d){ show(current + d); restart(); };
   window.mtGoto = function(i){ show(i); restart(); };
   restart();
+})();
+
+/* ===== FOCUS MORNING TOUR – Booking ===== */
+(function(){
+  var form = document.getElementById('ftForm');
+  if(!form) return;
+  var estimate = document.getElementById('ftEstimate');
+
+  function fee(adults){
+    adults = parseInt(adults) || 0;
+    if(adults <= 0) return 0;
+    if(adults === 1) return 6000;
+    return adults * 3000;
+  }
+  function fmt(n){ return '¥' + n.toLocaleString(); }
+
+  function updateEstimate(){
+    var fd = new FormData(form);
+    var adults = parseInt(fd.get('adults')) || 0;
+    var children = parseInt(fd.get('children')) || 0;
+    if(adults <= 0){ estimate.classList.remove('show'); return; }
+    var total = fee(adults);
+    var perPerson = adults === 1 ? '6,000' : '3,000';
+    estimate.innerHTML = 'お見積もり：<strong>' + fmt(total) + '</strong>'
+      + '<br><small>大人 ' + adults + '名 × ¥' + perPerson
+      + (children > 0 ? '　／　子ども ' + children + '名（無料）' : '')
+      + '　／　軽食（地元スコーン + ほうじ茶）込み</small>';
+    estimate.classList.add('show');
+  }
+  form.addEventListener('change', updateEstimate);
+  form.addEventListener('input', updateEstimate);
+  updateEstimate();
+
+  window.submitFocusTour = function(e){
+    e.preventDefault();
+    var fd = new FormData(form);
+    var adults = parseInt(fd.get('adults')) || 0;
+    var children = parseInt(fd.get('children')) || 0;
+    var total = fee(adults);
+
+    var subject = '【FOCUS MORNING TOUR 予約リクエスト】' + (fd.get('name') || '');
+    var body = [
+      '■ FOCUS MORNING TOUR 予約リクエスト',
+      '',
+      'お名前：' + (fd.get('name') || ''),
+      'メール：' + (fd.get('email') || ''),
+      'ご宿泊日：' + (fd.get('stayDate') || ''),
+      'ツアー希望日：' + (fd.get('tourDate') || ''),
+      'ご希望グループ：' + (fd.get('group') || ''),
+      '大人：' + adults + '名',
+      '子ども：' + children + '名（無料）',
+      '',
+      'お見積もり：' + fmt(total) + '（軽食込み）',
+      '',
+      '備考：',
+      (fd.get('note') || '（なし）')
+    ].join('\n');
+
+    var mailto = 'mailto:ouga0315@gmail.com'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(body);
+
+    if(typeof gtag === 'function'){
+      gtag('event', 'focus_tour_request', {
+        adults: adults, children: children, total: total,
+        group: fd.get('group') || ''
+      });
+    }
+    if(typeof fbq === 'function'){
+      fbq('track', 'Lead', { content_name: 'focus_morning_tour', value: total, currency: 'JPY' });
+    }
+
+    window.location.href = mailto;
+    return false;
+  };
 })();
 </script>
 
