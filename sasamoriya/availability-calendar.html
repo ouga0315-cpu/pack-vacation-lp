@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<script>
+(function(){
+  var IAB_NOISE = /(_autofillCallbackHandler|window\.webkit\.messageHandlers|contentWindow\.postMessage|__gCrWeb|null is not an object.*postMessage)/i;
+  window.addEventListener('error', function(e){ if(e&&e.message&&IAB_NOISE.test(e.message)){ e.stopImmediatePropagation(); } }, true);
+  window.addEventListener('unhandledrejection', function(e){ var m=(e&&e.reason&&(e.reason.message||''+e.reason))||''; if(IAB_NOISE.test(m)){ e.preventDefault&&e.preventDefault(); } });
+})();
+</script>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJSJFMXPX"></script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wxh6i8m022");
+</script>
+
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
+
+/* --- Pack Vacation カスタムイベント追跡 --- */
+(function(){
+  /* 1. スクロール深度 (25/50/75/100%) */
+  var scrollFired={};
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body;
+    var pct=Math.round((h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight)*100);
+    [25,50,75,100].forEach(function(t){
+      if(pct>=t&&!scrollFired[t]){scrollFired[t]=true;gtag('event','scroll_depth',{depth:t+'%'});}
+    });
+  },{passive:true});
+
+  /* 2. 電話タップ */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="tel:"]');
+    if(a)gtag('event','phone_tap',{phone_number:a.getAttribute('href').replace('tel:','')});
+  });
+
+  /* 3. 予約ボタン / CTA クリック */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="#calendar"],a[href*="availability"],button,.btn,.tel-btn');
+    if(a){
+      var txt=(a.textContent||'').trim().slice(0,40);
+      gtag('event','cta_click',{cta_text:txt,cta_href:a.getAttribute('href')||''});
+    }
+  });
+
+  /* 4. 予約フォーム送信完了 */
+  var origConfirm=window.confirmBooking;
+  if(typeof origConfirm==='function'){
+    window.confirmBooking=function(){
+      gtag('event','booking_submit',{property:window.currentProp||''});
+      return origConfirm.apply(this,arguments);
+    };
+  }
+
+  /* 5. 言語切替 */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="/ja/"],a[href*="/en/"],a.lang-jp,a.lang-en');
+    if(a){
+      var lang=a.getAttribute('href').indexOf('/en/')!==-1?'en':'ja';
+      gtag('event','language_switch',{language:lang});
+    }
+  });
+
+  /* 6. セクション到達 (Intersection Observer) */
+  if('IntersectionObserver' in window){
+    var secFired={};
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting&&!secFired[en.target.id]){
+          secFired[en.target.id]=true;
+          gtag('event','section_view',{section:en.target.id});
+        }
+      });
+    },{threshold:0.3});
+    document.querySelectorAll('section[id]').forEach(function(s){obs.observe(s);});
+  }
+})();
+</script>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>空き状況カレンダー</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;background:#fafaf8;color:#333;line-height:1.5}
+  .cal-wrap{max-width:460px;margin:0 auto;padding:16px}
+
+  /* タブ */
+  .tabs{display:flex;gap:4px;margin-bottom:16px}
+  .tab{flex:1;padding:10px 6px;border:2px solid #d4c9b8;border-radius:10px;background:#fff;font-size:18px;font-weight:700;text-align:center;cursor:pointer;transition:all .2s;color:#8a7e6e}
+  .tab.active{background:#4a6741;border-color:#4a6741;color:#fff}
+  .tab:not(.active):hover{background:#f5f0e8}
+
+  /* 月ナビ */
+  .month-header{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:12px}
+  .month-header h3{font-size:18px;font-weight:700;min-width:140px;text-align:center;color:#4a6741}
+
+  /* カレンダーグリッド */
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:24px}
+  .cal-grid .dow{font-size:18px;font-weight:700;text-align:center;padding:4px 0;color:#8a7e6e}
+  .cal-grid .dow:first-child{color:#c0392b}
+  .cal-grid .dow:last-child{color:#2980b9}
+  .day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:18px;font-weight:600;transition:all .15s}
+  .day.empty{background:transparent}
+  .day.available{background:#e8f5e3;color:#2d5a27;cursor:pointer}
+  .day.available:hover{background:#c8e6c0;transform:scale(1.05)}
+  .day.booked{background:#e8e5e0;color:#aaa;text-decoration:line-through;cursor:default}
+  .day.today{outline:2.5px solid #4a6741;outline-offset:-2px;font-weight:900}
+  .day.past{background:#f2f0ed;color:#c0bbb3;cursor:default}
+
+  /* 凡例 */
+  .legend{display:flex;justify-content:center;gap:16px;margin-bottom:20px;font-size:18px;color:#8a7e6e}
+  .legend span{display:flex;align-items:center;gap:4px}
+  .legend-dot{width:12px;height:12px;border-radius:4px;display:inline-block}
+  .legend-dot.av{background:#e8f5e3;border:1px solid #a3d49a}
+  .legend-dot.bk{background:#e8e5e0;border:1px solid #ccc}
+  .legend-dot.td{background:#fff;border:2.5px solid #4a6741}
+
+  /* Instagram CTA */
+  .cta-area{text-align:center;padding:20px 0 8px}
+  .cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border:none;border-radius:50px;font-size:18px;font-weight:700;color:#fff;cursor:pointer;text-decoration:none;transition:all .2s}
+  .cta-btn.sasamori{background:linear-gradient(135deg,#4a6741,#6b8f5e)}
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+  .cta-btn svg{width:22px;height:22px;fill:#fff}
+  .cta-sub{font-size:18px;color:#8a7e6e;margin-top:8px}
+
+  /* ローディング */
+  .loading{text-align:center;padding:40px 0;color:#aaa;font-size:18px}
+  .loading .spinner{display:inline-block;width:24px;height:24px;border:3px solid #e0ddd6;border-top-color:#4a6741;border-radius:50%;animation:spin .7s linear infinite;margin-bottom:8px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* フォールバック通知 */
+  .fallback-note{text-align:center;font-size:18px;color:#bbb;margin-bottom:12px;font-style:italic}
+
+  /* 料金・予約ポップアップ */
+  .price-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.35);z-index:1000;align-items:flex-start;justify-content:center;overflow-y:auto;padding:24px 0}
+  .price-overlay.show{display:flex}
+  .price-popup{background:#fff;border-radius:16px;padding:28px 24px;max-width:360px;width:92%;box-shadow:0 12px 40px rgba(0,0,0,0.2);text-align:center;position:relative;animation:popIn 0.25s ease;margin:auto}
+  @keyframes popIn{from{transform:scale(0.9);opacity:0}to{transform:scale(1);opacity:1}}
+  .price-popup-close{position:absolute;top:10px;right:14px;background:none;border:none;font-size:20px;color:#aaa;cursor:pointer;line-height:1}
+  .price-date{font-size:18px;font-weight:700;color:#4a6741;margin-bottom:6px}
+  .price-season{font-size:18px;color:#8a7e6e;margin-bottom:14px;letter-spacing:0.05em}
+  .price-main{font-size:26px;font-weight:700;color:#333;margin-bottom:4px}
+  .price-main small{font-size:18px;font-weight:400;color:#8a7e6e}
+  .price-detail{font-size:18px;color:#8a7e6e;line-height:1.8;margin-bottom:16px}
+  .price-divider{border:none;border-top:1px solid #e8e5e0;margin:16px 0}
+  /* 予約フォーム */
+  .book-form{text-align:left}
+  .book-form label{display:block;font-size:18px;font-weight:700;color:#4a6741;margin-bottom:4px;margin-top:12px;letter-spacing:0.05em}
+  .book-form label:first-child{margin-top:0}
+  .book-form input,.book-form select,.book-form textarea{width:100%;padding:10px 12px;border:1.5px solid #d4c9b8;border-radius:8px;font-size:18px;font-family:inherit;background:#fafaf8;transition:border-color 0.2s;box-sizing:border-box}
+  .book-form input:focus,.book-form select:focus,.book-form textarea:focus{outline:none;border-color:#4a6741}
+  .book-form textarea{resize:vertical;min-height:50px}
+  .book-form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .book-form input[type="checkbox"]{width:auto;padding:0;border:none;background:none}
+  .book-total{text-align:center;margin:16px 0 8px;font-size:20px;font-weight:700;color:#333}
+  .book-total small{font-size:18px;color:#8a7e6e;font-weight:400}
+  .book-note{font-size:18px;color:#bbb;text-align:center;margin-bottom:14px;font-style:italic}
+  .btn-submit{width:100%;padding:14px;background:linear-gradient(135deg,#4a6741,#6b8f5e);color:#fff;border:none;border-radius:50px;font-size:18px;font-weight:700;font-family:inherit;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em}
+  .btn-submit:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(74,103,65,0.3)}
+  .btn-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none}
+  /* ステップインジケータ */
+  .book-steps{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 18px;font-size:12px;color:#8a7e6e;letter-spacing:0.05em}
+  .book-steps .step{display:inline-flex;align-items:center;gap:6px}
+  .book-steps .step-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#e5e0d5;color:#8a7e6e;font-weight:700;font-size:11px}
+  .book-steps .step.active .step-num{background:#4a6741;color:#fff}
+  .book-steps .step.done .step-num{background:#4a6741;color:#fff}
+  .book-steps .step.done .step-num::before{content:'✓';font-size:12px}
+  .book-steps .step.done .step-num-digit{display:none}
+  .book-steps .step-line{width:22px;height:1px;background:#e5e0d5}
+  .book-steps .step.active .step-label{color:#4a6741;font-weight:700}
+  /* セクションヘッダ */
+  .book-section-h{font-size:13px;font-weight:700;color:#4a6741;margin:22px 0 6px;padding-top:14px;border-top:1px dashed #e5e0d5;letter-spacing:0.08em}
+  .book-section-h:first-child{border-top:none;padding-top:0;margin-top:0}
+  /* 完了画面 */
+  .book-done{text-align:center;padding:20px 0}
+  .book-done-icon{font-size:48px;margin-bottom:12px}
+  .book-done-title{font-size:18px;font-weight:700;color:#4a6741;margin-bottom:8px}
+  .book-done-text{font-size:18px;color:#8a7e6e;line-height:1.9}
+</style>
+</head>
+<body>
+<div class="cal-wrap">
+
+  <!-- タイトル -->
+  <div style="text-align:center;margin-bottom:16px;font-size:18px;font-weight:700;color:#4a6741;">🏠 民宿笹森家 ／ 空き状況</div>
+
+  <!-- カレンダー描画エリア -->
+  <div id="cal-container">
+    <div class="loading"><div class="spinner"></div><br>カレンダーを読み込み中...</div>
+  </div>
+
+  <!-- 凡例 -->
+  <div class="legend">
+    <span><span class="legend-dot av"></span>空き</span>
+    <span><span class="legend-dot bk"></span>予約済</span>
+    <span><span class="legend-dot td"></span>今日</span>
+  </div>
+
+  <!-- 予約ポップアップ -->
+  <div class="price-overlay" id="priceOverlay" onclick="if(event.target===this)closePricePopup()">
+    <div class="price-popup">
+      <button class="price-popup-close" onclick="closePricePopup()">&times;</button>
+
+      <!-- ステップ1: 料金確認 + フォーム -->
+      <div id="bookStep1">
+        <div class="book-steps">
+          <div class="step active"><span class="step-num"><span class="step-num-digit">1</span></span><span class="step-label">入力</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-num"><span class="step-num-digit">2</span></span><span class="step-label">確認</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-num"><span class="step-num-digit">3</span></span><span class="step-label">完了</span></div>
+        </div>
+        <div class="price-date" id="popupDate"></div>
+        <div class="price-season" id="popupSeason"></div>
+        <div class="price-main" id="popupPrice"></div>
+        <div class="price-detail" id="popupDetail"></div>
+        <hr class="price-divider">
+        <div class="book-form">
+          <div class="book-section-h">① 日程・人数</div>
+          <div class="row">
+            <div>
+              <label>チェックイン</label>
+              <input type="date" id="fCheckin" onchange="updateTotal()">
+            </div>
+            <div>
+              <label>チェックアウト</label>
+              <input type="date" id="fCheckout" onchange="updateTotal()">
+            </div>
+          </div>
+          <label>大人（13歳以上） *</label>
+          <select id="fGuests" onchange="updateTotal()">
+            <option value="1">1名</option>
+            <option value="2" selected>2名</option>
+            <option value="3">3名</option>
+            <option value="4">4名</option>
+            <option value="5">5名</option>
+            <option value="6">6名</option>
+          </select>
+          <div class="row" style="margin-top:8px;">
+            <div>
+              <label style="margin-top:0;">子ども（4〜12歳）</label>
+              <select id="fChildren" onchange="updateTotal()">
+                <option value="0" selected>0名</option>
+                <option value="1">1名</option>
+                <option value="2">2名</option>
+                <option value="3">3名</option>
+                <option value="4">4名</option>
+                <option value="5">5名</option>
+              </select>
+            </div>
+            <div>
+              <label style="margin-top:0;">幼児（0〜3歳）</label>
+              <select id="fInfants" onchange="updateTotal()">
+                <option value="0" selected>0名</option>
+                <option value="1">1名</option>
+                <option value="2">2名</option>
+                <option value="3">3名</option>
+              </select>
+            </div>
+          </div>
+          <label>ペット（頭数）</label>
+          <select id="fPets" onchange="updateTotal()">
+            <option value="0" selected>なし</option>
+            <option value="1">1頭</option>
+            <option value="2">2頭</option>
+            <option value="3">3頭</option>
+            <option value="4">4頭</option>
+            <option value="5">5頭以上（事前ご相談ください）</option>
+          </select>
+          <p style="font-size:14px;color:#8a7e6e;margin-top:6px;line-height:1.6;">
+            子ども：4〜12歳 ¥4,000／名・泊　0〜3歳 無料<br>
+            ペット：1頭目 ¥3,000／滞在　2頭目以降 ¥1,000／頭・滞在
+          </p>
+          <div class="book-total" id="fTotal"></div>
+          <div class="book-section-h">② ご連絡先</div>
+          <label>お名前 *</label>
+          <input type="text" id="fName" placeholder="山田 太郎">
+          <label>電話番号 *</label>
+          <input type="tel" id="fContact" placeholder="090-1234-5678">
+          <label>メールアドレス *（確認メール送付用）</label>
+          <input type="email" id="fEmail" placeholder="example@mail.com">
+          <details style="margin-top:14px;border:1px solid #e5dfd0;border-radius:8px;padding:12px 14px;background:#fafaf5;">
+            <summary style="cursor:pointer;font-weight:700;color:#4a6741;font-size:0.95rem;letter-spacing:0.05em;list-style:none;">
+              住所・職業・国籍（任意・チェックイン時記入も可）
+              <span style="float:right;color:#999;font-size:0.85rem;font-weight:normal;">▾</span>
+            </summary>
+            <p style="font-size:0.85rem;color:#888;margin:10px 0 4px;line-height:1.6;">旅館業法で宿泊者名簿への記載が必要ですが、チェックイン時にご記入いただくことも可能です。</p>
+            <label style="margin-top:8px">住所</label>
+            <input type="text" id="fAddress" placeholder="長野県松本市〇〇1-2-3">
+            <label>職業</label>
+            <input type="text" id="fOccupation" placeholder="会社員、学生、自営業 など">
+            <label>国籍<span style="font-size:14px;color:#aaa;font-weight:normal">（日本国籍以外の方は旅券番号も）</span></label>
+            <input type="text" id="fNationality" placeholder="例: 日本 / USA Passport No.123456789">
+            <div id="passportField" style="display:none;margin-top:12px;">
+              <label>Passport photo (required for international guests) *</label>
+              <input type="file" id="fPassport" accept="image/*" style="padding:8px 0;">
+              <p style="font-size:1.125rem;color:#999;margin-top:4px;">Under Japanese law, international guests must present a valid passport at check-in.</p>
+            </div>
+          </details>
+          <div class="book-section-h">③ お支払い・同意</div>
+          <label>お支払い方法 *<span style="font-size:18px;color:#888;font-weight:normal">（チェックイン時のお支払い方法）</span></label>
+          <select id="fPayment">
+            <option value="">選択してください</option>
+            <option value="現金">現金</option>
+            <option value="クレジットカード">クレジットカード</option>
+            <option value="PayPay">PayPay</option>
+            <option value="その他">その他</option>
+          </select>
+          <label>備考</label>
+          <textarea id="fNote" placeholder="到着時間、特別なご要望など"></textarea>
+          <!-- ハニーポット (Bot対策) -->
+          <div style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+            <label>Website <input type="text" id="fHp" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:8px;margin-top:14px;font-size:18px;line-height:1.6;font-weight:normal;">
+            <input type="checkbox" id="fAgree" style="margin-top:3px;flex-shrink:0;">
+            <span style="flex:1;min-width:0;"><a href="/pack-vacation-lp/terms.html" target="_blank" style="color:#4a6741;">利用規約</a>・<a href="/pack-vacation-lp/cancellation-policy.html" target="_blank" style="color:#4a6741;">キャンセルポリシー</a>・<a href="/pack-vacation-lp/privacy.html" target="_blank" style="color:#4a6741;">プライバシーポリシー</a>に同意します</span>
+          </label>
+          <div style="margin-top:16px">
+            <button class="btn-submit" id="btnSubmit" onclick="showConfirmation()">内容を確認する</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ステップ1.5: 確認画面 -->
+      <div id="bookStepConfirm" style="display:none">
+        <div class="book-form">
+          <div class="book-steps">
+            <div class="step done"><span class="step-num"><span class="step-num-digit">1</span></span><span class="step-label">入力</span></div>
+            <span class="step-line"></span>
+            <div class="step active"><span class="step-num"><span class="step-num-digit">2</span></span><span class="step-label">確認</span></div>
+            <span class="step-line"></span>
+            <div class="step"><span class="step-num"><span class="step-num-digit">3</span></span><span class="step-label">完了</span></div>
+          </div>
+          <div style="text-align:center;font-size:18px;font-weight:700;color:#4a6741;margin-bottom:6px">ご予約内容のご確認</div>
+          <div style="text-align:center;font-size:18px;color:#8a7e6e;margin-bottom:18px;line-height:1.7">下記内容で予約を送信します。<br>お間違いがなければ「この内容で予約する」を押してください。</div>
+          <dl id="confirmList" style="margin:0;padding:16px 18px;background:#faf7f2;border:1px solid #e8e0d2;border-radius:10px;font-size:18px;line-height:1.9;color:#4a3f2e"></dl>
+          <div style="display:flex;gap:10px;margin-top:18px">
+            <button class="btn-submit" onclick="backToForm()" style="background:#8a7e6e">入力に戻る</button>
+            <button class="btn-submit" id="btnConfirmSubmit" onclick="confirmBooking()">この内容で予約する</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ステップ2: 完了画面 -->
+      <div id="bookStep2" style="display:none">
+        <div class="book-steps">
+          <div class="step done"><span class="step-num"><span class="step-num-digit">1</span></span><span class="step-label">入力</span></div>
+          <span class="step-line"></span>
+          <div class="step done"><span class="step-num"><span class="step-num-digit">2</span></span><span class="step-label">確認</span></div>
+          <span class="step-line"></span>
+          <div class="step active"><span class="step-num"><span class="step-num-digit">3</span></span><span class="step-label">完了</span></div>
+        </div>
+        <div class="book-done">
+          <div class="book-done-icon">🎉</div>
+          <div class="book-done-title">ご予約を受け付けました！</div>
+          <div class="book-done-text">
+            確認メールをお送りしました（メールアドレスをご入力いただいた場合）。<br><br>
+            ホストの桜芽より、24時間以内にご連絡いたします。<br>
+            ご不明点はInstagram DMでもお気軽にどうぞ。
+          </div>
+          <div style="margin-top:20px">
+            <button class="btn-submit" onclick="closePricePopup()" style="background:#8a7e6e">閉じる</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Instagram CTA -->
+  <div class="cta-area">
+    <a id="cta-btn" class="cta-btn sasamori" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      Instagramで予約する
+    </a>
+    <div class="cta-sub">DMにてご希望日をお伝えください</div>
+  </div>
+
+  <!-- キャンセル・変更のご案内 -->
+  <div style="margin-top:18px;padding:14px 18px;background:#faf7f2;border:1px solid #e8e0d2;border-radius:10px;font-size:18px;color:#6b5f4e;text-align:center;line-height:1.7;">
+    <strong style="color:#4a6741;">ご予約のキャンセル・変更について</strong><br>
+    予約確定メールに記載の「予約をキャンセルする」ボタンから、ご宿泊の48時間前までキャンセルが可能です。<br>
+    メールが見当たらない場合は、Instagram DMまたはお電話にてご連絡ください。
+  </div>
+
+</div>
+
+<script>
+(function(){
+  // ===== 設定 =====
+  var CONFIG = {
+    sasamori: {
+      name: '民宿 笹森家',
+      icalUrls: [
+        'https://www.airbnb.jp/calendar/ical/1102707699897440341.ics?t=1ded900809014cb2a0ad576dbf36475e',
+        'https://ical.booking.com/v1/export?t=efa33e4f-8b52-4154-994e-fe7579b23999',
+        'https://ical.vacation-stay.jp/ical/v1/room_groups/860420.ics?s=d817b08590d4ba36757448abb168a648'
+      ],
+      instagram: 'https://ig.me/m/sasamorihouse',
+      ctaClass: 'sasamori'
+    },
+  };
+
+  // Google Apps Script プロキシURL
+  var GAS_PROXY_URL = 'https://script.google.com/macros/s/AKfycbw9_9z9yxgUH_ijYILVzVN6vbstrg_UKzOs5t6O7OvxtOgpCzweNSJ5AmyLMEedEtL-/exec';
+
+  var currentProp = 'sasamori';
+  var bookedDates = { sasamori: {} };
+  var useFallback = { sasamori: false };
+
+  // ===== iCal パーサー =====
+  function parseIcal(text) {
+    var dates = {};
+    var events = text.split('BEGIN:VEVENT');
+    for (var i = 1; i < events.length; i++) {
+      var ev = events[i];
+      var dtstart = extractField(ev, 'DTSTART');
+      var dtend = extractField(ev, 'DTEND');
+      if (dtstart) {
+        var start = parseIcalDate(dtstart);
+        var end = dtend ? parseIcalDate(dtend) : addDays(start, 1);
+        var d = new Date(start);
+        while (d < end) {
+          dates[formatDate(d)] = true;
+          d.setDate(d.getDate() + 1);
+        }
+      }
+    }
+    return dates;
+  }
+
+  function extractField(block, field) {
+    var re = new RegExp(field + '[^:]*:(.+)');
+    var m = block.match(re);
+    return m ? m[1].trim() : null;
+  }
+
+  function parseIcalDate(s) {
+    s = s.replace(/[^0-9T]/g, '');
+    var y = parseInt(s.substr(0, 4));
+    var mo = parseInt(s.substr(4, 2)) - 1;
+    var d = parseInt(s.substr(6, 2));
+    return new Date(y, mo, d);
+  }
+
+  function addDays(date, n) {
+    var r = new Date(date);
+    r.setDate(r.getDate() + n);
+    return r;
+  }
+
+  function formatDate(d) {
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  }
+
+  // ===== iCal 取得（複数ソースをマージ） =====
+  function fetchIcal(prop, callback) {
+    var urls = CONFIG[prop].icalUrls;
+    if (!urls || urls.length === 0 || !GAS_PROXY_URL || GAS_PROXY_URL.indexOf('PASTE_') === 0) {
+      generateSampleData(prop);
+      callback();
+      return;
+    }
+
+    var mergedDates = {};
+    var completed = 0;
+    var anySuccess = false;
+
+    urls.forEach(function(url) {
+      var proxyUrl = GAS_PROXY_URL + '?url=' + encodeURIComponent(url);
+      fetch(proxyUrl)
+        .then(function(res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.text();
+        })
+        .then(function(text) {
+          if (text.indexOf('BEGIN:VCALENDAR') !== -1) {
+            var parsed = parseIcal(text);
+            for (var key in parsed) {
+              mergedDates[key] = true;
+            }
+            anySuccess = true;
+          }
+        })
+        .catch(function() { /* 個別失敗は無視、他ソースで補完 */ })
+        .finally(function() {
+          completed++;
+          if (completed >= urls.length) {
+            if (anySuccess) {
+              bookedDates[prop] = mergedDates;
+              useFallback[prop] = false;
+            } else {
+              generateSampleData(prop);
+            }
+            callback();
+          }
+        });
+    });
+  }
+
+  // ===== サンプルデータ生成 =====
+  function generateSampleData(prop) {
+    useFallback[prop] = true;
+    var dates = {};
+    var today = new Date();
+    // ランダムに数日を予約済みにする
+    var seedMap = {
+      sasamori: [3,4,5,10,11,18,19,20,25,26]
+    };
+    var seeds = seedMap[prop] || [5,6,12,13,19,20,26,27];
+    for (var m = 0; m < 12; m++) {
+      var year = today.getFullYear();
+      var month = today.getMonth() + m;
+      if (month > 11) { month -= 12; year++; }
+      for (var s = 0; s < seeds.length; s++) {
+        var dim = new Date(year, month + 1, 0).getDate();
+        if (seeds[s] <= dim) {
+          dates[year + '-' + String(month + 1).padStart(2, '0') + '-' + String(seeds[s]).padStart(2, '0')] = true;
+        }
+      }
+    }
+    bookedDates[prop] = dates;
+  }
+
+  // ===== カレンダー描画 =====
+  function renderCalendars() {
+    var container = document.getElementById('cal-container');
+    container.innerHTML = '';
+
+    if (useFallback[currentProp]) {
+      var note = document.createElement('div');
+      note.className = 'fallback-note';
+      note.textContent = '* サンプル表示中（iCal未接続）';
+      container.appendChild(note);
+    }
+
+    var today = new Date();
+    for (var m = 0; m < 12; m++) {
+      var year = today.getFullYear();
+      var month = today.getMonth() + m;
+      if (month > 11) { month -= 12; year++; }
+      renderMonth(container, year, month, today);
+    }
+  }
+
+  function renderMonth(container, year, month, today) {
+    var MONTHS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    var DOWS = ['日','月','火','水','木','金','土'];
+
+    // ヘッダー
+    var header = document.createElement('div');
+    header.className = 'month-header';
+    var h3 = document.createElement('h3');
+    h3.textContent = year + '年 ' + MONTHS[month];
+    header.appendChild(h3);
+    container.appendChild(header);
+
+    // グリッド
+    var grid = document.createElement('div');
+    grid.className = 'cal-grid';
+
+    // 曜日ラベル
+    for (var w = 0; w < 7; w++) {
+      var dow = document.createElement('div');
+      dow.className = 'dow';
+      dow.textContent = DOWS[w];
+      grid.appendChild(dow);
+    }
+
+    var firstDay = new Date(year, month, 1).getDay();
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+    var todayStr = formatDate(today);
+
+    // 空セル
+    for (var e = 0; e < firstDay; e++) {
+      var empty = document.createElement('div');
+      empty.className = 'day empty';
+      grid.appendChild(empty);
+    }
+
+    // 日付セル
+    for (var d = 1; d <= daysInMonth; d++) {
+      var cell = document.createElement('div');
+      cell.className = 'day';
+      cell.textContent = d;
+
+      var dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      var dateObj = new Date(year, month, d);
+      var isPast = dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+      if (dateStr === todayStr) {
+        cell.classList.add('today');
+      }
+
+      if (isPast) {
+        cell.classList.add('past');
+      } else if (bookedDates[currentProp][dateStr]) {
+        cell.classList.add('booked');
+      } else {
+        cell.classList.add('available');
+        cell.setAttribute('data-date', dateStr);
+        cell.onclick = function() { showPricePopup(this.getAttribute('data-date')); };
+      }
+
+      grid.appendChild(cell);
+    }
+
+    container.appendChild(grid);
+  }
+
+  // 予約受付 GAS URL
+  var GAS_BOOKING_URL = 'https://script.google.com/macros/s/AKfycbz--kp0PzzTHj_OdZXEWMWMRa0I4lsAYwhSnY6WOuQMc8EkuRtuyVsf2kUYTYyjXSxQLg/exec';
+
+  // JSONP で GAS から予約済み日付を取得してマージ
+  function fetchGasAvailability(prop, callback) {
+    var cbName = 'gasAvail_' + prop + '_' + Date.now();
+    var done = false;
+    window[cbName] = function(resp) {
+      done = true;
+      try {
+        if (resp && resp.success && resp.dates) {
+          if (!bookedDates[prop]) bookedDates[prop] = {};
+          for (var i=0;i<resp.dates.length;i++) bookedDates[prop][resp.dates[i]] = true;
+          useFallback[prop] = false;
+        }
+      } catch(e) {}
+      delete window[cbName];
+      if (s.parentNode) s.parentNode.removeChild(s);
+      callback();
+    };
+    var s = document.createElement('script');
+    s.src = GAS_BOOKING_URL + '?action=availability&prop=' + encodeURIComponent(prop) + '&callback=' + cbName + '&_=' + Date.now();
+    s.onerror = function(){ if (!done) { delete window[cbName]; callback(); } };
+    document.head.appendChild(s);
+    setTimeout(function(){ if(!done){ try{delete window[cbName];}catch(e){} callback(); } }, 8000);
+  }
+
+  // ===== データ再取得 =====
+  function refreshAll() {
+    var done = 0;
+    function onDone(){ done++; if (done>=2) renderCalendars(); }
+    fetchIcal('sasamori', onDone);
+    fetchGasAvailability('sasamori', onDone);
+  }
+
+  var PRICING = {
+    sasamori: { base: 23000, perExtra: 10000, maxGuests: 6 }
+  };
+
+  // 追加料金
+  var CHILD_FEE_PER_NIGHT = 4000;   // 4〜12歳：1名・1泊あたり
+  var PET_FEE_FIRST = 3000;          // 1頭目：滞在あたり清掃費
+  var PET_FEE_ADDITIONAL = 1000;     // 2頭目以降：1頭あたり滞在
+
+  function getSeasonInfo(dateStr) {
+    var d = new Date(dateStr);
+    var m = d.getMonth() + 1;
+    var day = d.getDate();
+    var dow = d.getDay();
+    if ((m===4 && day>=26) || (m===5 && day<=6)) return {label:'ピーク（GW）', rate:1.30};
+    if (m===8 && day>=10 && day<=17) return {label:'ピーク（お盆）', rate:1.30};
+    if ((m===12 && day>=28) || (m===1 && day<=4)) return {label:'ピーク（年末年始）', rate:1.30};
+    var isWeekend = (dow === 5 || dow === 6);
+    if (m===7 || m===8 || m===10 || (m===3 && day>=20)) return {label: isWeekend?'ハイシーズン（週末）':'ハイシーズン', rate: isWeekend?1.25:1.15};
+    if (m===1 || m===2 || m===6 || m===11) return {label: isWeekend?'閑散期（週末）':'閑散期', rate: isWeekend?0.95:0.85};
+    return {label: isWeekend?'通常（週末）':'通常', rate: isWeekend?1.10:1.00};
+  }
+
+  function formatYen(n) { return '¥' + n.toLocaleString(); }
+
+  // 泊数分の合計を計算（日ごとに季節係数が変わる）
+  // adults: 大人人数 / children: 子ども(4-12歳) / pets: ペット頭数
+  function calcTotalPrice(checkin, checkout, adults, children, pets) {
+    adults = parseInt(adults) || 0;
+    children = parseInt(children) || 0;
+    pets = parseInt(pets) || 0;
+    var p = PRICING[currentProp];
+    var ci = new Date(checkin); var co = new Date(checkout);
+    var roomTotal = 0; var nights = 0; var d = new Date(ci);
+    while (d < co) {
+      var season = getSeasonInfo(formatDate(d));
+      var base = Math.round(p.base * season.rate / 100) * 100;
+      var extra = adults > 2 ? Math.round(p.perExtra * season.rate / 100) * 100 * (adults - 2) : 0;
+      roomTotal += base + extra;
+      nights++;
+      d.setDate(d.getDate() + 1);
+    }
+    var childFee = children * CHILD_FEE_PER_NIGHT * nights;
+    var petFee = pets > 0 ? PET_FEE_FIRST + (pets - 1) * PET_FEE_ADDITIONAL : 0;
+    return {
+      room: roomTotal,
+      child: childFee,
+      pet: petFee,
+      total: roomTotal + childFee + petFee,
+      nights: nights
+    };
+  }
+
+  window.showPricePopup = function(dateStr) {
+    // リセット
+    document.getElementById('bookStep1').style.display = '';
+    document.getElementById('bookStep2').style.display = 'none';
+    document.getElementById('btnSubmit').disabled = false;
+    document.getElementById('btnSubmit').textContent = 'この内容で予約する';
+
+    var info = getSeasonInfo(dateStr);
+    var p = PRICING[currentProp];
+    var base = Math.round(p.base * info.rate / 100) * 100;
+    var perExtra = Math.round(p.perExtra * info.rate / 100) * 100;
+
+    var d = new Date(dateStr);
+    var DOWS = ['日','月','火','水','木','金','土'];
+    var dateLabel = d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日（'+DOWS[d.getDay()]+'）';
+
+    document.getElementById('popupDate').textContent = dateLabel;
+    document.getElementById('popupSeason').textContent = info.label;
+    document.getElementById('popupPrice').innerHTML = formatYen(base) + ' <small>／泊（1〜2名）</small>';
+
+    var detail = '3名: ' + formatYen(base + perExtra) +
+                 ' ／ 4名: ' + formatYen(base + perExtra*2) +
+                 ' ／ 5名: ' + formatYen(base + perExtra*3) +
+                 ' ／ 6名: ' + formatYen(base + perExtra*4);
+    document.getElementById('popupDetail').textContent = detail;
+
+    // フォーム初期値
+    var co = new Date(d); co.setDate(co.getDate() + 1);
+    document.getElementById('fCheckin').value = dateStr;
+    document.getElementById('fCheckout').value = formatDate(co);
+    document.getElementById('fGuests').value = '2';
+    document.getElementById('fChildren').value = '0';
+    document.getElementById('fInfants').value = '0';
+    document.getElementById('fPets').value = '0';
+    document.getElementById('fName').value = '';
+    document.getElementById('fContact').value = '';
+    document.getElementById('fEmail').value = '';
+    document.getElementById('fNote').value = '';
+    updateTotal();
+
+    document.getElementById('priceOverlay').classList.add('show');
+  };
+
+  window.updateTotal = function() {
+    var ci = document.getElementById('fCheckin').value;
+    var co = document.getElementById('fCheckout').value;
+    var adults = document.getElementById('fGuests').value;
+    var children = document.getElementById('fChildren').value;
+    var pets = document.getElementById('fPets').value;
+    if (!ci || !co || new Date(co) <= new Date(ci)) {
+      document.getElementById('fTotal').innerHTML = '';
+      return;
+    }
+    var r = calcTotalPrice(ci, co, adults, children, pets);
+    var breakdown = '<small style="display:block;margin-top:6px;line-height:1.7;">'
+      + '宿泊料：' + formatYen(r.room) + '（' + r.nights + '泊 × 大人' + adults + '名）';
+    if (r.child > 0) breakdown += '<br>子ども料金：' + formatYen(r.child) + '（' + children + '名 × ' + r.nights + '泊）';
+    if (r.pet > 0) breakdown += '<br>ペット料金：' + formatYen(r.pet) + '（' + pets + '頭）';
+    breakdown += '</small>';
+    document.getElementById('fTotal').innerHTML = '<strong>合計 ' + formatYen(r.total) + '</strong>' + breakdown;
+  };
+
+  window.closePricePopup = function() {
+    document.getElementById('priceOverlay').classList.remove('show');
+  };
+
+  var pendingBookingData = null;
+
+  window.showConfirmation = function() {
+    var name = document.getElementById('fName').value.trim();
+    var contact = document.getElementById('fContact').value.trim();
+    var email = document.getElementById('fEmail').value.trim();
+    var address = document.getElementById('fAddress').value.trim() || 'チェックイン時記入予定';
+    var occupation = document.getElementById('fOccupation').value.trim() || 'チェックイン時記入予定';
+    var nationality = document.getElementById('fNationality').value.trim();
+    var payment = document.getElementById('fPayment').value;
+    var checkin = document.getElementById('fCheckin').value;
+    var checkout = document.getElementById('fCheckout').value;
+    var guests = document.getElementById('fGuests').value;
+    var children = document.getElementById('fChildren').value;
+    var infants = document.getElementById('fInfants').value;
+    var pets = document.getElementById('fPets').value;
+    var agreed = document.getElementById('fAgree').checked;
+    var hp = document.getElementById('fHp').value;
+
+    if (!name) { alert('お名前を入力してください'); return; }
+    if (!contact) { alert('連絡先を入力してください'); return; }
+    if (!email) { alert('メールアドレスを入力してください'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('メールアドレスの形式が正しくありません'); return; }
+    if (!payment) { alert('お支払い方法を選択してください'); return; }
+    if (!agreed) { alert('利用規約・キャンセルポリシー・プライバシーポリシーへのご同意が必要です'); return; }
+    if (!checkin || !checkout || new Date(checkout) <= new Date(checkin)) { alert('日程を正しく入力してください'); return; }
+    // 定員チェック（大人＋4-12歳子ども ≤ 6）
+    var occupants = parseInt(guests) + parseInt(children);
+    if (occupants > 6) { alert('大人と子ども（4〜12歳）の合計が定員（6名）を超えています'); return; }
+    // リードタイムチェック
+    var leadHours = (new Date(checkin + 'T15:00:00+09:00') - new Date()) / 36e5;
+    if (leadHours < 24) { alert('チェックイン24時間前を過ぎているため、Webからの予約は承れません。Instagram DMかお電話でお問い合わせください。'); return; }
+
+    var r = calcTotalPrice(checkin, checkout, guests, children, pets);
+    var nights = r.nights;
+
+    var guestSummary = guests + '名（大人）'
+      + (parseInt(children) > 0 ? ' / 子ども' + children + '名' : '')
+      + (parseInt(infants) > 0 ? ' / 幼児' + infants + '名' : '');
+    var petSummary = parseInt(pets) > 0 ? pets + '頭' : 'なし';
+
+    var priceSummary = formatYen(r.total) + '（' + nights + '泊'
+      + ' / 宿泊' + formatYen(r.room)
+      + (r.child > 0 ? ' + 子ども' + formatYen(r.child) : '')
+      + (r.pet > 0 ? ' + ペット' + formatYen(r.pet) : '')
+      + '）';
+
+    pendingBookingData = {
+      property: currentProp,
+      checkin: checkin,
+      checkout: checkout,
+      guests: guestSummary,
+      adults: guests,
+      children: children,
+      infants: infants,
+      pets: pets,
+      name: name,
+      contact: contact,
+      email: email,
+      address: address,
+      occupation: occupation,
+      nationality: nationality,
+      payment: payment,
+      agreed: agreed,
+      website: hp,
+      lang: 'ja',
+      note: document.getElementById('fNote').value.trim(),
+      totalPrice: priceSummary,
+      priceBreakdown: { room: r.room, child: r.child, pet: r.pet, total: r.total }
+    };
+
+    // 確認リスト描画
+    var esc = function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+    var priceCell = '<div>' + esc(formatYen(r.total)) + '</div>'
+      + '<div style="font-size:13px;color:#8a7e6e;margin-top:4px;">'
+      + '宿泊 ' + esc(formatYen(r.room))
+      + (r.child > 0 ? ' + 子ども ' + esc(formatYen(r.child)) : '')
+      + (r.pet > 0 ? ' + ペット ' + esc(formatYen(r.pet)) : '')
+      + '</div>';
+    var rows = [
+      ['ご宿泊', esc(CONFIG[currentProp].name || currentProp)],
+      ['チェックイン', esc(checkin)],
+      ['チェックアウト', esc(checkout) + '（' + nights + '泊）'],
+      ['大人', esc(guests) + '名'],
+      ['子ども（4〜12歳）', parseInt(children) > 0 ? esc(children) + '名' : '0名'],
+      ['幼児（0〜3歳）', parseInt(infants) > 0 ? esc(infants) + '名' : '0名'],
+      ['ペット', esc(petSummary)],
+      ['合計金額', priceCell],
+      ['お名前', esc(name)],
+      ['電話番号', esc(contact)],
+      ['メール', esc(email)],
+      ['住所', esc(address)],
+      ['職業', esc(occupation)],
+      ['国籍', esc(nationality) || '（未入力）'],
+      ['お支払い方法', esc(payment)],
+      ['備考', esc(pendingBookingData.note) || '（なし）']
+    ];
+    var html = rows.map(function(r){
+      return '<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px dashed #e0d8c5"><div style="flex:0 0 96px;color:#8a7e6e;font-weight:700">'+r[0]+'</div><div style="flex:1;word-break:break-word">'+r[1]+'</div></div>';
+    }).join('');
+    document.getElementById('confirmList').innerHTML = html;
+    document.getElementById('bookStep1').style.display = 'none';
+    document.getElementById('bookStepConfirm').style.display = '';
+  };
+
+  window.backToForm = function() {
+    document.getElementById('bookStepConfirm').style.display = 'none';
+    document.getElementById('bookStep1').style.display = '';
+  };
+
+  window.confirmBooking = function() {
+    if (!pendingBookingData) return;
+    var btn = document.getElementById('btnConfirmSubmit');
+    btn.disabled = true;
+    btn.textContent = '送信中...';
+    var data = pendingBookingData;
+
+    if (GAS_BOOKING_URL.indexOf('PASTE_') === 0) {
+      // GAS未設定時はデモモード
+      setTimeout(function() {
+        document.getElementById('bookStepConfirm').style.display = 'none';
+        document.getElementById('bookStep2').style.display = '';
+      }, 800);
+      return;
+    }
+
+    fetch(GAS_BOOKING_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data)
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(result) {
+      if (result.success) {
+        document.getElementById('bookStepConfirm').style.display = 'none';
+        document.getElementById('bookStep2').style.display = '';
+        try{ gtag('event','booking_completed',{property:window.currentProp||'sasamoriya',checkin:(data&&data.checkin)||'',nights:(data&&data.nights)||''}); }catch(e){}
+      } else {
+        alert('エラーが発生しました: ' + (result.error || '不明なエラー'));
+        btn.disabled = false;
+        btn.textContent = 'この内容で予約する';
+      }
+    })
+    .catch(function(err) {
+      alert('通信エラーが発生しました。もう一度お試しください。');
+      btn.disabled = false;
+      btn.textContent = 'この内容で予約する';
+    });
+  };
+
+  // ===== 初期化 =====
+  function init() {
+    refreshAll();
+    // CTA初期設定
+    var btn = document.getElementById('cta-btn');
+    btn.href = CONFIG[currentProp].instagram;
+
+    // 15分ごとに自動更新
+    setInterval(refreshAll, 15 * 60 * 1000);
+  }
+
+  init();
+
+  // Show passport field if loaded from English page
+  try {
+    if (window.parent && window.parent.location.href.indexOf('/en/') !== -1) {
+      var pf = document.getElementById('passportField');
+      if (pf) pf.style.display = 'block';
+    }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

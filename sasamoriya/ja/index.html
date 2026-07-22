@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- SNSアプリ内ブラウザ由来のノイズエラーを抑制（Clarity/GA計測を汚さない） -->
+<script>
+(function(){
+  var IAB_NOISE = /(_autofillCallbackHandler|window\.webkit\.messageHandlers|contentWindow\.postMessage|__gCrWeb|null is not an object.*postMessage)/i;
+  window.addEventListener('error', function(e){
+    if(e && e.message && IAB_NOISE.test(e.message)){ e.stopImmediatePropagation(); }
+  }, true);
+  window.addEventListener('unhandledrejection', function(e){
+    var m = (e && e.reason && (e.reason.message||''+e.reason)) || '';
+    if(IAB_NOISE.test(m)){ e.preventDefault && e.preventDefault(); }
+  });
+})();
+</script>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJSJFMXPX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
+
+/* --- Pack Vacation カスタムイベント追跡 --- */
+(function(){
+  /* 1. スクロール深度 (25/50/75/100%) */
+  var scrollFired={};
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body;
+    var pct=Math.round((h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight)*100);
+    [25,50,75,100].forEach(function(t){
+      if(pct>=t&&!scrollFired[t]){scrollFired[t]=true;gtag('event','scroll_depth',{depth:t+'%'});}
+    });
+  },{passive:true});
+
+  /* 2. 電話タップ */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="tel:"]');
+    if(a)gtag('event','phone_tap',{phone_number:a.getAttribute('href').replace('tel:','')});
+  });
+
+  /* 3. 予約ボタン / CTA クリック */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="#calendar"],a[href*="availability"],button,.btn,.tel-btn');
+    if(a){
+      var txt=(a.textContent||'').trim().slice(0,40);
+      gtag('event','cta_click',{cta_text:txt,cta_href:a.getAttribute('href')||''});
+    }
+  });
+
+  /* 4. 予約フォーム送信完了 */
+  var origConfirm=window.confirmBooking;
+  if(typeof origConfirm==='function'){
+    window.confirmBooking=function(){
+      gtag('event','booking_submit',{property:window.currentProp||''});
+      return origConfirm.apply(this,arguments);
+    };
+  }
+
+  /* 5. 言語切替 */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="/ja/"],a[href*="/en/"],a.lang-jp,a.lang-en');
+    if(a){
+      var lang=a.getAttribute('href').indexOf('/en/')!==-1?'en':'ja';
+      gtag('event','language_switch',{language:lang});
+    }
+  });
+
+  /* 6. セクション到達 (Intersection Observer) */
+  if('IntersectionObserver' in window){
+    var secFired={};
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting&&!secFired[en.target.id]){
+          secFired[en.target.id]=true;
+          gtag('event','section_view',{section:en.target.id});
+        }
+      });
+    },{threshold:0.3});
+    document.querySelectorAll('section[id]').forEach(function(s){obs.observe(s);});
+  }
+})();
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wxh6i8m022");
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1428749555963386');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {content_name: 'sasamoriya', content_category: 'lodging', content_type: 'product'});
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('a[href*="calendar"], a[href*="availability"]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      fbq('track', 'Lead', {content_name: 'sasamoriya', content_category: 'availability_check'});
+    });
+  });
+});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1428749555963386&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>民宿笹森家｜安曇野・森の中の一棟貸し</title>
+<meta name="description" content="安曇野学者村の森の中、2LDK一棟まるごと貸切。ペットOK・BBQ・100インチホームシアター・2025年新設浴室。素泊まり1泊¥15,000〜">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏡</text></svg>">
+<meta property="og:title" content="民宿笹森家｜安曇野の森に佇む一棟貸しの宿">
+<meta property="og:description" content="安曇野学者村の森の中、2LDK一棟まるごと貸切。ペットOK・BBQ・ホームシアター・2025年新設浴室。">
+<meta property="og:image" content="../images/exterior-autumn.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown: #5C3D2E;
+    --cream: #F8F5F0;
+    --green: #3C5A3A;
+    --gold: #B89B5E;
+    --text: #2C2C2C;
+    --muted: #7A7368;
+    --light: #EFEBE4;
+    --dark: #1A1A18;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Zen Old Mincho', 'Hiragino Mincho ProN', serif;
+    color: var(--text); background: var(--cream);
+    letter-spacing: 0.06em; line-height: 2.0; font-weight: 400;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 { font-weight: 500; letter-spacing: 0.15em; line-height: 1.6; }
+
+  /* ===== FADE IN ===== */
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== HEADER ===== */
+  header {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(248,245,240,0.92); backdrop-filter: blur(12px);
+    padding: 20px 48px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-img { height: 56px; width: auto; }
+  .logo-text { font-size:1.125rem; color: var(--brown); letter-spacing: 0.2em; font-weight: 500; }
+  .logo-text span { font-size:1.125rem; display: block; color: var(--muted); letter-spacing: 0.3em; margin-top: 2px; }
+  nav a { margin-left: 32px; text-decoration: none; color: var(--muted); font-size:1.125rem; letter-spacing: 0.15em; transition: color 0.3s; }
+  nav a:hover { color: var(--brown); }
+  .btn-book {
+    background: var(--brown); color: white; padding: 10px 28px;
+    text-decoration: none; font-size:1.125rem; letter-spacing: 0.2em;
+    transition: opacity 0.3s;
+  }
+  .btn-book:hover { opacity: 0.8; }
+
+  /* ===== HERO ===== */
+  .hero {
+    height: 100vh; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    filter: brightness(0.45);
+    opacity: 0; transition: opacity 1.2s ease-in-out;
+  }
+  .hero-slide.active { opacity: 1; }
+  .hero-content { position: relative; text-align: center; color: white; padding: 0 24px; }
+  .hero-sub { font-size:1.125rem; letter-spacing: 0.5em; margin-bottom: 24px; opacity: 0.7; }
+  .hero-title { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.5; margin-bottom: 24px; letter-spacing: 0.2em; font-weight: 400; }
+  .hero-desc { font-size:1.15rem; letter-spacing: 0.15em; opacity: 0.92; margin-bottom: 48px; }
+  .hero-btn {
+    display: inline-block; padding: 16px 56px;
+    border: 1px solid rgba(255,255,255,0.4); color: white;
+    text-decoration: none; letter-spacing: 0.25em; font-size:1.125rem;
+    transition: all 0.4s;
+  }
+  .hero-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+  .scroll-hint { display: none; }
+  .scroll-hint-legacy {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,0.4); font-size:1.125rem; letter-spacing: 0.4em;
+  }
+  .scroll-hint::after {
+    content: ''; display: block; width: 1px; height: 40px;
+    background: rgba(255,255,255,0.3); margin: 12px auto 0;
+  }
+
+  /* ===== SECTIONS ===== */
+  .section-inner { max-width: 1000px; margin: 0 auto; padding: 100px 48px; }
+  .section-label { font-size:1.125rem; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 20px; }
+  .section-title { font-size: clamp(1.5rem, 2.5vw, 2.2rem); color: var(--brown); margin-bottom: 32px; }
+  .section-text { color: var(--muted); font-size:1.125rem; }
+  .divider { border: none; border-top: 1px solid var(--gold); width: 40px; margin: 0; }
+
+  /* ===== ABOUT ===== */
+  .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .about-img { width: 100%; height: 400px; object-fit: cover; }
+  .badge { font-size:1.125rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 16px; display: block; }
+
+  /* ===== ROOMS ===== */
+  .rooms-section { background: var(--light); }
+  /* essentials: at-a-glance info */
+  .room-essentials { padding: 22px 0; border-top: 1px solid var(--light); border-bottom: 1px solid var(--light); margin: 20px 0; }
+  .room-essentials-row { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; font-size:1rem; color:var(--brown); margin-bottom:20px; line-height:1.7; }
+  .room-essentials-row span { display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+  .room-essentials-row b { color:var(--green); font-size:1.15rem; letter-spacing:0.02em; }
+  .room-cta-primary { display:flex; align-items:center; justify-content:center; gap:10px; background:var(--green); color:#fff !important; padding:18px 24px; border-radius:12px; text-decoration:none !important; font-weight:700; font-size:1.05rem; letter-spacing:0.1em; box-shadow:0 8px 20px -8px rgba(0,0,0,0.25); transition:0.2s; }
+  .room-cta-primary:hover { transform:translateY(-2px); box-shadow:0 12px 24px -8px rgba(0,0,0,0.35); }
+  /* collapsible details */
+  .room-more { margin-top:16px; }
+  .room-more > summary { cursor:pointer; padding:14px 20px; background:#f5f0e8; border-radius:10px; font-size:0.95rem; color:var(--brown); font-weight:600; letter-spacing:0.08em; list-style:none; text-align:center; transition:0.2s; }
+  .room-more > summary::-webkit-details-marker { display:none; }
+  .room-more > summary::after { content:' ▾'; margin-left:6px; }
+  .room-more[open] > summary::after { content:' ▴'; }
+  .room-more > summary:hover { background:#ede5d7; }
+  .room-more-body { padding-top:24px; }
+  /* mid-scroll CTA */
+  .room-midCTA { max-width:640px; margin:56px auto 0; text-align:center; padding:36px 28px; background:linear-gradient(135deg,#fff9f0,#f5ede0); border-radius:18px; }
+  .room-midCTA p { font-size:1rem; color:var(--brown); margin-bottom:20px; line-height:1.9; }
+  .room-midCTA .room-cta-big { display:inline-block; background:var(--green); color:#fff !important; padding:20px 44px; border-radius:999px; text-decoration:none !important; font-weight:700; font-size:1.1rem; letter-spacing:0.1em; box-shadow:0 10px 24px -8px rgba(0,0,0,0.3); transition:0.2s; }
+  .room-midCTA .room-cta-big:hover { transform:translateY(-3px); box-shadow:0 14px 30px -8px rgba(0,0,0,0.4); }
+  @media (max-width:768px){
+    .room-essentials-row { gap:10px; font-size:0.9rem; }
+    .room-essentials-row b { font-size:1.05rem; }
+    .room-cta-primary { font-size:1rem; padding:16px 20px; }
+    .room-midCTA { padding:28px 20px; margin-top:40px; }
+    .room-midCTA .room-cta-big { padding:18px 32px; font-size:1rem; }
+  }
+  .room-card { background: white; max-width: 900px; margin: 0 auto; overflow: hidden; }
+  .room-img-main { width: 100%; height: 340px; object-fit: cover; }
+  .room-info { padding: 48px; }
+  .room-name { font-size:1.2rem; color: var(--brown); margin-bottom: 24px; letter-spacing: 0.15em; }
+  .room-details { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 24px; }
+  .room-details-label { font-size:1.125rem; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 12px; }
+  .room-details ul { list-style: none; font-size:1.125rem; color: var(--muted); line-height: 2.2; }
+  .room-price { font-size:1.125rem; color: var(--green); margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--light); }
+  .room-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 32px; }
+  .room-gallery img { width: 100%; height: 160px; object-fit: cover; }
+  .room-gallery figcaption { font-size:1.125rem; color: var(--muted); text-align: center; margin-top: 8px; letter-spacing: 0.1em; line-height: 2.2; }
+
+  /* ===== ACTIVITIES ===== */
+  .act-photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 4px; }
+  .act-photo { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+  .act-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+  .act-photo:hover img { transform: scale(1.05); }
+  .act-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
+  }
+  .act-photo-label { color: var(--gold); font-size:1.125rem; letter-spacing: 0.3em; margin-bottom: 8px; }
+  .act-photo-name { color: white; font-size:1.125rem; letter-spacing: 0.1em; }
+  .act-photo-desc { color: rgba(255,255,255,0.6); font-size:1.125rem; margin-top: 6px; }
+  .act-tags { display: flex; flex-wrap: wrap; gap: 12px; max-width: 1000px; margin: 48px auto 0; padding: 0 48px; justify-content: center; }
+  .act-tag { font-size:1.125rem; color: var(--muted); letter-spacing: 0.1em; padding: 10px 24px; border: 1px solid var(--light); }
+
+  /* ===== AZUMINO ACTIVITIES (Reels) ===== */
+  .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1240px; margin: 0 auto; padding: 0 48px; }
+  .reel-item { text-align: center; }
+  .reel-item iframe { width: 100%; height: 360px; border: none; border-radius: 12px; }
+  .reel-caption { font-size:1.125rem; color: var(--muted); margin-top: 12px; letter-spacing: 0.02em; white-space: nowrap; }
+
+  /* ===== REVIEWS ===== */
+  .reviews-section { background: white; }
+  .review-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+  .review-card { padding: 32px; background: var(--cream); border-radius: 8px; }
+  .review-stars { color: var(--gold); font-size:1.125rem; letter-spacing: 0.15em; margin-bottom: 16px; }
+  .review-text { color: var(--muted); font-size:1.125rem; line-height: 2.0; margin-bottom: 20px; }
+  .review-author { font-size:1.125rem; color: var(--brown); letter-spacing: 0.1em; }
+
+  /* ===== SEASONS (same UI as activities) ===== */
+  .season-photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .season-photo { position: relative; overflow: hidden; aspect-ratio: 3/4; }
+  .season-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+  .season-photo:hover img { transform: scale(1.05); }
+  .season-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
+  }
+  .season-photo-label { color: var(--gold); font-size:1.125rem; letter-spacing: 0.3em; margin-bottom: 8px; }
+  .season-photo-name { color: white; font-size:1.125rem; letter-spacing: 0.1em; }
+  .season-photo-desc { color: rgba(255,255,255,0.6); font-size:1.125rem; margin-top: 6px; }
+
+  /* ===== ACCESS ===== */
+  .access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 32px; }
+  .access-info dt { font-size:1.125rem; color: var(--gold); letter-spacing: 0.2em; margin-top: 28px; }
+  .access-info dt:first-child { margin-top: 0; }
+  .access-info dd { color: var(--muted); line-height: 1.9; margin-top: 8px; font-size:1.125rem; }
+
+  /* ===== FOOTER ===== */
+  footer { background: var(--dark); color: rgba(255,255,255,0.4); text-align: center; padding: 60px 48px; font-size:1.125rem; letter-spacing: 0.15em; }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; }
+  footer a:hover { color: var(--gold); }
+  .footer-links { margin: 20px 0; }
+  .footer-links a { margin: 0 16px; }
+
+  /* ===== CHIP NAV (常時表示のページ内目次) ===== */
+  .chip-nav { display: none; position: fixed; top: 74px; left: 0; right: 0; z-index: 90;
+    background: rgba(255,255,255,0.96); backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0,0,0,0.05); border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 8px 0; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; white-space: nowrap; text-align: left;
+  }
+  .chip-nav::-webkit-scrollbar { display: none; }
+  .chip-nav-inner { padding: 0 16px; display: inline-block; }
+  .chip-nav a { display: inline-block; padding: 8px 16px; margin: 0 4px;
+    border-radius: 999px; background: #fff; color: var(--brown);
+    font-size: 0.82rem; text-decoration: none; border: 1px solid #e5dfd0;
+    letter-spacing: 0.05em; transition: 0.2s;
+  }
+  .chip-nav a.cta { background: var(--green); color: #fff; border-color: var(--green); font-weight: 700; }
+  .chip-nav a:active { transform: scale(0.96); }
+  /* When chip-nav visible on mobile, push content down */
+  body.has-chipnav { padding-top: 44px; }
+
+  /* ===== HAMBURGER MENU ===== */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .hamburger span { display: block; width: 20px; height: 1.5px; background: var(--brown); margin: 5px 0; transition: all 0.3s; }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+  .mobile-nav {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: rgba(248,245,240,0.97); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { text-decoration: none; color: var(--brown); font-size:1.125rem; letter-spacing: 0.2em; }
+
+  /* ===== HOST ===== */
+  .host-wrap { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: center; }
+  .host-photo { width: 280px; height: 280px; border-radius: 50%; object-fit: cover; background: var(--light); }
+  .host-name { font-size:1.2rem; color: var(--brown); margin-bottom: 8px; }
+  .host-role { font-size:1.125rem; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 20px; }
+  .host-text { color: var(--muted); font-size:1.125rem; line-height: 2.2; }
+
+  /* ===== FAQ ===== */
+  .faq-list { max-width: 800px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--light); }
+  .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 24px 0; font-family: inherit; font-size:1.125rem; color: var(--brown); letter-spacing: 0.08em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; line-height: 1.8; }
+  .faq-q::after { content: '+'; font-size:1.2rem; color: var(--gold); transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
+  .faq-q.open::after { content: '−'; }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
+  .faq-a-inner { padding: 0 0 24px; color: var(--muted); font-size:1.125rem; line-height: 2.2; }
+
+  /* ===== CONTACT ===== */
+  .contact-section { background: var(--brown); color: white; text-align: center; }
+  .contact-section .section-label { color: rgba(255,255,255,0.4); }
+  .contact-section h2 { color: white; }
+  .contact-text { color: rgba(255,255,255,0.6); font-size:1.125rem; margin-bottom: 36px; }
+  .btn-contact {
+    display: inline-block; padding: 16px 48px; border: 1px solid rgba(255,255,255,0.3);
+    color: white; text-decoration: none; font-size:1.125rem; letter-spacing: 0.2em;
+    transition: all 0.3s; margin: 0 8px;
+  }
+  .btn-contact:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+  .lang-switch { font-size:1.125rem; color: var(--muted); letter-spacing: 0.15em; margin-left: 24px; text-decoration: none; border: 1px solid var(--light); padding: 6px 14px; transition: all 0.3s; }
+  .lang-switch:hover { color: var(--brown); border-color: var(--brown); }
+
+  /* ===== HERO BADGES & META ===== */
+  .hero-badges { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin: 24px 0 28px; }
+  .hero-badge {
+    display:inline-block; padding:6px 14px;
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(6px);
+    border:1px solid rgba(255,255,255,0.3);
+    color:#fff; font-size:0.85rem; letter-spacing:0.08em; border-radius:999px;
+  }
+  .hero-meta {
+    display:flex; justify-content:center; gap:32px;
+    margin: 0 auto 36px; padding:18px 28px;
+    background: rgba(0,0,0,0.35); backdrop-filter: blur(6px);
+    border-radius:8px; max-width:560px;
+  }
+  .hero-meta-item { display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .hero-meta-label { color: var(--gold); font-size:0.7rem; letter-spacing:0.3em; }
+  .hero-meta-value { color:#fff; font-size:1rem; font-weight:500; letter-spacing:0.05em; }
+
+  /* ===== PRICING TABLE SECTION ===== */
+  .pricing-section { background: var(--cream); }
+  .pricing-table-wrap { max-width: 880px; margin: 0 auto; background:#fff; padding:48px; box-shadow: 0 2px 16px rgba(0,0,0,0.04); }
+  .pricing-table { width:100%; border-collapse:collapse; }
+  .pricing-table th, .pricing-table td {
+    padding:16px 12px; text-align:center; border-bottom:1px solid var(--light);
+    font-size:1rem;
+  }
+  .pricing-table thead th {
+    background: var(--brown); color:#fff; font-weight:500; letter-spacing:0.1em;
+    font-size:0.9rem;
+  }
+  .pricing-table tbody th {
+    background: var(--light); color: var(--brown); font-weight:500;
+    text-align:left; padding-left:20px;
+  }
+  .pricing-table td { color: var(--text); }
+  .pricing-table td.highlight { color: var(--green); font-weight:600; }
+  .pricing-note { margin-top:24px; color: var(--muted); font-size:0.9rem; line-height:1.9; }
+  .pricing-note ul { list-style:none; padding:0; }
+  .pricing-note li::before { content:"・"; color: var(--gold); }
+  .pricing-cta { text-align:center; margin-top:32px; }
+  .pricing-cta a {
+    display:inline-block; padding:16px 48px; background: var(--green); color:#fff;
+    text-decoration:none; letter-spacing:0.2em; font-size:1rem;
+    transition: opacity 0.3s;
+  }
+  .pricing-cta a:hover { opacity:0.85; }
+
+  /* ===== MOBILE STICKY BOOK BAR ===== */
+  .sticky-book-bar { display:none; }
+
+  /* ===== LIGHTBOX ===== */
+  .lightbox {
+    position:fixed; inset:0; background: rgba(0,0,0,0.92);
+    z-index:9999; display:none; align-items:center; justify-content:center;
+    padding:24px; cursor: zoom-out;
+  }
+  .lightbox.open { display:flex; }
+  .lightbox img { max-width:96vw; max-height:90vh; object-fit:contain; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+  .lightbox-close {
+    position:absolute; top:20px; right:24px;
+    background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;
+    line-height:1; padding:8px 12px;
+  }
+  .lightbox-prev, .lightbox-next {
+    position:absolute; top:50%; transform:translateY(-50%);
+    background: rgba(255,255,255,0.1); border:none; color:#fff;
+    font-size:2rem; cursor:pointer; padding:16px 20px; user-select:none;
+  }
+  .lightbox-prev { left:16px; } .lightbox-next { right:16px; }
+  .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.2); }
+  .lightboxable { cursor: zoom-in; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    header { padding: 14px 20px; }
+    nav { display: none; }
+    .hamburger { display: block; }
+    .chip-nav { display: block; top: 64px; }
+    body.has-chipnav { padding-top: 52px; }
+    .section-inner { padding: 72px 24px; }
+    .about-wrap, .access-grid, .room-details { grid-template-columns: 1fr; }
+    .about-img { height: 280px; }
+    .room-info { padding: 32px 24px; }
+    .room-gallery img { height: 120px; }
+    .act-tags { padding: 0 24px; }
+    .reel-grid { padding: 0 24px; grid-template-columns: 1fr; }
+    .reel-item iframe { height: 320px; }
+    .host-wrap { grid-template-columns: 1fr; text-align: center; }
+    .host-photo { margin: 0 auto 24px; width: 200px; height: 200px; }
+    .review-grid { grid-template-columns: 1fr; }
+    .season-photo-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 48px 24px; }
+
+    /* ===== MOBILE FONT SIZE OVERRIDES ===== */
+    /* Header */
+    header { padding: 10px 16px; }
+    .logo-img { height: 40px; }
+    .logo-text { font-size: 0.85rem; letter-spacing: 0.12em; line-height: 1.3; }
+    .logo-text span { font-size: 0.6rem; letter-spacing: 0.18em; margin-top: 1px; }
+    .btn-book { font-size: 0.7rem; padding: 7px 12px; letter-spacing: 0.1em; white-space: nowrap; }
+    nav a { font-size: 0.9rem; }
+    .mobile-nav a { font-size: 1rem; }
+    .lang-switch { font-size: 0.7rem; padding: 4px 10px; margin-left: 12px; }
+
+    /* Hero */
+    .hero-sub { font-size: 0.7rem; letter-spacing: 0.3em; margin-bottom: 14px; }
+    .hero-title { font-size: 1.4rem; letter-spacing: 0.05em; line-height: 1.6; margin-bottom: 14px; }
+    .hero-desc { font-size: 0.85rem; letter-spacing: 0.05em; margin-bottom: 18px; }
+    .hero-btn { font-size: 0.85rem; padding: 14px 32px; letter-spacing: 0.18em; }
+    .scroll-hint { display:none; }
+    .hero-badges { gap:6px; margin: 14px 0 18px; }
+    .hero-badge { font-size: 0.7rem; padding: 4px 10px; }
+    .hero-meta { gap: 16px; padding: 12px 16px; margin-bottom: 22px; }
+    .hero-meta-label { font-size: 0.55rem; letter-spacing: 0.2em; }
+    .hero-meta-value { font-size: 0.8rem; }
+
+    /* Pricing */
+    .pricing-table-wrap { padding: 24px 16px; }
+    .pricing-table th, .pricing-table td { padding: 10px 6px; font-size: 0.85rem; }
+    .pricing-table tbody th { padding-left: 10px; }
+    .pricing-cta a { padding: 14px 32px; font-size: 0.9rem; letter-spacing: 0.15em; }
+
+    /* Sticky book bar - mobile only */
+    .sticky-book-bar {
+      display:flex; position:fixed; bottom:0; left:0; right:0; z-index:90;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
+      border-top: 1px solid var(--light);
+      padding: 10px 14px; padding-bottom: calc(10px + env(safe-area-inset-bottom));
+      align-items:center; justify-content:space-between; gap:12px;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+    }
+    .sticky-book-info { display:flex; flex-direction:column; line-height:1.2; }
+    .sticky-book-price { font-size: 1rem; color: var(--brown); font-weight:700; }
+    .sticky-book-sub { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+    .sticky-book-btn {
+      background: var(--green); color:#fff; text-decoration:none;
+      padding: 14px 24px; font-size: 0.9rem; font-weight:700;
+      letter-spacing: 0.1em; border-radius: 6px; white-space:nowrap;
+    }
+    body { padding-bottom: 76px; }
+
+    /* Sections */
+    .section-label { font-size: 0.7rem; letter-spacing: 0.35em; margin-bottom: 14px; }
+    .section-title { font-size: 1.4rem; letter-spacing: 0.08em; margin-bottom: 24px; }
+    .section-text { font-size: 0.95rem; line-height: 1.9; }
+    .badge { font-size: 0.7rem; letter-spacing: 0.18em; margin-bottom: 12px; }
+
+    /* Rooms */
+    .room-name { font-size: 1.05rem; letter-spacing: 0.1em; margin-bottom: 18px; }
+    .room-details-label { font-size: 0.75rem; letter-spacing: 0.18em; margin-bottom: 8px; }
+    .room-details ul { font-size: 0.9rem; line-height: 2.0; }
+    .room-price { font-size: 0.9rem; }
+    .room-gallery figcaption { font-size: 0.75rem; }
+
+    /* Activities */
+    .act-photo-label { font-size: 0.7rem; letter-spacing: 0.25em; }
+    .act-photo-name { font-size: 0.95rem; }
+    .act-photo-desc { font-size: 0.8rem; }
+    .act-tag { font-size: 0.8rem; padding: 8px 18px; }
+
+    /* Reels */
+    .reel-caption { font-size: 0.8rem; }
+
+    /* Reviews */
+    .review-stars { font-size: 0.9rem; }
+    .review-text { font-size: 0.9rem; line-height: 1.9; }
+    .review-author { font-size: 0.85rem; }
+
+    /* Seasons */
+    .season-photo-label { font-size: 0.65rem; letter-spacing: 0.25em; }
+    .season-photo-name { font-size: 0.85rem; }
+    .season-photo-desc { font-size: 0.75rem; }
+
+    /* Access */
+    .access-info dt { font-size: 0.75rem; letter-spacing: 0.18em; margin-top: 22px; }
+    .access-info dd { font-size: 0.9rem; }
+
+    /* Host & FAQ */
+    .host-name { font-size: 1.05rem; }
+    .host-role { font-size: 0.75rem; letter-spacing: 0.18em; }
+    .host-text { font-size: 0.9rem; line-height: 2.0; }
+    .faq-q { font-size: 0.95rem; padding: 20px 0; }
+    .faq-a-inner { font-size: 0.9rem; line-height: 2.0; }
+
+    /* Contact & Footer */
+    .contact-text { font-size: 0.9rem; }
+    .btn-contact { font-size: 0.85rem; padding: 14px 28px; letter-spacing: 0.15em; }
+    footer { font-size: 0.75rem; letter-spacing: 0.1em; }
+
+  }
+
+  /* ===== MORNING TOUR SECTION ===== */
+  .mt-section { background: #F5F1E8; }
+  .mt-section .mt-hero {
+    height: 60vh; min-height: 400px;
+    position: relative; display: flex;
+    align-items: center; justify-content: center; overflow: hidden;
+  }
+  .mt-section .mt-hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1A1A18 0%, #2A1F18 50%, #5C3D2E 80%, #B89B5E 100%);
+  }
+  .mt-section .mt-hero-content {
+    position: relative; z-index: 1;
+    text-align: center; padding: 0 24px; max-width: 700px;
+  }
+  .mt-section .mt-hero-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.5em;
+    color: #B89B5E; margin-bottom: 24px; font-weight: 500;
+  }
+  .mt-section .mt-hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+    color: #fff; font-weight: 600;
+    line-height: 1.8; margin-bottom: 28px; letter-spacing: 0.12em;
+  }
+  .mt-section .mt-hero-catch {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.2rem; color: rgba(255,255,255,0.85);
+    letter-spacing: 0.1em; line-height: 1.8;
+  }
+  .mt-section .mt-inner {
+    max-width: 800px; margin: 0 auto; padding: 80px 48px;
+  }
+  .mt-section .mt-story { text-align: center; margin-bottom: 64px; }
+  .mt-section .mt-story p {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.05rem; color: #2C3E50;
+    line-height: 2.4; letter-spacing: 0.06em;
+  }
+  .mt-section .mt-highlight { color: #B89B5E; font-weight: 600; }
+  .mt-section .mt-photo-placeholder {
+    width: 100%; height: 300px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 48px 0;
+  }
+  .mt-section .mt-sub-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.3rem; color: #2C3E50;
+    letter-spacing: 0.12em; margin-bottom: 32px;
+    text-align: center; font-weight: 600;
+  }
+  .mt-section .mt-detail-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; margin-bottom: 48px;
+  }
+  .mt-section .mt-detail-item {
+    background: #fff; padding: 20px 24px;
+    border-left: 3px solid #B89B5E;
+  }
+  .mt-section .mt-detail-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.3em;
+    color: #9CAFB7; margin-bottom: 6px; font-weight: 500;
+  }
+  .mt-section .mt-detail-value {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.95rem; color: #2C3E50; line-height: 1.8;
+  }
+  .mt-section .mt-weather-title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.3em;
+    color: #9CAFB7; text-align: center;
+    margin-bottom: 20px; font-weight: 500;
+  }
+  .mt-section .mt-weather-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-bottom: 48px;
+  }
+  .mt-section .mt-weather-card {
+    background: #fff; padding: 24px 20px; text-align: center;
+  }
+  .mt-section .mt-weather-icon { font-size: 1.6rem; margin-bottom: 8px; }
+  .mt-section .mt-route-card { padding: 0; overflow: hidden; }
+  .mt-section .mt-route-img {
+    position: relative; width: 100%; aspect-ratio: 4/3;
+    background-size: cover; background-position: center;
+    margin-bottom: 16px;
+  }
+  .mt-section .mt-route-badge {
+    position: absolute; top: 10px; left: 10px;
+    background: rgba(184, 155, 94, 0.95); color: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.7rem; padding: 4px 10px; letter-spacing: 0.08em;
+    border-radius: 2px; font-weight: 500;
+  }
+  .mt-section .mt-route-card .mt-weather-type { padding: 0 16px; }
+  .mt-section .mt-route-card .mt-weather-desc { padding: 0 16px 20px; }
+  .mt-section .mt-weather-type {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85rem; color: #B89B5E;
+    letter-spacing: 0.15em; margin-bottom: 8px; font-weight: 500;
+  }
+  .mt-section .mt-weather-desc {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85rem; color: #2C3E50; line-height: 1.8;
+  }
+  .mt-section .mt-note-box {
+    background: #fff; padding: 28px 32px; margin-bottom: 24px;
+  }
+  .mt-section .mt-note-title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.3em;
+    color: #9CAFB7; margin-bottom: 12px; font-weight: 500;
+  }
+  .mt-section .mt-note-text {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.9rem; color: #2C3E50; line-height: 2.0;
+  }
+  .mt-section .mt-booking {
+    text-align: center; margin-top: 56px; padding: 40px;
+    background: #2C3E50;
+  }
+  .mt-section .mt-booking-text {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem; color: #fff;
+    letter-spacing: 0.1em; margin-bottom: 8px;
+  }
+  .mt-section .mt-booking-sub {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.8rem; color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== MORNING TOUR - MOBILE ===== */
+  @media (max-width: 768px) {
+    .mt-section .mt-hero { height: 45vh; min-height: 300px; }
+    .mt-section .mt-hero-title { font-size: 1.4rem; letter-spacing: 0.08em; }
+    .mt-section .mt-hero-catch { font-size: 0.95rem; }
+    .mt-section .mt-inner { padding: 56px 20px; }
+    .mt-section .mt-story p {
+      font-size: 0.95rem; line-height: 2.2;
+      text-align: left;
+    }
+    .mt-section .mt-sub-title { font-size: 1.1rem; margin-bottom: 24px; }
+    .mt-section .mt-detail-grid {
+      grid-template-columns: 1fr !important;
+      gap: 12px;
+    }
+    .mt-section .mt-detail-item { padding: 16px 20px; }
+    .mt-section .mt-detail-value { font-size: 0.9rem; }
+    .mt-section .mt-photo-placeholder { height: 200px; margin: 32px 0; }
+    .mt-section .mt-note-box { padding: 20px 24px; }
+    .mt-section .mt-note-text { font-size: 0.85rem; }
+    .mt-section .mt-weather-title { margin-bottom: 16px; }
+    .mt-section .mt-weather-grid {
+      grid-template-columns: 1fr !important;
+      gap: 12px;
+    }
+    .mt-section .mt-weather-card { padding: 20px 24px; }
+    .mt-section .mt-weather-desc {
+      font-size: 0.9rem; line-height: 1.8;
+    }
+    .mt-section .mt-booking { padding: 32px 20px; margin-top: 40px; }
+    .mt-section .mt-booking-text { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body class="has-chipnav">
+
+<!-- HEADER -->
+<header>
+
+  <a href="#" class="logo">
+    <img class="logo-img" src="../images/siro.png" alt="民宿笹森家 ロゴ">
+    <div class="logo-text">
+      民宿笹森家
+      <span>MINSHUKU SASAMORIHOUSE</span>
+    </div>
+  </a>
+  <nav>
+    <a href="#about">宿について</a>
+    <a href="#rooms">お部屋</a>
+    <a href="#activities">体験</a>
+    <a href="#morning-tour">朝ツアー</a>
+    <a href="pet.html">ペットと泊まる</a>
+    <a href="#access">アクセス</a>
+    <a href="../en/" class="lang-switch">English</a>
+  </nav>
+  <a href="#calendar" class="btn-book">予約する</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
+</header>
+
+<!-- CHIP NAV: モバイル常時ナビ（ハンバーガー依存解消） -->
+<nav class="chip-nav" aria-label="ページ内目次">
+  <div class="chip-nav-inner">
+    <a href="#about">宿について</a>
+    <a href="#rooms">お部屋</a>
+    <a href="#activities">体験</a>
+    <a href="#morning-tour">朝ツアー</a>
+    <a href="#faq">FAQ</a>
+    <a href="#access">アクセス</a>
+    <a href="#calendar" class="cta">📅 予約</a>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="toggleMenu()">宿について</a>
+  <a href="#rooms" onclick="toggleMenu()">お部屋</a>
+  <a href="#activities" onclick="toggleMenu()">体験</a>
+  <a href="#morning-tour" onclick="toggleMenu()">朝ツアー</a>
+  <a href="pet.html">ペットと泊まる</a>
+  <a href="#faq" onclick="toggleMenu()">よくある質問</a>
+  <a href="#access" onclick="toggleMenu()">アクセス</a>
+  <a href="#calendar" onclick="toggleMenu()">予約する</a>
+  <a href="../en/" onclick="toggleMenu()">English</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-slide active" style="background-image:url('../images/exterior-autumn.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/garden.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/living-kitchen.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-winter.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-spring.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-summer.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('../images/season-autumn.jpg')"></div>
+  <div class="hero-content">
+    <p class="hero-sub">AZUMINO GAKUSHAMURA, NAGANO</p>
+    <h1 class="hero-title">きこえてくるのは<br>森の揺らぎと、鳥の声</h1>
+    <p class="hero-desc">安曇野学者村の森の中に佇む、一棟貸しの静かな宿</p>
+    <div class="hero-badges">
+      <span class="hero-badge">🐾 ペットOK</span>
+      <span class="hero-badge">👶 子連れ歓迎</span>
+      <span class="hero-badge">🚗 駅から無料送迎</span>
+      <span class="hero-badge">🎬 100" シアター</span>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="hero-meta-label">料金</span><span class="hero-meta-value">1泊 ¥15,000〜</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">定員</span><span class="hero-meta-value">最大6名</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">評価</span><span class="hero-meta-value">★4.79 / 61件</span></div>
+    </div>
+    <a href="#calendar" class="hero-btn">今すぐ空き状況を確認する</a>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</div>
+
+<!-- ABOUT -->
+<div id="about">
+  <div class="section-inner">
+    <div class="about-wrap fade-in">
+      <div>
+        <p class="section-label">ABOUT</p>
+        <span class="badge">★4.79 ／ 口コミ61件の高評価宿</span>
+        <h2 class="section-title">森の中の別荘地に<br>あなただけの空間を</h2>
+        <hr class="divider" style="margin-bottom: 28px;">
+        <p class="section-text">
+          民宿笹森家は、安曇野学者村の森の中に佇む一棟貸しの宿です。<br><br>
+          2LDK・100㎡の二階建て古民家を、あなただけの空間として丸ごとお貸しします。
+          100インチ以上のホームシアター、吹き抜けのリビング、2025年に新設した浴室。
+          750㎡超の広大な庭ではBBQも楽しめます。ペットも大歓迎。<br><br>
+          このエリアの静けさは格別なほど。聞こえてくるのは木々の揺らぎと鳥のさえずり、
+          そして遠くを走る電車の音だけ。日常から完全に切り離された時間をどうぞ。
+        </p>
+      </div>
+      <img class="about-img" src="../images/living-kitchen.jpg" alt="民宿笹森家のリビングダイニング">
+    </div>
+  </div>
+</div>
+
+<!-- ROOMS -->
+<div class="rooms-section" id="rooms">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">ROOMS</p>
+      <h2 class="section-title" style="text-align:center;">お部屋</h2>
+    </div>
+    <div class="room-card fade-in">
+      <img class="room-img-main" src="../images/exterior-autumn.jpg" alt="笹森家 外観（秋）">
+      <div class="room-info">
+        <p class="room-name">笹森家まるごとプラン（一棟貸し）</p>
+
+        <!-- ESSENTIALS: 一目でわかる要点 -->
+        <div class="room-essentials">
+          <div class="room-essentials-row">
+            <span>💰 <b>¥15,000〜</b> / 泊</span>
+            <span>👥 最大6名</span>
+            <span>🐾 ペットOK</span>
+            <span>⭐ 4.79 (61件)</span>
+          </div>
+          <a href="#calendar" class="room-cta-primary" onclick="try{gtag('event','cta_click',{cta_text:'room_essentials_calendar',cta_location:'rooms_top'});}catch(e){}">📅 空き状況を確認・予約する →</a>
+        </div>
+
+        <!-- DETAILS: 折りたたみで情報過多を回避 -->
+        <details class="room-more" ontoggle="if(this.open){try{gtag('event','room_details_expand',{property:'sasamoriya'});}catch(e){}}">
+          <summary>お部屋の詳細を見る（間取り・設備・子ども/ペット料金）</summary>
+          <div class="room-more-body">
+            <div class="room-details">
+              <div>
+                <p class="room-details-label">FLOOR PLAN</p>
+                <ul>
+                  <li>和寝室（布団4組）</li>
+                  <li>洋寝室 兼 シアタールーム（ダブルベッド）</li>
+                  <li>吹き抜けのリビングダイニング</li>
+                  <li>専用バスルーム（2025年新設）</li>
+                </ul>
+              </div>
+              <div>
+                <p class="room-details-label">DETAILS</p>
+                <ul>
+                  <li>100㎡・750㎡超の広大な庭</li>
+                  <li>安曇野学者村 森の中の別荘地</li>
+                  <li>ペットOK ／ BBQエリアあり</li>
+                  <li>100インチ以上のホームシアター</li>
+                  <li>安曇追分駅より無料送迎（相談可）</li>
+                  <li>無料駐車場3台分</li>
+                </ul>
+              </div>
+            </div>
+            <p class="room-price" style="margin-top:24px;">定員：最大6名（和寝室4名＋洋寝室2名）／ 素泊まり 1泊 ¥15,000〜（人数・時期により変動）</p>
+            <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--light);">
+              <p class="room-details-label" style="margin-bottom:12px;">子ども料金</p>
+              <ul style="margin-bottom:20px;">
+                <li>0〜3歳：無料</li>
+                <li>4〜12歳：¥4,000 / 名</li>
+                <li>13歳以上：大人料金</li>
+              </ul>
+              <p class="room-details-label" style="margin-bottom:12px;">ペット料金 <a href="pet.html" style="color:var(--green);text-decoration:underline;font-size:0.9rem;font-weight:normal;letter-spacing:normal;">ペットと泊まる ▶</a></p>
+              <ul>
+                <li>1頭目：¥3,000</li>
+                <li>2頭目以降：¥1,000 / 頭</li>
+                <li>頭数制限なし（小型犬・猫を想定。大型犬は要相談）</li>
+              </ul>
+            </div>
+            <div class="room-gallery">
+              <figure>
+                <img src="../images/kitchen-detail.jpg" alt="フルキッチン">
+                <figcaption>フルキッチン</figcaption>
+              </figure>
+              <figure>
+                <img src="../images/bedroom-western.jpg" alt="洋寝室">
+                <figcaption>洋寝室</figcaption>
+              </figure>
+              <figure>
+                <img src="../images/bathroom-new.jpg" alt="浴室（2025年新設）">
+                <figcaption>浴室（2025年新設）</figcaption>
+              </figure>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ACTIVITIES: 笹森家でしかできない体験 -->
+<div id="activities">
+  <div class="section-inner" style="padding-bottom: 40px;">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">ACTIVITIES</p>
+      <h2 class="section-title" style="text-align:center;">笹森家でしかできない体験</h2>
+    </div>
+  </div>
+  <div class="act-photo-grid fade-in">
+    <div class="act-photo">
+      <img src="../images/theater.jpg" alt="ホームシアター">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">CINEMA</p>
+        <p class="act-photo-name">100インチ ホームシアター</p>
+        <p class="act-photo-desc">映画・アニメ・スポーツ観戦を大画面で</p>
+      </div>
+    </div>
+    <div class="act-photo">
+      <img src="../images/garden.jpg" alt="森の庭">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">OUTDOOR</p>
+        <p class="act-photo-name">森の庭でBBQ・ピクニック</p>
+        <p class="act-photo-desc">750㎡超の広大な庭。木漏れ日の中でゆっくりと</p>
+      </div>
+    </div>
+    <div class="act-photo">
+      <img src="../images/lifestyle-pet.jpg" alt="ペットと過ごす">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">PET FRIENDLY</p>
+        <p class="act-photo-name">ペットと一緒に泊まれる</p>
+        <p class="act-photo-desc">こたつでぬくぬく。雪景色を眺めながら</p>
+      </div>
+    </div>
+    <div class="act-photo">
+      <img src="../images/pet-dog.jpg" alt="ペット歓迎">
+      <div class="act-photo-overlay">
+        <p class="act-photo-label">WELCOME</p>
+        <p class="act-photo-name">小型犬・猫 大歓迎</p>
+        <p class="act-photo-desc">家族みんなで、ペットも一緒に安曇野へ</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEASONS（笹森家体験と同じUI） -->
+<div>
+  <div class="section-inner fade-in" style="padding-bottom: 40px;">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">SEASONS</p>
+      <h2 class="section-title" style="text-align:center;">四季の安曇野を楽しむ</h2>
+    </div>
+  </div>
+  <div class="season-photo-grid fade-in">
+    <div class="season-photo">
+      <img src="../images/season-winter.jpg" alt="冬の黒沢滝 氷瀑">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">WINTER</p>
+        <p class="season-photo-name">冬 ─ 氷瀑と雪景色</p>
+        <p class="season-photo-desc">黒沢滝の氷瀑、こたつ時間。白馬スキー場まで車40分</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../images/season-spring.jpg" alt="春の安曇野">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">SPRING</p>
+        <p class="season-photo-name">春 ─ 桜と北アルプス</p>
+        <p class="season-photo-desc">残雪の山々とわさび田の花。サイクリングにも最適</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../images/season-summer.jpg" alt="夏の安曇野 田園風景">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">SUMMER</p>
+        <p class="season-photo-name">夏 ─ 田園と星空</p>
+        <p class="season-photo-desc">一面の田園風景と北アルプス。標高600mの涼しい風</p>
+      </div>
+    </div>
+    <div class="season-photo">
+      <img src="../images/season-autumn.jpg" alt="秋の安曇野">
+      <div class="season-photo-overlay">
+        <p class="season-photo-label">AUTUMN</p>
+        <p class="season-photo-name">秋 ─ 紅葉と新そば</p>
+        <p class="season-photo-desc">学者村の紅葉がピーク。焚き火とホームシアターの夜</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 安曇野でできる体験（Reels 3本・横一列） -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">EXPLORE AZUMINO</p>
+      <h2 class="section-title" style="text-align:center;">安曇野でできる体験</h2>
+      <p class="section-text" style="max-width:600px;margin:0 auto;">笹森家を拠点に、安曇野の自然とアクティビティを満喫。<br>ホストがガイドやおすすめルートのご案内もいたします。</p>
+    </div>
+    <div class="reel-grid">
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/p/DP7ZOQzD6-o/embed" allowfullscreen loading="lazy"></iframe>
+        <p class="reel-caption">登山 ─ 北アルプスの絶景</p>
+      </div>
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/reel/DInijkPyVHV/embed" allowfullscreen loading="lazy"></iframe>
+        <p class="reel-caption">サイクリング ─ 田園を駆ける</p>
+      </div>
+      <div class="reel-item">
+        <iframe src="https://www.instagram.com/reel/DMxFpW2yKPR/embed" allowfullscreen loading="lazy"></iframe>
+        <p class="reel-caption">キャニオニング ─ 渓流遊び</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="reviews-section">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <p class="section-label">GUEST REVIEWS</p>
+      <h2 class="section-title" style="text-align:center;">お客様の声</h2>
+    </div>
+    <div class="review-grid fade-in">
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「オーナーの方がとても親切で、安曇追分駅まで迎えに来てくださり、行き道に景色の綺麗な道で車を止めて南アルプスを見せてくれたりこの辺りの特色を説明しながらの送迎でとても楽しかったです。宿の細かいところにオーナーの配慮が感じられ、是非また来たいと思いました。」</p>
+        <p class="review-author">— 丸野 さま</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「綺麗な緑に囲まれた静かな空間。そんなところを求めてる方には大変訪れてほしいと感じるところでした。お部屋も木に囲まれていて、落ち着く空間でした。また訪れたい場所の一つになりました。」</p>
+        <p class="review-author">— 弥寿々 さま ／ 数泊滞在</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「ホストさんはとても親しみやすい方で、質問の返答も早く、安心して滞在できました。部屋は綺麗で清潔、お風呂も広く、夜も全然寒くならず、朝まで快適に過ごせました。シチュエーションは最高でした。」</p>
+        <p class="review-author">— Shigeru さま ／ ペット同伴で滞在</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">「安曇野の森の中にある木造の家で、暖かくて快適でした。冬の陽射しが森から差し込み、周辺の景色も楽しめます。交通の便は良いとは言えませんが、無料駐車場があるので問題なし。森の中の静けさを求めるなら最高の場所です。」</p>
+        <p class="review-author">— Shaokang さま ／ 3泊滞在</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR -->
+<div id="calendar">
+  <div class="section-inner fade-in" style="text-align: center;">
+    <p class="section-label">AVAILABILITY</p>
+    <h2 class="section-title" style="text-align:center;">空き状況カレンダー</h2>
+    <p class="section-text" style="margin-bottom: 40px;">ご希望の日程をご確認ください。</p>
+    <iframe src="../availability-calendar.html" style="width:100%;height:560px;border:none;" loading="lazy" title="空き状況カレンダー"></iframe>
+  </div>
+</div>
+
+<!-- SNS -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in" style="max-width: 720px; text-align: center;">
+    <p class="section-label">SNS</p>
+    <h2 class="section-title" style="text-align:center; margin-bottom: 32px;">最新の様子をチェック</h2>
+    <div style="display:flex; justify-content:center; gap:4px; margin-bottom:32px;">
+      <button onclick="switchSNS('ig','sasamori')" id="tab-ig-s" style="padding:12px 28px;border:1px solid var(--brown);background:var(--brown);color:white;cursor:pointer;font-size:1.125rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Instagram</button>
+      <button onclick="switchSNS('note','sasamori')" id="tab-note-s" style="padding:12px 28px;border:1px solid var(--brown);background:transparent;color:var(--brown);cursor:pointer;font-size:1.125rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">note</button>
+      <button onclick="switchSNS('podcast','sasamori')" id="tab-podcast-s" style="padding:12px 28px;border:1px solid var(--brown);background:transparent;color:var(--brown);cursor:pointer;font-size:1.125rem;font-family:inherit;letter-spacing:0.15em;transition:all 0.3s;">Podcast</button>
+    </div>
+    <div id="sns-ig-s" style="min-height:540px;">
+      <iframe src="https://www.instagram.com/sasamorihouse/embed" style="width:100%;height:540px;border:none;overflow:hidden;background:white;" loading="lazy"></iframe>
+    </div>
+    <div id="sns-note-s" style="display:none;min-height:540px;">
+      <div style="width:100%;height:540px;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px;box-sizing:border-box;">
+        <div style="width:64px;height:64px;background:#41c9b4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:28px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <h3 style="margin:0 0 8px;font-size:1.125rem;color:var(--text);letter-spacing:0.1em;">Pack Vacation</h3>
+        <p style="margin:0 0 4px;font-size:1.125rem;color:var(--muted);letter-spacing:0.1em;">@ouga_sanjo</p>
+        <p style="margin:0 0 36px;font-size:1.125rem;color:var(--muted);max-width:320px;line-height:1.8;">宿の裏話やゲストとのエピソード、安曇野の暮らしをnoteで発信中。</p>
+        <a href="https://note.com/ouga_sanjo" target="_blank" style="display:inline-block;padding:14px 48px;background:var(--brown);color:white;text-decoration:none;font-size:1.125rem;letter-spacing:0.2em;transition:opacity 0.3s;">noteを読む</a>
+      </div>
+    </div>
+    <div id="sns-podcast-s" style="display:none;min-height:540px;">
+      <iframe src="https://open.spotify.com/embed/show/0i1LD1y7MnyzoptDa6PytJ?theme=0" style="width:100%;height:540px;border:none;" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+<script>
+function switchSNS(type, site) {
+  var panels = ['ig','note','podcast'];
+  var s = site === 'sasamori' ? '-s' : '-t';
+  panels.forEach(function(p){
+    var el = document.getElementById('sns-'+p+s);
+    var tab = document.getElementById('tab-'+p+s);
+    if(el) el.style.display = p===type ? 'block' : 'none';
+    if(tab){
+      var color = site==='sasamori' ? 'var(--brown)' : 'var(--navy)';
+      tab.style.background = p===type ? color : 'transparent';
+      tab.style.color = p===type ? 'white' : color;
+    }
+  });
+}
+</script>
+
+<!-- HOST -->
+<div style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <p class="section-label">HOST</p>
+    <h2 class="section-title" style="text-align:center;">ホスト紹介</h2>
+    <div class="host-wrap" style="margin-top:48px;">
+      <img class="host-photo" src="../images/host-ouga.jpg" alt="ホスト 三條桜芽">
+      <div>
+        <p class="host-name">三條 桜芽（さんじょう おうが）</p>
+        <p class="host-role">PACK VACATION 代表</p>
+        <p class="host-text">
+          東京生まれ、東京育ち。23歳で安曇野に移住し、一棟貸しの宿「民宿笹森家」を開業。以来、数百組のゲストをお迎えしてきました。<br>
+          同年に法人化し、翌年には2軒目となる「ゲストハウス灯」をオープン。<br><br>
+          宿の運営と並行して、安曇野の自然や文化の魅力を伝えるべく、SNSでの発信や登山・観光のガイド業にも力を注いでいます。<br><br>
+          お越しの際は安曇追分駅までの送迎はもちろん、地元のおすすめスポットや登山ルートのご案内もお任せください。
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MORNING TOUR -->
+<section id="morning-tour" class="mt-section">
+  <div class="mt-hero">
+    <div class="mt-hero-bg"></div>
+    <div class="mt-hero-content">
+      <p class="mt-hero-label">GREEN SEASON MORNING TOUR</p>
+      <h2 class="mt-hero-title">絶景は、見るものじゃなく<br>入るものだった</h2>
+      <p class="mt-hero-catch">上高地で満足できなかった、あなたへ。</p>
+    </div>
+  </div>
+
+  <div class="mt-inner">
+    <!-- Story -->
+    <div class="mt-story fade-in">
+      <p>
+        長野の絶景。北アルプス、上高地、安曇野。<br>
+        一度は行ったことが、あるかもしれません。<br><br>
+        でも——駐車場の渋滞、観光バスの列、写真スポットの順番待ち。<br>
+        <span class="mt-highlight">「自然の中に入った」気がしましたか？</span><br><br>
+        早朝5時。観光客は、誰もいません。<br>
+        あなたと、ガイドと、北アルプスと、鳥の声だけ。<br><br>
+        入り込んだ"つもり"から、本当に入り込む3時間。
+      </p>
+    </div>
+
+    <!-- Tour Photos -->
+    <div class="fade-in" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 48px 0 24px;">
+      <img src="../images/morning-tour-1.jpg" alt="長峰山展望台からの朝の眺望"
+           style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block;">
+      <img src="../images/morning-tour-2.jpg" alt="北アルプスの朝焼け"
+           style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block;">
+      <img src="../images/morning-tour-3.jpg" alt="早朝の安曇野"
+           style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block;">
+    </div>
+    <p style="font-family:'Noto Sans JP',sans-serif; font-size:0.75rem; color:#B89B5E; text-align:center; margin: 0 0 48px; letter-spacing:0.1em;">早朝ツアーより</p>
+
+    <!-- Tour Details -->
+    <h3 class="mt-sub-title fade-in">ツアー詳細</h3>
+    <div class="mt-detail-grid fade-in">
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">所要時間</p>
+        <p class="mt-detail-value">約3時間<br>（朝4:30〜7:30頃／季節により調整）</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">料金</p>
+        <p class="mt-detail-value">1人 2,500円<br>（送迎・撮影サービス込み）</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">最低催行人数</p>
+        <p class="mt-detail-value">2名</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">ベストシーズン</p>
+        <p class="mt-detail-value"><strong style="color:#B89B5E;">4月〜11月（グリーンシーズン限定）</strong><br>冬季は道路閉鎖のため催行困難</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">朝食オプション</p>
+        <p class="mt-detail-value">+1,500円<br>（ツアー後に宿で）</p>
+      </div>
+      <div class="mt-detail-item">
+        <p class="mt-detail-label">持ち物</p>
+        <p class="mt-detail-value">歩きやすい靴・暖かい羽織もの<br>（夏でも朝は冷え込みます）</p>
+      </div>
+    </div>
+
+    <!-- Photo Service -->
+    <div class="mt-note-box fade-in">
+      <p class="mt-note-title">撮影サービス</p>
+      <p class="mt-note-text">ツアー中の写真は後日Googleフォトでお渡しします。</p>
+    </div>
+
+    <!-- 5 Routes -->
+    <p class="mt-weather-title fade-in">5つの早朝ルート — 天気と体力で当日選びます</p>
+    <div class="mt-weather-grid fade-in" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+      <div class="mt-weather-card mt-route-card">
+        <div class="mt-route-img" style="background-image:url('../images/morning-tour-1.jpg');"><span class="mt-route-badge">晴れ・初心者</span></div>
+        <p class="mt-weather-type">長峰山展望台</p>
+        <p class="mt-weather-desc">北アルプス全景を一望<br>朝焼けのメインルート</p>
+      </div>
+      <div class="mt-weather-card mt-route-card">
+        <div class="mt-route-img" style="background-image:url('../images/morning-tour-2.jpg');"><span class="mt-route-badge">晴れ・体力あり</span></div>
+        <p class="mt-weather-type">京ヶ倉</p>
+        <p class="mt-weather-desc">雲海と稜線<br>登った人だけの絶景</p>
+      </div>
+      <div class="mt-weather-card mt-route-card">
+        <div class="mt-route-img" style="background-image:url('../images/morning-tour-3.jpg');"><span class="mt-route-badge">曇り・静寂</span></div>
+        <p class="mt-weather-type">中房湖</p>
+        <p class="mt-weather-desc">鏡面の水面と森<br>音の消える朝</p>
+      </div>
+      <div class="mt-weather-card mt-route-card">
+        <div class="mt-route-img" style="background-image:url('../images/garden.jpg');"><span class="mt-route-badge">雨・水景</span></div>
+        <p class="mt-weather-type">わさび田・水路</p>
+        <p class="mt-weather-desc">安曇野の原風景<br>雨が育てる水の街</p>
+      </div>
+      <div class="mt-weather-card mt-route-card">
+        <div class="mt-route-img" style="background-image:url('../images/season-autumn.jpg');"><span class="mt-route-badge">雨・迫力</span></div>
+        <p class="mt-weather-type">黒沢の滝</p>
+        <p class="mt-weather-desc">雨の日こそ姿を現す<br>知る人ぞ知る穴場</p>
+      </div>
+    </div>
+
+    <!-- Cancellation & Booking -->
+    <div class="mt-note-box fade-in">
+      <p class="mt-note-title">キャンセル規定</p>
+      <p class="mt-note-text">
+        悪天候による中止：全額返金<br>
+        お客様都合のキャンセル：半額徴収
+      </p>
+    </div>
+
+    <div class="mt-booking fade-in">
+      <p class="mt-booking-text">チェックイン時にホストへ直接お申し込みください。</p>
+      <p class="mt-booking-sub">※前日20時までにご相談いただくとスムーズです。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<div id="faq" style="background: var(--light);">
+  <div class="section-inner fade-in">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title" style="text-align:center;">よくある質問</h2>
+    <div class="faq-list" style="margin-top:40px;">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Wi-Fiは使えますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">はい、無料Wi-Fiを完備しています。リモートワークにも対応できる速度です。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">タオルやアメニティはありますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">バスタオル・シャンプー・ボディソープをご用意しています。歯ブラシはご持参ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">近くにコンビニやスーパーはありますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">車で約10分の場所にコンビニ・スーパーがあります。到着前の買い出しがおすすめです。BBQ食材の調達先もご案内できます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">ペットの種類やサイズに制限はありますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">小型犬・猫を中心に歓迎です。頭数制限はありません。料金は1頭目 ¥3,000、2頭目以降 ¥1,000/頭。大型犬はご予約前にご相談ください。ベッドやお布団の上にペットを上げないようご協力をお願いします。詳しくは<a href="pet.html" style="color:var(--green);text-decoration:underline;">ペットと泊まる</a>をご覧ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">子連れ・赤ちゃんでも泊まれますか？料金は？</button>
+        <div class="faq-a"><div class="faq-a-inner">はい、お子様連れ大歓迎です。一棟貸しなので周りを気にせずお過ごしいただけます。料金は0〜3歳：無料／4〜12歳：¥4,000／13歳以上：大人料金となります。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">キャンセルポリシーはどうなっていますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">14日前まで：全額返金、7日前まで：50%返金、7日以内：返金不可となります。詳細はご予約時にお知らせいたします。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">送迎はお願いできますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">JR大糸線「安曇追分駅」まで無料送迎を行っています（要事前予約）。到着時間をお知らせください。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Wi-Fiの速度は？</button>
+        <div class="faq-a"><div class="faq-a-inner">光回線で安定した速度です。リモートワークやオンライン会議も問題なくご利用いただけます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">食事はつきますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">素泊まりのみとなります。フルキッチン完備ですので自炊が可能です。車で約10分の場所にスーパー・コンビニがあります。近隣のおすすめ飲食店もご案内します。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">冬の暖房は？</button>
+        <div class="faq-a"><div class="faq-a-inner">エアコン・こたつ・石油ストーブを完備しています。真冬でも暖かくお過ごしいただけます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">キッチンの設備は？</button>
+        <div class="faq-a"><div class="faq-a-inner">IHコンロ・冷蔵庫・電子レンジ・炊飯器・調理器具・食器類を完備。食材をお持ち込みいただければ本格的な料理も可能です。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">駐車場はありますか？ / Is parking available?</button>
+        <div class="faq-a"><div class="faq-a-inner">無料駐車場あり（2台まで）。3台以上の場合は事前にご相談ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">喫煙はできますか？ / Is smoking allowed?</button>
+        <div class="faq-a"><div class="faq-a-inner">全館禁煙です。敷地内に喫煙スペースはございません。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">静粛時間はありますか？ / Are there quiet hours?</button>
+        <div class="faq-a"><div class="faq-a-inner">22:00以降はお静かにお過ごしください。近隣への配慮をお願いしております。</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="section-inner fade-in" style="max-width:720px;">
+    <p class="section-label">CONTACT</p>
+    <h2 class="section-title" style="text-align:center; color:white;">お問い合わせ・ご予約</h2>
+    <p class="contact-text">ご不明点やご相談はお気軽にどうぞ。</p>
+    <div>
+      <a href="https://instagram.com/sasamorihouse" target="_blank" class="btn-contact">Instagram DM</a>
+      <a href="tel:090-6308-3620" class="btn-contact">電話で問い合わせる</a>
+      <a href="mailto:ouga0315@gmail.com" class="btn-contact">メールで問い合わせる</a>
+      <a href="#calendar" class="btn-contact">空き状況を確認する</a>
+    </div>
+  </div>
+</div>
+
+<!-- ACCESS -->
+<div id="access">
+  <div class="section-inner fade-in">
+    <p class="section-label">ACCESS</p>
+    <h2 class="section-title">アクセス</h2>
+    <div class="access-grid">
+      <dl class="access-info">
+        <dt>ADDRESS</dt>
+        <dd>長野県安曇野市穂高有明7403-30</dd>
+        <dt>TRAIN</dt>
+        <dd>JR大糸線「安曇追分駅」より送迎無料（要予約）<br>松本駅から電車で約35分</dd>
+        <dt>CAR</dt>
+        <dd>長野自動車道「安曇野IC」から約20分<br>無料駐車場あり（無料・2台まで）</dd>
+        <dt>CHECK-IN</dt>
+        <dd>15:00〜（ご到着が遅れる場合はご連絡ください）</dd>
+        <dt>CHECK-OUT</dt>
+        <dd>〜10:00</dd>
+      </dl>
+      <iframe src="https://www.google.com/maps?q=長野県安曇野市穂高有明7403-30&output=embed" style="width:100%;height:360px;border:none;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-size:1.125rem; color:rgba(255,255,255,0.6); letter-spacing:0.2em;">民宿笹森家</p>
+  <p style="font-size:1.125rem; margin-top:4px; letter-spacing:0.3em;">MINSHUKU SASAMORIHOUSE</p>
+  <div class="footer-links">
+    <a href="https://instagram.com/sasamorihouse" target="_blank">Instagram</a>
+    <a href="https://note.com/ouga_sanjo" target="_blank">note</a>
+    <a href="https://open.spotify.com/show/0i1LD1y7MnyzoptDa6PytJ" target="_blank">Podcast</a>
+    <a href="https://linktr.ee/sasamoriya" target="_blank">Linktree</a>
+  </div>
+  <div class="footer-links" style="margin-top:8px;">
+    <a href="/pack-vacation-lp/terms.html">利用規約</a>
+    <a href="/pack-vacation-lp/cancellation-policy.html">キャンセルポリシー</a>
+    <a href="/pack-vacation-lp/privacy.html">プライバシー</a>
+  </div>
+  <p style="font-size:1.125rem; color:rgba(255,255,255,0.45); margin:16px 0 8px; letter-spacing:0.1em; line-height:1.8;">
+    ご予約のキャンセルは、予約確定メール内の「予約をキャンセルする」リンクから承っております。<br>
+    メールが見当たらない場合は <a href="https://instagram.com/sasamorihouse" target="_blank">Instagram DM</a> までご連絡ください。
+  </p>
+  <p>&copy; 2026 Pack Vacation Co., Ltd.</p>
+</footer>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "民宿笹森家",
+  "description": "安曇野学者村の森の中に佇む一棟貸しの宿。2LDK・100㎡の古民家を丸ごと貸切。ペットOK・BBQ・ホームシアター完備。",
+  "url": "https://ouga0315-cpu.github.io/pack-vacation-lp/sasamoriya/",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "安曇野市",
+    "addressRegion": "長野県",
+    "addressCountry": "JP"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 36.3425,
+    "longitude": 137.8536
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.79",
+    "reviewCount": "61",
+    "bestRating": "5"
+  },
+  "checkinTime": "15:00",
+  "checkoutTime": "10:00",
+  "petsAllowed": true,
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "無料Wi-Fi", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "無料駐車場", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "BBQエリア", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "ホームシアター", "value": true}
+  ]
+}
+</script>
+
+<!-- Hamburger Menu -->
+<script>
+function toggleMenu() {
+  var nav = document.getElementById('mobileNav');
+  var btn = document.querySelector('.hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('active');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+</script>
+
+<!-- FAQ Toggle -->
+<script>
+function toggleFAQ(el) {
+  el.classList.toggle('open');
+  var answer = el.nextElementSibling;
+  if (el.classList.contains('open')) {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    try{ gtag('event','faq_open',{question:(el.textContent||'').trim().slice(0,80),property:'sasamoriya'}); }catch(e){}
+  } else {
+    answer.style.maxHeight = '0';
+  }
+}
+</script>
+
+<!-- Hero Slideshow -->
+<script>
+(function(){
+  var slides = document.querySelectorAll('.hero-slide');
+  var current = 0;
+  var total = slides.length;
+  setInterval(function(){
+    slides[current].classList.remove('active');
+    current = (current + 1) % total;
+    slides[current].classList.add('active');
+  }, 5000);
+})();
+</script>
+
+<!-- Scroll Animation -->
+<script>
+(function(){
+  var els = document.querySelectorAll('.fade-in');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function(el){ observer.observe(el); });
+})();
+
+/* ===== LIGHTBOX ===== */
+(function(){
+  var selectors = '.room-img-main, .room-gallery img, .act-photo img, .about-img, .season-photo img';
+  var imgs = Array.prototype.slice.call(document.querySelectorAll(selectors));
+  if(!imgs.length) return;
+  imgs.forEach(function(img){ img.classList.add('lightboxable'); });
+
+  var lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.innerHTML = '<button class="lightbox-close" aria-label="閉じる">×</button>' +
+                 '<button class="lightbox-prev" aria-label="前へ">‹</button>' +
+                 '<img alt="">' +
+                 '<button class="lightbox-next" aria-label="次へ">›</button>';
+  document.body.appendChild(lb);
+  var lbImg = lb.querySelector('img');
+  var idx = 0;
+  function show(i){
+    idx = (i + imgs.length) % imgs.length;
+    lbImg.src = imgs[idx].src;
+    lbImg.alt = imgs[idx].alt || '';
+  }
+  function open(i){ show(i); lb.classList.add('open'); document.body.style.overflow='hidden'; }
+  function close(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+  imgs.forEach(function(img,i){ img.addEventListener('click', function(){ open(i); }); });
+  lb.querySelector('.lightbox-close').addEventListener('click', function(e){ e.stopPropagation(); close(); });
+  lb.querySelector('.lightbox-prev').addEventListener('click', function(e){ e.stopPropagation(); show(idx-1); });
+  lb.querySelector('.lightbox-next').addEventListener('click', function(e){ e.stopPropagation(); show(idx+1); });
+  lb.addEventListener('click', function(e){ if(e.target===lb || e.target===lbImg) close(); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1);
+  });
+})();
+</script>
+
+<!-- STICKY MOBILE BOOK BAR -->
+<a href="#calendar" class="sticky-book-bar" style="text-decoration:none;">
+  <div class="sticky-book-info">
+    <span class="sticky-book-price">1泊 ¥15,000〜</span>
+    <span class="sticky-book-sub">最大6名 / ペット・子連れOK</span>
+  </div>
+  <span class="sticky-book-btn">今すぐ予約</span>
+</a>
+
+</body>
+</html>
