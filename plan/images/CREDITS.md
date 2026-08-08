@@ -4,9 +4,9 @@
 
 | ファイル | スポット | ライセンス | 撮影者 / 出典 |
 |---|---|---|---|
-| nature-01.jpg | 長峰山展望台 | CC BY-SA 4.0 | [Qurren](https://commons.wikimedia.org/wiki/User:Qurren) — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Nagamineso_observation_deck.jpg) |
+| nature-01.jpg | 安曇野わさび田湧水群 | CC BY 4.0 | ブルーノ・プラス (Bruno Plus) — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Azumino_Wasabida_Yusuigun2.jpg) |
 | nature-02.jpg | 烏川渓谷（渓谷橋からの眺め） | CC BY-SA 3.0 | [Qurren](https://commons.wikimedia.org/wiki/User:Qurren) — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Karasu_River_view_from_Karasugawakeikokubashi-bridge.jpg) |
-| food-01.jpg | 万水川カヌーツーリング（大王わさび農場そば） | CC BY-SA 4.0 | [松岡明芳](https://commons.wikimedia.org/wiki/User:松岡明芳) — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:2007-08-13_Yorozui-River_Canoe_touring_%E8%93%BC%E5%B7%9D%E3%82%AB%E3%83%8C%E3%83%BC%E3%83%84%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%EF%BC%88%E3%82%AB%E3%83%A4%E3%83%83%E3%82%AF%E5%A3%87%E4%B8%8A%E6%99%B4%E4%B8%80%EF%BC%89P8138826.jpg) |
+| food-01.jpg | 大王わさび農園（パノラマ） | CC BY 3.0 | funk bass — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E7%8E%8B%E3%82%8F%E3%81%95%E3%81%B3%E8%BE%B2%E5%9C%92_-_panoramio.jpg) |
 | food-02.jpg | 安曇野ワイナリー | CC BY-SA 4.0 | [Qurren](https://commons.wikimedia.org/wiki/User:Qurren) — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Azumino_Winery.jpg) |
 | art-01.jpg | 碌山美術館 | CC BY 2.5 | [663highland](https://commons.wikimedia.org/wiki/User:663highland) — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:150921_Rokuzan_Art_Museum_Azumino_Nagano_pref_Japan01s3.jpg) |
 | art-02.jpg | 安曇野ちひろ美術館 | CC BY 2.5 | [663highland](https://commons.wikimedia.org/wiki/User:663highland) — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:150922_Chihiro_Art_Museum_Azumino_Japan01s3.jpg) |
