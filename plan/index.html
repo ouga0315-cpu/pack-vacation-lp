@@ -233,6 +233,11 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     margin-bottom: 20px;
   }
   .result-course.primary { border: 2px solid var(--green); }
+  .result-course-image {
+    width: 100%; aspect-ratio: 16 / 9;
+    background-size: cover; background-position: center;
+    background-color: var(--light);
+  }
   .result-course-head {
     padding: 20px 24px; border-bottom: 1px solid var(--border);
     background: var(--cream);
@@ -295,14 +300,20 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   /* All-courses list */
   .all-courses {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 12px; margin-top: 20px;
+    gap: 14px; margin-top: 20px;
   }
   .all-course-card {
     background: var(--white); border: 1px solid var(--border);
-    border-radius: 6px; padding: 14px; cursor: pointer;
-    transition: border-color 0.2s;
+    border-radius: 6px; overflow: hidden; cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
   }
-  .all-course-card:hover { border-color: var(--green); }
+  .all-course-card:hover { border-color: var(--green); transform: translateY(-2px); }
+  .all-course-image {
+    width: 100%; aspect-ratio: 4 / 3;
+    background-size: cover; background-position: center;
+    background-color: var(--light);
+  }
+  .all-course-body { padding: 12px 14px; }
   .all-course-type {
     font-size: 0.7rem; color: var(--gold);
     letter-spacing: 0.15em; margin-bottom: 4px;
@@ -311,6 +322,59 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     font-family: 'Noto Serif JP', serif;
     font-size: 0.95rem; color: var(--brown);
     line-height: 1.4;
+  }
+  .all-course-tag {
+    font-size: 0.75rem; color: var(--muted);
+    margin-top: 6px; line-height: 1.5;
+  }
+
+  /* Instagram section */
+  .ig-section {
+    margin-top: 48px; padding: 32px 20px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; text-align: center;
+  }
+  .ig-section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem; color: var(--brown);
+    letter-spacing: 0.1em; margin-bottom: 8px; font-weight: 600;
+  }
+  .ig-section-sub {
+    font-size: 0.8rem; color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .ig-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .ig-tag {
+    display: inline-block; padding: 6px 12px;
+    background: var(--cream); color: var(--brown);
+    text-decoration: none; font-size: 0.8rem;
+    border-radius: 999px; letter-spacing: 0.03em;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .ig-tag:hover { background: var(--brown); color: var(--white); }
+  .ig-embeds {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px; margin-top: 20px;
+  }
+  .ig-embed-card {
+    background: var(--cream); border-radius: 6px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .ig-embed-card iframe { width: 100%; height: 380px; border: none; display: block; }
+  .ig-embed-name {
+    padding: 10px 14px; text-align: center;
+    font-size: 0.85rem; color: var(--brown);
+    letter-spacing: 0.08em; font-weight: 500;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+  }
+  .ig-embed-name a { color: var(--brown); text-decoration: none; }
+  @media (max-width: 640px) {
+    .ig-embed-card iframe { height: 460px; }
   }
 
   /* Footer */
@@ -392,6 +456,8 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
       <button class="btn-ghost" onclick="restart()">もう一度診断する</button>
       <button class="btn-ghost" onclick="showAllCourses()">全15コースを見る</button>
     </div>
+
+    <div id="resultIgSection"></div>
   </section>
 
   <!-- All Courses Screen -->
@@ -400,6 +466,22 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
     <h2 class="q-label">安曇野の一日、15本</h2>
     <p class="q-sub">気になるコースをタップで詳細</p>
     <div class="all-courses" id="allCourses"></div>
+
+    <section class="ig-section">
+      <div class="ig-section-title">Instagram で暮らしを覗く</div>
+      <div class="ig-section-sub">灯と笹森家の日々。それぞれのアカウントから雰囲気をどうぞ。</div>
+      <div class="ig-embeds">
+        <div class="ig-embed-card">
+          <iframe src="https://www.instagram.com/guesthousetomoshibi/embed" loading="lazy" allowtransparency="true"></iframe>
+          <div class="ig-embed-name"><a href="https://instagram.com/guesthousetomoshibi" target="_blank" rel="noopener">@guesthousetomoshibi（灯）</a></div>
+        </div>
+        <div class="ig-embed-card">
+          <iframe src="https://www.instagram.com/sasamorihouse/embed" loading="lazy" allowtransparency="true"></iframe>
+          <div class="ig-embed-name"><a href="https://instagram.com/sasamorihouse" target="_blank" rel="noopener">@sasamorihouse（笹森家）</a></div>
+        </div>
+      </div>
+    </section>
+
     <div style="text-align:center; margin-top: 40px;">
       <button class="btn-ghost" onclick="restart()">診断からやり直す</button>
     </div>
@@ -624,6 +706,23 @@ function showResult() {
   document.getElementById('resultCourseSecondary').innerHTML = secondary ? renderCourseCard(secondary, false) : '';
   document.getElementById('resultSubLabel').style.display = secondary ? 'block' : 'none';
 
+  // Instagram embeds for recommended inns
+  const IG_HANDLES = { tomoshibi: { handle: 'guesthousetomoshibi', label: '灯' }, sasamoriya: { handle: 'sasamorihouse', label: '笹森家' } };
+  const igCards = inns.map(key => {
+    const h = IG_HANDLES[key];
+    return `
+      <div class="ig-embed-card">
+        <iframe src="https://www.instagram.com/${h.handle}/embed" loading="lazy" allowtransparency="true"></iframe>
+        <div class="ig-embed-name"><a href="https://instagram.com/${h.handle}" target="_blank" rel="noopener">@${h.handle}（${h.label}）</a></div>
+      </div>`;
+  }).join('');
+  document.getElementById('resultIgSection').innerHTML = `
+    <section class="ig-section">
+      <div class="ig-section-title">宿の日々を、Instagram で</div>
+      <div class="ig-section-sub">泊まる前に、雰囲気を確かめてください。</div>
+      <div class="ig-embeds">${igCards}</div>
+    </section>`;
+
   showScreen('screen-result');
 
   if (typeof gtag === 'function') {
@@ -645,8 +744,21 @@ function renderCourseCard(c, isPrimary) {
       </div>
     </li>`).join('');
 
+  const igHtml = c.instagramTag ? `
+    <div style="margin-top:16px;padding-top:16px;border-top:1px dashed var(--border);">
+      <div style="font-size:0.75rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:8px;">Instagram で探す</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        ${c.instagramTag.split(/\s+/).filter(Boolean).map(tag => {
+          const clean = tag.replace(/^#/, '');
+          const url = 'https://www.instagram.com/explore/tags/' + encodeURIComponent(clean) + '/';
+          return `<a href="${url}" target="_blank" rel="noopener" class="ig-tag">${tag}</a>`;
+        }).join('')}
+      </div>
+    </div>` : '';
+
   return `
     <div class="result-course ${isPrimary ? 'primary' : ''}">
+      ${c.image ? `<div class="result-course-image" style="background-image:url('${c.image}');"></div>` : ''}
       <div class="result-course-head">
         <span class="result-course-type">${c.typeIcon} ${c.type}</span>
         <div class="result-course-title">${c.title}</div>
@@ -660,6 +772,7 @@ function renderCourseCard(c, isPrimary) {
       </div>
       <div class="result-course-body">
         <ul class="result-course-stops">${stopsHtml}</ul>
+        ${igHtml}
       </div>
     </div>`;
 }
@@ -670,8 +783,12 @@ function showAllCourses(e) {
   const grid = document.getElementById('allCourses');
   grid.innerHTML = COURSES.map(c => `
     <div class="all-course-card" onclick="showCourseDetail('${c.id}')">
-      <div class="all-course-type">${c.typeIcon} ${c.type}</div>
-      <div class="all-course-title">${c.title}</div>
+      ${c.image ? `<div class="all-course-image" style="background-image:url('${c.image}');"></div>` : ''}
+      <div class="all-course-body">
+        <div class="all-course-type">${c.typeIcon} ${c.type}</div>
+        <div class="all-course-title">${c.title}</div>
+        <div class="all-course-tag">${c.tagline}</div>
+      </div>
     </div>
   `).join('');
   showScreen('screen-all');

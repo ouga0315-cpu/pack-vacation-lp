@@ -11,6 +11,8 @@
     "weather": ["晴れ"],
     "companions": ["一人", "カップル", "大人少人数"],
     "inn": "any",
+    "image": "../sasamoriya/images/morning-tour-1.jpg",
+    "instagramTag": "#長峰山 #安曇野",
     "stops": [
       { "time": "7:30", "name": "宿を出発", "note": "" },
       { "time": "8:30", "name": "長峰山山頂", "note": "北アルプスと安曇野を一望" },
@@ -30,6 +32,8 @@
     "weather": ["晴れ", "雨"],
     "companions": ["大人少人数", "カップル", "家族"],
     "inn": "sasamoriya",
+    "image": "../sasamoriya/images/season-autumn.jpg",
+    "instagramTag": "#烏川渓谷 #ほりでーゆ",
     "stops": [
       { "time": "9:00", "name": "宿を出発", "note": "" },
       { "time": "9:30", "name": "烏川渓谷緑地の遊歩道", "note": "" },
@@ -50,6 +54,8 @@
     "weather": ["晴れ", "雨"],
     "companions": ["一人", "カップル", "大人少人数", "家族"],
     "inn": "any",
+    "image": "../sasamoriya/images/season-summer.jpg",
+    "instagramTag": "#安曇野そば #大王わさび農場",
     "stops": [
       { "time": "10:30", "name": "宿を出発", "note": "" },
       { "time": "11:00", "name": "そば処双葉 or 志水庵 or 上條", "note": "" },
@@ -70,6 +76,8 @@
     "weather": ["晴れ", "雨"],
     "companions": ["カップル", "大人少人数"],
     "inn": "tomoshibi",
+    "image": "../sasamoriya/images/season-spring.jpg",
+    "instagramTag": "#安曇野ワイナリー #アルプス牧場",
     "stops": [
       { "time": "10:00", "name": "宿を出発", "note": "" },
       { "time": "10:30", "name": "モルゲンロートベーカリー or サントノーレで朝食", "note": "" },
@@ -91,6 +99,8 @@
     "weather": ["晴れ", "雨"],
     "companions": ["一人", "カップル"],
     "inn": "tomoshibi",
+    "image": "../sasamoriya/images/season-winter.jpg",
+    "instagramTag": "#碌山美術館 #安曇野アート",
     "stops": [
       { "time": "10:00", "name": "宿を出発", "note": "" },
       { "time": "10:30", "name": "碌山美術館 or 安曇野ちひろ美術館", "note": "" },
@@ -112,6 +122,8 @@
     "weather": ["晴れ", "雨"],
     "companions": ["カップル", "家族", "大人少人数"],
     "inn": "tomoshibi",
+    "image": "../tomoshibi/images/hero-reading.jpg",
+    "instagramTag": "#ちひろ美術館 #安曇野アートヒルズ",
     "stops": [
       { "time": "10:00", "name": "宿を出発", "note": "" },
       { "time": "10:30", "name": "大隈美術館 or 有明美術館", "note": "" },
@@ -133,6 +145,8 @@
     "weather": ["晴れ"],
     "companions": ["カップル", "大人少人数", "家族"],
     "inn": "any",
+    "image": "../sasamoriya/images/morning-tour-2.jpg",
+    "instagramTag": "#focusmorningtour #kiboco",
     "stops": [
       { "time": "6:00", "name": "FOCUS MORNING TOUR 集合（朝枠）", "note": "" },
       { "time": "9:00", "name": "宿で軽食＆休憩", "note": "" },
@@ -154,6 +168,8 @@
     "weather": ["晴れ"],
     "companions": ["カップル", "大人少人数"],
     "inn": "any",
+    "image": "../sasamoriya/images/morning-tour/hero.jpg",
+    "instagramTag": "#燕岳 #合戦尾根 #中房温泉",
     "stops": [
       { "time": "5:30", "name": "宿を出発", "note": "" },
       { "time": "6:30", "name": "中房温泉登山口", "note": "" },
@@ -176,6 +192,8 @@
     "weather": ["晴れ"],
     "companions": ["カップル", "家族", "大人少人数"],
     "inn": "any",
+    "image": "../sasamoriya/images/garden.jpg",
+    "instagramTag": "#安曇野サイクリング #拾ヶ堰",
     "stops": [
       { "time": "9:00", "name": "宿を出発", "note": "自転車は安曇野市内各所でレンタル可" },
       { "time": "9:30", "name": "大王わさび農場", "note": "" },
@@ -197,6 +215,8 @@
     "weather": ["晴れ", "雨"],
     "companions": ["一人", "カップル", "大人少人数"],
     "inn": "tomoshibi",
+    "image": "../sasamoriya/images/exterior-autumn.jpg",
+    "instagramTag": "#しゃくなげの湯 #ほりでーゆ",
     "stops": [
       { "time": "9:00", "name": "カフェガルニでゆっくり朝食", "note": "" },
       { "time": "11:00", "name": "烏川渓谷で散歩", "note": "" },
@@ -217,6 +237,8 @@
     "weather": ["晴れ", "雨"],
     "companions": ["家族"],
     "inn": "sasamoriya",
+    "image": "../sasamoriya/images/garden.jpg",
+    "instagramTag": "#あづみの公園 #子連れ旅",
     "stops": [
       { "time": "10:00", "name": "宿を出発", "note": "" },
       { "time": "10:30", "name": "国営アルプスあづみの公園（遊具・広場）", "note": "" },
@@ -237,6 +259,8 @@
     "weather": ["晴れ", "雨"],
     "companions": ["ペット"],
     "inn": "sasamoriya",
+    "image": "../sasamoriya/images/pet-dog.jpg",
+    "instagramTag": "#犬連れ旅 #安曇野学者村",
     "stops": [
       { "time": "7:00", "name": "学者村別荘地を散歩（約1時間）", "note": "" },
       { "time": "8:30", "name": "宿で朝食", "note": "" },
@@ -257,6 +281,8 @@
     "weather": ["晴れ"],
     "companions": ["ペット"],
     "inn": "sasamoriya",
+    "image": "../sasamoriya/images/lifestyle-pet.jpg",
+    "instagramTag": "#犬連れドライブ #三郷スカイライン",
     "stops": [
       { "time": "9:00", "name": "宿を出発", "note": "" },
       { "time": "10:00", "name": "烏川渓谷緑地の遊歩道", "note": "犬OK・水辺で遊べる" },
@@ -277,6 +303,8 @@
     "weather": ["晴れ"],
     "companions": ["家族"],
     "inn": "sasamoriya",
+    "image": "../sasamoriya/images/morning-tour-3.jpg",
+    "instagramTag": "#中房川 #安曇野川遊び",
     "stops": [
       { "time": "9:00", "name": "宿を出発", "note": "" },
       { "time": "9:30", "name": "中房川で川遊び", "note": "" },
@@ -299,6 +327,8 @@
     "weather": ["雨"],
     "companions": ["家族"],
     "inn": "any",
+    "image": "../tomoshibi/images/lifestyle-bunk.jpg",
+    "instagramTag": "#ちひろ美術館 #雨の日子連れ",
     "stops": [
       { "time": "10:00", "name": "宿を出発", "note": "" },
       { "time": "10:30", "name": "安曇野ちひろ美術館", "note": "絵本部屋＋広い屋内スペース" },
