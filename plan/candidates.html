@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>候補ギャラリー | Pack Vacation /plan/</title>
+<style>
+  body { font-family: sans-serif; margin: 0; padding: 24px; background: #f5f5f5; color: #222; line-height: 1.6; }
+  h1 { font-size: 1.4rem; margin: 0 0 8px; }
+  .lead { color: #666; margin-bottom: 32px; font-size: 0.9rem; }
+  .course { background: #fff; padding: 20px; margin-bottom: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .course-head { margin-bottom: 16px; }
+  .course-id { font-size: 0.75rem; color: #999; letter-spacing: 0.15em; }
+  .course-title { font-size: 1.1rem; color: #333; margin: 4px 0; font-weight: 700; }
+  .course-need { font-size: 0.85rem; color: #EE5A1F; font-weight: 500; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+  .cand { background: #fafafa; border: 2px solid #eee; border-radius: 6px; overflow: hidden; }
+  .cand.current { border-color: #3C5A3A; }
+  .cand img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .cand-body { padding: 10px 12px; }
+  .cand-label { font-size: 0.9rem; font-weight: 700; color: #333; }
+  .cand-tag { font-size: 0.7rem; color: #666; margin-top: 2px; font-family: monospace; }
+  .cand.current .cand-label::after { content: " ✅ 現在採用中"; color: #3C5A3A; font-weight: normal; font-size: 0.75rem; }
+  .no-cand { padding: 40px 20px; text-align: center; color: #999; background: #fafafa; border-radius: 6px; font-size: 0.9rem; }
+  .instructions { background: #fff9e6; border-left: 4px solid #EE5A1F; padding: 16px 20px; margin-bottom: 24px; border-radius: 4px; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<h1>候補ギャラリー — Pack Vacation /plan/</h1>
+<p class="lead">全15コースの画像候補一覧です。緑枠が現在採用中の画像。</p>
+
+<div class="instructions">
+<strong>返信フォーマット：</strong> 各コースIDに対して「a / b / c / other」を指定してください。<br>
+例：<code>NATURE-01: a / FOOD-01: 別の写真を後で送る / ART-02: a のままでOK</code>
+</div>
+
+<script>
+const COURSES = [
+  { id: "NATURE-01", title: "湧水と朝もや", need: "早朝の靄・湧水・水景", cands: [
+    { file: "nature-01_a.jpg", label: "シルエット×朝もや", tag: "focus-morning-tour/p_sil", current: true },
+    { file: "nature-01_b.jpg", label: "霧の田園×アルプス", tag: "250620/DSC_0022" },
+    { file: "nature-01_c.jpg", label: "稲穂×夕焼けアルプス", tag: "ouga/DSC_0003" },
+  ]},
+  { id: "NATURE-02", title: "渓谷と森と温泉の一日", need: "新緑or紅葉の渓谷・滝", cands: [
+    { file: "nature-02_a.jpg", label: "新緑の渓流と人", tag: "260518/DSC_0041", current: true },
+    { file: "nature-02_b.jpg", label: "森の滝", tag: "focus-morning-tour/p_water" },
+    { file: "nature-02_c.jpg", label: "岩と川の女性", tag: "260518/DSC_0054" },
+  ]},
+  { id: "FOOD-01", title: "そばとわさびの真昼", need: "そば・わさびソフト・穂高神社", cands: [
+    { file: "food-01_a.jpg", label: "川底のプリズム（水）", tag: "260423/DSC_0040", current: true },
+  ]},
+  { id: "FOOD-02", title: "ワイン・パン・チーズ・丘の一日", need: "ワイン・パン・チーズ・丘", cands: [
+    { file: "food-02_a.jpg", label: "冬朝焼け×葡萄棚", tag: "ouga/DSC_0085", current: true },
+  ]},
+  { id: "ART-01", title: "碌山と信州の光", need: "美術館・工芸・静けさ", cands: [
+    { file: "art-01_a.jpg", label: "雪の窓辺（静寂）", tag: "ouga/DSC_0337_1892", current: true },
+    { file: "art-01_b.jpg", label: "霧の山（詩的）", tag: "250620/DSC_0018" },
+    { file: "art-01_c.jpg", label: "雨の紫陽花", tag: "ouga/DSC_0037" },
+  ]},
+  { id: "ART-02", title: "絵本と工芸の一日", need: "美術館・ガラス工芸・陶芸", cands: [
+    { file: "art-02_a.jpg", label: "桜のマクロ", tag: "ouga/DSC_0073", current: true },
+  ]},
+  { id: "ACTIVE-01", title: "FOCUS × kibocoの一日", need: "早朝の北アルプス・雲海", cands: [
+    { file: "active-01_a.jpg", label: "雲海×北アルプス×展望台", tag: "focus-morning-tour/p_alpen ★", current: true },
+    { file: "active-01_b.jpg", label: "紅葉山×雲海", tag: "ouga/DSC_0016" },
+    { file: "active-01_c.jpg", label: "冬朝焼け×葡萄棚", tag: "ouga/DSC_0085" },
+  ]},
+  { id: "ACTIVE-02", title: "北アルプスに触れる", need: "燕岳・登山者・稜線", cands: [
+    { file: "active-02_a.jpg", label: "稜線を歩く登山者たち ★", tag: "ouga/DSC_0088", current: true },
+    { file: "active-02_b.jpg", label: "雪の頂上×青空", tag: "260423/DSC_0011" },
+    { file: "active-02_c.jpg", label: "紅葉山肌", tag: "ouga/DSC_0016" },
+  ]},
+  { id: "ACTIVE-03", title: "安曇野サイクリング", need: "拾ヶ堰・万水川・自転車", cands: [
+    { file: "active-03_a.jpg", label: "稲穂×夕焼けアルプス", tag: "ouga/DSC_0003", current: true },
+  ]},
+  { id: "SLOW-01", title: "温泉と森散歩", need: "紅葉の窓辺・温泉・秋の静寂", cands: [
+    { file: "slow-01_a.jpg", label: "ログハウス紅葉窓辺 ★", tag: "focus-morning-tour/p_cabin", current: true },
+    { file: "slow-01_b.jpg", label: "雪の窓辺", tag: "ouga/DSC_0337_1892" },
+    { file: "slow-01_c.jpg", label: "もみじ逆光", tag: "ouga/DSC_0054" },
+  ]},
+  { id: "SLOW-02", title: "子連れゆったり公園日", need: "公園・遊具・広場・子ども", cands: [
+    { file: "slow-02_a.jpg", label: "ひまわり畑", tag: "ouga/DSC_0086", current: true },
+    { file: "slow-02_b.jpg", label: "鯉のぼり×青空", tag: "ouga/DSC_0112" },
+    { file: "slow-02_c.jpg", label: "桜", tag: "ouga/DSC_0073" },
+  ]},
+  { id: "DOG-01", title: "学者村の朝散歩と森カフェ", need: "犬・散歩・別荘地・森の道", cands: [
+    { file: "dog-01_a.jpg", label: "森の中の小道", tag: "focus-morning-tour/p_forest", current: true },
+    { file: "dog-01_b.jpg", label: "白鳥×田園", tag: "260213/DSC_0085(2)" },
+    { file: "dog-01_c.jpg", label: "霧の山", tag: "250620/DSC_0018" },
+  ]},
+  { id: "DOG-02", title: "北アルプス裾野ドッグドライブ", need: "犬×車×アルプス裾野", cands: [
+    { file: "dog-02_a.jpg", label: "白鳥の群れ×田園", tag: "260213/DSC_0087(2)", current: true },
+  ]},
+  { id: "KIDS-01", title: "川と食と探検の一日", need: "中房川・川遊び・BBQ・子ども", cands: [
+    { file: "kids-01_a.jpg", label: "子どもの食卓 ★", tag: "250924/DSC_0057", current: true },
+    { file: "kids-01_b.jpg", label: "岩の上の人（川）", tag: "260518/DSC_0054" },
+    { file: "kids-01_c.jpg", label: "渓流と人", tag: "260518/DSC_0041" },
+  ]},
+  { id: "KIDS-02", title: "雨の日の美術館めぐり", need: "屋内・美術館・子ども・雨", cands: [
+    { file: "kids-02_a.jpg", label: "雨の紫陽花", tag: "ouga/DSC_0037", current: true },
+  ]},
+];
+
+const container = document.body;
+COURSES.forEach(c => {
+  const div = document.createElement('div');
+  div.className = 'course';
+  const gridHtml = c.cands.length > 0
+    ? `<div class="grid">${c.cands.map(cand => `
+        <div class="cand ${cand.current ? 'current' : ''}">
+          <img src="candidates/${cand.file}" loading="lazy" alt="${cand.label}">
+          <div class="cand-body">
+            <div class="cand-label">${cand.label}</div>
+            <div class="cand-tag">${cand.tag}</div>
+          </div>
+        </div>`).join('')}</div>`
+    : `<div class="no-cand">候補なし — 追加検索が必要</div>`;
+  div.innerHTML = `
+    <div class="course-head">
+      <div class="course-id">${c.id}</div>
+      <div class="course-title">${c.title}</div>
+      <div class="course-need">欲しい: ${c.need}</div>
+    </div>
+    ${gridHtml}
+  `;
+  container.appendChild(div);
+});
+</script>
+
+</body>
+</html>
