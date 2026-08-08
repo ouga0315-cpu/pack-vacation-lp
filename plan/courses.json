@@ -7,17 +7,41 @@
     "typeIcon": "🌿",
     "duration": "半日",
     "stamina": "軽め",
-    "transport": ["車"],
-    "weather": ["晴れ"],
-    "companions": ["一人", "カップル", "大人少人数"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ"
+    ],
+    "companions": [
+      "一人",
+      "カップル",
+      "大人少人数"
+    ],
     "inn": "any",
-    "image": "../sasamoriya/images/morning-tour-1.jpg",
+    "image": "./images/nature-01.jpg",
     "instagramTag": "#長峰山 #安曇野",
     "stops": [
-      { "time": "7:30", "name": "宿を出発", "note": "" },
-      { "time": "8:30", "name": "長峰山山頂", "note": "北アルプスと安曇野を一望" },
-      { "time": "9:30", "name": "ベーカリースイート", "note": "" },
-      { "time": "10:30", "name": "大王わさび農場・おひさまロードなど穂高周辺", "note": "" }
+      {
+        "time": "7:30",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "8:30",
+        "name": "長峰山山頂",
+        "note": "北アルプスと安曇野を一望"
+      },
+      {
+        "time": "9:30",
+        "name": "ベーカリースイート",
+        "note": ""
+      },
+      {
+        "time": "10:30",
+        "name": "大王わさび農場・おひさまロードなど穂高周辺",
+        "note": ""
+      }
     ]
   },
   {
@@ -28,18 +52,47 @@
     "typeIcon": "🌿",
     "duration": "一日",
     "stamina": "しっかり",
-    "transport": ["車"],
-    "weather": ["晴れ", "雨"],
-    "companions": ["大人少人数", "カップル", "家族"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ",
+      "雨"
+    ],
+    "companions": [
+      "大人少人数",
+      "カップル",
+      "家族"
+    ],
     "inn": "sasamoriya",
-    "image": "../sasamoriya/images/season-autumn.jpg",
+    "image": "./images/nature-02.jpg",
     "instagramTag": "#烏川渓谷 #ほりでーゆ",
     "stops": [
-      { "time": "9:00", "name": "宿を出発", "note": "" },
-      { "time": "9:30", "name": "烏川渓谷緑地の遊歩道", "note": "" },
-      { "time": "12:00", "name": "須砂渡食堂でランチ", "note": "" },
-      { "time": "14:30", "name": "ほりでーゆ〜四季の郷で日帰り温泉", "note": "" },
-      { "time": "15:30", "name": "アルプス安曇野公園（穂高）", "note": "" }
+      {
+        "time": "9:00",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "9:30",
+        "name": "烏川渓谷緑地の遊歩道",
+        "note": ""
+      },
+      {
+        "time": "12:00",
+        "name": "須砂渡食堂でランチ",
+        "note": ""
+      },
+      {
+        "time": "14:30",
+        "name": "ほりでーゆ〜四季の郷で日帰り温泉",
+        "note": ""
+      },
+      {
+        "time": "15:30",
+        "name": "アルプス安曇野公園（穂高）",
+        "note": ""
+      }
     ]
   },
   {
@@ -50,18 +103,48 @@
     "typeIcon": "🍜",
     "duration": "半日",
     "stamina": "軽め",
-    "transport": ["車"],
-    "weather": ["晴れ", "雨"],
-    "companions": ["一人", "カップル", "大人少人数", "家族"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ",
+      "雨"
+    ],
+    "companions": [
+      "一人",
+      "カップル",
+      "大人少人数",
+      "家族"
+    ],
     "inn": "any",
-    "image": "../sasamoriya/images/season-summer.jpg",
+    "image": "./images/food-01.jpg",
     "instagramTag": "#安曇野そば #大王わさび農場",
     "stops": [
-      { "time": "10:30", "name": "宿を出発", "note": "" },
-      { "time": "11:00", "name": "そば処双葉 or 志水庵 or 上條", "note": "" },
-      { "time": "13:00", "name": "大王わさび農場でわさびソフト", "note": "" },
-      { "time": "14:00", "name": "穂高神社", "note": "" },
-      { "time": "15:00", "name": "宿に戻る", "note": "" }
+      {
+        "time": "10:30",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "11:00",
+        "name": "そば処双葉 or 志水庵 or 上條",
+        "note": ""
+      },
+      {
+        "time": "13:00",
+        "name": "大王わさび農場でわさびソフト",
+        "note": ""
+      },
+      {
+        "time": "14:00",
+        "name": "穂高神社",
+        "note": ""
+      },
+      {
+        "time": "15:00",
+        "name": "宿に戻る",
+        "note": ""
+      }
     ]
   },
   {
@@ -72,19 +155,51 @@
     "typeIcon": "🍷",
     "duration": "一日",
     "stamina": "軽め",
-    "transport": ["車"],
-    "weather": ["晴れ", "雨"],
-    "companions": ["カップル", "大人少人数"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ",
+      "雨"
+    ],
+    "companions": [
+      "カップル",
+      "大人少人数"
+    ],
     "inn": "tomoshibi",
-    "image": "../sasamoriya/images/season-spring.jpg",
+    "image": "./images/food-02.jpg",
     "instagramTag": "#安曇野ワイナリー #アルプス牧場",
     "stops": [
-      { "time": "10:00", "name": "宿を出発", "note": "" },
-      { "time": "10:30", "name": "モルゲンロートベーカリー or サントノーレで朝食", "note": "" },
-      { "time": "12:00", "name": "安曇野ワイナリー", "note": "" },
-      { "time": "13:00", "name": "ビストロノリ or レストランアベでランチ", "note": "" },
-      { "time": "15:00", "name": "アルプス牧場でソフトクリームとチーズ", "note": "" },
-      { "time": "17:00", "name": "宿に戻る", "note": "" }
+      {
+        "time": "10:00",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "10:30",
+        "name": "モルゲンロートベーカリー or サントノーレで朝食",
+        "note": ""
+      },
+      {
+        "time": "12:00",
+        "name": "安曇野ワイナリー",
+        "note": ""
+      },
+      {
+        "time": "13:00",
+        "name": "ビストロノリ or レストランアベでランチ",
+        "note": ""
+      },
+      {
+        "time": "15:00",
+        "name": "アルプス牧場でソフトクリームとチーズ",
+        "note": ""
+      },
+      {
+        "time": "17:00",
+        "name": "宿に戻る",
+        "note": ""
+      }
     ]
   },
   {
@@ -95,19 +210,51 @@
     "typeIcon": "🎨",
     "duration": "一日",
     "stamina": "軽め",
-    "transport": ["車"],
-    "weather": ["晴れ", "雨"],
-    "companions": ["一人", "カップル"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ",
+      "雨"
+    ],
+    "companions": [
+      "一人",
+      "カップル"
+    ],
     "inn": "tomoshibi",
-    "image": "../sasamoriya/images/season-winter.jpg",
+    "image": "./images/art-01.jpg",
     "instagramTag": "#碌山美術館 #安曇野アート",
     "stops": [
-      { "time": "10:00", "name": "宿を出発", "note": "" },
-      { "time": "10:30", "name": "碌山美術館 or 安曇野ちひろ美術館", "note": "" },
-      { "time": "12:00", "name": "ビストロノリ or レストランアベでランチ", "note": "" },
-      { "time": "14:00", "name": "工芸体験：あずみの木箸 or とんぼ玉楽舎", "note": "" },
-      { "time": "16:00", "name": "シャクナゲの湯", "note": "" },
-      { "time": "17:30", "name": "宿に戻る", "note": "" }
+      {
+        "time": "10:00",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "10:30",
+        "name": "碌山美術館 or 安曇野ちひろ美術館",
+        "note": ""
+      },
+      {
+        "time": "12:00",
+        "name": "ビストロノリ or レストランアベでランチ",
+        "note": ""
+      },
+      {
+        "time": "14:00",
+        "name": "工芸体験：あずみの木箸 or とんぼ玉楽舎",
+        "note": ""
+      },
+      {
+        "time": "16:00",
+        "name": "シャクナゲの湯",
+        "note": ""
+      },
+      {
+        "time": "17:30",
+        "name": "宿に戻る",
+        "note": ""
+      }
     ]
   },
   {
@@ -118,19 +265,52 @@
     "typeIcon": "🎨",
     "duration": "一日",
     "stamina": "軽め",
-    "transport": ["車"],
-    "weather": ["晴れ", "雨"],
-    "companions": ["カップル", "家族", "大人少人数"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ",
+      "雨"
+    ],
+    "companions": [
+      "カップル",
+      "家族",
+      "大人少人数"
+    ],
     "inn": "tomoshibi",
-    "image": "../tomoshibi/images/hero-reading.jpg",
+    "image": "./images/art-02.jpg",
     "instagramTag": "#ちひろ美術館 #安曇野アートヒルズ",
     "stops": [
-      { "time": "10:00", "name": "宿を出発", "note": "" },
-      { "time": "10:30", "name": "大隈美術館 or 有明美術館", "note": "" },
-      { "time": "13:00", "name": "カフェランチ（Olika cafe / 七ヶ月 / creek）", "note": "" },
-      { "time": "14:30", "name": "工芸体験：The art studio 8（吹きガラス）or 穂高陶芸会館（陶芸）", "note": "" },
-      { "time": "16:30", "name": "北アルプス展望美術館", "note": "" },
-      { "time": "17:30", "name": "宿に戻る", "note": "" }
+      {
+        "time": "10:00",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "10:30",
+        "name": "大隈美術館 or 有明美術館",
+        "note": ""
+      },
+      {
+        "time": "13:00",
+        "name": "カフェランチ（Olika cafe / 七ヶ月 / creek）",
+        "note": ""
+      },
+      {
+        "time": "14:30",
+        "name": "工芸体験：The art studio 8（吹きガラス）or 穂高陶芸会館（陶芸）",
+        "note": ""
+      },
+      {
+        "time": "16:30",
+        "name": "北アルプス展望美術館",
+        "note": ""
+      },
+      {
+        "time": "17:30",
+        "name": "宿に戻る",
+        "note": ""
+      }
     ]
   },
   {
@@ -141,19 +321,51 @@
     "typeIcon": "🌅",
     "duration": "一日",
     "stamina": "ほどよく",
-    "transport": ["車"],
-    "weather": ["晴れ"],
-    "companions": ["カップル", "大人少人数", "家族"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ"
+    ],
+    "companions": [
+      "カップル",
+      "大人少人数",
+      "家族"
+    ],
     "inn": "any",
-    "image": "../sasamoriya/images/morning-tour-2.jpg",
+    "image": "./images/active-01.jpg",
     "instagramTag": "#focusmorningtour #kiboco",
     "stops": [
-      { "time": "6:00", "name": "FOCUS MORNING TOUR 集合（朝枠）", "note": "" },
-      { "time": "9:00", "name": "宿で軽食＆休憩", "note": "" },
-      { "time": "12:00", "name": "宿近くの食堂 or カフェでランチ", "note": "" },
-      { "time": "13:30", "name": "outdoor guide kiboco へ移動", "note": "" },
-      { "time": "14:00", "name": "kibocoの季節のアクティビティ", "note": "春夏：カヌー・トレッキング／秋冬：スノーシューなど" },
-      { "time": "17:00", "name": "宿に戻る", "note": "" }
+      {
+        "time": "6:00",
+        "name": "FOCUS MORNING TOUR 集合（朝枠）",
+        "note": ""
+      },
+      {
+        "time": "9:00",
+        "name": "宿で軽食＆休憩",
+        "note": ""
+      },
+      {
+        "time": "12:00",
+        "name": "宿近くの食堂 or カフェでランチ",
+        "note": ""
+      },
+      {
+        "time": "13:30",
+        "name": "outdoor guide kiboco へ移動",
+        "note": ""
+      },
+      {
+        "time": "14:00",
+        "name": "kibocoの季節のアクティビティ",
+        "note": "春夏：カヌー・トレッキング／秋冬：スノーシューなど"
+      },
+      {
+        "time": "17:00",
+        "name": "宿に戻る",
+        "note": ""
+      }
     ]
   },
   {
@@ -164,20 +376,55 @@
     "typeIcon": "🏔",
     "duration": "一日",
     "stamina": "しっかり",
-    "transport": ["車"],
-    "weather": ["晴れ"],
-    "companions": ["カップル", "大人少人数"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ"
+    ],
+    "companions": [
+      "カップル",
+      "大人少人数"
+    ],
     "inn": "any",
-    "image": "../sasamoriya/images/morning-tour/hero.jpg",
+    "image": "./images/active-02.jpg",
     "instagramTag": "#燕岳 #合戦尾根 #中房温泉",
     "stops": [
-      { "time": "5:30", "name": "宿を出発", "note": "" },
-      { "time": "6:30", "name": "中房温泉登山口", "note": "" },
-      { "time": "7:00", "name": "合戦尾根を登り始める", "note": "" },
-      { "time": "11:00", "name": "合戦小屋で折返し", "note": "燕岳山頂は上級者向けなので推奨せず" },
-      { "time": "14:30", "name": "下山完了", "note": "" },
-      { "time": "15:00", "name": "中房温泉で汗を流す", "note": "" },
-      { "time": "17:00", "name": "宿に戻る", "note": "" }
+      {
+        "time": "5:30",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "6:30",
+        "name": "中房温泉登山口",
+        "note": ""
+      },
+      {
+        "time": "7:00",
+        "name": "合戦尾根を登り始める",
+        "note": ""
+      },
+      {
+        "time": "11:00",
+        "name": "合戦小屋で折返し",
+        "note": "燕岳山頂は上級者向けなので推奨せず"
+      },
+      {
+        "time": "14:30",
+        "name": "下山完了",
+        "note": ""
+      },
+      {
+        "time": "15:00",
+        "name": "中房温泉で汗を流す",
+        "note": ""
+      },
+      {
+        "time": "17:00",
+        "name": "宿に戻る",
+        "note": ""
+      }
     ]
   },
   {
@@ -188,19 +435,51 @@
     "typeIcon": "🚴",
     "duration": "半日",
     "stamina": "ほどよく",
-    "transport": ["自転車"],
-    "weather": ["晴れ"],
-    "companions": ["カップル", "家族", "大人少人数"],
+    "transport": [
+      "自転車"
+    ],
+    "weather": [
+      "晴れ"
+    ],
+    "companions": [
+      "カップル",
+      "家族",
+      "大人少人数"
+    ],
     "inn": "any",
-    "image": "../sasamoriya/images/garden.jpg",
+    "image": "./images/active-03.jpg",
     "instagramTag": "#安曇野サイクリング #拾ヶ堰",
     "stops": [
-      { "time": "9:00", "name": "宿を出発", "note": "自転車は安曇野市内各所でレンタル可" },
-      { "time": "9:30", "name": "大王わさび農場", "note": "" },
-      { "time": "11:00", "name": "万水川沿い", "note": "" },
-      { "time": "12:00", "name": "穂高神社周辺でランチ", "note": "" },
-      { "time": "14:00", "name": "拾ヶ堰の水路沿い", "note": "" },
-      { "time": "15:30", "name": "宿に戻る", "note": "" }
+      {
+        "time": "9:00",
+        "name": "宿を出発",
+        "note": "自転車は安曇野市内各所でレンタル可"
+      },
+      {
+        "time": "9:30",
+        "name": "大王わさび農場",
+        "note": ""
+      },
+      {
+        "time": "11:00",
+        "name": "万水川沿い",
+        "note": ""
+      },
+      {
+        "time": "12:00",
+        "name": "穂高神社周辺でランチ",
+        "note": ""
+      },
+      {
+        "time": "14:00",
+        "name": "拾ヶ堰の水路沿い",
+        "note": ""
+      },
+      {
+        "time": "15:30",
+        "name": "宿に戻る",
+        "note": ""
+      }
     ]
   },
   {
@@ -211,18 +490,47 @@
     "typeIcon": "♨️",
     "duration": "一日",
     "stamina": "軽め",
-    "transport": ["車"],
-    "weather": ["晴れ", "雨"],
-    "companions": ["一人", "カップル", "大人少人数"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ",
+      "雨"
+    ],
+    "companions": [
+      "一人",
+      "カップル",
+      "大人少人数"
+    ],
     "inn": "tomoshibi",
-    "image": "../sasamoriya/images/exterior-autumn.jpg",
+    "image": "./images/slow-01.jpg",
     "instagramTag": "#しゃくなげの湯 #ほりでーゆ",
     "stops": [
-      { "time": "9:00", "name": "カフェガルニでゆっくり朝食", "note": "" },
-      { "time": "11:00", "name": "烏川渓谷で散歩", "note": "" },
-      { "time": "13:00", "name": "須砂渡食堂で食事", "note": "" },
-      { "time": "14:30", "name": "しゃくなげの湯 or ほりでーゆ〜四季の郷で温泉", "note": "" },
-      { "time": "16:30", "name": "宿に戻る", "note": "" }
+      {
+        "time": "9:00",
+        "name": "カフェガルニでゆっくり朝食",
+        "note": ""
+      },
+      {
+        "time": "11:00",
+        "name": "烏川渓谷で散歩",
+        "note": ""
+      },
+      {
+        "time": "13:00",
+        "name": "須砂渡食堂で食事",
+        "note": ""
+      },
+      {
+        "time": "14:30",
+        "name": "しゃくなげの湯 or ほりでーゆ〜四季の郷で温泉",
+        "note": ""
+      },
+      {
+        "time": "16:30",
+        "name": "宿に戻る",
+        "note": ""
+      }
     ]
   },
   {
@@ -233,18 +541,45 @@
     "typeIcon": "👶",
     "duration": "一日",
     "stamina": "軽め",
-    "transport": ["車"],
-    "weather": ["晴れ", "雨"],
-    "companions": ["家族"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ",
+      "雨"
+    ],
+    "companions": [
+      "家族"
+    ],
     "inn": "sasamoriya",
-    "image": "../sasamoriya/images/garden.jpg",
+    "image": "./images/slow-02.jpg",
     "instagramTag": "#あづみの公園 #子連れ旅",
     "stops": [
-      { "time": "10:00", "name": "宿を出発", "note": "" },
-      { "time": "10:30", "name": "国営アルプスあづみの公園（遊具・広場）", "note": "" },
-      { "time": "12:30", "name": "隣接カフェで昼食", "note": "" },
-      { "time": "14:30", "name": "安曇野ちひろ美術館の庭", "note": "" },
-      { "time": "16:30", "name": "宿に戻る", "note": "" }
+      {
+        "time": "10:00",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "10:30",
+        "name": "国営アルプスあづみの公園（遊具・広場）",
+        "note": ""
+      },
+      {
+        "time": "12:30",
+        "name": "隣接カフェで昼食",
+        "note": ""
+      },
+      {
+        "time": "14:30",
+        "name": "安曇野ちひろ美術館の庭",
+        "note": ""
+      },
+      {
+        "time": "16:30",
+        "name": "宿に戻る",
+        "note": ""
+      }
     ]
   },
   {
@@ -255,18 +590,46 @@
     "typeIcon": "🐾",
     "duration": "一日",
     "stamina": "軽め",
-    "transport": ["徒歩", "車"],
-    "weather": ["晴れ", "雨"],
-    "companions": ["ペット"],
+    "transport": [
+      "徒歩",
+      "車"
+    ],
+    "weather": [
+      "晴れ",
+      "雨"
+    ],
+    "companions": [
+      "ペット"
+    ],
     "inn": "sasamoriya",
-    "image": "../sasamoriya/images/pet-dog.jpg",
+    "image": "./images/dog-01.jpg",
     "instagramTag": "#犬連れ旅 #安曇野学者村",
     "stops": [
-      { "time": "7:00", "name": "学者村別荘地を散歩（約1時間）", "note": "" },
-      { "time": "8:30", "name": "宿で朝食", "note": "" },
-      { "time": "10:00", "name": "国営アルプスあづみの公園のリード付エリア", "note": "" },
-      { "time": "12:00", "name": "犬OKのテラスカフェでランチ", "note": "" },
-      { "time": "14:00", "name": "宿へ戻ってのんびり", "note": "" }
+      {
+        "time": "7:00",
+        "name": "学者村別荘地を散歩（約1時間）",
+        "note": ""
+      },
+      {
+        "time": "8:30",
+        "name": "宿で朝食",
+        "note": ""
+      },
+      {
+        "time": "10:00",
+        "name": "国営アルプスあづみの公園のリード付エリア",
+        "note": ""
+      },
+      {
+        "time": "12:00",
+        "name": "犬OKのテラスカフェでランチ",
+        "note": ""
+      },
+      {
+        "time": "14:00",
+        "name": "宿へ戻ってのんびり",
+        "note": ""
+      }
     ]
   },
   {
@@ -277,18 +640,44 @@
     "typeIcon": "🐾",
     "duration": "一日",
     "stamina": "ほどよく",
-    "transport": ["車"],
-    "weather": ["晴れ"],
-    "companions": ["ペット"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ"
+    ],
+    "companions": [
+      "ペット"
+    ],
     "inn": "sasamoriya",
     "image": "../sasamoriya/images/lifestyle-pet.jpg",
     "instagramTag": "#犬連れドライブ #三郷スカイライン",
     "stops": [
-      { "time": "9:00", "name": "宿を出発", "note": "" },
-      { "time": "10:00", "name": "烏川渓谷緑地の遊歩道", "note": "犬OK・水辺で遊べる" },
-      { "time": "12:00", "name": "犬同伴OKランチ", "note": "" },
-      { "time": "14:00", "name": "三郷スカイライン展望地 or 長峰山", "note": "" },
-      { "time": "17:00", "name": "宿に戻る", "note": "帰宅後、750㎡の庭で自由に" }
+      {
+        "time": "9:00",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "10:00",
+        "name": "烏川渓谷緑地の遊歩道",
+        "note": "犬OK・水辺で遊べる"
+      },
+      {
+        "time": "12:00",
+        "name": "犬同伴OKランチ",
+        "note": ""
+      },
+      {
+        "time": "14:00",
+        "name": "三郷スカイライン展望地 or 長峰山",
+        "note": ""
+      },
+      {
+        "time": "17:00",
+        "name": "宿に戻る",
+        "note": "帰宅後、750㎡の庭で自由に"
+      }
     ]
   },
   {
@@ -299,20 +688,54 @@
     "typeIcon": "👦",
     "duration": "一日",
     "stamina": "ほどよく",
-    "transport": ["車"],
-    "weather": ["晴れ"],
-    "companions": ["家族"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "晴れ"
+    ],
+    "companions": [
+      "家族"
+    ],
     "inn": "sasamoriya",
-    "image": "../sasamoriya/images/morning-tour-3.jpg",
+    "image": "./images/kids-01.jpg",
     "instagramTag": "#中房川 #安曇野川遊び",
     "stops": [
-      { "time": "9:00", "name": "宿を出発", "note": "" },
-      { "time": "9:30", "name": "中房川で川遊び", "note": "" },
-      { "time": "12:00", "name": "そば処志水庵 or そば処くるまや", "note": "" },
-      { "time": "13:00", "name": "北アルプス牧場ソフト", "note": "" },
-      { "time": "13:30", "name": "烏川渓谷緑地散策", "note": "" },
-      { "time": "15:30", "name": "宿へ戻ってBBQ準備", "note": "" },
-      { "time": "17:30", "name": "宿でBBQ", "note": "" }
+      {
+        "time": "9:00",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "9:30",
+        "name": "中房川で川遊び",
+        "note": ""
+      },
+      {
+        "time": "12:00",
+        "name": "そば処志水庵 or そば処くるまや",
+        "note": ""
+      },
+      {
+        "time": "13:00",
+        "name": "北アルプス牧場ソフト",
+        "note": ""
+      },
+      {
+        "time": "13:30",
+        "name": "烏川渓谷緑地散策",
+        "note": ""
+      },
+      {
+        "time": "15:30",
+        "name": "宿へ戻ってBBQ準備",
+        "note": ""
+      },
+      {
+        "time": "17:30",
+        "name": "宿でBBQ",
+        "note": ""
+      }
     ]
   },
   {
@@ -323,19 +746,49 @@
     "typeIcon": "👧",
     "duration": "一日",
     "stamina": "軽め",
-    "transport": ["車"],
-    "weather": ["雨"],
-    "companions": ["家族"],
+    "transport": [
+      "車"
+    ],
+    "weather": [
+      "雨"
+    ],
+    "companions": [
+      "家族"
+    ],
     "inn": "any",
-    "image": "../tomoshibi/images/lifestyle-bunk.jpg",
+    "image": "./images/kids-02.jpg",
     "instagramTag": "#ちひろ美術館 #雨の日子連れ",
     "stops": [
-      { "time": "10:00", "name": "宿を出発", "note": "" },
-      { "time": "10:30", "name": "安曇野ちひろ美術館", "note": "絵本部屋＋広い屋内スペース" },
-      { "time": "13:00", "name": "現地カフェ or 近隣でランチ", "note": "" },
-      { "time": "14:30", "name": "安曇野アートヒルズ or シャクナゲの湯", "note": "ガラス吹き or キャンドル作り体験" },
-      { "time": "17:00", "name": "帰りにパン屋", "note": "" },
-      { "time": "18:00", "name": "宿に戻る", "note": "" }
+      {
+        "time": "10:00",
+        "name": "宿を出発",
+        "note": ""
+      },
+      {
+        "time": "10:30",
+        "name": "安曇野ちひろ美術館",
+        "note": "絵本部屋＋広い屋内スペース"
+      },
+      {
+        "time": "13:00",
+        "name": "現地カフェ or 近隣でランチ",
+        "note": ""
+      },
+      {
+        "time": "14:30",
+        "name": "安曇野アートヒルズ or シャクナゲの湯",
+        "note": "ガラス吹き or キャンドル作り体験"
+      },
+      {
+        "time": "17:00",
+        "name": "帰りにパン屋",
+        "note": ""
+      },
+      {
+        "time": "18:00",
+        "name": "宿に戻る",
+        "note": ""
+      }
     ]
   }
 ]
