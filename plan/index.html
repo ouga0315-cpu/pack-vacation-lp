@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなたに合う安曇野の一日 | Pack Vacation</title>
+<meta name="description" content="質問に答えると、あなたに合う"安曇野の一日"（モデルコース）と、合う宿を提案します。灯・笹森家 共通の診断ページ。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔</text></svg>">
+<meta property="og:title" content="あなたに合う安曇野の一日｜Pack Vacation">
+<meta property="og:description" content="5つの質問で、あなたに合うモデルコースと宿を提案します。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJSJFMXPX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
+</script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wxh6i8m022");
+</script>
+
+<style>
+  :root {
+    --brown: #5C3D2E;
+    --cream: #F8F5F0;
+    --green: #3C5A3A;
+    --gold: #B89B5E;
+    --orange: #EE5A1F;
+    --navy: #2B2B2B;
+    --text: #2C2C2C;
+    --muted: #7A7368;
+    --light: #EFEBE4;
+    --dark: #1A1A18;
+    --white: #FFFFFF;
+    --border: #E2E8F0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    color: var(--text); background: var(--cream);
+    line-height: 1.8; letter-spacing: 0.03em;
+    min-height: 100vh;
+  }
+  a { color: var(--green); }
+  button { font-family: inherit; }
+
+  /* Header */
+  .plan-header {
+    background: var(--white);
+    padding: 16px 24px; text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .plan-header .brand {
+    font-size: 0.75rem; color: var(--muted);
+    letter-spacing: 0.3em;
+  }
+  .plan-header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    color: var(--brown); margin-top: 6px;
+    letter-spacing: 0.12em; font-weight: 600;
+  }
+  .plan-header .home {
+    display: inline-block; margin-top: 8px;
+    font-size: 0.75rem; color: var(--muted);
+    text-decoration: none; letter-spacing: 0.1em;
+  }
+
+  /* Container */
+  .plan-wrap {
+    max-width: 720px; margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Progress bar */
+  .progress-outer {
+    height: 4px; background: var(--light); border-radius: 2px;
+    overflow: hidden; margin-bottom: 32px;
+  }
+  .progress-inner {
+    height: 100%; background: var(--green);
+    transition: width 0.4s ease;
+  }
+
+  /* Screen */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Intro */
+  .intro { text-align: center; padding: 40px 20px; }
+  .intro-hero {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    color: var(--brown); line-height: 1.5;
+    letter-spacing: 0.1em; margin-bottom: 20px;
+  }
+  .intro-sub {
+    font-size: 1rem; color: var(--muted);
+    line-height: 1.9; margin-bottom: 40px;
+  }
+  .intro-meta {
+    display: flex; justify-content: center; gap: 24px;
+    margin-bottom: 40px; flex-wrap: wrap;
+  }
+  .intro-meta-item {
+    font-size: 0.85rem; color: var(--muted);
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .intro-meta-item strong {
+    color: var(--brown); font-size: 1.4rem; font-weight: 700;
+  }
+
+  .btn-primary {
+    display: inline-block; padding: 18px 48px;
+    background: var(--green); color: var(--white);
+    text-decoration: none; border: none; cursor: pointer;
+    font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.15em; border-radius: 4px;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  .btn-ghost {
+    display: inline-block; padding: 14px 32px;
+    background: transparent; color: var(--brown);
+    text-decoration: none; border: 1px solid var(--border);
+    cursor: pointer; font-size: 0.9rem;
+    letter-spacing: 0.1em; border-radius: 4px;
+    transition: all 0.3s; font-family: inherit;
+  }
+  .btn-ghost:hover { border-color: var(--brown); }
+
+  /* Question screen */
+  .q-num {
+    font-size: 0.75rem; color: var(--gold);
+    letter-spacing: 0.3em; margin-bottom: 12px;
+  }
+  .q-label {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    color: var(--brown); line-height: 1.6;
+    letter-spacing: 0.08em; margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .q-sub {
+    font-size: 0.85rem; color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .q-options {
+    display: grid; gap: 12px; margin-bottom: 32px;
+  }
+  .q-option {
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 20px; background: var(--white);
+    border: 2px solid var(--border); border-radius: 8px;
+    cursor: pointer; font-size: 1rem; color: var(--text);
+    text-align: left; transition: all 0.2s;
+    font-family: inherit; line-height: 1.5;
+  }
+  .q-option:hover { border-color: var(--green); }
+  .q-option.selected {
+    border-color: var(--green);
+    background: rgba(60, 90, 58, 0.06);
+  }
+  .q-option-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .q-option-label { flex: 1; }
+
+  .q-nav {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin-top: 24px;
+  }
+
+  /* Result screen */
+  .result-eyebrow {
+    text-align: center; font-size: 0.75rem;
+    color: var(--gold); letter-spacing: 0.4em;
+    margin-bottom: 12px;
+  }
+  .result-title {
+    text-align: center; font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+    color: var(--brown); letter-spacing: 0.1em;
+    margin-bottom: 32px; font-weight: 600;
+  }
+
+  .result-inn {
+    background: var(--white); padding: 24px;
+    text-align: center; border-radius: 8px;
+    margin-bottom: 24px; border: 1px solid var(--border);
+  }
+  .result-inn-label {
+    font-size: 0.7rem; color: var(--gold);
+    letter-spacing: 0.3em; margin-bottom: 8px;
+  }
+  .result-inn-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.3rem; color: var(--brown);
+    letter-spacing: 0.1em; margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .result-inn-links {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .result-inn-links a {
+    padding: 10px 20px; background: var(--brown); color: var(--white);
+    text-decoration: none; border-radius: 4px;
+    font-size: 0.85rem; letter-spacing: 0.1em;
+    transition: opacity 0.3s;
+  }
+  .result-inn-links a.secondary {
+    background: transparent; color: var(--brown);
+    border: 1px solid var(--brown);
+  }
+  .result-inn-links a:hover { opacity: 0.85; }
+
+  .result-course {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .result-course.primary { border: 2px solid var(--green); }
+  .result-course-head {
+    padding: 20px 24px; border-bottom: 1px solid var(--border);
+    background: var(--cream);
+  }
+  .result-course-type {
+    display: inline-block; padding: 4px 12px;
+    background: var(--white); color: var(--brown);
+    font-size: 0.7rem; letter-spacing: 0.15em;
+    border-radius: 999px; margin-bottom: 8px;
+    border: 1px solid var(--border);
+  }
+  .result-course-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.25rem; color: var(--brown);
+    letter-spacing: 0.08em; font-weight: 600;
+    line-height: 1.4;
+  }
+  .result-course-tagline {
+    margin-top: 8px; color: var(--muted);
+    font-size: 0.9rem; line-height: 1.7;
+  }
+  .result-course-meta {
+    display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap;
+    font-size: 0.75rem; color: var(--muted);
+  }
+  .result-course-meta span {
+    padding: 3px 10px; background: var(--white);
+    border: 1px solid var(--border); border-radius: 4px;
+  }
+  .result-course-body {
+    padding: 20px 24px;
+  }
+  .result-course-stops {
+    list-style: none;
+  }
+  .result-course-stops li {
+    display: flex; gap: 16px; padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .result-course-stops li:last-child { border-bottom: none; }
+  .stop-time {
+    flex: 0 0 60px; color: var(--green);
+    font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  }
+  .stop-body { flex: 1; }
+  .stop-name { color: var(--text); font-size: 0.95rem; }
+  .stop-note { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
+
+  .result-sub {
+    margin-top: 32px;
+    font-size: 0.8rem; color: var(--muted);
+    letter-spacing: 0.15em; text-align: center;
+  }
+  .result-actions {
+    display: flex; gap: 12px; justify-content: center;
+    margin-top: 32px; flex-wrap: wrap;
+  }
+
+  /* All-courses list */
+  .all-courses {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px; margin-top: 20px;
+  }
+  .all-course-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 6px; padding: 14px; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .all-course-card:hover { border-color: var(--green); }
+  .all-course-type {
+    font-size: 0.7rem; color: var(--gold);
+    letter-spacing: 0.15em; margin-bottom: 4px;
+  }
+  .all-course-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.95rem; color: var(--brown);
+    line-height: 1.4;
+  }
+
+  /* Footer */
+  .plan-footer {
+    text-align: center; padding: 32px 20px;
+    color: var(--muted); font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+  .plan-footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
+
+  @media (max-width: 640px) {
+    .plan-wrap { padding: 24px 16px 60px; }
+    .intro { padding: 24px 12px; }
+    .q-option { padding: 16px; font-size: 0.95rem; }
+    .btn-primary { padding: 16px 32px; font-size: 0.9rem; }
+    .result-inn-links a { padding: 12px 18px; font-size: 0.8rem; }
+    .stop-time { flex: 0 0 50px; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="plan-header">
+  <div class="brand">PACK VACATION</div>
+  <h1>あなたに合う、安曇野の一日</h1>
+  <a href="../" class="home">← 宿選びに戻る</a>
+</header>
+
+<div class="plan-wrap">
+  <div class="progress-outer" id="progressBar" style="display:none;">
+    <div class="progress-inner" id="progressInner" style="width:0%"></div>
+  </div>
+
+  <!-- Intro Screen -->
+  <section class="screen active" id="screen-intro">
+    <div class="intro">
+      <h2 class="intro-hero">安曇野を、<br>あなたのやり方で歩く。</h2>
+      <p class="intro-sub">
+        5つの質問に答えると、あなたに合う<br>
+        "安曇野の一日"を1本と、合う宿をご提案します。
+      </p>
+      <div class="intro-meta">
+        <div class="intro-meta-item"><strong>5</strong><span>質問</span></div>
+        <div class="intro-meta-item"><strong>約1分</strong><span>で完了</span></div>
+        <div class="intro-meta-item"><strong>15</strong><span>コース</span></div>
+      </div>
+      <button class="btn-primary" onclick="startDiagnosis()">診断をはじめる</button>
+      <div style="margin-top:24px;">
+        <a href="#" onclick="showAllCourses(event)" class="btn-ghost">全コースを見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Question Screens (built dynamically) -->
+  <section class="screen" id="screen-question">
+    <p class="q-num" id="qNum"></p>
+    <h2 class="q-label" id="qLabel"></h2>
+    <p class="q-sub" id="qSub"></p>
+    <div class="q-options" id="qOptions"></div>
+    <div class="q-nav">
+      <button class="btn-ghost" id="btnBack" onclick="prevQuestion()">← 戻る</button>
+      <button class="btn-primary" id="btnNext" onclick="nextQuestion()" disabled style="opacity:0.4;">次へ →</button>
+    </div>
+  </section>
+
+  <!-- Result Screen -->
+  <section class="screen" id="screen-result">
+    <p class="result-eyebrow">FOR YOU</p>
+    <h2 class="result-title">あなたにおすすめの、<br>安曇野の一日</h2>
+
+    <div class="result-inn" id="resultInn"></div>
+
+    <div id="resultCoursePrimary"></div>
+
+    <p class="result-sub" id="resultSubLabel" style="margin-top:40px;">— 別の気分の日には —</p>
+    <div id="resultCourseSecondary"></div>
+
+    <div class="result-actions">
+      <button class="btn-ghost" onclick="restart()">もう一度診断する</button>
+      <button class="btn-ghost" onclick="showAllCourses()">全15コースを見る</button>
+    </div>
+  </section>
+
+  <!-- All Courses Screen -->
+  <section class="screen" id="screen-all">
+    <p class="q-num">ALL COURSES</p>
+    <h2 class="q-label">安曇野の一日、15本</h2>
+    <p class="q-sub">気になるコースをタップで詳細</p>
+    <div class="all-courses" id="allCourses"></div>
+    <div style="text-align:center; margin-top: 40px;">
+      <button class="btn-ghost" onclick="restart()">診断からやり直す</button>
+    </div>
+  </section>
+
+  <!-- Single Course Detail (shown on tap from all-courses) -->
+  <section class="screen" id="screen-course-detail">
+    <div id="courseDetailContent"></div>
+    <div style="text-align:center; margin-top: 32px;">
+      <button class="btn-ghost" onclick="showAllCourses()">← 一覧に戻る</button>
+    </div>
+  </section>
+</div>
+
+<footer class="plan-footer">
+  © Pack Vacation ／
+  <a href="../tomoshibi/ja/">ゲストハウス 灯</a> ／
+  <a href="../sasamoriya/ja/">民宿 笹森家</a>
+</footer>
+
+<script>
+const INN_INFO = {
+  tomoshibi: {
+    name: '灯（ともしび）',
+    tag: '少人数・全室個室・温泉つき',
+    url: '../tomoshibi/ja/',
+    bookUrl: '../tomoshibi/availability-calendar.html'
+  },
+  sasamoriya: {
+    name: '笹森家（一棟貸し）',
+    tag: 'ペット・BBQ・シアター・大人数OK',
+    url: '../sasamoriya/ja/',
+    bookUrl: '../sasamoriya/availability-calendar.html'
+  }
+};
+
+let COURSES = [];
+let QUESTIONS_DATA = null;
+const answers = {};
+let currentQIndex = 0;
+
+// Load JSON
+Promise.all([
+  fetch('courses.json').then(r => r.json()),
+  fetch('questions.json').then(r => r.json())
+]).then(([courses, questions]) => {
+  COURSES = courses;
+  QUESTIONS_DATA = questions;
+}).catch(err => {
+  console.error('JSON load error:', err);
+  alert('データの読み込みに失敗しました。ページを再読み込みしてください。');
+});
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function startDiagnosis() {
+  currentQIndex = 0;
+  Object.keys(answers).forEach(k => delete answers[k]);
+  document.getElementById('progressBar').style.display = 'block';
+  showQuestion(0);
+  if (typeof gtag === 'function') gtag('event', 'shindan_start');
+}
+
+function showQuestion(idx) {
+  const q = QUESTIONS_DATA.questions[idx];
+  currentQIndex = idx;
+
+  document.getElementById('qNum').textContent = `質問 ${idx+1} / ${QUESTIONS_DATA.questions.length}`;
+  document.getElementById('qLabel').textContent = q.label;
+  document.getElementById('qSub').textContent = q.sub || '';
+
+  const optsEl = document.getElementById('qOptions');
+  optsEl.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'q-option';
+    if (answers[q.id] === opt.value) btn.classList.add('selected');
+    btn.innerHTML = `${opt.icon ? `<span class="q-option-icon">${opt.icon}</span>` : ''}<span class="q-option-label">${opt.value}</span>`;
+    btn.onclick = () => selectOption(q.id, opt.value, btn);
+    optsEl.appendChild(btn);
+  });
+
+  document.getElementById('btnBack').style.visibility = idx === 0 ? 'hidden' : 'visible';
+  updateNextButton();
+  document.getElementById('progressInner').style.width = `${((idx+1) / QUESTIONS_DATA.questions.length) * 100}%`;
+  showScreen('screen-question');
+}
+
+function selectOption(qid, value, btn) {
+  answers[qid] = value;
+  document.querySelectorAll('.q-option').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  updateNextButton();
+  if (typeof gtag === 'function') gtag('event', 'shindan_answer', { question_id: qid, answer: value });
+}
+
+function updateNextButton() {
+  const q = QUESTIONS_DATA.questions[currentQIndex];
+  const nextBtn = document.getElementById('btnNext');
+  const hasAnswer = !!answers[q.id];
+  const canProceed = hasAnswer || q.optional;
+  nextBtn.disabled = !canProceed;
+  nextBtn.style.opacity = canProceed ? '1' : '0.4';
+  nextBtn.textContent = currentQIndex === QUESTIONS_DATA.questions.length - 1 ? '結果を見る' : '次へ →';
+}
+
+function nextQuestion() {
+  if (currentQIndex < QUESTIONS_DATA.questions.length - 1) {
+    showQuestion(currentQIndex + 1);
+  } else {
+    showResult();
+  }
+}
+function prevQuestion() {
+  if (currentQIndex > 0) showQuestion(currentQIndex - 1);
+}
+
+function scoreCourses() {
+  const q1 = answers.Q1;
+  const q2 = answers.Q2;
+  const q3 = answers.Q3;
+  const q4 = answers.Q4;
+  const q5 = answers.Q5;
+
+  // Filter first
+  let eligible = COURSES.filter(c => {
+    // Q4 = 車なし → exclude car-only courses
+    if (q4 === '車なし' && c.transport.includes('車') && !c.transport.includes('徒歩') && !c.transport.includes('公共')) {
+      return false;
+    }
+    // Q4 = 自転車 → 自転車があるコースのみ or 徒歩OKも許容
+    if (q4 === '自転車' && !c.transport.includes('自転車')) {
+      // still allow non-active courses (as fallback)
+      // but heavily deprioritize by not filtering; boost handles it
+    }
+    // Q5 = 雨 → exclude sunny-only courses (雨天対応がないもの)
+    if (q5 === '雨' && !c.weather.includes('雨')) {
+      return false;
+    }
+    // Q2 = ペット → 宿がsasamoriya or anyでないコースは除外（灯限定コースは除く）
+    if (q2 === 'ペット' && c.inn === 'tomoshibi') {
+      return false;
+    }
+    return true;
+  });
+
+  // Fallback: if filter left too few, relax constraints
+  if (eligible.length < 2) eligible = COURSES.slice();
+
+  // Score
+  const scored = eligible.map(c => {
+    let score = 0;
+
+    QUESTIONS_DATA.questions.forEach(q => {
+      const ans = answers[q.id];
+      if (!ans) return;
+      const opt = q.options.find(o => o.value === ans);
+      if (!opt || !opt.boost) return;
+      Object.entries(opt.boost).forEach(([key, val]) => {
+        const [field, target] = key.split(':');
+        const cVal = c[field];
+        if (Array.isArray(cVal)) {
+          if (cVal.includes(target)) score += val;
+        } else {
+          if (cVal === target) score += val;
+        }
+      });
+    });
+
+    // Randomness (tiny) to break ties
+    score += Math.random() * 0.1;
+    return { course: c, score };
+  });
+
+  scored.sort((a, b) => b.score - a.score);
+  return scored;
+}
+
+function decideInns() {
+  const q1 = answers.Q1;
+  const q2 = answers.Q2;
+  const q3 = answers.Q3;
+  const map = QUESTIONS_DATA.meta.innMap;
+  let baseInn = map[q2] || 'any';
+
+  // Family + active → 灯もあり
+  if (q2 === '家族' && (q1 === '体を動かす' || q3 === 'しっかり')) {
+    return ['sasamoriya', 'tomoshibi'];
+  }
+  if (baseInn === 'any') return ['tomoshibi', 'sasamoriya'];
+  if (baseInn === 'sasamoriya') return ['sasamoriya'];
+  if (baseInn === 'tomoshibi') return ['tomoshibi'];
+  return ['tomoshibi', 'sasamoriya'];
+}
+
+function showResult() {
+  const scored = scoreCourses();
+  const primary = scored[0].course;
+  const secondary = scored[1] ? scored[1].course : null;
+  const inns = decideInns();
+
+  // Inn card
+  const innHtml = inns.map(key => {
+    const inn = INN_INFO[key];
+    return `<div style="margin-bottom:12px;">
+      <div class="result-inn-label">あなたに合う宿</div>
+      <div class="result-inn-name">${inn.name}</div>
+      <div style="font-size:0.85rem;color:var(--muted);">${inn.tag}</div>
+      <div class="result-inn-links">
+        <a href="${inn.url}">宿を詳しく見る</a>
+        <a href="${inn.bookUrl}" class="secondary" onclick="trackBookClick('${key}')">予約状況を見る</a>
+      </div>
+    </div>`;
+  }).join('<hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">');
+
+  document.getElementById('resultInn').innerHTML = innHtml;
+  document.getElementById('resultCoursePrimary').innerHTML = renderCourseCard(primary, true);
+  document.getElementById('resultCourseSecondary').innerHTML = secondary ? renderCourseCard(secondary, false) : '';
+  document.getElementById('resultSubLabel').style.display = secondary ? 'block' : 'none';
+
+  showScreen('screen-result');
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'shindan_result', {
+      primary_course: primary.id,
+      secondary_course: secondary ? secondary.id : '',
+      inn: inns.join(',')
+    });
+  }
+}
+
+function renderCourseCard(c, isPrimary) {
+  const stopsHtml = c.stops.map(s => `
+    <li>
+      <span class="stop-time">${s.time}</span>
+      <div class="stop-body">
+        <div class="stop-name">${s.name}</div>
+        ${s.note ? `<div class="stop-note">${s.note}</div>` : ''}
+      </div>
+    </li>`).join('');
+
+  return `
+    <div class="result-course ${isPrimary ? 'primary' : ''}">
+      <div class="result-course-head">
+        <span class="result-course-type">${c.typeIcon} ${c.type}</span>
+        <div class="result-course-title">${c.title}</div>
+        <div class="result-course-tagline">${c.tagline}</div>
+        <div class="result-course-meta">
+          <span>${c.duration}</span>
+          <span>体力：${c.stamina}</span>
+          <span>${c.transport.join('・')}</span>
+          <span>${c.weather.join('・')}</span>
+        </div>
+      </div>
+      <div class="result-course-body">
+        <ul class="result-course-stops">${stopsHtml}</ul>
+      </div>
+    </div>`;
+}
+
+function showAllCourses(e) {
+  if (e) e.preventDefault();
+  document.getElementById('progressBar').style.display = 'none';
+  const grid = document.getElementById('allCourses');
+  grid.innerHTML = COURSES.map(c => `
+    <div class="all-course-card" onclick="showCourseDetail('${c.id}')">
+      <div class="all-course-type">${c.typeIcon} ${c.type}</div>
+      <div class="all-course-title">${c.title}</div>
+    </div>
+  `).join('');
+  showScreen('screen-all');
+  if (typeof gtag === 'function') gtag('event', 'shindan_all_view');
+}
+
+function showCourseDetail(id) {
+  const c = COURSES.find(x => x.id === id);
+  if (!c) return;
+  document.getElementById('courseDetailContent').innerHTML = renderCourseCard(c, true);
+  showScreen('screen-course-detail');
+  if (typeof gtag === 'function') gtag('event', 'course_view', { course_id: id });
+}
+
+function restart() {
+  document.getElementById('progressBar').style.display = 'none';
+  Object.keys(answers).forEach(k => delete answers[k]);
+  currentQIndex = 0;
+  showScreen('screen-intro');
+}
+
+function trackBookClick(inn) {
+  if (typeof gtag === 'function') gtag('event', 'yoyaku_click', { inn: inn });
+}
+</script>
+
+</body>
+</html>

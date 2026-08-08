@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "innMap": {
+      "一人": "tomoshibi",
+      "カップル": "any",
+      "大人少人数": "any",
+      "家族": "sasamoriya",
+      "ペット": "sasamoriya",
+      "大人数": "sasamoriya"
+    },
+    "familyActiveTriggersInn": {
+      "condition": "Q2==家族 && (Q1==体を動かす || Q3==しっかり)",
+      "additionalInn": "tomoshibi"
+    }
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "label": "今回、いちばんしたいことは？",
+      "sub": "旅の方向を決めます",
+      "options": [
+        { "value": "自然に浸る",     "icon": "🌿", "boost": { "type:自然に浸る": 100 } },
+        { "value": "手と舌で味わう", "icon": "🍜", "boost": { "type:手と舌で味わう": 100 } },
+        { "value": "アートと静けさ", "icon": "🎨", "boost": { "type:アートと静けさ": 100 } },
+        { "value": "体を動かす",     "icon": "🏔", "boost": { "type:体を動かす": 100 } },
+        { "value": "のんびり整う",   "icon": "♨️", "boost": { "type:のんびり整う": 100 } },
+        { "value": "愛犬と過ごしたい", "icon": "🐾", "boost": { "type:愛犬と過ごす": 120 } },
+        { "value": "子どもと過ごす", "icon": "👶", "boost": { "type:子どもと過ごす": 120 } }
+      ]
+    },
+    {
+      "id": "Q2",
+      "label": "誰と来ますか？",
+      "sub": "宿の推奨に強く効きます",
+      "options": [
+        { "value": "一人",         "boost": { "companions:一人": 50 } },
+        { "value": "カップル",     "boost": { "companions:カップル": 50 } },
+        { "value": "大人少人数",   "boost": { "companions:大人少人数": 50 } },
+        { "value": "家族",         "boost": { "companions:家族": 60 } },
+        { "value": "ペット",       "boost": { "companions:ペット": 80, "type:愛犬と過ごす": 40 } },
+        { "value": "大人数",       "boost": { "companions:大人少人数": 30 } }
+      ]
+    },
+    {
+      "id": "Q3",
+      "label": "どのくらい動きたい？",
+      "sub": "体力と時間の目安",
+      "options": [
+        { "value": "のんびり",     "boost": { "stamina:軽め": 25 } },
+        { "value": "ほどよく",     "boost": { "stamina:ほどよく": 25 } },
+        { "value": "しっかり",     "boost": { "stamina:しっかり": 25 } }
+      ]
+    },
+    {
+      "id": "Q4",
+      "label": "移動手段は？",
+      "sub": "実行できるコースを絞ります",
+      "options": [
+        { "value": "車あり",       "boost": { "transport:車": 15 } },
+        { "value": "自転車",       "boost": { "transport:自転車": 30 } },
+        { "value": "車なし",       "boost": {}, "filter": "excludeCarOnly" }
+      ]
+    },
+    {
+      "id": "Q5",
+      "label": "お天気は？（任意）",
+      "sub": "雨の日でも成立するコースを優先します",
+      "optional": true,
+      "options": [
+        { "value": "晴れ・曇り",   "boost": { "weather:晴れ": 10 } },
+        { "value": "雨",           "boost": { "weather:雨": 20 }, "filter": "excludeSunnyOnly" },
+        { "value": "まだ未定",     "boost": {} }
+      ]
+    }
+  ]
+}
