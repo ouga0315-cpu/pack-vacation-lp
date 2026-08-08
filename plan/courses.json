@@ -650,7 +650,7 @@
       "ペット"
     ],
     "inn": "sasamoriya",
-    "image": "../sasamoriya/images/lifestyle-pet.jpg",
+    "image": "./images/dog-02.jpg",
     "instagramTag": "#犬連れドライブ #三郷スカイライン",
     "stops": [
       {
