@@ -1,0 +1,10 @@
+{
+  "_使い方": "新しい土地を追加するときは data/<土地ID>/ を作り、この config.json と spots.json を置く。土地IDは英数字（例: azumino, hakuba）。QRやURLは trip.html?area=<土地ID> を指す。",
+  "regionName": "（土地の表示名。例：白馬）",
+  "innAddress": "（宿の住所。Googleマップ経路の出発地＝到着地になる）",
+  "nearInnAreas": ["（宿に近いエリア名。朝食・夕食の店を優先する範囲。spots.json の area と一致させる）"],
+  "bikeAreas": ["（自転車で回れるエリア名。spots.json の area と一致させる）"],
+  "innLinks": [
+    { "name": "（宿名。フッターに出す。不要なら空配列 [] に）", "url": "（宿ページのURL）" }
+  ]
+}

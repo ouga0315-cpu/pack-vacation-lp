@@ -1,0 +1,10 @@
+{
+  "regionName": "安曇野",
+  "innAddress": "長野県安曇野市穂高有明7403-30",
+  "nearInnAreas": ["有明・中房", "穂高"],
+  "bikeAreas": ["有明・中房", "穂高", "堀金・三郷"],
+  "innLinks": [
+    { "name": "ゲストハウス 灯", "url": "../tomoshibi/ja/" },
+    { "name": "民宿 笹森家", "url": "../sasamoriya/ja/" }
+  ]
+}

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>あなただけの安曇野の一日をつくる | Pack Vacation</title>
-<meta name="description" content="7つの質問に答えると、その場であなただけの安曇野の一日（旅程）を組み立てます。灯・笹森家 宿泊者向け。">
+<title>あなただけの一日をつくる | Pack Vacation</title>
+<meta name="description" content="7つの質問に答えると、その場であなただけの一日（旅程）を組み立てます。宿泊者向け。">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
@@ -141,7 +141,7 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
 
 <header class="plan-header">
   <div class="brand">PACK VACATION</div>
-  <h1>あなただけの、安曇野の一日</h1>
+  <h1 id="hdrTitle">あなただけの、安曇野の一日</h1>
 </header>
 
 <div class="plan-wrap">
@@ -153,9 +153,9 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   <section class="screen active" id="screen-intro">
     <div class="intro">
       <h2 class="intro-hero">その日の気分で、<br>一日を組み立てる。</h2>
-      <p class="intro-sub">
+      <p class="intro-sub" id="introSub">
         いくつかの質問に答えると、その場で<br>
-        あなただけの"安曇野の一日"を組み立てます。
+        あなただけの「安曇野の一日」を組み立てます。
       </p>
       <div class="intro-meta">
         <div class="intro-meta-item"><strong id="metaQ">7</strong><span>質問</span></div>
@@ -197,19 +197,12 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   </section>
 </div>
 
-<footer class="plan-footer">
-  © Pack Vacation ／
-  <a href="../tomoshibi/ja/">ゲストハウス 灯</a> ／
-  <a href="../sasamoriya/ja/">民宿 笹森家</a>
+<footer class="plan-footer" id="planFooter">
+  © Pack Vacation
 </footer>
 
 <script>
-/* ============== 宿情報・推奨ロジック（/plan/ から流用） ============== */
-const INN_INFO = {
-  tomoshibi:{ name:'灯（ともしび）', tag:'少人数・全室個室・温泉つき', url:'../tomoshibi/ja/', bookUrl:'../tomoshibi/availability-calendar.html' },
-  sasamoriya:{ name:'笹森家（一棟貸し）', tag:'ペット・BBQ・シアター・大人数OK', url:'../sasamoriya/ja/', bookUrl:'../sasamoriya/availability-calendar.html' }
-};
-const INN_MAP = { '一人':'tomoshibi','カップル':'any','大人少人数':'any','家族':'sasamoriya','ペット':'sasamoriya','大人数':'sasamoriya' };
+/* ============== 本体（全土地共通）。土地固有は data/<土地ID>/config.json + spots.json ============== */
 
 /* ============== 質問（7問） ============== */
 const QUESTIONS = [
@@ -264,16 +257,39 @@ const QUESTIONS = [
 ];
 
 /* ============== 状態 ============== */
-let SPOTS = [], META = null;
+let SPOTS = [], META = null, CFG = null;
+let NEAR_INN = [], BIKE_AREAS = [];        // 宿の近く / 自転車圏（config から設定）
 const A = {};              // answers
 A.meals = ['昼食'];        // 既定：昼は外で（最も多いケース）
 let qi = 0, advTimer = null;
 
-fetch('spots.json?v='+Date.now()).then(r=>r.json()).then(d=>{
-  SPOTS = d.spots; META = d.meta;
+// 土地IDを URL の ?area= から取得（既定 azumino）。data/<土地ID>/ を読む
+const AREA_ID = ((new URLSearchParams(location.search).get('area')) || 'azumino').replace(/[^a-z0-9_-]/gi,'');
+const DATA_BASE = 'data/' + AREA_ID + '/';
+Promise.all([
+  fetch(DATA_BASE+'config.json?v='+Date.now()).then(r=>r.json()),
+  fetch(DATA_BASE+'spots.json?v='+Date.now()).then(r=>r.json())
+]).then(([cfg,d])=>{
+  CFG=cfg; SPOTS=d.spots; META=d.meta;
+  NEAR_INN = CFG.nearInnAreas || [];
+  BIKE_AREAS = CFG.bikeAreas || [];
+  applyRegion();
+}).catch(e=>{ console.error(e); alert('データの読み込みに失敗しました（土地ID: '+AREA_ID+'）。URLとデータを確認してください。'); });
+
+// 土地名・宿リンクなど、地域固有の表示を反映
+function applyRegion(){
+  const rn = CFG.regionName || '';
   document.getElementById('metaSpots').textContent = SPOTS.length;
   document.getElementById('metaQ').textContent = QUESTIONS.length;
-}).catch(e=>{ console.error(e); alert('データの読み込みに失敗しました。再読み込みしてください。'); });
+  document.title = 'あなただけの'+rn+'の一日をつくる | Pack Vacation';
+  const h=document.getElementById('hdrTitle'); if(h) h.textContent='あなただけの、'+rn+'の一日';
+  const is=document.getElementById('introSub'); if(is) is.innerHTML='いくつかの質問に答えると、その場で<br>あなただけの「'+rn+'の一日」を組み立てます。';
+  const ft=document.getElementById('planFooter');
+  if(ft){
+    const links=(CFG.innLinks||[]).map(l=>`<a href="${l.url}">${l.name}</a>`).join(' ／ ');
+    ft.innerHTML='© Pack Vacation'+(links?' ／ '+links:'');
+  }
+}
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -355,8 +371,7 @@ function seasonOK(spot){
 }
 
 /* ============== ヘルパー ============== */
-const NEAR_INN = ['有明・中房','穂高'];        // 宿の近く（朝食・夕食向き）
-const BIKE_AREAS = ['有明・中房','穂高','堀金・三郷'];
+// NEAR_INN / BIKE_AREAS は config.json から applyRegion() で設定される
 const staminaRank = {'のんびり':1,'ほどよく':2,'しっかり':3,'軽め':1};
 function sRank(v){ return staminaRank[v]||2; }
 function adj(area){ return (META.areaAdjacency && META.areaAdjacency[area]) || []; }
@@ -403,19 +418,19 @@ function travel(a,b){ if(a===b) return 25; if(adj(a).includes(b)) return 40; ret
 // スポット名 → 地図検索クエリ（代替店の"/"や括弧を落とし、地域名を補う）
 function mapQuery(s){
   let n=(s.name||'').split('（')[0].split('(')[0].split(' / ')[0].split('/')[0].split(' or ')[0].trim();
-  const hint = s.area==='松本' ? '松本' : (s.area==='遠方' ? '' : '安曇野');
+  const hint = NEAR_INN.includes(s.area) ? (CFG.regionName||'') : '';   // 中心エリアのみ地域名を補って地図検索を安定化
   if(hint && n.indexOf(hint)<0 && n.indexOf('上高地')<0) n = n+' '+hint;
   return n;
 }
-// 宿→各スポット→宿 の順路を Googleマップの経路URLに
-const INN_ADDR = '長野県安曇野市穂高有明7403-30';
+// 宿→各スポット→宿 の順路を Googleマップの経路URLに（出発地=到着地=宿の住所 from config）
 function routeUrl(rows){
   const stops = rows.filter(r=>!r.fixed && r.mapQ).map(r=>r.mapQ);
   if(!stops.length) return null;
+  const inn = CFG.innAddress || '';
   const mode = A.transport==='自転車' ? 'bicycling' : (A.transport==='車なし' ? 'walking' : 'driving');
   const enc = encodeURIComponent;
   const wps = stops.map(enc).join('%7C');   // %7C = |
-  return `https://www.google.com/maps/dir/?api=1&origin=${enc(INN_ADDR)}&destination=${enc(INN_ADDR)}&waypoints=${wps}&travelmode=${mode}`;
+  return `https://www.google.com/maps/dir/?api=1&origin=${enc(inn)}&destination=${enc(inn)}&waypoints=${wps}&travelmode=${mode}`;
 }
 
 /* ============== 旅程の組み立て（時間駆動） ============== */
@@ -539,19 +554,11 @@ function planDay(){
   return { rows, anchor, big };
 }
 
-/* ============== 宿推奨（/plan/ 流用） ============== */
-function decideInns(){
-  const base = INN_MAP[A.companion]||'any';
-  if(A.companion==='家族' && (A.goal==='体を動かす'||A.stamina==='しっかり')) return ['sasamoriya','tomoshibi'];
-  if(base==='any') return ['tomoshibi','sasamoriya'];
-  return [base];
-}
-
 /* ============== 描画 ============== */
 const GOAL_ICON = {'自然に浸る':'🌿','手と舌で味わう':'🍜','アートと静けさ':'🎨','体を動かす':'🏔','のんびり整う':'♨️','愛犬と過ごす':'🐾','子どもと過ごす':'👧'};
 const GOAL_TAGLINE = {
   '自然に浸る':'水と森に、深く浸る一日。',
-  '手と舌で味わう':'安曇野の水が育てた味を、巡る。',
+  '手と舌で味わう':'その土地の水が育てた味を、巡る。',
   'アートと静けさ':'静けさの中で、手と目を澄ます。',
   '体を動かす':'体で読む、北アルプスの裾野。',
   'のんびり整う':'しないことを、しにいく。',
@@ -617,7 +624,7 @@ function renderResult(res){
       ${allTags.length?`<div class="trip-foot"><div class="tiny-label">Instagram で探す</div><div class="ig-tags">${allTags.map(t=>{const c=t.replace(/^#/,'');return `<a class="ig-tag" target="_blank" rel="noopener" href="https://www.instagram.com/explore/tags/${encodeURIComponent(c)}/">${t}</a>`;}).join('')}</div></div>`:''}
     </div>`;
 
-  const nocarNote = A.transport==='車なし' ? '安曇野は車前提の地域です。車なしの場合、行ける範囲がどうしても限られます。<br>' : '';
+  const nocarNote = A.transport==='車なし' ? 'この地域は車での移動が前提です。車なしの場合、行ける範囲が限られます。<br>' : '';
   document.getElementById('resDisclaimer').innerHTML =
     nocarNote + 'この旅程は目安です。各店の営業日・定休・料金・ペット可否は変わることがあるため、お出かけ前に「地図」リンクからご確認ください。<br>「別の組み合わせにする」で作り直せます。';
 
