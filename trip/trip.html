@@ -120,11 +120,34 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
   .plan-footer{text-align:center; padding:30px 20px; color:var(--muted); font-size:0.74rem; letter-spacing:0.08em;}
   .plan-footer a{color:var(--muted); text-decoration:none; margin:0 8px;}
 
+  /* --- ワクワク演出 --- */
+  .building{ text-align:center; padding:70px 20px; }
+  .building-icon{ font-size:3rem; display:inline-block; animation:pulse 1s ease-in-out infinite; }
+  .building-text{ margin-top:22px; font-family:'Noto Serif JP',serif; color:var(--brown); font-size:1.1rem; letter-spacing:0.08em; }
+  .building-dots{ margin-top:18px; display:flex; gap:8px; justify-content:center; }
+  .building-dots span{ width:8px; height:8px; border-radius:50%; background:var(--green); display:inline-block; animation:dot 1s infinite; }
+  .building-dots span:nth-child(2){ animation-delay:.15s; }
+  .building-dots span:nth-child(3){ animation-delay:.3s; }
+  @keyframes pulse{ 0%,100%{ transform:scale(1); opacity:.85; } 50%{ transform:scale(1.18); opacity:1; } }
+  @keyframes dot{ 0%,100%{ opacity:.3; transform:translateY(0); } 50%{ opacity:1; transform:translateY(-6px); } }
+  @keyframes stopIn{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes pop{ 0%{ transform:scale(1);} 50%{ transform:scale(1.05);} 100%{ transform:scale(1);} }
+  .stops li{ opacity:0; animation:stopIn .5s ease forwards; }
+  .q-option.selected{ animation:pop .25s ease; }
+  .result-narrative{ text-align:center; font-family:'Noto Serif JP',serif; color:var(--muted); font-size:0.95rem; line-height:1.95; margin:0 4px 22px; letter-spacing:0.04em; }
+  .btn-omakase{ display:inline-block; margin-top:18px; color:var(--muted); font-size:0.9rem; text-decoration:none; letter-spacing:0.08em; border-bottom:1px dashed var(--border); padding-bottom:2px; cursor:pointer; }
+  .btn-omakase:hover{ color:var(--brown); }
+  @media (prefers-reduced-motion: reduce){
+    .stops li{ opacity:1; animation:none; }
+    .building-icon, .building-dots span, .q-option.selected{ animation:none; }
+  }
+
   @media print{
     .plan-header, .plan-footer, .progress-outer, .q-nav, .result-actions, .route-bar, .result-eyebrow{ display:none !important; }
     body{ background:#fff; }
     .plan-wrap{ padding:0; max-width:100%; }
     .trip-card{ border:1px solid #bbb; box-shadow:none; }
+    .stops li{ opacity:1 !important; animation:none !important; }
     .stop-map, .ig-tag{ display:none !important; }   /* 紙ではリンクは不要 */
     a{ color:var(--text); text-decoration:none; }
   }
@@ -162,7 +185,17 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
         <div class="intro-meta-item"><strong>約1分</strong><span>で完成</span></div>
         <div class="intro-meta-item"><strong id="metaSpots">80</strong><span>スポットから</span></div>
       </div>
-      <button class="btn-primary" onclick="start()">はじめる</button>
+      <button class="btn-primary" onclick="start()">一日をつくりはじめる</button>
+      <div><a class="btn-omakase" onclick="omakase(event)">おまかせで1日つくる 🎲</a></div>
+    </div>
+  </section>
+
+  <!-- Building (reveal) -->
+  <section class="screen" id="screen-building">
+    <div class="building">
+      <div class="building-icon" id="buildIcon">🗺️</div>
+      <div class="building-text" id="buildText">あなたの一日を編んでいます…</div>
+      <div class="building-dots"><span></span><span></span><span></span></div>
     </div>
   </section>
 
@@ -181,9 +214,10 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
 
   <!-- Result -->
   <section class="screen" id="screen-result">
-    <p class="result-eyebrow">YOUR DAY</p>
+    <p class="result-eyebrow" id="resEyebrow">あなたの一日、できました ✨</p>
     <h2 class="result-title" id="resTitle"></h2>
     <p class="result-tagline" id="resTagline"></p>
+    <p class="result-narrative" id="resNarrative"></p>
 
     <div id="tripCard"></div>
 
@@ -346,7 +380,7 @@ function updateNext(){
   const q=QUESTIONS[qi]; const btn=document.getElementById('btnNext');
   const ok = q.optional || q.type==='multi' || !!A[q.id];
   btn.disabled=!ok;
-  btn.textContent = qi===QUESTIONS.length-1 ? '旅程をつくる' : '次へ →';
+  btn.textContent = qi===QUESTIONS.length-1 ? 'この気分で一日を組む ✨' : '次へ →';
 }
 function nextQ(){ if(qi<QUESTIONS.length-1) showQ(qi+1); else build(); }
 function prevQ(){ if(qi>0) showQ(qi-1); }
@@ -434,8 +468,40 @@ function routeUrl(rows){
 }
 
 /* ============== 旅程の組み立て（時間駆動） ============== */
-function build(){ renderResult(planDay()); if(typeof gtag==='function') gtag('event','trip_result',{goal:A.goal, companion:A.companion, duration:A.duration}); }
+function build(){
+  const res=planDay();
+  if(typeof gtag==='function') gtag('event','trip_result',{goal:A.goal, companion:A.companion, duration:A.duration});
+  showBuilding(()=>renderResult(res));   // "編んでいる"演出をはさんでから結果へ
+}
 function reshuffle(){ renderResult(planDay()); }
+
+// 結果を出す前の"ため"（処理は一瞬だが、あえて見せる）
+function showBuilding(done){
+  document.getElementById('progressBar').style.display='none';
+  const msgs=['スポットを選んでいます','いい順番を考えています','地図を描いています'];
+  const txt=document.getElementById('buildText');
+  document.getElementById('buildIcon').textContent = GOAL_ICON[A.goal]||'🗺️';
+  txt.textContent='あなたの一日を編んでいます…';
+  showScreen('screen-building');
+  let i=0;
+  const iv=setInterval(()=>{ txt.textContent=msgs[i%msgs.length]; i++; }, 470);
+  setTimeout(()=>{ clearInterval(iv); done(); }, 1650);
+}
+
+// おまかせ：質問を飛ばして"驚きの一日"を即つくる
+function omakase(e){
+  if(e) e.preventDefault();
+  const rnd=a=>a[Math.floor(Math.random()*a.length)];
+  Object.keys(A).forEach(k=>delete A[k]);
+  A.goal=rnd(['自然に浸る','手と舌で味わう','アートと静けさ','体を動かす','のんびり整う','子どもと過ごす']);
+  A.companion=rnd(['カップル','大人少人数','家族','一人']);
+  A.stamina=rnd(['のんびり','ほどよく','しっかり']);
+  A.transport='車あり'; A.weather='晴れ';
+  A.duration=rnd(['半日','一日']);
+  A.meals=rnd([['昼食'],['昼食','夕食'],['朝食','昼食']]);
+  if(typeof gtag==='function') gtag('event','trip_omakase');
+  build();
+}
 
 function planDay(){
   const pool = SPOTS.filter(passesHardFilter);
@@ -560,7 +626,7 @@ const GOAL_TAGLINE = {
   '自然に浸る':'水と森に、深く浸る一日。',
   '手と舌で味わう':'その土地の水が育てた味を、巡る。',
   'アートと静けさ':'静けさの中で、手と目を澄ます。',
-  '体を動かす':'体で読む、北アルプスの裾野。',
+  '体を動かす':'からだ全部で、土地を感じる一日。',
   'のんびり整う':'しないことを、しにいく。',
   '愛犬と過ごす':'いぬと歩く、やわらかい時間。',
   '子どもと過ごす':'こどもの速度で、一日を過ごす。'
@@ -569,8 +635,19 @@ const GOAL_TAGLINE = {
 function renderResult(res){
   const rows = res.rows;
   const goal=A.goal;
-  document.getElementById('resTitle').innerHTML = `${GOAL_ICON[goal]||''} ${goal}｜${A.duration}`;
+  const compWord={'一人':'ひとりで','カップル':'ふたりで','大人少人数':'仲間と','家族':'家族で','ペット':'愛犬と','大人数':'みんなで'}[A.companion]||'';
+  const weatherWord = A.weather==='雨' ? '雨でも、' : '';
+  document.getElementById('resTitle').innerHTML = `${GOAL_ICON[goal]||''} ${weatherWord}${compWord}めぐる、${(CFG&&CFG.regionName)||''}。`;
   document.getElementById('resTagline').textContent = GOAL_TAGLINE[goal]||'';
+  // 一日を物語で一文に
+  const _real=rows.filter(r=>!r.fixed);
+  const shortNm=s=>s.split('（')[0].split('(')[0].trim().slice(0,14);
+  const _m=_real[0], _l=_real.find(r=>r.kind==='昼食'), _c=_real.filter(r=>r!==_m && r!==_l).slice(-1)[0];
+  const _nar=[];
+  if(_m) _nar.push(`朝は「${shortNm(_m.name)}」から`);
+  if(_l && _l!==_m) _nar.push(`昼は「${shortNm(_l.name)}」`);
+  if(_c) _nar.push(`締めは「${shortNm(_c.name)}」`);
+  document.getElementById('resNarrative').textContent = _nar.length ? _nar.join('、')+'。そんな一日です。' : '';
 
   // メタ
   const meta = [
@@ -579,15 +656,16 @@ function renderResult(res){
   ].filter(Boolean);
 
   // ストップ
-  const stopsHtml = rows.map(r=>{
+  const stopsHtml = rows.map((r,i)=>{
+    const delay = ` style="animation-delay:${i*70}ms"`;
     if(r.fixed){
-      return `<li class="stop-fixed"><span class="stop-time">${timeStr(r.time)}</span>
+      return `<li class="stop-fixed"${delay}><span class="stop-time">${timeStr(r.time)}</span>
         <div class="stop-body"><div class="stop-name">${r.name}</div></div></li>`;
     }
     const tags = r.tag ? `<div class="ig-tags">${r.tag.split(/\s+/).filter(Boolean).map(t=>{
       const c=t.replace(/^#/,''); return `<a class="ig-tag" target="_blank" rel="noopener" href="https://www.instagram.com/explore/tags/${encodeURIComponent(c)}/">${t}</a>`;
     }).join('')}</div>`:'';
-    return `<li>
+    return `<li${delay}>
       <span class="stop-time">${timeStr(r.time)}</span>
       <div class="stop-body">
         ${r.category?`<div class="stop-cat">${r.category}${r.kind?' ・ '+r.kind:''}</div>`:''}
