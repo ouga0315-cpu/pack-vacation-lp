@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなただけの安曇野の一日をつくる | Pack Vacation</title>
+<meta name="description" content="7つの質問に答えると、その場であなただけの安曇野の一日（旅程）を組み立てます。灯・笹森家 宿泊者向け。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJSJFMXPX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
+</script>
+
+<style>
+  :root{
+    --brown:#5C3D2E; --cream:#F8F5F0; --green:#3C5A3A; --gold:#B89B5E;
+    --orange:#EE5A1F; --text:#2C2C2C; --muted:#7A7368; --light:#EFEBE4;
+    --white:#FFFFFF; --border:#E2E8F0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Zen Kaku Gothic New',sans-serif; color:var(--text);
+    background:var(--cream); line-height:1.8; letter-spacing:0.03em; min-height:100vh;
+  }
+  a{color:var(--green);}
+  button{font-family:inherit;}
+
+  .plan-header{background:var(--white); padding:16px 24px; text-align:center; border-bottom:1px solid var(--border);}
+  .plan-header .brand{font-size:0.72rem; color:var(--muted); letter-spacing:0.3em;}
+  .plan-header h1{font-family:'Noto Serif JP',serif; font-size:clamp(1.15rem,3vw,1.5rem); color:var(--brown); margin-top:6px; letter-spacing:0.1em; font-weight:600;}
+
+  .plan-wrap{max-width:720px; margin:0 auto; padding:32px 20px 80px;}
+
+  .progress-outer{height:4px; background:var(--light); border-radius:2px; overflow:hidden; margin-bottom:28px;}
+  .progress-inner{height:100%; background:var(--green); transition:width .4s ease;}
+
+  .screen{display:none;}
+  .screen.active{display:block; animation:fadeIn .4s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  .intro{text-align:center; padding:36px 16px;}
+  .intro-hero{font-family:'Noto Serif JP',serif; font-size:clamp(1.5rem,4.5vw,2.1rem); color:var(--brown); line-height:1.5; letter-spacing:0.08em; margin-bottom:18px;}
+  .intro-sub{font-size:0.98rem; color:var(--muted); line-height:1.9; margin-bottom:32px;}
+  .intro-meta{display:flex; justify-content:center; gap:22px; margin-bottom:34px; flex-wrap:wrap;}
+  .intro-meta-item{font-size:0.82rem; color:var(--muted); display:flex; flex-direction:column; align-items:center; gap:2px;}
+  .intro-meta-item strong{color:var(--brown); font-size:1.3rem; font-weight:700;}
+
+  .btn-primary{display:inline-block; padding:17px 46px; background:var(--green); color:var(--white); border:none; cursor:pointer; font-size:1rem; font-weight:700; letter-spacing:0.14em; border-radius:4px; transition:opacity .3s, transform .3s;}
+  .btn-primary:hover{opacity:.88; transform:translateY(-2px);}
+  .btn-primary:disabled{opacity:.4; cursor:default; transform:none;}
+  .btn-ghost{display:inline-block; padding:13px 30px; background:transparent; color:var(--brown); border:1px solid var(--border); cursor:pointer; font-size:0.88rem; letter-spacing:0.1em; border-radius:4px; transition:all .3s;}
+  .btn-ghost:hover{border-color:var(--brown);}
+
+  .q-num{font-size:0.72rem; color:var(--gold); letter-spacing:0.3em; margin-bottom:12px;}
+  .q-label{font-family:'Noto Serif JP',serif; font-size:clamp(1.15rem,3vw,1.45rem); color:var(--brown); line-height:1.6; letter-spacing:0.06em; margin-bottom:6px; font-weight:600;}
+  .q-sub{font-size:0.84rem; color:var(--muted); margin-bottom:24px;}
+  .q-options{display:grid; gap:11px; margin-bottom:28px;}
+  .q-option{display:flex; align-items:center; gap:13px; padding:17px 18px; background:var(--white); border:2px solid var(--border); border-radius:8px; cursor:pointer; font-size:1rem; color:var(--text); text-align:left; transition:all .2s; line-height:1.5;}
+  .q-option:hover{border-color:var(--green);}
+  .q-option.selected{border-color:var(--green); background:rgba(60,90,58,.06);}
+  .q-option-icon{font-size:1.4rem; flex-shrink:0;}
+  .q-option-label{flex:1;}
+  .q-option-desc{display:block; font-size:0.75rem; color:var(--muted); margin-top:2px;}
+  .q-hint{font-size:0.75rem; color:var(--muted); text-align:center; margin:-14px 0 22px;}
+  .q-nav{display:flex; justify-content:space-between; gap:12px; margin-top:20px;}
+
+  /* Result */
+  .result-eyebrow{text-align:center; font-size:0.72rem; color:var(--gold); letter-spacing:0.4em; margin-bottom:10px;}
+  .result-title{text-align:center; font-family:'Noto Serif JP',serif; font-size:clamp(1.35rem,3.5vw,1.75rem); color:var(--brown); letter-spacing:0.08em; margin-bottom:6px; font-weight:600;}
+  .result-tagline{text-align:center; color:var(--muted); font-size:0.92rem; margin-bottom:28px;}
+
+  .trip-card{background:var(--white); border:2px solid var(--green); border-radius:10px; overflow:hidden; margin-bottom:22px;}
+  .trip-card-head{padding:18px 22px; background:var(--cream); border-bottom:1px solid var(--border);}
+  .trip-badges{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:4px;}
+  .trip-badge{display:inline-block; padding:4px 11px; background:var(--white); color:var(--brown); font-size:0.72rem; letter-spacing:0.08em; border-radius:999px; border:1px solid var(--border);}
+  .trip-meta{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; font-size:0.74rem; color:var(--muted);}
+  .trip-meta span{padding:3px 10px; background:var(--white); border:1px solid var(--border); border-radius:4px;}
+
+  .stops{list-style:none; padding:8px 22px 4px;}
+  .stops li{display:flex; gap:14px; padding:14px 0; border-bottom:1px dashed var(--border);}
+  .stops li:last-child{border-bottom:none;}
+  .stop-time{flex:0 0 52px; color:var(--green); font-weight:700; font-size:0.9rem;}
+  .stop-body{flex:1;}
+  .stop-name{color:var(--text); font-size:0.98rem; font-weight:500;}
+  .stop-cat{font-size:0.72rem; color:var(--gold); letter-spacing:0.05em; margin-bottom:2px;}
+  .stop-note{color:var(--muted); font-size:0.8rem; margin-top:4px;}
+  .stop-links{margin-top:7px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  .stop-map{font-size:0.76rem; color:var(--green); text-decoration:none; border:1px solid var(--border); padding:3px 10px; border-radius:999px;}
+  .stop-map:hover{background:var(--green); color:var(--white);}
+  .stop-verify{font-size:0.68rem; color:var(--orange); letter-spacing:0.03em;}
+  .stop-fixed .stop-time{color:var(--muted);}
+
+  .route-bar{padding:14px 22px 4px;}
+  .route-btn{display:block; text-align:center; padding:15px; background:var(--green); color:#fff; text-decoration:none; border-radius:6px; font-weight:700; letter-spacing:0.08em; transition:opacity .3s, transform .2s;}
+  .route-btn:hover{opacity:.9; transform:translateY(-1px);}
+  .route-note{text-align:center; font-size:0.72rem; color:var(--muted); margin-top:7px;}
+
+  .trip-foot{padding:14px 22px 20px; border-top:1px dashed var(--border);}
+  .trip-foot .ig-tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+  .ig-tag{display:inline-block; padding:5px 11px; background:var(--cream); color:var(--brown); text-decoration:none; font-size:0.78rem; border-radius:999px; border:1px solid var(--border); transition:all .2s;}
+  .ig-tag:hover{background:var(--brown); color:var(--white);}
+  .tiny-label{font-size:0.72rem; color:var(--muted); letter-spacing:0.1em;}
+
+  .result-inn{background:var(--white); padding:22px; text-align:center; border-radius:8px; margin-bottom:22px; border:1px solid var(--border);}
+  .result-inn-label{font-size:0.68rem; color:var(--gold); letter-spacing:0.3em; margin-bottom:8px;}
+  .result-inn-name{font-family:'Noto Serif JP',serif; font-size:1.25rem; color:var(--brown); letter-spacing:0.08em; margin-bottom:6px; font-weight:600;}
+  .result-inn-links{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px;}
+  .result-inn-links a{padding:10px 20px; background:var(--brown); color:var(--white); text-decoration:none; border-radius:4px; font-size:0.84rem; letter-spacing:0.08em; transition:opacity .3s;}
+  .result-inn-links a.secondary{background:transparent; color:var(--brown); border:1px solid var(--brown);}
+  .result-inn-links a:hover{opacity:.85;}
+
+  .result-actions{display:flex; gap:12px; justify-content:center; margin-top:28px; flex-wrap:wrap;}
+  .disclaimer{margin-top:26px; font-size:0.74rem; color:var(--muted); line-height:1.8; text-align:center; padding:0 8px;}
+
+  .plan-footer{text-align:center; padding:30px 20px; color:var(--muted); font-size:0.74rem; letter-spacing:0.08em;}
+  .plan-footer a{color:var(--muted); text-decoration:none; margin:0 8px;}
+
+  @media print{
+    .plan-header, .plan-footer, .progress-outer, .q-nav, .result-actions, .route-bar, .result-eyebrow{ display:none !important; }
+    body{ background:#fff; }
+    .plan-wrap{ padding:0; max-width:100%; }
+    .trip-card{ border:1px solid #bbb; box-shadow:none; }
+    .stop-map, .ig-tag{ display:none !important; }   /* 紙ではリンクは不要 */
+    a{ color:var(--text); text-decoration:none; }
+  }
+
+  @media (max-width:640px){
+    .plan-wrap{padding:22px 14px 60px;}
+    .q-option{padding:15px; font-size:0.95rem;}
+    .btn-primary{padding:16px 30px; font-size:0.92rem;}
+    .stop-time{flex:0 0 46px; font-size:0.82rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="plan-header">
+  <div class="brand">PACK VACATION</div>
+  <h1>あなただけの、安曇野の一日</h1>
+</header>
+
+<div class="plan-wrap">
+  <div class="progress-outer" id="progressBar" style="display:none;">
+    <div class="progress-inner" id="progressInner" style="width:0%"></div>
+  </div>
+
+  <!-- Intro -->
+  <section class="screen active" id="screen-intro">
+    <div class="intro">
+      <h2 class="intro-hero">その日の気分で、<br>一日を組み立てる。</h2>
+      <p class="intro-sub">
+        いくつかの質問に答えると、その場で<br>
+        あなただけの"安曇野の一日"を組み立てます。
+      </p>
+      <div class="intro-meta">
+        <div class="intro-meta-item"><strong id="metaQ">7</strong><span>質問</span></div>
+        <div class="intro-meta-item"><strong>約1分</strong><span>で完成</span></div>
+        <div class="intro-meta-item"><strong id="metaSpots">80</strong><span>スポットから</span></div>
+      </div>
+      <button class="btn-primary" onclick="start()">はじめる</button>
+    </div>
+  </section>
+
+  <!-- Question -->
+  <section class="screen" id="screen-question">
+    <p class="q-num" id="qNum"></p>
+    <h2 class="q-label" id="qLabel"></h2>
+    <p class="q-sub" id="qSub"></p>
+    <div class="q-options" id="qOptions"></div>
+    <p class="q-hint" id="qHint" style="display:none;">複数選べます（選ばなければ宿での食事になります）</p>
+    <div class="q-nav">
+      <button class="btn-ghost" id="btnBack" onclick="prevQ()">← 戻る</button>
+      <button class="btn-primary" id="btnNext" onclick="nextQ()" disabled>次へ →</button>
+    </div>
+  </section>
+
+  <!-- Result -->
+  <section class="screen" id="screen-result">
+    <p class="result-eyebrow">YOUR DAY</p>
+    <h2 class="result-title" id="resTitle"></h2>
+    <p class="result-tagline" id="resTagline"></p>
+
+    <div id="tripCard"></div>
+
+    <div class="result-actions">
+      <button class="btn-ghost" onclick="reshuffle()">🔀 別の組み合わせ</button>
+      <button class="btn-ghost" onclick="window.print()">🖨 保存・印刷</button>
+      <button class="btn-ghost" onclick="restart()">↺ 条件を変える</button>
+    </div>
+
+    <p class="disclaimer" id="resDisclaimer"></p>
+  </section>
+</div>
+
+<footer class="plan-footer">
+  © Pack Vacation ／
+  <a href="../tomoshibi/ja/">ゲストハウス 灯</a> ／
+  <a href="../sasamoriya/ja/">民宿 笹森家</a>
+</footer>
+
+<script>
+/* ============== 宿情報・推奨ロジック（/plan/ から流用） ============== */
+const INN_INFO = {
+  tomoshibi:{ name:'灯（ともしび）', tag:'少人数・全室個室・温泉つき', url:'../tomoshibi/ja/', bookUrl:'../tomoshibi/availability-calendar.html' },
+  sasamoriya:{ name:'笹森家（一棟貸し）', tag:'ペット・BBQ・シアター・大人数OK', url:'../sasamoriya/ja/', bookUrl:'../sasamoriya/availability-calendar.html' }
+};
+const INN_MAP = { '一人':'tomoshibi','カップル':'any','大人少人数':'any','家族':'sasamoriya','ペット':'sasamoriya','大人数':'sasamoriya' };
+
+/* ============== 質問（7問） ============== */
+const QUESTIONS = [
+  { id:'goal', label:'今日、いちばんしたいことは？', sub:'旅の方向を決めます', type:'single',
+    options:[
+      {value:'自然に浸る', icon:'🌿'},
+      {value:'手と舌で味わう', icon:'🍜'},
+      {value:'アートと静けさ', icon:'🎨'},
+      {value:'体を動かす', icon:'🏔'},
+      {value:'のんびり整う', icon:'♨️'},
+      {value:'愛犬と過ごす', icon:'🐾', label:'愛犬と過ごしたい'},
+      {value:'子どもと過ごす', icon:'👧'}
+    ]},
+  { id:'companion', label:'誰と過ごしますか？', sub:'宿と行き先の推奨に効きます', type:'single',
+    options:[
+      {value:'一人', icon:'🚶'},
+      {value:'カップル', icon:'💑'},
+      {value:'大人少人数', icon:'👥'},
+      {value:'家族', icon:'👨‍👩‍👧'},
+      {value:'ペット', icon:'🐕'},
+      {value:'大人数', icon:'👨‍👩‍👧‍👦'}
+    ]},
+  { id:'stamina', label:'どのくらい動きたい？', sub:'', type:'single',
+    options:[
+      {value:'のんびり', icon:'🍃', label:'のんびり（歩きは少なめ）'},
+      {value:'ほどよく', icon:'🌤', label:'ほどよく'},
+      {value:'しっかり', icon:'🥾', label:'しっかり動きたい'}
+    ]},
+  { id:'transport', label:'移動手段は？', sub:'', type:'single',
+    options:[
+      {value:'車あり', icon:'🚗'},
+      {value:'自転車', icon:'🚴'},
+      {value:'車なし', icon:'🚶', label:'車なし（宿の近く中心）'}
+    ]},
+  { id:'weather', label:'お天気は？', sub:'雨のときは屋内中心に組みます', type:'single', optional:true,
+    options:[
+      {value:'晴れ', icon:'☀️', label:'晴れ・くもり'},
+      {value:'雨', icon:'🌧'},
+      {value:'おまかせ', icon:'🤷', label:'未定・おまかせ'}
+    ]},
+  { id:'duration', label:'どのくらいの時間？', sub:'', type:'single',
+    options:[
+      {value:'半日', icon:'🕒', label:'半日（数時間）'},
+      {value:'一日', icon:'🌅', label:'一日たっぷり'}
+    ]},
+  { id:'meals', label:'外で食べたい食事は？', sub:'選ばなければ宿での食事になります', type:'multi', optional:true,
+    options:[
+      {value:'朝食', icon:'🥐'},
+      {value:'昼食', icon:'🍽', label:'昼食（おすすめ）'},
+      {value:'夕食', icon:'🍶'}
+    ]}
+];
+
+/* ============== 状態 ============== */
+let SPOTS = [], META = null;
+const A = {};              // answers
+A.meals = ['昼食'];        // 既定：昼は外で（最も多いケース）
+let qi = 0, advTimer = null;
+
+fetch('spots.json?v='+Date.now()).then(r=>r.json()).then(d=>{
+  SPOTS = d.spots; META = d.meta;
+  document.getElementById('metaSpots').textContent = SPOTS.length;
+  document.getElementById('metaQ').textContent = QUESTIONS.length;
+}).catch(e=>{ console.error(e); alert('データの読み込みに失敗しました。再読み込みしてください。'); });
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function start(){
+  qi=0; Object.keys(A).forEach(k=>delete A[k]); A.meals=['昼食'];
+  document.getElementById('progressBar').style.display='block';
+  showQ(0);
+  if(typeof gtag==='function') gtag('event','trip_start');
+}
+function showQ(i){
+  const q=QUESTIONS[i]; qi=i;
+  document.getElementById('qNum').textContent=`質問 ${i+1} / ${QUESTIONS.length}`;
+  document.getElementById('qLabel').textContent=q.label;
+  document.getElementById('qSub').textContent=q.sub||'';
+  const wrap=document.getElementById('qOptions'); wrap.innerHTML='';
+  q.options.forEach(opt=>{
+    const b=document.createElement('button');
+    b.className='q-option';
+    const selected = q.type==='multi' ? A.meals.includes(opt.value) : A[q.id]===opt.value;
+    if(selected) b.classList.add('selected');
+    b.innerHTML=`${opt.icon?`<span class="q-option-icon">${opt.icon}</span>`:''}<span class="q-option-label">${opt.label||opt.value}</span>`;
+    b.onclick=()=>select(q,opt.value,b);
+    wrap.appendChild(b);
+  });
+  document.getElementById('qHint').style.display = q.type==='multi' ? 'block':'none';
+  document.getElementById('btnBack').style.visibility = i===0?'hidden':'visible';
+  // 単一選択は自動で進むので「次へ」は隠す（複数選択の食事だけ表示）
+  document.getElementById('btnNext').style.display = q.type==='multi' ? 'inline-block':'none';
+  clearTimeout(advTimer);
+  updateNext();
+  document.getElementById('progressInner').style.width=`${((i+1)/QUESTIONS.length)*100}%`;
+  showScreen('screen-question');
+}
+function select(q,val,btn){
+  if(q.type==='multi'){
+    const idx=A.meals.indexOf(val);
+    if(idx>=0){ A.meals.splice(idx,1); btn.classList.remove('selected'); }
+    else { A.meals.push(val); btn.classList.add('selected'); }
+    updateNext();
+  } else {
+    A[q.id]=val;
+    document.querySelectorAll('.q-option').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    // 単一選択は選んだ瞬間に自動で次へ（タップ半減）。別の選択肢を押せば切替可
+    clearTimeout(advTimer);
+    advTimer=setTimeout(()=>{ nextQ(); }, 260);
+  }
+  if(typeof gtag==='function') gtag('event','trip_answer',{question_id:q.id, answer:q.type==='multi'?A.meals.join(','):val});
+}
+function updateNext(){
+  const q=QUESTIONS[qi]; const btn=document.getElementById('btnNext');
+  const ok = q.optional || q.type==='multi' || !!A[q.id];
+  btn.disabled=!ok;
+  btn.textContent = qi===QUESTIONS.length-1 ? '旅程をつくる' : '次へ →';
+}
+function nextQ(){ if(qi<QUESTIONS.length-1) showQ(qi+1); else build(); }
+function prevQ(){ if(qi>0) showQ(qi-1); }
+function restart(){
+  document.getElementById('progressBar').style.display='none';
+  Object.keys(A).forEach(k=>delete A[k]); A.meals=[]; qi=0;
+  showScreen('screen-intro');
+}
+
+/* ============== 季節（今日の日付から自動判定） ============== */
+function currentMonth(){ return (new Date()).getMonth()+1; }
+function seasonOK(spot){
+  if(!spot.season) return true;
+  const m=currentMonth(); const s=spot.season;
+  const range=(a,b)=> m>=a && m<=b;
+  if(s.includes('夏')) return range(6,8);
+  if(s.includes('初夏')) return range(6,10);
+  // parse "4〜11月" / "6〜11月" / "4月中旬〜11月中旬"
+  const nums = s.match(/\d+/g);
+  if(nums && nums.length>=2) return range(parseInt(nums[0]), parseInt(nums[1]));
+  return true;
+}
+
+/* ============== ヘルパー ============== */
+const NEAR_INN = ['有明・中房','穂高'];        // 宿の近く（朝食・夕食向き）
+const BIKE_AREAS = ['有明・中房','穂高','堀金・三郷'];
+const staminaRank = {'のんびり':1,'ほどよく':2,'しっかり':3,'軽め':1};
+function sRank(v){ return staminaRank[v]||2; }
+function adj(area){ return (META.areaAdjacency && META.areaAdjacency[area]) || []; }
+
+function passesHardFilter(spot){
+  if(!seasonOK(spot)) return false;
+  // 天気
+  if(A.weather==='雨' && !(spot.weather||[]).includes('雨')) return false;
+  // 移動
+  if(A.transport==='車なし' && spot.needsCar) return false;
+  if(A.transport==='自転車'){
+    if(!BIKE_AREAS.includes(spot.area)) return false;
+    if(sRank(spot.stamina)>=3) return false;
+    if(spot.duration>=300) return false;
+  }
+  // ペット
+  if(A.companion==='ペット' && spot.dogOk===false) return false;
+  // 同行者（companions指定があり all でも該当でもない → 除外）
+  const comp=spot.companions||['all'];
+  if(!comp.includes('all') && !comp.includes(A.companion)) return false;
+  return true;
+}
+function score(spot){
+  let s=0;
+  const types=spot.types||[];
+  if(types.includes(A.goal)) s+=100;
+  // 目的の相性（副次）
+  types.forEach(t=>{ if(t!==A.goal) s+=8; });
+  // 同行者
+  const comp=spot.companions||['all'];
+  if(comp.includes(A.companion)) s+=40; else if(comp.includes('all')) s+=15;
+  // 体力
+  const chosen=sRank(A.stamina||'ほどよく');
+  if(sRank(spot.stamina)<=chosen) s+=10; else s-=25;
+  // 信頼度（未検証の基本スポットは高扱い）
+  const conf=spot.confidence||'高';
+  s += conf==='高'?6 : conf==='中'?3 : 0;
+  s += Math.random()*3; // タイブレーク＆別組み合わせ用
+  return s;
+}
+function timeStr(mins){ const h=Math.floor(mins/60), m=mins%60; return h+':'+String(m).padStart(2,'0'); }
+function travel(a,b){ if(a===b) return 25; if(adj(a).includes(b)) return 40; return 60; }
+
+// スポット名 → 地図検索クエリ（代替店の"/"や括弧を落とし、地域名を補う）
+function mapQuery(s){
+  let n=(s.name||'').split('（')[0].split('(')[0].split(' / ')[0].split('/')[0].split(' or ')[0].trim();
+  const hint = s.area==='松本' ? '松本' : (s.area==='遠方' ? '' : '安曇野');
+  if(hint && n.indexOf(hint)<0 && n.indexOf('上高地')<0) n = n+' '+hint;
+  return n;
+}
+// 宿→各スポット→宿 の順路を Googleマップの経路URLに
+const INN_ADDR = '長野県安曇野市穂高有明7403-30';
+function routeUrl(rows){
+  const stops = rows.filter(r=>!r.fixed && r.mapQ).map(r=>r.mapQ);
+  if(!stops.length) return null;
+  const mode = A.transport==='自転車' ? 'bicycling' : (A.transport==='車なし' ? 'walking' : 'driving');
+  const enc = encodeURIComponent;
+  const wps = stops.map(enc).join('%7C');   // %7C = |
+  return `https://www.google.com/maps/dir/?api=1&origin=${enc(INN_ADDR)}&destination=${enc(INN_ADDR)}&waypoints=${wps}&travelmode=${mode}`;
+}
+
+/* ============== 旅程の組み立て（時間駆動） ============== */
+function build(){ renderResult(planDay()); if(typeof gtag==='function') gtag('event','trip_result',{goal:A.goal, companion:A.companion, duration:A.duration}); }
+function reshuffle(){ renderResult(planDay()); }
+
+function planDay(){
+  const pool = SPOTS.filter(passesHardFilter);
+  const used = new Set();
+  const take = arr=>{ for(const s of arr){ if(!used.has(s.id)){ used.add(s.id); return s; } } return null; };
+
+  const isOnsen = s=> s.category && s.category.indexOf('温泉')>=0;
+  const isMeal  = s=> s.meal===true;
+  const isDinner= s=> (s.category&&s.category.indexOf('夕食')>=0) || (s.slot||[]).includes('夜');
+  const isSight = s=> !isMeal(s) && !isOnsen(s);
+  const inSlot  = (s,sl)=> (s.slot||[]).includes(sl);
+  const byScore = arr=> arr.map(s=>({s,v:score(s)})).sort((a,b)=>b.v-a.v).map(x=>x.s);
+  const preferArea = (arr,areas)=> [...arr].sort((a,b)=>(areas.includes(a.area)?0:1)-(areas.includes(b.area)?0:1));
+
+  // アンカーエリア（目的に合う見る枠が濃い所）
+  const sights = byScore(pool.filter(isSight));
+  let anchor = NEAR_INN[0];
+  if(sights.length){
+    const as={}; sights.slice(0,20).forEach(s=>{ as[s.area]=(as[s.area]||0)+score(s); });
+    anchor = Object.keys(as).sort((a,b)=>as[b]-as[a])[0] || anchor;
+  }
+  const allowed = [anchor, ...adj(anchor)];
+  const inAllowed = s=> allowed.includes(s.area);
+
+  const fullDay = A.duration==='一日';
+  const wB = A.meals.includes('朝食'), wL = A.meals.includes('昼食'), wD = A.meals.includes('夕食');
+
+  // 時計を進めながら組む
+  const rows=[];
+  let t = wB ? 8*60 : 9*60;      // 出発時刻
+  let prevArea=null;
+  const add=(s,kind,minTime)=>{
+    if(!s) return false;
+    if(prevArea!==null) t += travel(prevArea, s.area);
+    if(minTime!=null && t < minTime){
+      if(kind==='夕食' && (minTime - t) >= 60){
+        rows.push({fixed:true, time:Math.round(t/5)*5, name:'宿に戻って休憩・自由時間'});
+      }
+      t = minTime;
+    }
+    t = Math.round(t/5)*5;
+    rows.push({time:t, name:s.name, kind, category:s.category, note:s.note, map:s.map, mapQ:mapQuery(s), verify:!!s.verify, reserve:!!s.reserve, tag:s.instagramTag, area:s.area});
+    t += s.duration; prevArea=s.area;
+    if(s.reserve) reserveUsed=true;
+    return true;
+  };
+
+  rows.push({fixed:true, time:t, name:'宿を出発'});
+  t += 5;
+
+  const sightBudget = fullDay ? 300 : 170;   // 見る・体験の合計上限（分）
+  let sightUsed = 0;
+  let big = false, big300 = false, reserveUsed = false;   // big=長め(150+) / big300=終日型(300+) / 要予約は1日1つまで
+
+  // A 朝食（宿の近く優先）
+  if(wB){ add(take(preferArea(byScore(pool.filter(s=>isMeal(s)&&inSlot(s,'朝'))), NEAR_INN)), '朝食'); }
+
+  // B 午前のメイン（朝/昼前スロット優先）
+  {
+    let c = byScore(pool.filter(s=>isSight(s)&&inAllowed(s)&&(inSlot(s,'朝')||inSlot(s,'昼前'))));
+    if(!c.length) c = byScore(pool.filter(s=>isSight(s)&&inAllowed(s)));
+    if(!c.length) c = byScore(pool.filter(isSight));
+    const m = take(c);
+    if(m){ add(m,'午前'); sightUsed += m.duration; if(m.duration>=150) big=true; if(m.duration>=300) big300=true; }
+  }
+
+  // C 昼食（大型活動<300のとき・11:45以降にアンカー）
+  if(wL && !big300){
+    let c = byScore(pool.filter(s=>isMeal(s)&&inSlot(s,'昼')&&inAllowed(s)));
+    if(!c.length) c = preferArea(byScore(pool.filter(s=>isMeal(s)&&inSlot(s,'昼'))), allowed);
+    add(take(c), '昼食', 11*60+45);
+  }
+
+  // D 午後を合計スロット上限で埋める（見どころ / 味の寄り道 / 温泉）
+  if(!big300){
+    // 大型活動(150+)の日は午後は締めの温泉のみ。それ以外は体力に応じて1〜3枠
+    const maxSlots = big ? 1 : (fullDay ? (A.stamina==='しっかり'?3:2) : 1);
+    const startCut = fullDay ? 15*60+30 : 13*60+30;   // これ以降は新規スポットを足さない
+    // 温泉を締めに使う日か（のんびり目的／しっかり動く／大型活動）
+    const onsenWanted = A.goal==='のんびり整う' || big || A.stamina==='しっかり';
+    let slots=0;
+    const tryAdd=(s,kind)=>{
+      if(!s || slots>=maxSlots || t>startCut) return false;
+      if(kind!=='温泉' && sightUsed>=sightBudget) return false;
+      add(s,kind); if(kind!=='温泉') sightUsed+=s.duration; slots++; return true;
+    };
+
+    // 1) 食メインの日は「味の寄り道」を先に一つ（わさびソフト等）
+    if(A.goal==='手と舌で味わう'){
+      tryAdd(take(byScore(pool.filter(x=>!isMeal(x)&&(x.types||[]).includes('手と舌で味わう')&&inAllowed(x)))), '味の寄り道');
+    }
+    // 2) 見どころ（温泉ぶんの枠は残す）
+    const sightSlots = onsenWanted ? maxSlots-1 : maxSlots;
+    while(slots<sightSlots){
+      const s = take(byScore(pool.filter(x=>isSight(x)&&inAllowed(x)&&(!reserveUsed||!x.reserve)&&(inSlot(x,'午後')||inSlot(x,'昼前')||inSlot(x,'朝')))));
+      if(!tryAdd(s,'午後')) break;
+    }
+    // 3) 締めの温泉（開始が遅すぎない場合）
+    if(onsenWanted && t<=(fullDay?16*60:13*60+30)){
+      tryAdd(take(preferArea(byScore(pool.filter(isOnsen)), allowed)), '温泉');
+    }
+  }
+
+  // F 夕食（17:30以降・宿の近く優先・当日利用なので"予約不要で入れる店"を優先）
+  if(wD){
+    const near = preferArea(byScore(pool.filter(isDinner)), NEAR_INN);
+    const c = near.filter(x=>!x.reserve).concat(near.filter(x=>x.reserve));
+    add(take(c.length?c:byScore(pool.filter(isDinner))), '夕食', 17*60+30);
+  }
+
+  // 宿に戻る
+  if(prevArea){ t += travel(prevArea, NEAR_INN[0]); }
+  t = Math.round(t/5)*5;
+  rows.push({fixed:true, time:t, name: wD ? '宿に戻る' : '宿に戻ってゆっくり'});
+
+  return { rows, anchor, big };
+}
+
+/* ============== 宿推奨（/plan/ 流用） ============== */
+function decideInns(){
+  const base = INN_MAP[A.companion]||'any';
+  if(A.companion==='家族' && (A.goal==='体を動かす'||A.stamina==='しっかり')) return ['sasamoriya','tomoshibi'];
+  if(base==='any') return ['tomoshibi','sasamoriya'];
+  return [base];
+}
+
+/* ============== 描画 ============== */
+const GOAL_ICON = {'自然に浸る':'🌿','手と舌で味わう':'🍜','アートと静けさ':'🎨','体を動かす':'🏔','のんびり整う':'♨️','愛犬と過ごす':'🐾','子どもと過ごす':'👧'};
+const GOAL_TAGLINE = {
+  '自然に浸る':'水と森に、深く浸る一日。',
+  '手と舌で味わう':'安曇野の水が育てた味を、巡る。',
+  'アートと静けさ':'静けさの中で、手と目を澄ます。',
+  '体を動かす':'体で読む、北アルプスの裾野。',
+  'のんびり整う':'しないことを、しにいく。',
+  '愛犬と過ごす':'いぬと歩く、やわらかい時間。',
+  '子どもと過ごす':'こどもの速度で、一日を過ごす。'
+};
+
+function renderResult(res){
+  const rows = res.rows;
+  const goal=A.goal;
+  document.getElementById('resTitle').innerHTML = `${GOAL_ICON[goal]||''} ${goal}｜${A.duration}`;
+  document.getElementById('resTagline').textContent = GOAL_TAGLINE[goal]||'';
+
+  // メタ
+  const meta = [
+    `${A.companion||''}`, `${A.duration}`, `体力：${A.stamina||'ほどよく'}`, `${A.transport||''}`,
+    `${res.anchor}中心`, A.weather==='雨'?'雨の日プラン':''
+  ].filter(Boolean);
+
+  // ストップ
+  const stopsHtml = rows.map(r=>{
+    if(r.fixed){
+      return `<li class="stop-fixed"><span class="stop-time">${timeStr(r.time)}</span>
+        <div class="stop-body"><div class="stop-name">${r.name}</div></div></li>`;
+    }
+    const tags = r.tag ? `<div class="ig-tags">${r.tag.split(/\s+/).filter(Boolean).map(t=>{
+      const c=t.replace(/^#/,''); return `<a class="ig-tag" target="_blank" rel="noopener" href="https://www.instagram.com/explore/tags/${encodeURIComponent(c)}/">${t}</a>`;
+    }).join('')}</div>`:'';
+    return `<li>
+      <span class="stop-time">${timeStr(r.time)}</span>
+      <div class="stop-body">
+        ${r.category?`<div class="stop-cat">${r.category}${r.kind?' ・ '+r.kind:''}</div>`:''}
+        <div class="stop-name">${r.name}</div>
+        ${r.note?`<div class="stop-note">${r.note}</div>`:''}
+        <div class="stop-links">
+          ${r.map?`<a class="stop-map" target="_blank" rel="noopener" href="${r.map}">🗺 地図</a>`:''}
+          ${r.reserve?`<span class="stop-verify">※要予約</span>`:''}
+          ${r.verify?`<span class="stop-verify">※営業日・料金は要確認</span>`:''}
+        </div>
+        ${tags}
+      </div>
+    </li>`;
+  }).join('');
+
+  const allTags = [...new Set(rows.filter(r=>r.tag).flatMap(r=>r.tag.split(/\s+/)).filter(Boolean))].slice(0,8);
+
+  const rUrl = routeUrl(rows);
+  const modeLabel = A.transport==='自転車' ? '自転車' : (A.transport==='車なし' ? '徒歩' : '車');
+  const routeHtml = rUrl ? `
+    <div class="route-bar">
+      <a class="route-btn" href="${rUrl}" target="_blank" rel="noopener" onclick="track('route_open','${A.transport||''}')">🗺 この順路をGoogleマップで開く</a>
+      <div class="route-note">宿 → 各スポット → 宿 の順に、${modeLabel}でナビできます</div>
+    </div>` : '';
+
+  document.getElementById('tripCard').innerHTML = `
+    <div class="trip-card">
+      <div class="trip-card-head">
+        <div class="trip-badges"><span class="trip-badge">${GOAL_ICON[goal]||''} ${goal}</span></div>
+        <div class="trip-meta">${meta.map(m=>`<span>${m}</span>`).join('')}</div>
+      </div>
+      <ul class="stops">${stopsHtml}</ul>
+      ${routeHtml}
+      ${allTags.length?`<div class="trip-foot"><div class="tiny-label">Instagram で探す</div><div class="ig-tags">${allTags.map(t=>{const c=t.replace(/^#/,'');return `<a class="ig-tag" target="_blank" rel="noopener" href="https://www.instagram.com/explore/tags/${encodeURIComponent(c)}/">${t}</a>`;}).join('')}</div></div>`:''}
+    </div>`;
+
+  const nocarNote = A.transport==='車なし' ? '安曇野は車前提の地域です。車なしの場合、行ける範囲がどうしても限られます。<br>' : '';
+  document.getElementById('resDisclaimer').innerHTML =
+    nocarNote + 'この旅程は目安です。各店の営業日・定休・料金・ペット可否は変わることがあるため、お出かけ前に「地図」リンクからご確認ください。<br>「別の組み合わせにする」で作り直せます。';
+
+  showScreen('screen-result');
+}
+function track(ev,inn){ if(typeof gtag==='function') gtag('event',ev,{inn:inn}); }
+</script>
+</body>
+</html>

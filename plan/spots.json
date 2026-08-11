@@ -1,0 +1,2619 @@
+{
+  "meta": {
+    "note": "旅程を組み立てる部品（スポット）のプール。/plan/ の15コースから抽出し、性格タグを付与した初稿。",
+    "version": "0.3",
+    "updated": "2026-08-11",
+    "schema": {
+      "id": "英字ID",
+      "name": "表示名",
+      "area": "地理クラスタ（同/隣エリアで固めてルートを賢く）",
+      "category": "表示用の系統（絞り込み・アイコン用）",
+      "types": "効く型（Q1と一致）。複数可",
+      "slot": "一日のどこに置けるか：朝/昼前/昼/午後/夕方",
+      "duration": "滞在の目安（分）",
+      "meal": "食事枠として使えるか",
+      "indoor": "屋内か（雨の日に強い）",
+      "dogOk": "犬同伴可",
+      "needsCar": "車が要るか（車なしフィルタ用）",
+      "companions": "合う同行者。'all'は誰でも可",
+      "stamina": "軽め/ほどよく/しっかり",
+      "weather": "晴れ/雨",
+      "reserve": "要予約か",
+      "season": "推奨シーズン（無ければ通年）",
+      "note": "一言メモ",
+      "alt": "同枠の代替候補（お店の選択肢など）",
+      "instagramTag": "投稿タグ",
+      "map": "地図リンク"
+    },
+    "areas": [
+      "明科・長峰",
+      "穂高",
+      "堀金・三郷",
+      "有明・中房",
+      "松川・池田",
+      "松本",
+      "遠方",
+      "宿発着"
+    ],
+    "areaAdjacency": {
+      "明科・長峰": [
+        "穂高",
+        "松本"
+      ],
+      "穂高": [
+        "明科・長峰",
+        "堀金・三郷",
+        "有明・中房",
+        "松本"
+      ],
+      "堀金・三郷": [
+        "穂高",
+        "松川・池田",
+        "松本"
+      ],
+      "有明・中房": [
+        "穂高",
+        "松川・池田"
+      ],
+      "松川・池田": [
+        "堀金・三郷",
+        "有明・中房"
+      ],
+      "松本": [
+        "穂高",
+        "堀金・三郷",
+        "明科・長峰"
+      ],
+      "遠方": [],
+      "宿発着": [
+        "穂高",
+        "堀金・三郷",
+        "有明・中房"
+      ]
+    }
+  },
+  "spots": [
+    {
+      "id": "naganeyama",
+      "name": "長峰山 山頂展望",
+      "area": "明科・長峰",
+      "category": "🌿自然・展望",
+      "types": [
+        "自然に浸る",
+        "愛犬と過ごす"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "北アルプスと安曇野を一望。観光客が来る前の朝が最高。",
+      "instagramTag": "#長峰山 #安曇野",
+      "map": "https://maps.google.com/?q=長峰山展望台"
+    },
+    {
+      "id": "karasugawa-keikoku",
+      "name": "烏川渓谷緑地の遊歩道",
+      "area": "堀金・三郷",
+      "category": "🌿自然・展望",
+      "types": [
+        "自然に浸る",
+        "のんびり整う",
+        "愛犬と過ごす",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "水辺の遊歩道。犬OK・子どもが水に近づける。",
+      "instagramTag": "#烏川渓谷",
+      "map": "https://maps.google.com/?q=烏川渓谷緑地"
+    },
+    {
+      "id": "yorozuigawa",
+      "name": "万水川沿い",
+      "area": "穂高",
+      "category": "🌿自然・展望",
+      "types": [
+        "自然に浸る",
+        "体を動かす"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 40,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "大王わさび農場に隣接。水車小屋の景色。サイクリング向き。",
+      "instagramTag": "#万水川",
+      "map": "https://maps.google.com/?q=万水川+安曇野"
+    },
+    {
+      "id": "jukkasegi",
+      "name": "拾ヶ堰の水路沿い",
+      "area": "堀金・三郷",
+      "category": "🌿自然・展望",
+      "types": [
+        "自然に浸る",
+        "体を動かす"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "アルプスを正面に見て走れる平坦な水路。サイクリングの名所。",
+      "instagramTag": "#拾ヶ堰 #安曇野サイクリング",
+      "map": "https://maps.google.com/?q=拾ヶ堰"
+    },
+    {
+      "id": "misato-skyline",
+      "name": "三郷スカイライン展望地",
+      "area": "堀金・三郷",
+      "category": "🌿自然・展望",
+      "types": [
+        "自然に浸る",
+        "愛犬と過ごす"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 40,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "車で標高を上げて安曇野を見下ろす。犬とのドライブに。",
+      "instagramTag": "#三郷スカイライン",
+      "map": "https://maps.google.com/?q=三郷スカイライン展望"
+    },
+    {
+      "id": "nakabusa-kawa",
+      "name": "中房川で川遊び",
+      "area": "有明・中房",
+      "category": "🌿自然・展望",
+      "types": [
+        "子どもと過ごす",
+        "自然に浸る"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "家族"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "season": "夏",
+      "note": "冷たい清流。子どもが水にいちばん近づく場所。",
+      "instagramTag": "#中房川 #安曇野川遊び",
+      "map": "https://maps.google.com/?q=中房川"
+    },
+    {
+      "id": "kassen-one",
+      "name": "合戦尾根トレッキング（中房温泉登山口）",
+      "area": "有明・中房",
+      "category": "🏔アクティビティ",
+      "types": [
+        "体を動かす"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 480,
+      "meal": false,
+      "indoor": false,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "しっかり",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "season": "初夏〜秋",
+      "note": "合戦小屋で折返す健脚コース。燕岳山頂は上級者向けのため推奨せず。",
+      "instagramTag": "#合戦尾根 #中房温泉",
+      "map": "https://maps.google.com/?q=中房温泉登山口"
+    },
+    {
+      "id": "owasabi",
+      "name": "大王わさび農場",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "自然に浸る",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "朝",
+        "昼前",
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "名物わさびソフト。広い水辺の農場、散策も気持ちいい。",
+      "instagramTag": "#大王わさび農場",
+      "map": "https://maps.google.com/?q=大王わさび農場"
+    },
+    {
+      "id": "bakery-suite",
+      "name": "ベーカリースイート",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 30,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "朝食・テイクアウト向きのパン。",
+      "instagramTag": "#安曇野パン",
+      "map": "https://maps.google.com/?q=ベーカリースイート+安曇野"
+    },
+    {
+      "id": "winery",
+      "name": "安曇野ワイナリー",
+      "area": "堀金・三郷",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼前",
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": true,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数",
+        "大人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "丘の上のワイナリー。テラスからアルプス。",
+      "instagramTag": "#安曇野ワイナリー",
+      "map": "https://maps.google.com/?q=安曇野ワイナリー"
+    },
+    {
+      "id": "bistro-lunch",
+      "name": "ビストロノリ / レストランアベ（ランチ）",
+      "area": "堀金・三郷",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "アートと静けさ"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 75,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数",
+        "一人"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "落ち着いた大人のランチ。",
+      "alt": [
+        "ビストロノリ",
+        "レストランアベ"
+      ],
+      "instagramTag": "#安曇野ランチ",
+      "map": "https://maps.google.com/?q=ビストロノリ+安曇野"
+    },
+    {
+      "id": "alps-bokujo",
+      "name": "アルプス牧場（ソフト・チーズ）",
+      "area": "堀金・三郷",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 40,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "濃厚ソフトとチーズ。子どもも喜ぶ。",
+      "instagramTag": "#アルプス牧場",
+      "map": "https://maps.google.com/?q=北アルプス牧場+安曇野"
+    },
+    {
+      "id": "suzato-shokudo",
+      "name": "須砂渡食堂（ランチ）",
+      "area": "堀金・三郷",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "のんびり整う"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "烏川渓谷・ほりでーゆの近く。山側ランチに。",
+      "instagramTag": "#須砂渡食堂",
+      "map": "https://maps.google.com/?q=須砂渡食堂"
+    },
+    {
+      "id": "cafe-garni",
+      "name": "カフェガルニ（朝食カフェ）",
+      "area": "堀金・三郷",
+      "category": "🍜食・カフェ",
+      "types": [
+        "のんびり整う",
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "一人",
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "ゆっくり始める朝に。",
+      "instagramTag": "#安曇野カフェ",
+      "map": "https://maps.google.com/?q=カフェガルニ+安曇野"
+    },
+    {
+      "id": "dog-cafe",
+      "name": "犬同伴OKのテラスカフェ",
+      "area": "堀金・三郷",
+      "category": "🍜食・カフェ",
+      "types": [
+        "愛犬と過ごす",
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "ペット"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "犬と一緒にテラスでランチ。",
+      "instagramTag": "#犬連れ旅 #安曇野",
+      "map": "https://maps.google.com/?q=安曇野+犬OK+カフェ"
+    },
+    {
+      "id": "rokuzan",
+      "name": "碌山美術館",
+      "area": "穂高",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "一人",
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "蔦の教会風の館。信州の光と彫刻。雨の日ほど深い。",
+      "instagramTag": "#碌山美術館",
+      "map": "https://maps.google.com/?q=碌山美術館"
+    },
+    {
+      "id": "chihiro",
+      "name": "安曇野ちひろ美術館",
+      "area": "松川・池田",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ",
+        "子どもと過ごす",
+        "のんびり整う"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "絵本の部屋＋広い屋内と庭。雨でも子どもが楽しめる。",
+      "instagramTag": "#安曇野ちひろ美術館",
+      "map": "https://maps.google.com/?q=安曇野ちひろ美術館"
+    },
+    {
+      "id": "arita-museum",
+      "name": "大隈美術館 / 有明美術館",
+      "area": "有明・中房",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "一人",
+        "カップル",
+        "大人少人数",
+        "家族"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "有明エリアの静かな私設美術館。",
+      "alt": [
+        "大隈美術館",
+        "有明美術館"
+      ],
+      "instagramTag": "#安曇野アート",
+      "map": "https://maps.google.com/?q=有明美術館+安曇野"
+    },
+    {
+      "id": "tenbo-museum",
+      "name": "北アルプス展望美術館",
+      "area": "松川・池田",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "池田町の丘。アルプスを望む展望とアート。",
+      "instagramTag": "#北アルプス展望美術館",
+      "map": "https://maps.google.com/?q=北アルプス展望美術館"
+    },
+    {
+      "id": "hotaka-shrine",
+      "name": "穂高神社",
+      "area": "穂高",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 40,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "安曇野の総鎮守。街歩きの起点に。",
+      "instagramTag": "#穂高神社",
+      "map": "https://maps.google.com/?q=穂高神社"
+    },
+    {
+      "id": "glass-studio",
+      "name": "吹きガラス体験（The art studio 8 / 安曇野アートヒルズ）",
+      "area": "穂高",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "手を動かすと旅の記憶が残る。要予約。",
+      "alt": [
+        "The art studio 8",
+        "安曇野アートヒルズミュージアム"
+      ],
+      "instagramTag": "#吹きガラス体験 #安曇野アートヒルズ",
+      "map": "https://maps.google.com/?q=安曇野アートヒルズミュージアム"
+    },
+    {
+      "id": "pottery",
+      "name": "陶芸体験（穂高陶芸会館）",
+      "area": "穂高",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "土から器をつくる。要予約。",
+      "instagramTag": "#穂高陶芸会館",
+      "map": "https://maps.google.com/?q=穂高陶芸会館"
+    },
+    {
+      "id": "craft-small",
+      "name": "工芸体験：あずみの木箸 / とんぼ玉楽舎",
+      "area": "穂高",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "一人",
+        "カップル",
+        "大人少人数",
+        "家族"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "短時間で作れる工芸。マイ箸・とんぼ玉。要予約。",
+      "alt": [
+        "あずみの木箸工房",
+        "とんぼ玉楽舎"
+      ],
+      "instagramTag": "#安曇野工芸体験",
+      "map": "https://maps.google.com/?q=あずみの木箸工房"
+    },
+    {
+      "id": "horiday-yu",
+      "name": "ほりでーゆ〜四季の郷（日帰り温泉）",
+      "area": "堀金・三郷",
+      "category": "♨️温泉",
+      "types": [
+        "のんびり整う",
+        "自然に浸る"
+      ],
+      "slot": [
+        "午後",
+        "夕方"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "山側の日帰り温泉。一日の締めに。",
+      "instagramTag": "#ほりでーゆ",
+      "map": "https://maps.google.com/?q=ほりでーゆ四季の郷"
+    },
+    {
+      "id": "shakunage-yu",
+      "name": "しゃくなげの湯（日帰り温泉）",
+      "area": "有明・中房",
+      "category": "♨️温泉",
+      "types": [
+        "のんびり整う"
+      ],
+      "slot": [
+        "午後",
+        "夕方"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "穂高・有明側の日帰り温泉。",
+      "instagramTag": "#しゃくなげの湯",
+      "map": "https://maps.google.com/?q=しゃくなげの湯+安曇野"
+    },
+    {
+      "id": "nakabusa-onsen",
+      "name": "中房温泉（日帰り入浴）",
+      "area": "有明・中房",
+      "category": "♨️温泉",
+      "types": [
+        "のんびり整う",
+        "体を動かす"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "登山口の秘湯。トレッキング後の汗を流すのに最適。",
+      "instagramTag": "#中房温泉",
+      "map": "https://maps.google.com/?q=中房温泉"
+    },
+    {
+      "id": "focus-morning-tour",
+      "name": "FOCUS MORNING TOUR（朝の自然体験）",
+      "area": "宿発着",
+      "category": "🏔アクティビティ",
+      "types": [
+        "体を動かす",
+        "自然に浸る"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 150,
+      "meal": false,
+      "indoor": false,
+      "dogOk": false,
+      "needsCar": false,
+      "companions": [
+        "カップル",
+        "大人少人数",
+        "家族"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": true,
+      "note": "宿泊者限定の朝ツアー。自然の解像度が上がる朝。要予約。",
+      "instagramTag": "#focusmorningtour",
+      "map": ""
+    },
+    {
+      "id": "kiboco",
+      "name": "outdoor guide kiboco（季節のアクティビティ）",
+      "area": "有明・中房",
+      "category": "🏔アクティビティ",
+      "types": [
+        "体を動かす",
+        "自然に浸る",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 180,
+      "meal": false,
+      "indoor": false,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数",
+        "家族"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": true,
+      "note": "春夏：カヌー・トレッキング／秋冬：スノーシュー。要予約。",
+      "instagramTag": "#kiboco",
+      "map": "https://maps.google.com/?q=outdoor+guide+kiboco"
+    },
+    {
+      "id": "cycling",
+      "name": "安曇野サイクリング（レンタル）",
+      "area": "穂高",
+      "category": "🏔アクティビティ",
+      "types": [
+        "体を動かす",
+        "自然に浸る"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 180,
+      "meal": false,
+      "indoor": false,
+      "dogOk": false,
+      "needsCar": false,
+      "companions": [
+        "カップル",
+        "家族",
+        "大人少人数"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "安曇野は平ら。拾ヶ堰〜大王わさび〜穂高神社を自転車で。市内各所でレンタル可。",
+      "instagramTag": "#安曇野サイクリング",
+      "map": "https://maps.google.com/?q=安曇野+レンタサイクル"
+    },
+    {
+      "id": "azumino-park",
+      "name": "国営アルプスあづみの公園",
+      "area": "堀金・三郷",
+      "category": "🏔アクティビティ",
+      "types": [
+        "子どもと過ごす",
+        "のんびり整う",
+        "愛犬と過ごす"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 120,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "家族",
+        "ペット"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "広い芝生・遊具・リード付エリア。子ども・犬に強い。",
+      "instagramTag": "#あづみの公園",
+      "map": "https://maps.google.com/?q=国営アルプスあづみの公園"
+    },
+    {
+      "id": "gakushamura",
+      "name": "学者村別荘地の朝散歩",
+      "area": "有明・中房",
+      "category": "🐾犬と過ごす",
+      "types": [
+        "愛犬と過ごす",
+        "のんびり整う"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": false,
+      "companions": [
+        "ペット"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "観光じゃない、犬と居るだけの静かな朝。",
+      "instagramTag": "#安曇野学者村 #犬連れ旅",
+      "map": "https://maps.google.com/?q=安曇野+学者村"
+    },
+    {
+      "id": "cafe-ariake-yama",
+      "name": "ありあけ山のcafe",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "のんびり整う"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿至近(約2分)。ボリューム満点の日替りランチ。金〜月営業/火・水休・要予約推奨。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://s.tabelog.com/nagano/A2005/A200501/20014672/",
+      "map": "https://maps.google.com/?q=ありあけ山のcafe+安曇野"
+    },
+    {
+      "id": "cafe-tabicha",
+      "name": "たび茶（森カフェ）",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "のんびり整う",
+        "アートと静けさ"
+      ],
+      "slot": [
+        "昼",
+        "午後"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "一人",
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "season": "6〜11月",
+      "note": "宿至近(約2分)の森カフェ。※6〜11月の日曜のみ営業11:00〜17:00・要確認。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://retty.me/area/PRE20/ARE273/SUB55902/100000890809/",
+      "map": "https://maps.google.com/?q=たび茶+安曇野穂高有明"
+    },
+    {
+      "id": "cafe-good-old-land",
+      "name": "Good Old Land",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "のんびり整う",
+        "アートと静けさ"
+      ],
+      "slot": [
+        "昼",
+        "午後"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "一人",
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(約3分)。カントリー調の隠れ家カフェ。火・水休。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/C20220/C55186/rstLst/cafe/",
+      "map": "https://maps.google.com/?q=Good+Old+Land+安曇野"
+    },
+    {
+      "id": "cafe-pork-wapa",
+      "name": "ポーク ワパ",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "のんびり整う"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 50,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(約4分)。手作りケーキのカフェ。水休。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/C20220/C55186/rstLst/cafe/",
+      "map": "https://maps.google.com/?q=ポークワパ+安曇野"
+    },
+    {
+      "id": "cafe-varie",
+      "name": "カフェバリエ（CAFE VARIE）",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "のんびり整う"
+      ],
+      "slot": [
+        "昼",
+        "午後"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(約6分)。眺望の良い一家経営カフェ、洋食＋スイーツ。11:30〜16:30/月・火休。犬同伴不可。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.cafevarie.com/",
+      "map": "https://maps.google.com/?q=カフェバリエ+安曇野"
+    },
+    {
+      "id": "cafe-arome",
+      "name": "arome（アローム）",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "のんびり整う"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 45,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(約5分)。ワンコイン以下のモーニングが評判の朝カフェ。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/C20220/C55186/rstLst/cafe/",
+      "map": "https://maps.google.com/?q=arome+カフェ+安曇野穂高有明"
+    },
+    {
+      "id": "cafe-chillout",
+      "name": "チルアウト スタイル コーヒー",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "のんびり整う",
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約10分。田園を望む自家焙煎コーヒー、フレンチトースト。9:00〜18:00/木休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.hotpepper.jp/strJ001130585/",
+      "map": "https://maps.google.com/?q=チルアウトスタイルコーヒー+安曇野"
+    },
+    {
+      "id": "cafe-shinkasha",
+      "name": "心花舎（しんかしゃ）",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "のんびり整う",
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約10分。名物いちごパフェ。水・木休。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/C20220/C55186/rstLst/cafe/",
+      "map": "https://maps.google.com/?q=心花舎+安曇野"
+    },
+    {
+      "id": "cafe-fuunoiro",
+      "name": "カフェ風のいろ（展望）",
+      "area": "松川・池田",
+      "category": "🍜食・カフェ",
+      "types": [
+        "のんびり整う",
+        "アートと静けさ",
+        "自然に浸る"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "池田町。北アルプス一望のギャラリー併設展望カフェ。水・木休。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/C20481/rstLst/cafe/",
+      "map": "https://maps.google.com/?q=カフェ風のいろ+池田町"
+    },
+    {
+      "id": "soba-yoshino",
+      "name": "有明山のそば よし野",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿至近(約3分)。当日打ち分限りで早仕舞い。定休が資料で割れる・要確認。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/20020302/",
+      "map": "https://maps.google.com/?q=有明山のそば+よし野"
+    },
+    {
+      "id": "soba-ishomatsuan",
+      "name": "手打ちそば 石松庵",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(約5分)。木曜休/平日11:30-14:00・土日祝-14:30。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.ekiten.jp/shop_13530385/",
+      "map": "https://maps.google.com/?q=手打ちそば+石松庵+安曇野"
+    },
+    {
+      "id": "soba-jiyuan-asakawa",
+      "name": "そば処 時遊庵あさかわ",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "アートと静けさ"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 75,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "宿近く(約7分)。安曇野そば上位級(食べログ3.61)。900坪庭園、わさび花芽ざるが名物。水休・当日分売切れ早仕舞い。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://tabelog.com/soba/nagano/A2005/A200501/rank/",
+      "map": "https://maps.google.com/?q=時遊庵あさかわ+安曇野"
+    },
+    {
+      "id": "soba-takayama",
+      "name": "そば処 たか山",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "自然に浸る"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "season": "4〜11月",
+      "note": "宿近く(約10分)。景色の良い細めん。4-11月11:00-17:00・木曜休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://azuminist.com/sobadokoro-takayama/",
+      "map": "https://maps.google.com/?q=そば処+たか山+安曇野"
+    },
+    {
+      "id": "soba-ooume",
+      "name": "そば処 大梅",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約15分(穂高牧)。老舗の二八(食べログ3.61)。日・月休/火-土11:00-14:00・売切れ終了。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://soba-ooume.wixsite.com/azumino",
+      "map": "https://maps.google.com/?q=そば処+大梅+安曇野"
+    },
+    {
+      "id": "soba-azumino-okina",
+      "name": "安曇野翁",
+      "area": "松川・池田",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約30分(池田町)。県内トップクラスの名店(食べログ3.50)。月・第3火休/11-15時・売切れ終了。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://tabelog.com/en/nagano/A2005/A200501/20000816/",
+      "map": "https://maps.google.com/?q=安曇野翁+池田町"
+    },
+    {
+      "id": "soba-ikkyuan",
+      "name": "そば処 一休庵",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約20分(穂高駅前)。駅徒歩1分でアクセス良(食べログ3.48)。月曜休/11-16時。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://ikkyuan.jp/sp/access.html",
+      "map": "https://maps.google.com/?q=一休庵+穂高"
+    },
+    {
+      "id": "soba-suzuki",
+      "name": "そば処 寿々喜",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "アートと静けさ"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約20分。碌山美術館向かい・山盛りボリューム(食べログ3.36)。月曜休(祝翌)。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://r.gnavi.co.jp/c4thjvcs0000/",
+      "map": "https://maps.google.com/?q=そば処+寿々喜+穂高"
+    },
+    {
+      "id": "soba-aozaki",
+      "name": "安曇野そば処 青崎",
+      "area": "松川・池田",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約25分(松川村)。細打ちのど越し(食べログ3.34)。水曜休/金土日は夜19時まで営業。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://r.gnavi.co.jp/gka7ucuk0000/",
+      "map": "https://maps.google.com/?q=安曇野そば処+青崎+松川村"
+    },
+    {
+      "id": "bakery-weekends",
+      "name": "ウィーケンズ ベーカリー",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 30,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(約5分)。週末営業の小さな新店。木〜土のみ10:00-16:00・売切れ終い。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/20023910/",
+      "map": "https://maps.google.com/?q=Weekends+bakery+安曇野"
+    },
+    {
+      "id": "bakery-vif-hotaka",
+      "name": "Vif穂高（直売所・パン工房）",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝",
+        "昼前"
+      ],
+      "duration": 30,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(約5分)。農産物直売所内の焼きたてパンコーナー。※純ベーカリーではない。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/C20220/C55186/rstLst/pan/",
+      "map": "https://maps.google.com/?q=Vif穂高"
+    },
+    {
+      "id": "bakery-yorokobi-prelude",
+      "name": "歓びのプレリュード（高級食パン）",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 20,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(約9分)。高級食パン専門「朝のハーモニー」。日・月休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://yorokobi-no-prelude.com/",
+      "map": "https://maps.google.com/?q=歓びのプレリュード+安曇野"
+    },
+    {
+      "id": "bakery-tsukihido",
+      "name": "月日堂製パン",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 25,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約10〜12分。石臼自家製粉＋薪窯の田舎パン・カンパーニュ。火・水休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://gappido.com/",
+      "map": "https://maps.google.com/?q=月日堂製パン+安曇野"
+    },
+    {
+      "id": "bakery-pancalmo",
+      "name": "パン カルモ",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 25,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約20〜25分(柏矢町)。地元野菜と自家製酵母のパン(食べログ3.34)。月+不定休・要確認。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://pancalmo.azumino.shop/",
+      "map": "https://maps.google.com/?q=パンカルモ+安曇野"
+    },
+    {
+      "id": "bakery-azuminoru",
+      "name": "あづみのるベーカリー",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 25,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約20〜25分。人気No.1アンバターサンド、弾力あるバゲット(食べログ3.16)。月・火休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://azuminoru.com/",
+      "map": "https://maps.google.com/?q=あづみのるベーカリー+安曇野"
+    },
+    {
+      "id": "bakery-bunga",
+      "name": "しぜん酵母と石窯ぱん bunga（ぶんが）",
+      "area": "松川・池田",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "のんびり整う"
+      ],
+      "slot": [
+        "朝",
+        "昼"
+      ],
+      "duration": 40,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約25〜30分(池田町)。無添加・国産小麦・石窯焼き。カフェ併設(食べログ3.16)。月・火・水休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://ikeda-kanko.jp/kanko/gohan/bunga/",
+      "map": "https://maps.google.com/?q=bunga+石窯ぱん+池田町"
+    },
+    {
+      "id": "bakery-snowdrop",
+      "name": "パン工房 スノードロップ",
+      "area": "堀金・三郷",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "朝",
+        "昼前"
+      ],
+      "duration": 30,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約25分(三郷温・HAMAフラワーパーク内)。アンバタフランスが名物。水休(祝営業)。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/20014726/",
+      "map": "https://maps.google.com/?q=パン工房スノードロップ+安曇野"
+    },
+    {
+      "id": "bakery-le-trefle",
+      "name": "ル・トレフル（Le Trefle）",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 25,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約25分(豊科)。国産小麦・天然酵母の小さなパン工房、種類豊富。月・火+不定休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.le-trefle3928.com/",
+      "map": "https://maps.google.com/?q=ル・トレフル+豊科"
+    },
+    {
+      "id": "dinner-laputa",
+      "name": "Taverna LAPUTA（タヴェルナ ラピュタ）",
+      "area": "有明・中房",
+      "category": "🍽夕食",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "夜"
+      ],
+      "duration": 90,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "宿至近(約4分)、有明山神社前の人気イタリア食堂。11:00–20:00(LO19:30)/火・第3水休/夜は予約推奨。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://www.taverna-laputa.com/",
+      "map": "https://maps.google.com/?q=Taverna+LAPUTA+安曇野"
+    },
+    {
+      "id": "dinner-nijinokaori",
+      "name": "ニジノカオリ（フレンチ）",
+      "area": "有明・中房",
+      "category": "🍽夕食",
+      "types": [
+        "手と舌で味わう",
+        "アートと静けさ"
+      ],
+      "slot": [
+        "夜"
+      ],
+      "duration": 120,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "宿近く(約6分)。少人数向け予約制フレンチ。夜18:00–20:30/火休/要予約。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://r.gnavi.co.jp/8e8rswuu0000/",
+      "map": "https://maps.google.com/?q=ニジノカオリ+安曇野"
+    },
+    {
+      "id": "dinner-shogetsu",
+      "name": "昇月（日本料理・懐石）",
+      "area": "有明・中房",
+      "category": "🍽夕食",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "夜"
+      ],
+      "duration": 120,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "宿近く(約9分)。安曇野トップ級(食べログ3.69)。要予約・¥15,000〜の特別な夜向け。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/rank/",
+      "map": "https://maps.google.com/?q=昇月+安曇野穂高有明"
+    },
+    {
+      "id": "dinner-stagione",
+      "name": "スタジオーネ（イタリアン）",
+      "area": "有明・中房",
+      "category": "🍽夕食",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "夜"
+      ],
+      "duration": 90,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "宿近く(約9分)。地元人気の高評価イタリアン(食べログ3.57)。月・第2第4火休/夜営業は電話確認推奨。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://www.hotpepper.jp/strJ000361183/",
+      "map": "https://maps.google.com/?q=スタジオーネ+安曇野"
+    },
+    {
+      "id": "dinner-fusan",
+      "name": "焼肉食堂ふーさん",
+      "area": "有明・中房",
+      "category": "🍽夕食",
+      "types": [
+        "手と舌で味わう",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "夜"
+      ],
+      "duration": 90,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "家族",
+        "大人少人数",
+        "大人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約10分。夜しっかり営業の焼肉、家族向け。17:00–22:00/水休。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://www.yakiniku-fusan.com/",
+      "map": "https://maps.google.com/?q=焼肉食堂ふーさん+安曇野"
+    },
+    {
+      "id": "dinner-masahiro-nishimura",
+      "name": "レストラン マサヒロ・ニシムラ（フレンチ）",
+      "area": "有明・中房",
+      "category": "🍽夕食",
+      "types": [
+        "手と舌で味わう",
+        "アートと静けさ"
+      ],
+      "slot": [
+        "夜"
+      ],
+      "duration": 150,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "約10分。フレンチ百名店(食べログ3.63)。完全予約制¥8,800〜・前日までに要予約/木休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/20001167/",
+      "map": "https://maps.google.com/?q=マサヒロニシムラ+安曇野"
+    },
+    {
+      "id": "dinner-kamehachi-hotaka",
+      "name": "亀八 穂高店（焼肉）",
+      "area": "穂高",
+      "category": "🍽夕食",
+      "types": [
+        "手と舌で味わう",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "夜"
+      ],
+      "duration": 90,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "家族",
+        "大人少人数",
+        "大人数"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約15分。地元評判の焼肉、夜遅めまで(11:00–21:30/LO21:00)。定休は要確認。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/20008998/",
+      "map": "https://maps.google.com/?q=亀八+穂高店"
+    },
+    {
+      "id": "matsumoto-art-museum",
+      "name": "松本市美術館",
+      "area": "松本",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約40分(松本市中心部)。草間彌生コレクションで有名。雨の日にも強い。月休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://matsumoto-artmuse.jp/",
+      "map": "https://maps.google.com/?q=松本市美術館"
+    },
+    {
+      "id": "kamikochi",
+      "name": "上高地",
+      "area": "遠方",
+      "category": "🏔アクティビティ",
+      "types": [
+        "自然に浸る",
+        "体を動かす"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 480,
+      "meal": false,
+      "indoor": false,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数",
+        "家族"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "season": "4月中旬〜11月中旬",
+      "note": "終日型の別格スポット。※マイカー規制のため沢渡でバス/タクシーに乗換え。宿から片道1.5〜2時間、1日がかり。冬季閉山。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.kamikochi.or.jp/",
+      "map": "https://maps.google.com/?q=上高地バスターミナル"
+    },
+    {
+      "id": "soba-futaba",
+      "name": "そば処 双葉",
+      "area": "堀金・三郷",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "手打ちそば(食べログ3.32)。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/",
+      "map": "https://maps.google.com/?q=そば処 双葉+安曇野"
+    },
+    {
+      "id": "soba-shisuian",
+      "name": "そば処 志水庵",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "アートと静けさ"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近くの古民家そば。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/",
+      "map": "https://maps.google.com/?q=そば処 志水庵+安曇野"
+    },
+    {
+      "id": "soba-kamijo",
+      "name": "そば処 上條",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "人気の手打ちそば(食べログ3.48)。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/",
+      "map": "https://maps.google.com/?q=そば処 上條+安曇野"
+    },
+    {
+      "id": "soba-kurumaya",
+      "name": "そば処 くるまや",
+      "area": "穂高",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 60,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "わさび田の湧水そば(食べログ3.46)。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/",
+      "map": "https://maps.google.com/?q=そば処 くるまや+安曇野"
+    },
+    {
+      "id": "cafe-olika",
+      "name": "Olika cafe（オリカ）",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "のんびり整う",
+        "アートと静けさ",
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼",
+        "午後"
+      ],
+      "duration": 75,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿至近の森のカフェ。ランチ・スイーツ。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/",
+      "map": "https://maps.google.com/?q=Olika cafe+安曇野"
+    },
+    {
+      "id": "cafe-nanakagetsu",
+      "name": "七ヶ月",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "のんびり整う",
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "昼",
+        "午後"
+      ],
+      "duration": 75,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿至近(穂高有明7348)。落ち着くカフェ。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/",
+      "map": "https://maps.google.com/?q=七ヶ月+安曇野"
+    },
+    {
+      "id": "cafe-creek",
+      "name": "カフェクリーク（creek）",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "のんびり整う",
+        "アートと静けさ"
+      ],
+      "slot": [
+        "昼",
+        "午後"
+      ],
+      "duration": 75,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿至近(穂高有明7553)。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/",
+      "map": "https://maps.google.com/?q=カフェクリーク+安曇野"
+    },
+    {
+      "id": "bakery-morgenrot",
+      "name": "モルゲンロートベーカリー",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 30,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(穂高有明8551・約8-10分)。水木金休(食べログ3.06)。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/",
+      "map": "https://maps.google.com/?q=モルゲンロートベーカリー+安曇野"
+    },
+    {
+      "id": "bakery-sainthonore",
+      "name": "サントノーレ 安曇野店",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "のんびり整う"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 40,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(穂高有明8148・約7分)。森のベーカリー＆カフェ。月休(食べログ3.10)。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://azumino-sainthonore.com/",
+      "map": "https://maps.google.com/?q=サントノーレ 安曇野店+安曇野"
+    },
+    {
+      "id": "fujio-sanso",
+      "name": "富士尾山荘",
+      "area": "有明・中房",
+      "category": "🍜食・カフェ",
+      "types": [
+        "手と舌で味わう",
+        "自然に浸る"
+      ],
+      "slot": [
+        "昼"
+      ],
+      "duration": 75,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "宿近く(そば街道・穂高有明2184・約10分)。40年超の老舗。安曇野産九割そば＋郷土食(山賊焼き・ソースカツ丼)。11:00-15:00/17:00-20:00・火+不定休・予約可。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/20001061/",
+      "map": "https://maps.google.com/?q=富士尾山荘+安曇野"
+    },
+    {
+      "id": "niku-maruto",
+      "name": "肉のマルト 有明店（精肉＋焼肉食堂）",
+      "area": "有明・中房",
+      "category": "🍽夕食",
+      "types": [
+        "手と舌で味わう",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "昼",
+        "夜"
+      ],
+      "duration": 90,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(穂高有明10011・約10分)。昭和49年創業。BBQ用の肉調達に最適・馬刺しも。隣接食堂11:00-14:00/17:00-20:30・木休。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://r.gnavi.co.jp/mgs6mjxx0000/",
+      "map": "https://maps.google.com/?q=肉のマルト 有明店+安曇野"
+    },
+    {
+      "id": "yakiniku-danchan",
+      "name": "焼肉だんちゃん",
+      "area": "明科・長峰",
+      "category": "🍽夕食",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "夜"
+      ],
+      "duration": 90,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": true,
+      "note": "明科(中川手2823)・宿から約25-30分とやや遠い。自社牧場の和牛一頭買い、肉質評価高い(Yahoo4.67)。17:00-22:00・予約可。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/20003781/",
+      "map": "https://maps.google.com/?q=焼肉だんちゃん+安曇野"
+    },
+    {
+      "id": "nodaya",
+      "name": "飲み食い処 のだや",
+      "area": "有明・中房",
+      "category": "🍽夕食",
+      "types": [
+        "手と舌で味わう"
+      ],
+      "slot": [
+        "夜"
+      ],
+      "duration": 75,
+      "meal": true,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "宿近く(穂高有明1704・約10分)。有明の地元居酒屋、郷土料理・定食。17:00開店・火昼/水夜休。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://tabelog.com/nagano/A2005/A200501/20021975/",
+      "map": "https://maps.google.com/?q=飲み食い処 のだや+安曇野"
+    }
+  ]
+}
