@@ -1,7 +1,7 @@
 {
   "meta": {
     "note": "旅程を組み立てる部品（スポット）のプール。/plan/ の15コースから抽出し、性格タグを付与した初稿。",
-    "version": "0.3",
+    "version": "0.4",
     "updated": "2026-08-11",
     "schema": {
       "id": "英字ID",
@@ -291,7 +291,8 @@
       "types": [
         "手と舌で味わう",
         "自然に浸る",
-        "子どもと過ごす"
+        "子どもと過ごす",
+        "愛犬と過ごす"
       ],
       "slot": [
         "朝",
@@ -419,7 +420,8 @@
       "category": "🍜食・カフェ",
       "types": [
         "手と舌で味わう",
-        "子どもと過ごす"
+        "子どもと過ごす",
+        "愛犬と過ごす"
       ],
       "slot": [
         "午後"
@@ -2614,6 +2616,667 @@
       "verify": true,
       "source": "https://tabelog.com/nagano/A2005/A200501/20021975/",
       "map": "https://maps.google.com/?q=飲み食い処 のだや+安曇野"
+    },
+    {
+      "id": "onsen-fineview",
+      "name": "安曇野みさと温泉 ファインビュー室山",
+      "area": "堀金・三郷",
+      "category": "♨️温泉",
+      "types": [
+        "のんびり整う",
+        "自然に浸る"
+      ],
+      "slot": [
+        "午後",
+        "夕方"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約30分(三郷・標高800m)。松本平を一望する高台の日帰り湯。日帰り概ね11:00〜19:00・大人平日650円。日帰り時間は媒体差あり要確認。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://fineview.co.jp/onsen",
+      "map": "https://maps.google.com/?q=安曇野みさと温泉 ファインビュー室山"
+    },
+    {
+      "id": "onsen-ariakeso",
+      "name": "有明温泉 有明荘",
+      "area": "有明・中房",
+      "category": "♨️温泉",
+      "types": [
+        "のんびり整う",
+        "自然に浸る"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "season": "4〜11月",
+      "reserve": false,
+      "note": "約40分(中房線)。燕岳登山口手前の大露天・源泉かけ流し。日帰り10:00〜17:00・750円。期間営業(2026は4/24〜11/4)・水木不定休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.enzanso.co.jp/ariakeso",
+      "map": "https://maps.google.com/?q=有明温泉 有明荘"
+    },
+    {
+      "id": "onsen-suzumushi",
+      "name": "天然ラドン 馬羅尾天狗岩温泉 すずむし荘",
+      "area": "松川・池田",
+      "category": "♨️温泉",
+      "types": [
+        "のんびり整う"
+      ],
+      "slot": [
+        "午後",
+        "夕方"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約20分(松川村)。村営・天然ラドン泉の落ち着いた湯。9:00〜18:00・木曜休。安曇野側から近い。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://suzumushisou.jp/daytrip_onsen.html",
+      "map": "https://maps.google.com/?q=天然ラドン 馬羅尾天狗岩温泉 すずむし荘"
+    },
+    {
+      "id": "onsen-yakushi-omachi",
+      "name": "湯けむり屋敷 薬師の湯（大町温泉郷）",
+      "area": "松川・池田",
+      "category": "♨️温泉",
+      "types": [
+        "のんびり整う"
+      ],
+      "slot": [
+        "午後",
+        "夕方"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約35分(大町温泉郷)。日帰り専用・露天＋かけ流し、温泉博物館併設。10:00〜21:00・大人750円・無休。営業時間は要確認。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://o-yakushinoyu.com/",
+      "map": "https://maps.google.com/?q=湯けむり屋敷 薬師の湯"
+    },
+    {
+      "id": "onsen-hotplaza-asama",
+      "name": "ホットプラザ浅間（浅間温泉）",
+      "area": "松本",
+      "category": "♨️温泉",
+      "types": [
+        "のんびり整う"
+      ],
+      "slot": [
+        "午後",
+        "夕方",
+        "夜"
+      ],
+      "duration": 75,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約45分(松本・浅間温泉)。夜24時まで営業で使い勝手良。10:00〜24:00・火曜休・大人750円。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://hotplaza.jp/",
+      "map": "https://maps.google.com/?q=ホットプラザ浅間"
+    },
+    {
+      "id": "horseland",
+      "name": "ホースランド安曇野（乗馬・引き馬）",
+      "area": "穂高",
+      "category": "🏔アクティビティ",
+      "types": [
+        "体を動かす",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": false,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "家族",
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": true,
+      "note": "約25分(豊科南穂高)。1歳から乗れる引き馬・ビジター乗馬。馬やヤギとのふれあいもあり小さい子連れ向き。平日は要予約。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.horselandazumino.com/",
+      "map": "https://maps.google.com/?q=ホースランド安曇野"
+    },
+    {
+      "id": "rafting-md",
+      "name": "AZUMINO MOUNTAIN DISCOVERY（ラフティング/SUP）",
+      "area": "穂高",
+      "category": "🏔アクティビティ",
+      "types": [
+        "体を動かす",
+        "自然に浸る",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 180,
+      "meal": false,
+      "indoor": false,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "家族",
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "season": "4〜9月",
+      "reserve": true,
+      "note": "約25分(豊科南穂高)。安曇野の川あそび。ラフトは4歳から保護者同伴OK・安全講習あり。要予約。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://azumino-rafting.com/",
+      "map": "https://maps.google.com/?q=AZUMINO MOUNTAIN DISCOVERY"
+    },
+    {
+      "id": "kisen-balloon",
+      "name": "安曇野气船 熱気球",
+      "area": "穂高",
+      "category": "🏔アクティビティ",
+      "types": [
+        "体を動かす",
+        "自然に浸る"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": false,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数",
+        "家族"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": true,
+      "note": "約20分(穂高)。北アルプスを望む空中散歩。夏は早朝の係留体験が中心、上空フリー飛行は真冬(2〜3月)限定・不定期。運行は要事前確認。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://www.azuminokisen.com/",
+      "map": "https://maps.google.com/?q=安曇野气船 熱気球"
+    },
+    {
+      "id": "shirouma-sup",
+      "name": "シロウマアウトドアカンパニー（木崎湖SUP/カヤック）",
+      "area": "松川・池田",
+      "category": "🏔アクティビティ",
+      "types": [
+        "体を動かす",
+        "自然に浸る",
+        "愛犬と過ごす"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 150,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "家族",
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "season": "4〜11月",
+      "reserve": true,
+      "note": "約45分(大町・木崎湖)。北アルプスを映す静水SUP・カヤック。温水シャワー・犬同乗プランあり。要予約。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.shiroumaoutdoor-company.com/",
+      "map": "https://maps.google.com/?q=シロウマアウトドアカンパニー"
+    },
+    {
+      "id": "kizakiko-paraglider",
+      "name": "木崎湖フライトパーク（パラグライダー）",
+      "area": "松川・池田",
+      "category": "🏔アクティビティ",
+      "types": [
+        "体を動かす",
+        "自然に浸る"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": false,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "カップル",
+        "大人少人数"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": true,
+      "note": "約50分(大町・木崎湖)。ベテラン操縦のタンデムで高度2000mへ。未経験でも北アルプス上空を飛べる。要予約・天候次第。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://kizakiko.net/wordpress/",
+      "map": "https://maps.google.com/?q=木崎湖フライトパーク"
+    },
+    {
+      "id": "gohoden-swan",
+      "name": "御宝田遊水池（白鳥飛来地）",
+      "area": "明科・長峰",
+      "category": "🌿自然・展望",
+      "types": [
+        "自然に浸る",
+        "愛犬と過ごす",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 45,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "season": "10〜3月",
+      "reserve": false,
+      "note": "約30分(明科)。犀川沿いの遊水池。北アルプスを背に越冬コハクチョウを間近に。駐車無料。白鳥は10月中旬〜3月末(1月ピーク)。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.jalan.net/kankou/spt_20220ab2032029258/",
+      "map": "https://maps.google.com/?q=御宝田遊水池"
+    },
+    {
+      "id": "wasabida-yusui",
+      "name": "安曇野わさび田湧水群公園",
+      "area": "穂高",
+      "category": "🌿自然・展望",
+      "types": [
+        "自然に浸る",
+        "のんびり整う",
+        "子どもと過ごす",
+        "愛犬と過ごす"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 40,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "約20分(柏矢町)。名水百選。透明な湧水池に緑が映える憩いの公園。散策無料・通年。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.city.azumino.nagano.jp/site/mizumonogatari/2485.html",
+      "map": "https://maps.google.com/?q=安曇野わさび田湧水群公園"
+    },
+    {
+      "id": "hikarujoyama",
+      "name": "光城山（ひかるじょうやま）",
+      "area": "明科・長峰",
+      "category": "🌿自然・展望",
+      "types": [
+        "自然に浸る",
+        "体を動かす",
+        "愛犬と過ごす"
+      ],
+      "slot": [
+        "朝"
+      ],
+      "duration": 120,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "ほどよく",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "約25分(豊科田沢)。標高912m。山頂は北アルプス360度。桜が斜面を駆け上がる「昇り龍」は4月中旬。登山口駐車無料。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.go-nagano.net/nature-and-outdoors/id19360",
+      "map": "https://maps.google.com/?q=光城山"
+    },
+    {
+      "id": "ryumonbuchi",
+      "name": "龍門渕公園・あやめ公園",
+      "area": "明科・長峰",
+      "category": "🌿自然・展望",
+      "types": [
+        "自然に浸る",
+        "のんびり整う",
+        "愛犬と過ごす"
+      ],
+      "slot": [
+        "午後",
+        "朝"
+      ],
+      "duration": 40,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "約30分(明科)。犀川沿いの水辺公園。6月は数十種の花菖蒲であやめ祭り。散策無料・通年。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.city.azumino.nagano.jp/soshiki/35/96926.html",
+      "map": "https://maps.google.com/?q=龍門渕公園・あやめ公園"
+    },
+    {
+      "id": "chihiro-park",
+      "name": "安曇野ちひろ公園",
+      "area": "松川・池田",
+      "category": "🐾犬と過ごす",
+      "types": [
+        "愛犬と過ごす",
+        "のんびり整う",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "午後",
+        "朝"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": false,
+      "dogOk": true,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ"
+      ],
+      "reserve": false,
+      "note": "約25〜30分(松川村)。約5.3haの芝生と北アルプス。リードで園内散策可(美術館内は犬NG)。入園無料。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.vill.matsukawa.nagano.jp/administration/?content=254",
+      "map": "https://maps.google.com/?q=安曇野ちひろ公園"
+    },
+    {
+      "id": "matsumoto-castle",
+      "name": "国宝 松本城",
+      "area": "松本",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ",
+        "子どもと過ごす"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 90,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約50分(松本)。現存天守で国宝。通常8:30〜17:00(最終16:30)、GW・お盆は8:00〜18:00に延長。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.city.matsumoto.nagano.jp/soshiki/135/4118.html",
+      "map": "https://maps.google.com/?q=国宝 松本城"
+    },
+    {
+      "id": "kaichi-school",
+      "name": "国宝 旧開智学校校舎",
+      "area": "松本",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ"
+      ],
+      "slot": [
+        "朝",
+        "午後"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約50分(松本城の北)。明治の擬洋風建築で国宝。屋内で雨の日に強い。9:00〜17:00・火曜休(3〜11月は第3火)。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://matsu-haku.com/kaichi/info",
+      "map": "https://maps.google.com/?q=国宝 旧開智学校校舎"
+    },
+    {
+      "id": "lala-matsumoto",
+      "name": "ラーラ松本（屋内温水プール）",
+      "area": "松本",
+      "category": "🎨文化・工芸",
+      "types": [
+        "子どもと過ごす",
+        "のんびり整う"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 120,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "家族"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約40分(松本・島内)。造波・流水プール＋約75mスライダー。年中温水で雨でも子どもが遊べる。10:00〜21:00・火曜休。",
+      "confidence": "高",
+      "verify": true,
+      "source": "https://www.lala-matsumoto.jp/facility/",
+      "map": "https://maps.google.com/?q=ラーラ松本"
+    },
+    {
+      "id": "matsumoto-clock",
+      "name": "松本市時計博物館",
+      "area": "松本",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ"
+      ],
+      "slot": [
+        "午後"
+      ],
+      "duration": 45,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約50分(松本・中心部)。動く古時計のコレクション。屋内・雨に強い。9:00〜17:00・火曜休。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://matsu-haku.com/tokei/",
+      "map": "https://maps.google.com/?q=松本市時計博物館"
+    },
+    {
+      "id": "tabuchi-museum",
+      "name": "田淵行男記念館",
+      "area": "堀金・三郷",
+      "category": "🎨文化・工芸",
+      "types": [
+        "アートと静けさ",
+        "自然に浸る"
+      ],
+      "slot": [
+        "午後",
+        "朝"
+      ],
+      "duration": 60,
+      "meal": false,
+      "indoor": true,
+      "dogOk": false,
+      "needsCar": true,
+      "companions": [
+        "all"
+      ],
+      "stamina": "軽め",
+      "weather": [
+        "晴れ",
+        "雨"
+      ],
+      "reserve": false,
+      "note": "約20分(豊科)。山岳写真家・田淵行男の高山蝶と山の写真。安曇野の静かな屋内スポット。開館状況は要確認。",
+      "confidence": "中",
+      "verify": true,
+      "source": "https://www.city.azumino.nagano.jp/site/tabuchi/",
+      "map": "https://maps.google.com/?q=田淵行男記念館"
     }
   ]
 }

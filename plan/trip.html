@@ -345,7 +345,7 @@ function currentMonth(){ return (new Date()).getMonth()+1; }
 function seasonOK(spot){
   if(!spot.season) return true;
   const m=currentMonth(); const s=spot.season;
-  const range=(a,b)=> m>=a && m<=b;
+  const range=(a,b)=> a<=b ? (m>=a && m<=b) : (m>=a || m<=b);   // a>b は年またぎ(例:10〜3月)
   if(s.includes('夏')) return range(6,8);
   if(s.includes('初夏')) return range(6,10);
   // parse "4〜11月" / "6〜11月" / "4月中旬〜11月中旬"
