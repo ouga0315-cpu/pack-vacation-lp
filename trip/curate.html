@@ -38,6 +38,19 @@
   .export{ margin-top:20px; }
   .export textarea{ width:100%; height:90px; font-size:.72rem; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:monospace; }
   .ok{ color:var(--green); font-size:.8rem; margin-left:8px; }
+  body{ padding-bottom:80px; }
+  .donebar{ position:fixed; left:0; right:0; bottom:0; z-index:20; background:rgba(255,255,255,.97);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border-top:1px solid var(--border);
+    padding:10px 14px; display:flex; align-items:center; gap:12px; box-shadow:0 -4px 16px rgba(0,0,0,.06); }
+  .donebar-info{ font-size:.85rem; color:var(--brown); white-space:nowrap; }
+  .donebar-info b{ color:var(--green); font-size:1.05rem; }
+  .donebtn{ flex:1; font-family:inherit; font-size:.98rem; font-weight:700; padding:15px; border:none;
+    border-radius:8px; background:var(--green); color:#fff; cursor:pointer; letter-spacing:.05em; }
+  .donebtn:active{ opacity:.9; }
+  .toast{ position:fixed; left:50%; bottom:90px; transform:translateX(-50%); background:#1a1a18; color:#fff;
+    padding:13px 20px; border-radius:10px; font-size:.86rem; line-height:1.6; z-index:30; opacity:0;
+    transition:opacity .3s; text-align:center; max-width:90vw; box-shadow:0 8px 30px rgba(0,0,0,.4); pointer-events:none; }
+  .toast.show{ opacity:1; }
 </style>
 </head>
 <body>
@@ -48,7 +61,6 @@
     <button class="btn" onclick="setAll(true)">全部つかう</button>
     <button class="btn" onclick="setAll(false)">全部外す</button>
     <button class="btn" onclick="dropPeople()">👤 人物を全部外す</button>
-    <button class="btn primary" onclick="doExport()">書き出す（コピー）</button>
     <span class="ok" id="ok"></span>
   </div>
 </div>
@@ -56,10 +68,16 @@
   <div class="hint">使う写真だけ緑枠に。選び終えたら「書き出す」→ チャットに貼ってください。反映します。（選択はこの端末に自動保存されます）</div>
   <div class="grid" id="grid"></div>
   <div class="export">
-    <div class="hint">書き出し結果（コピー用）:</div>
-    <textarea id="out" readonly placeholder="「書き出す」を押すとここに出ます"></textarea>
+    <div class="hint">うまくコピーできない時は、下の枠の文字を長押しで全選択してコピー → チャットに貼り付け:</div>
+    <textarea id="out" readonly placeholder="下の「選び終わった」ボタンを押すとここに出ます"></textarea>
   </div>
 </div>
+
+<div class="donebar">
+  <div class="donebar-info">使う <b id="doneCount">…</b> 枚</div>
+  <button class="donebtn" onclick="doExport()">✅ 選び終わった → コピー</button>
+</div>
+<div class="toast" id="toast"></div>
 <script>
 const AREA=((new URLSearchParams(location.search)).get('area')||'azumino').replace(/[^a-z0-9_-]/gi,'');
 const BASE='data/'+AREA+'/';
@@ -90,7 +108,9 @@ function updateCount(){
   const total=PHOTOS.length, on=sel.size;
   const ppl=[...sel].filter(n=>PEOPLE.has(n)).length;
   document.getElementById('count').textContent=`使用 ${on} / 全 ${total}（人物 ${ppl}）`;
+  const d=document.getElementById('doneCount'); if(d) d.textContent=on;
 }
+function showToast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),4500); }
 function save(){ localStorage.setItem(LSKEY, JSON.stringify([...sel])); }
 function toggle(n){
   if(sel.has(n)) sel.delete(n); else sel.add(n);
@@ -104,9 +124,19 @@ function dropPeople(){ PEOPLE.forEach(n=>sel.delete(n)); save(); render(); docum
 function doExport(){
   const arr=PHOTOS.filter(n=>sel.has(n));   // 元の順序を保つ
   const txt=JSON.stringify(arr);
-  document.getElementById('out').value=txt;
-  if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>{ document.getElementById('ok').textContent='コピーしました！チャットに貼ってください'; }).catch(()=>{});
-  document.getElementById('out').select();
+  const out=document.getElementById('out');
+  out.value=txt;
+  out.scrollIntoView({behavior:'smooth', block:'center'});
+  // まず同期で必ず案内（下の枠を全選択しておく）
+  showToast('できました（使う写真 '+arr.length+'枚）。下の枠の文字を長押しコピー → チャットに貼り付けてください');
+  try{ out.focus(); out.select(); }catch(e){}
+  // 自動コピーできれば成功メッセージに更新
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(txt).then(()=>{
+      document.getElementById('ok').textContent='コピー済み';
+      showToast('✅ コピーしました！（'+arr.length+'枚）このままチャットに貼り付けてください');
+    }).catch(()=>{});
+  }
 }
 </script>
 </body>
