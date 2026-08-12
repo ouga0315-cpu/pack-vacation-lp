@@ -429,7 +429,11 @@ function buildGallery(){
   galleryBuilt=true;
 }
 function openLightbox(name){
-  document.getElementById('lightboxImg').src=DATA_BASE+'photos/'+name;
+  const img=document.getElementById('lightboxImg');
+  img.src=DATA_BASE+'photos/'+name;                 // まず軽いサムネを即表示（グリッドで読込済）
+  const big=new Image();
+  big.onload=()=>{ if(document.getElementById('lightbox').classList.contains('open')) img.src=big.src; };
+  big.src=DATA_BASE+'photos/large/'+name;            // 高画質版を裏で読み込み→完了したら差し替え
   document.getElementById('lightboxCap').textContent = CAPTIONS[name] || '';
   document.getElementById('lightbox').classList.add('open');
   if(typeof gtag==='function') gtag('event','gallery_photo',{photo:name});
