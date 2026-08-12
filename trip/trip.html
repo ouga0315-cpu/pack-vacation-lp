@@ -405,15 +405,36 @@ function applyRegion(){
   buildWall();
 }
 
-// 背景：土地カセットの写真を敷き詰めた壁。プールから毎回ランダムに約110枚を、大小まぜて描画
+// 人物写真を上部に置かず、下へ均等に散らして並べ替える
+function splitPeople(list){
+  const ppl=new Set(CFG.peoplePhotos||[]);
+  return { land:list.filter(n=>!ppl.has(n)), people:list.filter(n=>ppl.has(n)) };
+}
+function arrangeSpread(land, people, startAt){
+  const total=land.length+people.length;
+  const slots=new Array(total).fill(null);
+  const gap=(total-startAt)/Math.max(people.length,1);
+  people.forEach((p,k)=>{
+    let pos=Math.min(total-1, startAt+Math.round(k*gap));
+    while(pos<total && slots[pos]!==null) pos++;
+    if(pos>=total) pos=slots.indexOf(null);
+    if(pos>=0) slots[pos]=p;
+  });
+  let li=0;
+  for(let i=0;i<total;i++){ if(slots[i]===null && li<land.length) slots[i]=land[li++]; }
+  return slots.filter(Boolean);
+}
+
+// 背景：土地カセットの写真を敷き詰めた壁。毎回ランダム＋人物は上部に出さず下へ散らす
 function buildWall(){
   const wall=document.getElementById('photoWall');
   if(!wall || !CFG.bgPhotos || !CFG.bgPhotos.length) return;
   const base=DATA_BASE+'photos/';
-  const pool=[...CFG.bgPhotos].sort(()=>Math.random()-0.5);
-  const pick=pool.slice(0, Math.min(110, pool.length));   // 画面内はかぶり0・訪問ごとに違う顔
+  const shuf=a=>a.slice().sort(()=>Math.random()-0.5);
+  const {land,people}=splitPeople(CFG.bgPhotos);
+  const order=arrangeSpread(shuf(land).slice(0,94), shuf(people).slice(0,16), 20);  // 上部~20枚は風景のみ
   const sizeClass=()=>{ const r=Math.random(); return r<0.12?'big':(r<0.24?'wide':(r<0.36?'tall':'')); };
-  const tiles=pick.map(n=>`<div class="tile ${sizeClass()}"><img src="${base}${n}" alt="" decoding="async"></div>`).join('');
+  const tiles=order.map(n=>`<div class="tile ${sizeClass()}"><img src="${base}${n}" alt="" decoding="async"></div>`).join('');
   wall.innerHTML=`<div class="photo-grid">${tiles}</div>`;
 }
 
@@ -424,8 +445,10 @@ function buildGallery(){
   const grid=document.getElementById('galleryGrid');
   if(!grid || !CFG.bgPhotos || !CFG.bgPhotos.length) return;
   const base=DATA_BASE+'photos/';
+  const {land,people}=splitPeople(CFG.bgPhotos);
+  const order=arrangeSpread(land, people, 8);   // 先頭は風景・人物は全体に均等分散
   const sc=()=>{ const r=Math.random(); return r<0.10?'big':(r<0.20?'wide':(r<0.30?'tall':'')); };
-  grid.innerHTML = CFG.bgPhotos.map(n=>`<div class="tile ${sc()}" onclick="openLightbox('${n}')"><img src="${base}${n}" alt="" loading="lazy" decoding="async"></div>`).join('');
+  grid.innerHTML = order.map(n=>`<div class="tile ${sc()}" onclick="openLightbox('${n}')"><img src="${base}${n}" alt="" loading="lazy" decoding="async"></div>`).join('');
   galleryBuilt=true;
 }
 function openLightbox(name){

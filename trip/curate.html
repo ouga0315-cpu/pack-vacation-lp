@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>写真を選ぶ | Pack Vacation</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗂️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --brown:#5C3D2E; --cream:#F8F5F0; --green:#3C5A3A; --muted:#7A7368; --border:#E2E8F0; --white:#fff; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ font-family:'Zen Kaku Gothic New',sans-serif; color:#2C2C2C; background:var(--cream); line-height:1.7; }
+  .bar{ position:sticky; top:0; z-index:10; background:rgba(255,255,255,.94); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border); padding:12px 16px; }
+  .bar h1{ font-size:1rem; color:var(--brown); letter-spacing:.06em; }
+  .bar .sub{ font-size:.78rem; color:var(--muted); margin-top:2px; }
+  .count{ font-weight:700; color:var(--green); }
+  .actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .btn{ font-family:inherit; font-size:.8rem; padding:8px 12px; border-radius:6px; border:1px solid var(--border);
+    background:var(--white); color:var(--brown); cursor:pointer; letter-spacing:.03em; }
+  .btn:hover{ border-color:var(--green); }
+  .btn.primary{ background:var(--green); color:#fff; border-color:var(--green); }
+  .wrap{ max-width:1100px; margin:0 auto; padding:14px 10px 40px; }
+  .hint{ font-size:.8rem; color:var(--muted); margin:6px 2px 12px; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(104px,1fr)); gap:6px; }
+  .cell{ position:relative; aspect-ratio:1/1; border-radius:6px; overflow:hidden; cursor:pointer; background:#eee;
+    outline:3px solid transparent; }
+  .cell img{ width:100%; height:100%; object-fit:cover; display:block; transition:opacity .15s, transform .2s; }
+  .cell.on{ outline-color:var(--green); }
+  .cell.off img{ opacity:.28; filter:grayscale(.6); }
+  .cell .mark{ position:absolute; top:4px; right:4px; width:22px; height:22px; border-radius:50%; font-size:.8rem;
+    display:flex; align-items:center; justify-content:center; color:#fff; }
+  .cell.on .mark{ background:var(--green); }
+  .cell.off .mark{ background:rgba(0,0,0,.55); }
+  .cell .person{ position:absolute; top:4px; left:4px; background:rgba(0,0,0,.6); color:#fff; font-size:.66rem;
+    padding:1px 6px; border-radius:999px; }
+  .export{ margin-top:20px; }
+  .export textarea{ width:100%; height:90px; font-size:.72rem; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:monospace; }
+  .ok{ color:var(--green); font-size:.8rem; margin-left:8px; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <h1>写真を選ぶ — <span id="region"></span></h1>
+  <div class="sub"><span class="count" id="count">…</span>　（タップで使う/使わないを切替）</div>
+  <div class="actions">
+    <button class="btn" onclick="setAll(true)">全部つかう</button>
+    <button class="btn" onclick="setAll(false)">全部外す</button>
+    <button class="btn" onclick="dropPeople()">👤 人物を全部外す</button>
+    <button class="btn primary" onclick="doExport()">書き出す（コピー）</button>
+    <span class="ok" id="ok"></span>
+  </div>
+</div>
+<div class="wrap">
+  <div class="hint">使う写真だけ緑枠に。選び終えたら「書き出す」→ チャットに貼ってください。反映します。（選択はこの端末に自動保存されます）</div>
+  <div class="grid" id="grid"></div>
+  <div class="export">
+    <div class="hint">書き出し結果（コピー用）:</div>
+    <textarea id="out" readonly placeholder="「書き出す」を押すとここに出ます"></textarea>
+  </div>
+</div>
+<script>
+const AREA=((new URLSearchParams(location.search)).get('area')||'azumino').replace(/[^a-z0-9_-]/gi,'');
+const BASE='data/'+AREA+'/';
+const LSKEY='curate_'+AREA;
+let PHOTOS=[], PEOPLE=new Set(), sel=new Set();
+
+fetch(BASE+'config.json?v='+Date.now()).then(r=>r.json()).then(cfg=>{
+  document.getElementById('region').textContent=cfg.regionName||AREA;
+  PHOTOS=cfg.bgPhotos||[]; PEOPLE=new Set(cfg.peoplePhotos||[]);
+  const saved=localStorage.getItem(LSKEY);
+  sel = saved ? new Set(JSON.parse(saved)) : new Set(PHOTOS);   // 既定は全部つかう
+  render();
+}).catch(e=>{ document.getElementById('count').textContent='読み込み失敗'; console.error(e); });
+
+function render(){
+  const g=document.getElementById('grid');
+  g.innerHTML=PHOTOS.map(n=>{
+    const on=sel.has(n), person=PEOPLE.has(n);
+    return `<div class="cell ${on?'on':'off'}" data-n="${n}" onclick="toggle('${n}')">
+      <img src="${BASE}photos/${n}" alt="" loading="lazy" decoding="async">
+      ${person?'<span class="person">👤 人物</span>':''}
+      <span class="mark">${on?'✓':'＋'}</span>
+    </div>`;
+  }).join('');
+  updateCount();
+}
+function updateCount(){
+  const total=PHOTOS.length, on=sel.size;
+  const ppl=[...sel].filter(n=>PEOPLE.has(n)).length;
+  document.getElementById('count').textContent=`使用 ${on} / 全 ${total}（人物 ${ppl}）`;
+}
+function save(){ localStorage.setItem(LSKEY, JSON.stringify([...sel])); }
+function toggle(n){
+  if(sel.has(n)) sel.delete(n); else sel.add(n);
+  const el=document.querySelector('.cell[data-n="'+n+'"]');
+  const on=sel.has(n); el.classList.toggle('on',on); el.classList.toggle('off',!on);
+  el.querySelector('.mark').textContent=on?'✓':'＋';
+  save(); updateCount(); document.getElementById('ok').textContent='';
+}
+function setAll(on){ sel = on ? new Set(PHOTOS) : new Set(); save(); render(); document.getElementById('ok').textContent=''; }
+function dropPeople(){ PEOPLE.forEach(n=>sel.delete(n)); save(); render(); document.getElementById('ok').textContent='人物を外しました'; }
+function doExport(){
+  const arr=PHOTOS.filter(n=>sel.has(n));   // 元の順序を保つ
+  const txt=JSON.stringify(arr);
+  document.getElementById('out').value=txt;
+  if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>{ document.getElementById('ok').textContent='コピーしました！チャットに貼ってください'; }).catch(()=>{});
+  document.getElementById('out').select();
+}
+</script>
+</body>
+</html>
