@@ -161,10 +161,13 @@ gtag('js',new Date());gtag('config','G-6VJSJFMXPX');
 
   /* ===== 背景の写真の壁（土地カセット bgPhotos）＋ すりガラスUI ===== */
   .photo-wall{ position:fixed; inset:0; z-index:0; overflow:hidden; background:#1a1a18; }
-  .photo-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(74px,1fr)); gap:2px; will-change:transform; animation:drift 160s linear infinite; }
-  .tile{ aspect-ratio:1/1; overflow:hidden; }
+  .photo-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(76px,1fr)); grid-auto-rows:76px; grid-auto-flow:row dense; gap:2px; will-change:transform; animation:drift 90s ease-in-out infinite alternate; }
+  .tile{ overflow:hidden; }
   .tile img{ width:100%; height:100%; object-fit:cover; display:block; }
-  @keyframes drift{ from{ transform:translateY(0); } to{ transform:translateY(-50%); } }
+  .tile.big{ grid-column:span 2; grid-row:span 2; }   /* 大 */
+  .tile.wide{ grid-column:span 2; }                    /* 横長 */
+  .tile.tall{ grid-row:span 2; }                       /* 縦長 */
+  @keyframes drift{ from{ transform:translateY(0); } to{ transform:translateY(-32%); } }
   .photo-scrim{ position:fixed; inset:0; z-index:1; pointer-events:none;
     background:linear-gradient(180deg, rgba(20,20,18,.58), rgba(20,20,18,.50) 40%, rgba(20,20,18,.64)); }
 
@@ -367,14 +370,16 @@ function applyRegion(){
   buildWall();
 }
 
-// 背景：土地カセットの写真を敷き詰めた壁（上下ループでゆっくり流れる）
+// 背景：土地カセットの写真を敷き詰めた壁。プールから毎回ランダムに約110枚を、大小まぜて描画
 function buildWall(){
   const wall=document.getElementById('photoWall');
   if(!wall || !CFG.bgPhotos || !CFG.bgPhotos.length) return;
   const base=DATA_BASE+'photos/';
-  const shuffled=[...CFG.bgPhotos].sort(()=>Math.random()-0.5);
-  const tiles=shuffled.map(n=>`<div class="tile"><img src="${base}${n}" alt="" decoding="async"></div>`).join('');
-  wall.innerHTML=`<div class="photo-grid">${tiles}${tiles}</div>`;   // 2周分でシームレスループ
+  const pool=[...CFG.bgPhotos].sort(()=>Math.random()-0.5);
+  const pick=pool.slice(0, Math.min(110, pool.length));   // 画面内はかぶり0・訪問ごとに違う顔
+  const sizeClass=()=>{ const r=Math.random(); return r<0.12?'big':(r<0.24?'wide':(r<0.36?'tall':'')); };
+  const tiles=pick.map(n=>`<div class="tile ${sizeClass()}"><img src="${base}${n}" alt="" decoding="async"></div>`).join('');
+  wall.innerHTML=`<div class="photo-grid">${tiles}</div>`;
 }
 
 function showScreen(id){
