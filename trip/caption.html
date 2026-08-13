@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>写真にコメント | Pack Vacation</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{ --brown:#5C3D2E; --cream:#F8F5F0; --green:#3C5A3A; --muted:#7A7368; --border:#E2E8F0; --white:#fff; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ font-family:'Zen Kaku Gothic New',sans-serif; color:#2C2C2C; background:var(--cream); line-height:1.7; padding-bottom:80px; }
+  .bar{ position:sticky; top:0; z-index:10; background:rgba(255,255,255,.95); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border); padding:12px 16px; }
+  .bar h1{ font-size:1rem; color:var(--brown); letter-spacing:.06em; }
+  .bar .sub{ font-size:.78rem; color:var(--muted); margin-top:2px; }
+  .count{ font-weight:700; color:var(--green); }
+  .wrap{ max-width:1100px; margin:0 auto; padding:12px 10px 40px; }
+  .hint{ font-size:.8rem; color:var(--muted); margin:6px 2px 12px; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(104px,1fr)); gap:6px; }
+  .cell{ position:relative; aspect-ratio:1/1; border-radius:6px; overflow:hidden; cursor:pointer; background:#eee; outline:3px solid transparent; }
+  .cell img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .cell.has{ outline-color:var(--green); }
+  .cell .cap{ position:absolute; left:0; right:0; bottom:0; background:linear-gradient(transparent, rgba(0,0,0,.75));
+    color:#fff; font-size:.66rem; padding:14px 6px 5px; line-height:1.3; }
+  .cell .badge{ position:absolute; top:4px; right:4px; background:var(--green); color:#fff; width:22px; height:22px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.7rem; }
+  /* editor */
+  .editor{ position:fixed; inset:0; z-index:40; display:none; align-items:center; justify-content:center; padding:16px;
+    background:rgba(10,10,9,.9); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
+  .editor.open{ display:flex; }
+  .editor-inner{ background:var(--white); border-radius:12px; width:100%; max-width:520px; overflow:hidden; }
+  .editor-inner img{ width:100%; max-height:52vh; object-fit:cover; display:block; background:#000; }
+  .ed-body{ padding:14px 16px 16px; }
+  .ed-body textarea{ width:100%; height:70px; font-family:inherit; font-size:1rem; padding:10px; border:1px solid var(--border); border-radius:8px; resize:vertical; }
+  .ed-btns{ display:flex; gap:8px; margin-top:12px; }
+  .ed-btns button{ font-family:inherit; font-size:.9rem; padding:11px 14px; border-radius:8px; border:1px solid var(--border); background:var(--white); color:var(--brown); cursor:pointer; }
+  .ed-btns .grow{ flex:1; }
+  .ed-btns .primary{ background:var(--green); color:#fff; border-color:var(--green); font-weight:700; }
+  .ed-btns .del{ color:#b23; }
+  /* bottom done bar */
+  .donebar{ position:fixed; left:0; right:0; bottom:0; z-index:20; background:rgba(255,255,255,.97);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border-top:1px solid var(--border);
+    padding:10px 14px; display:flex; align-items:center; gap:12px; box-shadow:0 -4px 16px rgba(0,0,0,.06); }
+  .donebar-info{ font-size:.85rem; color:var(--brown); white-space:nowrap; }
+  .donebar-info b{ color:var(--green); font-size:1.05rem; }
+  .donebtn{ flex:1; font-family:inherit; font-size:.98rem; font-weight:700; padding:15px; border:none; border-radius:8px; background:var(--green); color:#fff; cursor:pointer; }
+  .export{ margin-top:20px; }
+  .export textarea{ width:100%; height:90px; font-size:.72rem; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:monospace; }
+  .toast{ position:fixed; left:50%; bottom:90px; transform:translateX(-50%); background:#1a1a18; color:#fff; padding:13px 20px;
+    border-radius:10px; font-size:.86rem; line-height:1.6; z-index:50; opacity:0; transition:opacity .3s; text-align:center; max-width:90vw; pointer-events:none; box-shadow:0 8px 30px rgba(0,0,0,.4); }
+  .toast.show{ opacity:1; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <h1>写真にコメント — <span id="region"></span></h1>
+  <div class="sub"><span class="count" id="count">…</span>　（写真をタップ → ひとこと入力 → 保存）</div>
+</div>
+<div class="wrap">
+  <div class="hint">付けたい写真だけでOK。コメントは拡大表示のときに出ます。書き終えたら下の緑ボタン → チャットに貼り付け。（この端末に自動保存されます）</div>
+  <div class="grid" id="grid"></div>
+  <div class="export">
+    <div class="hint">うまくコピーできない時は、下の枠を長押しで全選択してコピー → チャットに貼り付け:</div>
+    <textarea id="out" readonly placeholder="下の「書き出す」ボタンを押すとここに出ます"></textarea>
+  </div>
+</div>
+
+<div class="donebar">
+  <div class="donebar-info">コメント <b id="doneCount">0</b> 件</div>
+  <button class="donebtn" onclick="doExport()">✅ 書き出す → コピー</button>
+</div>
+
+<div class="editor" id="editor">
+  <div class="editor-inner">
+    <img id="edImg" src="" alt="">
+    <div class="ed-body">
+      <textarea id="edText" placeholder="この写真のひとこと（例：朝もやの長峰山 / 大王わさび農場の湧き水）"></textarea>
+      <div class="ed-btns">
+        <button class="grow" onclick="closeEditor()">閉じる</button>
+        <button class="del" onclick="clearCap()">コメント削除</button>
+        <button class="primary" onclick="saveCap()">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const AREA=((new URLSearchParams(location.search)).get('area')||'azumino').replace(/[^a-z0-9_-]/gi,'');
+const BASE='data/'+AREA+'/';
+const LSKEY='caption_'+AREA;
+let PHOTOS=[], caps={}, edCurrent=null;
+
+Promise.all([
+  fetch(BASE+'config.json?v='+Date.now()).then(r=>r.json()),
+  fetch(BASE+'captions.json?v='+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({}))
+]).then(([cfg,saved])=>{
+  document.getElementById('region').textContent=cfg.regionName||AREA;
+  PHOTOS=cfg.bgPhotos||[];
+  const ls=localStorage.getItem(LSKEY);
+  caps = ls ? JSON.parse(ls) : (saved||{});     // 途中の下書き優先、無ければ公開中のcaptions
+  render();
+}).catch(e=>{ document.getElementById('count').textContent='読み込み失敗'; console.error(e); });
+
+function render(){
+  const g=document.getElementById('grid');
+  g.innerHTML=PHOTOS.map(n=>{
+    const c=caps[n];
+    return `<div class="cell ${c?'has':''}" data-n="${n}" onclick="openEditor('${n}')">
+      <img src="${BASE}photos/${n}" alt="" loading="lazy" decoding="async">
+      ${c?`<span class="badge">💬</span><span class="cap">${esc(c)}</span>`:''}
+    </div>`;
+  }).join('');
+  updateCount();
+}
+function esc(s){ return s.replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+function updateCount(){
+  const n=Object.values(caps).filter(v=>v&&v.trim()).length;
+  document.getElementById('count').textContent=`コメント付き ${n}枚 / 全 ${PHOTOS.length}`;
+  document.getElementById('doneCount').textContent=n;
+}
+function save(){ localStorage.setItem(LSKEY, JSON.stringify(caps)); }
+
+function openEditor(n){
+  edCurrent=n;
+  document.getElementById('edImg').src=BASE+'photos/large/'+n;
+  document.getElementById('edText').value=caps[n]||'';
+  document.getElementById('editor').classList.add('open');
+  setTimeout(()=>document.getElementById('edText').focus(),100);
+}
+function closeEditor(){ document.getElementById('editor').classList.remove('open'); edCurrent=null; }
+function saveCap(){
+  if(!edCurrent) return;
+  const t=document.getElementById('edText').value.trim();
+  if(t) caps[edCurrent]=t; else delete caps[edCurrent];
+  save(); render(); closeEditor();
+}
+function clearCap(){ if(edCurrent){ delete caps[edCurrent]; save(); render(); } closeEditor(); }
+
+function showToast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),4500); }
+function doExport(){
+  const clean={}; Object.keys(caps).forEach(k=>{ if(caps[k]&&caps[k].trim()) clean[k]=caps[k].trim(); });
+  const txt=JSON.stringify(clean, null, 0);
+  const out=document.getElementById('out'); out.value=txt;
+  out.scrollIntoView({behavior:'smooth', block:'center'});
+  const cnt=Object.keys(clean).length;
+  showToast('できました（コメント '+cnt+'件）。下の枠の文字を長押しコピー → チャットに貼り付けてください');
+  try{ out.focus(); out.select(); }catch(e){}
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(txt).then(()=>showToast('✅ コピーしました！（'+cnt+'件）このままチャットに貼り付けてください')).catch(()=>{});
+  }
+}
+</script>
+</body>
+</html>
