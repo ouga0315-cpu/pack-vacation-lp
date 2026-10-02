@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宿泊者ガイド｜民宿笹森家</title>
+<meta name="description" content="民宿笹森家 宿泊者専用ガイド">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root { --brown:#5C3D2E; --cream:#F8F5F0; --gold:#B89B5E; --green:#3C5A3A; --red:#B85C2E; --text:#2C2C2C; --muted:#7A7368; --light:#EFEBE4; --dark:#1A1A18; --white:#FFF; --border:#E2DCCC; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Zen Kaku Gothic New",sans-serif;color:var(--text);background:var(--cream);line-height:1.8;min-height:100vh;}
+a{color:var(--green);}
+#gate{position:fixed;inset:0;z-index:999;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;padding:24px;}
+#gate.hidden{display:none;}
+.gate-inner{max-width:420px;text-align:center;}
+.gate-logo{font-family:"Noto Serif JP",serif;font-size:1.5rem;letter-spacing:0.15em;margin-bottom:12px;font-weight:500;}
+.gate-sub{font-size:0.85rem;opacity:0.7;letter-spacing:0.3em;margin-bottom:40px;}
+.gate-msg{font-size:0.95rem;margin-bottom:24px;line-height:1.9;opacity:0.9;}
+.gate-input{width:100%;padding:14px 18px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:1rem;border-radius:4px;letter-spacing:0.1em;text-align:center;font-family:inherit;}
+.gate-input:focus{outline:none;border-color:var(--gold);}
+.gate-btn{width:100%;margin-top:16px;padding:14px;background:var(--gold);color:#fff;border:none;border-radius:4px;font-size:1rem;font-weight:700;letter-spacing:0.15em;cursor:pointer;font-family:inherit;}
+.gate-error{color:#ff8c7a;font-size:0.85rem;margin-top:12px;min-height:1.2em;}
+.gate-hint{font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:32px;line-height:1.9;}
+header{background:linear-gradient(180deg,var(--brown) 0%,#4a3025 100%);color:#fff;padding:32px 20px;text-align:center;}
+.brand{font-size:0.7rem;letter-spacing:0.5em;color:var(--gold);margin-bottom:10px;}
+h1{font-family:"Noto Serif JP",serif;font-size:clamp(1.4rem,4vw,1.8rem);letter-spacing:0.1em;font-weight:600;line-height:1.5;}
+.welcome{margin-top:14px;font-size:0.9rem;opacity:0.85;line-height:1.9;}
+nav.toc{background:var(--white);padding:12px 16px;border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap;position:sticky;top:0;z-index:10;}
+nav.toc a{display:inline-block;padding:6px 14px;margin-right:6px;background:var(--light);color:var(--brown);text-decoration:none;font-size:0.8rem;border-radius:999px;}
+main{max-width:760px;margin:0 auto;padding:24px 20px 80px;}
+section{margin-bottom:36px;scroll-margin-top:60px;}
+.section-eyebrow{font-size:0.7rem;color:var(--gold);letter-spacing:0.3em;margin-bottom:8px;}
+h2{font-family:"Noto Serif JP",serif;font-size:1.3rem;color:var(--brown);letter-spacing:0.1em;margin-bottom:18px;font-weight:600;border-bottom:2px solid var(--gold);padding-bottom:8px;display:inline-block;}
+h3{font-size:1rem;color:var(--brown);font-weight:700;margin:20px 0 10px;}
+p{margin-bottom:10px;}
+ul,ol{padding-left:1.2em;margin-bottom:12px;}
+li{margin-bottom:6px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:12px;}
+.card.alert{background:#FFF9E6;border-color:var(--gold);border-left:5px solid var(--gold);}
+.card.danger{background:#FFF4ED;border-color:var(--red);border-left:5px solid var(--red);}
+.card.info{background:#EEF4EE;border-color:var(--green);border-left:5px solid var(--green);}
+.hero-info{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.hero-info-item{background:var(--white);padding:14px;border-radius:8px;border:1px solid var(--border);text-align:center;}
+.hero-info-label{font-size:0.7rem;color:var(--muted);letter-spacing:0.2em;margin-bottom:6px;}
+.hero-info-value{font-family:"Noto Serif JP",serif;font-size:1.3rem;color:var(--brown);font-weight:700;letter-spacing:0.1em;word-break:break-all;}
+.hero-info-sub{font-size:0.75rem;color:var(--muted);margin-top:4px;}
+@media(max-width:480px){.hero-info{grid-template-columns:1fr;}}
+.time-table{display:grid;grid-template-columns:auto 1fr;gap:10px 20px;margin:12px 0;}
+.time-table dt{color:var(--brown);font-weight:700;font-size:0.9rem;}
+.list-icon{list-style:none;padding:0;}
+.list-icon li{padding:8px 0 8px 28px;position:relative;border-bottom:1px dashed var(--border);}
+.list-icon li::before{content:"✓";position:absolute;left:6px;color:var(--green);font-weight:700;}
+.spot{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:10px;}
+.spot-name{font-weight:700;color:var(--brown);font-size:1rem;margin-bottom:4px;}
+.spot-tag{display:inline-block;padding:2px 8px;background:var(--light);color:var(--muted);font-size:0.7rem;border-radius:999px;margin-right:6px;}
+.spot-desc{font-size:0.85rem;color:var(--muted);line-height:1.8;margin-top:6px;}
+.spot-dist{font-size:0.75rem;color:var(--green);margin-top:4px;font-weight:500;}
+.emergency-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.emergency-grid a{display:block;text-align:center;padding:16px 10px;background:var(--white);border:2px solid var(--red);border-radius:8px;color:var(--red);text-decoration:none;font-weight:700;font-size:0.95rem;}
+.emergency-grid a strong{display:block;font-size:1.4rem;margin-top:4px;letter-spacing:0.1em;}
+.cta{display:inline-block;padding:12px 28px;background:var(--green);color:#fff !important;text-decoration:none;border-radius:999px;font-size:0.9rem;letter-spacing:0.1em;margin-top:12px;}
+details{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:10px;}
+details summary{cursor:pointer;font-weight:700;color:var(--brown);}
+details[open] summary{margin-bottom:12px;}
+footer{background:var(--dark);color:rgba(255,255,255,0.7);text-align:center;padding:32px 20px;font-size:0.8rem;}
+footer a{color:rgba(255,255,255,0.9);}
+@media print{#gate,nav.toc{display:none !important;}body{background:#fff;}}
+</style>
+</head>
+<body>
+
+<div id="gate">
+<div class="gate-inner">
+<div class="gate-logo">民宿 笹森家</div>
+<div class="gate-sub">GUEST ONLY</div>
+<p class="gate-msg">このページは宿泊者専用です。<br>予約時にお送りした<strong>合言葉</strong>をご入力ください。</p>
+<input type="password" id="passInput" class="gate-input" placeholder="合言葉を入力" autocomplete="off">
+<button class="gate-btn" onclick="checkPass()">入室する</button>
+<div class="gate-error" id="passErr"></div>
+<p class="gate-hint">合言葉は予約確認メッセージに記載しています。<br>ご不明な場合は Instagram DM まで。</p>
+</div>
+</div>
+
+<header>
+<div class="brand">GUEST GUIDE</div>
+<h1>民宿 笹森家<br><small style="font-size:0.65em;letter-spacing:0.25em;opacity:0.8;">— ようこそ、森の中へ —</small></h1>
+<p class="welcome">このたびはご予約いただきありがとうございます。<br>滞在中にご参照いただくための案内ページです。</p>
+</header>
+
+<nav class="toc">
+<a href="#checkin">🚪 入室</a>
+<a href="#access">🚗 アクセス</a>
+<a href="#amenity">🛏 設備</a>
+<a href="#kitchen">🍳 キッチン</a>
+<a href="#bath">🛁 お風呂</a>
+<a href="#bbq">🔥 BBQ・庭</a>
+<a href="#rules">📋 ルール</a>
+<a href="#pet">🐾 ペット</a>
+<a href="#checkout">👋 退室</a>
+<a href="#local">🏔 周辺</a>
+<a href="#emergency">🚨 緊急</a>
+</nav>
+
+<main>
+
+<section id="checkin">
+<div class="section-eyebrow">CHECK-IN</div>
+<h2>🚪 入室</h2>
+<div class="hero-info">
+<div class="hero-info-item">
+<div class="hero-info-label">DOOR CODE</div>
+<div class="hero-info-value">2 0 0 0 0 3 1 5</div>
+<div class="hero-info-sub">玄関ナンバーキー</div>
+</div>
+<div class="hero-info-item">
+<div class="hero-info-label">WI-FI</div>
+<div class="hero-info-value" style="font-size:1rem;">sasamorihouse</div>
+<div class="hero-info-sub">SSID＝パスワード 同じ</div>
+</div>
+</div>
+<div class="card alert">
+<h3 style="margin-top:0;">⏰ チェックイン時間</h3>
+<dl class="time-table">
+<dt>チェックイン</dt><dd>15:00 〜 23:00</dd>
+<dt>チェックアウト</dt><dd>10:00まで（延長不可）</dd>
+</dl>
+<p style="font-size:0.85rem;margin-top:8px;">到着予定時刻がわかり次第、ホストまでご連絡ください。<br>オーナーが別棟におります。</p>
+</div>
+<h3>📝 事前チェックインフォーム</h3>
+<p>到着前に下記フォームの入力をお願いします（旅館業法の宿帳記入です）。</p>
+<p><a href="https://forms.gle/8yqA16aUHjkhVXNs6" target="_blank" class="cta">事前チェックインフォームを開く ▶</a></p>
+<h3>📷 撮影サービスについて</h3>
+<p>ホスト（三條桜芽）はカメラマンでもあります。記念日の撮影などご希望があればお申し付けください。<br>ポートフォリオ：Instagram <a href="https://instagram.com/ouga0315" target="_blank">@ouga0315</a> / <a href="https://instagram.com/sasamorihouse" target="_blank">@sasamorihouse</a></p>
+</section>
+
+<section id="access">
+<div class="section-eyebrow">ACCESS</div>
+<h2>🚗 アクセス</h2>
+<div class="card">
+<h3 style="margin-top:0;">住所</h3>
+<p>〒399-8301 長野県安曇野市穂高有明7403-30</p>
+<p><a href="https://maps.app.goo.gl/6oJTbxQ74yckNojP7" target="_blank" class="cta">Googleマップで開く ▶</a></p>
+</div>
+<h3>🚙 お車の方</h3>
+<ul>
+<li>安曇野ICから車で約20分</li>
+<li>大熊美術館横の小道に入り、最初の十字路の左斜め前が宿です</li>
+</ul>
+<h3>🚉 公共交通機関の方</h3>
+<ul>
+<li>JR大糸線「安曇追分駅」より徒歩35分 / タクシー10分</li>
+<li>無料送迎あり（事前にご連絡ください）</li>
+</ul>
+<h3>🅿️ 駐車場</h3>
+<ul>
+<li>敷地内に無料駐車スペース（2台分）</li>
+<li>※駐車中の事故・盗難等について当方は責任を負いかねます</li>
+</ul>
+<div class="card danger">
+<h3 style="margin-top:0;">❄️ 冬季のご注意（12月〜3月）</h3>
+<p>スタッドレスタイヤまたはチェーンが必須です。<br>別荘地内は雪が残ることがあります。</p>
+</div>
+<div class="card info">
+<h3 style="margin-top:0;">🛒 到着前に買い物を</h3>
+<p>宿周辺にコンビニはありません。<br><strong>ツルヤ穂高店</strong>（車15分）で先に買い物を済ませてからお越しください。</p>
+</div>
+</section>
+
+<section id="amenity">
+<div class="section-eyebrow">ROOM & AMENITY</div>
+<h2>🛏 お部屋・設備・アメニティ</h2>
+<h3>お部屋の構成</h3>
+<ul>
+<li>100㎡のログハウス調コテージ（敷地750㎡・庭700㎡）</li>
+<li>寝室2・ベッド5台相当・バスルーム1</li>
+<li>専用リビング、ダイニング、フルキッチン、ゲスト専用玄関</li>
+</ul>
+<h3>🛌 寝具</h3>
+<ul>
+<li>寝室1：布団4組</li>
+<li>寝室2：ダブルベッド1台</li>
+<li>シーツ・予備の枕と毛布あり</li>
+<li>連泊時のタオル・シーツ交換はありません（ご希望時は要連絡）</li>
+</ul>
+<h3>🧴 アメニティ</h3>
+<ul class="list-icon">
+<li>シャンプー / コンディショナー / ボディソープ</li>
+<li>ヘアドライヤー</li>
+<li>タオル・バスタオル</li>
+<li>ハンガー・清掃用品</li>
+</ul>
+<div class="card alert">
+<h3 style="margin-top:0;">🧳 お持ちいただくもの</h3>
+<ul style="margin-bottom:0;">
+<li>歯ブラシ（環境配慮のため提供なし）</li>
+<li>寝間着</li>
+<li>調味料（衛生上の理由で提供なし）</li>
+<li>BBQ用の網と炭</li>
+</ul>
+</div>
+<h3>🌡 冷暖房設備</h3>
+<ul>
+<li>エアコン</li>
+<li>こたつ（冬季）</li>
+<li>石油ストーブ（使用方法は下部に記載）</li>
+<li>シーリングファン</li>
+</ul>
+<h3>📺 エンタメ</h3>
+<ul>
+<li>テレビ（Netflix対応）</li>
+<li>100インチホームシアター（プロジェクター）</li>
+</ul>
+</section>
+
+<section id="kitchen">
+<div class="section-eyebrow">KITCHEN</div>
+<h2>🍳 キッチン</h2>
+<h3>設備</h3>
+<ul>
+<li>ガスコンロ</li>
+<li>冷蔵庫・冷凍庫</li>
+<li>電子レンジ</li>
+<li>電気ケトル</li>
+<li>調理器具一式（鍋・フライパンなど）</li>
+<li>食器・カトラリー（お皿・ボウル・カップ・箸）</li>
+<li>子ども用食器</li>
+<li>ダイニングテーブル（6名）</li>
+</ul>
+<div class="card alert">
+<p style="margin:0;"><strong>調味料はご持参ください。</strong><br>衛生上の理由で、油・塩・胡椒等の調味料はご用意していません。</p>
+</div>
+</section>
+
+<section id="bath">
+<div class="section-eyebrow">BATH</div>
+<h2>🛁 お風呂</h2>
+<div class="card">
+<p>宿のお風呂は<strong>母屋</strong>にあります。何時でも利用可能です。</p>
+<p style="font-size:0.85rem;color:var(--muted);margin-top:8px;">冬季は外が冷え込みます。周辺の温泉施設のご利用もおすすめです（下記「周辺情報」参照）。</p>
+</div>
+<h3>洗濯機・乾燥機</h3>
+<p>洗濯乾燥機あり（宿泊費に含む）。</p>
+</section>
+
+<section id="bbq">
+<div class="section-eyebrow">BBQ & GARDEN</div>
+<h2>🔥 BBQ・庭</h2>
+<h3>庭</h3>
+<ul>
+<li>プライベートガーデン700㎡（裏庭はゲスト専用）</li>
+<li>屋外ダイニング（6席）</li>
+<li>夜は満天の星が見えます</li>
+</ul>
+<h3>BBQ</h3>
+<ul>
+<li>BBQコンロは自由にご使用いただけます</li>
+<li><strong>炭と網はご持参ください</strong></li>
+</ul>
+<div class="card danger">
+<h3 style="margin-top:0;">🔥 焚き火は禁止</h3>
+<p style="margin:0;">焚き火、および枯れ葉を火に投入することは禁止しています。<br>火の粉が飛ぶと火災の原因になります。</p>
+</div>
+<div class="card alert">
+<h3 style="margin-top:0;">🌙 22時以降のお願い</h3>
+<p style="margin:0;">別荘地の真ん中にある宿です。22時以降は屋外での食事・大音量をお控えください。<br>窓もお閉めください。</p>
+</div>
+</section>
+
+<section id="rules">
+<div class="section-eyebrow">HOUSE RULES</div>
+<h2>📋 ハウスルール</h2>
+<ol>
+<li><strong>22時以降は静かに</strong>（音楽・庭での食事は控え、窓を閉める）</li>
+<li><strong>お風呂は母屋</strong>（何時でも利用可能）</li>
+<li><strong>喫煙は玄関の灰皿で</strong>（電子タバコ含む・室内全禁煙）</li>
+<li><strong>野生動物への餌やり禁止</strong></li>
+<li><strong>汚損・破損は発覚時またはチェックアウト時にご報告ください</strong>（原状回復費用のご請求あり）</li>
+</ol>
+<h3>その他の確認事項</h3>
+<ul>
+<li>定員6名を超える宿泊が確認された場合は、超過人数分の宿泊費を請求します</li>
+<li>宿泊者以外の方の施設内へのお立ち入りはお断りしています</li>
+<li>泥酔・大声で騒がれる方のご利用はお断りします</li>
+<li>イベント・パーティー不可</li>
+<li>静粛時間 21:00〜10:00</li>
+</ul>
+<div class="card info">
+<h3 style="margin-top:0;">🧒 お子様の安全について</h3>
+<ul style="margin-bottom:0;">
+<li>2階へ続く階段は片側のみ手すりです</li>
+<li>2階の手すりは隙間が広めです</li>
+<li>屋内・屋外ともに保護者の付き添いをお願いします</li>
+</ul>
+</div>
+</section>
+
+<section id="pet">
+<div class="section-eyebrow">PET</div>
+<h2>🐾 ペット同伴の方へ</h2>
+<ul>
+<li>ペットOK（最大3匹）</li>
+<li>ペット料金：滞在1回あたり ¥3,444（介助動物は無料）</li>
+<li>700㎡の庭で自由に走らせていただけます</li>
+</ul>
+<div class="card alert">
+<p style="margin:0;"><strong>ベッド・お布団の上にはペットを上げないでください。</strong><br>アレルギーをお持ちの次のお客様への配慮です。</p>
+</div>
+</section>
+
+<section id="checkout">
+<div class="section-eyebrow">CHECK-OUT</div>
+<h2>👋 退室時のお願い</h2>
+<div class="hero-info-item" style="background:var(--white);border:1px solid var(--border);padding:14px;margin-bottom:14px;">
+<div class="hero-info-label">CHECK-OUT</div>
+<div class="hero-info-value">10:00</div>
+<div class="hero-info-sub">延長不可</div>
+</div>
+<h3>チェックアウト手順</h3>
+<ol>
+<li>使った食器を洗ってカゴに戻してください</li>
+<li>ゴミを分別して所定のゴミ箱へ</li>
+<li>照明・家電をオフにしてください</li>
+<li>使ったシーツを集めてください</li>
+</ol>
+<p style="font-size:0.85rem;color:var(--muted);">特別な退室手続きはありません。そのままご退出いただいて構いません。<br>お忘れ物にはご注意ください。</p>
+<h3>🗑 ゴミの分別</h3>
+<ul>
+<li><strong>燃えるゴミ</strong>：蓋のあるゴミ箱</li>
+<li><strong>プラゴミ</strong>：汚れを取って、蓋のないゴミ箱</li>
+<li><strong>缶・ペットボトル</strong>：中身をゆすいで分けて置く<br><small style="color:var(--muted);">※ラベル・キャップは燃えるゴミへ</small></li>
+</ul>
+</section>
+
+<section id="local">
+<div class="section-eyebrow">AROUND SASAMORIYA</div>
+<h2>🏔 周辺情報</h2>
+<h3>🍜 ホストおすすめの飲食店</h3>
+<div class="spot">
+<div class="spot-name">安曇野そば処 双葉</div>
+<span class="spot-tag">そば / ソースカツ丼</span>
+<p class="spot-desc">ホスト1推し！安曇野一のソースカツ丼。古民家のような落ち着いた雰囲気のご家族経営のお店です。</p>
+</div>
+<div class="spot">
+<div class="spot-name">お食事処 しもさと</div>
+<span class="spot-tag">定食</span>
+<p class="spot-desc">がっつり食べたい時に。座敷あり・お子様連れOK。お酒の種類も豊富で夜も楽しめます。</p>
+</div>
+<div class="spot">
+<div class="spot-name">モルゲンロート ベーカリー</div>
+<span class="spot-tag">パン / 朝食</span>
+<p class="spot-desc">朝一番から営業しているおしゃれなパン屋さん。店員さんの笑顔とインテリアがかわいいお店。</p>
+</div>
+<div class="spot">
+<div class="spot-name">まるこ食堂</div>
+<span class="spot-tag">カフェ / 定食</span>
+<p class="spot-dist">📍 当宿から一番近いお店</p>
+<p class="spot-desc">別荘地で食べる贅沢な家庭料理。おしゃれでこじんまりした店内で優しい味の定食を。</p>
+</div>
+<div class="spot">
+<div class="spot-name">富士尾山荘</div>
+<span class="spot-tag">そば</span>
+<p class="spot-desc">情緒ある地元のお蕎麦屋さん。</p>
+</div>
+<div class="spot">
+<div class="spot-name">ＫＩＩＹＡ</div>
+<span class="spot-tag">カフェ</span>
+<p class="spot-desc">安曇野一のおしゃれカフェ。</p>
+</div>
+<p style="font-size:0.8rem;color:var(--muted);margin-top:12px;">※ 上記いずれもディナー時間は閉店している可能性があります。事前に営業時間をご確認ください。</p>
+
+<h3 style="margin-top:28px;">🎨 観光スポット</h3>
+<div class="spot">
+<div class="spot-name">大王わさび農場</div>
+<span class="spot-tag">観光</span>
+<p class="spot-desc">日本最大級のわさび農場。農場内は無料で散策可能。看板猫がかわいい。清流が流れる景色は必見。</p>
+</div>
+<div class="spot">
+<div class="spot-name">国営アルプスあづみの公園</div>
+<span class="spot-tag">公園 / 家族</span>
+<p class="spot-desc">入場料450円で満足度大。ベビーカー・雪遊び道具の無料貸出あり。家族で楽しめます。</p>
+</div>
+<div class="spot">
+<div class="spot-name">上高地</div>
+<span class="spot-tag">自然</span>
+<p class="spot-dist">📍 宿から車1時間 + バス30分</p>
+<p class="spot-desc">雄大な景色と北アルプスの清流。朝一番のバスがおすすめ。</p>
+</div>
+<div class="spot">
+<div class="spot-name">乗鞍高原</div>
+<span class="spot-tag">自然 / 散策</span>
+<p class="spot-dist">📍 宿から車1時間</p>
+<p class="spot-desc">森に囲まれた静かな池と高原。緑好きな方におすすめ。</p>
+</div>
+<div class="spot">
+<div class="spot-name">美ヶ原高原</div>
+<span class="spot-tag">自然 / サイクリング</span>
+<p class="spot-dist">📍 宿から1時間</p>
+<p class="spot-desc">日本離れした景色。サイクリング・登山にもおすすめ。</p>
+</div>
+<div class="spot">
+<div class="spot-name">ラ・カスタ</div>
+<span class="spot-tag">体験 / 要予約</span>
+<p class="spot-desc">北アルプスのわき水を使った調香体験。</p>
+</div>
+<div class="spot">
+<div class="spot-name">The art studio 8</div>
+<span class="spot-tag">体験 / 要予約</span>
+<p class="spot-desc">思い出をグラスにして持ち帰る、ガラス工芸体験。</p>
+</div>
+<div class="spot">
+<div class="spot-name">穂高陶芸会館</div>
+<span class="spot-tag">体験 / 要予約</span>
+<p class="spot-desc">思い出を陶器にして持ち帰る、陶芸体験。</p>
+</div>
+
+<h3 style="margin-top:28px;">♨️ 温泉施設</h3>
+<div class="spot">
+<div class="spot-name">しゃくなげの湯</div>
+<p class="spot-desc">9:30〜21:30（最終入場20:30）</p>
+<p><a href="http://syakunagenoyu.info/" target="_blank">公式サイト ▶</a></p>
+</div>
+<div class="spot">
+<div class="spot-name">すずむし荘</div>
+<p class="spot-desc">10:00〜21:00（最終入場20:30）</p>
+<p><a href="https://suzumushisou.jp/" target="_blank">公式サイト ▶</a></p>
+</div>
+<div class="spot">
+<div class="spot-name">穂高温泉郷</div>
+<p class="spot-desc">シャワーがない施設もあります。事前にお問い合わせの上ご利用ください。</p>
+</div>
+
+<h3 style="margin-top:28px;">🛒 コンビニ・スーパー</h3>
+<ul>
+<li>宿周辺にコンビニはありません</li>
+<li>ツルヤ穂高店（スーパー・車15分）</li>
+</ul>
+
+<h3 style="margin-top:28px;">🌅 FOCUS MORNING TOUR</h3>
+<div class="card">
+<p>宿泊者限定の早朝ガイドツアー「<strong>FOCUS MORNING TOUR</strong>」もご案内しています。</p>
+<ul style="margin:8px 0;">
+<li>1名 ¥6,000 / 2名以上 ¥3,000・名（子ども同伴無料）</li>
+<li>早朝枠（4時台）/ 朝枠（6時台）</li>
+<li>軽食（地元スコーン + ほうじ茶）付</li>
+</ul>
+<p>詳細は<a href="../ja/#morning-tour" target="_blank">LP</a>をご覧ください。</p>
+</div>
+</section>
+
+<section id="emergency">
+<div class="section-eyebrow">EMERGENCY</div>
+<h2>🚨 緊急時</h2>
+<div class="emergency-grid">
+<a href="tel:119">火災・救急<strong>119</strong></a>
+<a href="tel:110">警察<strong>110</strong></a>
+</div>
+<h3 style="margin-top:24px;">ホストへの連絡</h3>
+<p>お困りの際はまずホストへご連絡ください（別棟に居住しています）。</p>
+<ul>
+<li>Airbnbメッセージ</li>
+<li>Instagram DM：<a href="https://instagram.com/sasamorihouse" target="_blank">@sasamorihouse</a></li>
+</ul>
+</section>
+
+<section id="heater">
+<div class="section-eyebrow">KEROSENE HEATER</div>
+<h2>🔥 石油ストーブの使い方</h2>
+<details>
+<summary>日本語での使い方</summary>
+<h3>1. 点火</h3>
+<ul>
+<li>タンクに灯油があることを確認（空の状態で点火しない）</li>
+<li>「運転/停止」ボタンを押す</li>
+<li>1〜2分待ち、青い炎が安定するまで待つ</li>
+<li>炎が不安定な場合は使用を中止し、ホストへ連絡</li>
+</ul>
+<h3>点火時に煙だけが出た場合</h3>
+<p>うまく点火していません。すぐに「停止」を押し、煙が消えるまで待ち、1〜2分後に再度試してください。<br>安定点火のコツ：窓を閉める／風・ドラフトを避ける。<br>3回以上同じ現象が起きたら、使用を中止してホストへ連絡を。</p>
+<h3>2. 使用中の安全</h3>
+<ul>
+<li>1時間ごとに3〜5分の換気</li>
+<li>可燃物は1m以上離す</li>
+<li>ストーブの上に物を置かない</li>
+<li>使用中に燃料タンクに触れたり動かしたりしない</li>
+<li>ストーブ自体を動かさない</li>
+<li>お子様・ペットを近づけない</li>
+<li>上での調理・湯沸かしは不可</li>
+</ul>
+<h3>3. 消火</h3>
+<ul>
+<li>「運転/停止」を押す</li>
+<li>炎が完全に消えるまで触らない</li>
+<li>消火後30分は熱いままなので触らない</li>
+</ul>
+<h3>4. 使用禁止条件</h3>
+<ul>
+<li>換気が行われていない</li>
+<li>ストーブの上・近くに物が置かれている</li>
+<li>強い灯油臭・異音がする</li>
+<li>炎が赤くなる</li>
+</ul>
+<h3>5. 緊急時</h3>
+<p>焦げ臭い / 異音 / 赤い・異常な炎 → すぐに消火、換気、ホストへ連絡。</p>
+</details>
+
+<details>
+<summary>Instructions in English</summary>
+<h3>1. Turning On</h3>
+<ul>
+<li>Ensure the tank has kerosene. Do not attempt ignition if empty.</li>
+<li>Press the "運転/停止" button.</li>
+<li>Wait 1–2 minutes until the blue flame stabilizes.</li>
+<li>If the flame is unstable, stop use and contact the host.</li>
+</ul>
+<h3>If Only Smoke Appears When Igniting</h3>
+<p>Press "Stop" immediately. Wait until all smoke clears. After 1–2 minutes, try again.<br>Tips: Close nearby windows / Avoid drafts.<br>If this occurs 3 times or more, stop using and contact the host.</p>
+<h3>2. Safety During Use</h3>
+<ul>
+<li>Ventilate the room 3–5 minutes every hour</li>
+<li>Keep all flammable objects 1 meter away</li>
+<li>Do NOT place any items on the heater</li>
+<li>Do NOT touch or move the fuel tank while in use</li>
+<li>Do NOT move the heater</li>
+<li>Keep children and pets away</li>
+<li>Cooking or boiling water on top is not allowed</li>
+</ul>
+<h3>3. Turning Off</h3>
+<ul>
+<li>Press "運転/停止"</li>
+<li>Do not touch until the flame is fully extinguished</li>
+<li>The heater stays hot for 30 minutes — avoid contact</li>
+</ul>
+<h3>4. When Use Is Not Allowed</h3>
+<ul>
+<li>Ventilation is not being performed</li>
+<li>Items are placed on or near the heater</li>
+<li>Strong kerosene smell or unusual noise</li>
+<li>Flame turns red</li>
+</ul>
+<h3>5. In Case of Emergency</h3>
+<p>Burning smell / Strange noises / Red or abnormal flame<br>→ Turn off immediately, ventilate the room, and contact the host.</p>
+</details>
+</section>
+
+</main>
+
+<footer>
+<div style="margin-bottom:10px;">© 民宿 笹森家 / Pack Vacation</div>
+<div style="font-size:0.75rem;opacity:0.6;">
+<a href="../ja/">宿のLPに戻る</a> ／
+<a href="https://instagram.com/sasamorihouse" target="_blank">Instagram</a>
+</div>
+</footer>
+
+<script>
+const PASS_PLAIN = "sasamori";
+function checkPass(){
+  const input = document.getElementById("passInput").value.trim();
+  const err = document.getElementById("passErr");
+  if(!input){ err.textContent = "合言葉を入力してください"; return; }
+  if(input.toLowerCase() === PASS_PLAIN.toLowerCase()){
+    localStorage.setItem("sasa_guest_ok","1");
+    document.getElementById("gate").classList.add("hidden");
+    err.textContent = "";
+  } else {
+    err.textContent = "合言葉が違います。もう一度お試しください。";
+  }
+}
+document.getElementById("passInput").addEventListener("keydown", function(e){
+  if(e.key === "Enter") checkPass();
+});
+if(localStorage.getItem("sasa_guest_ok") === "1"){
+  document.getElementById("gate").classList.add("hidden");
+}
+if(new URLSearchParams(location.search).get("open") === "1"){
+  document.getElementById("gate").classList.add("hidden");
+}
+</script>
+
+</body>
+</html>
