@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>素材候補プレビュー｜安曇野おためし移住泊</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;--surface:#FFF;--ink:#1A1A18;--sub:#58544C;--mute:#6B655A;
+  --line:#DED6C4;--accent:#5C7B3F;--accent-dark:#3C5A2A;--warm:#8A4A1A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Zen Kaku Gothic New",sans-serif;color:var(--ink);background:#eae6dc;padding:20px;line-height:1.8;}
+h1.page-title{font-family:"Noto Serif JP",serif;font-size:1.6rem;margin-bottom:4px;}
+.page-sub{color:var(--sub);margin-bottom:32px;font-size:0.9rem;}
+.section-group{margin-bottom:48px;background:var(--surface);border-radius:12px;padding:24px;}
+.sg-head{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:20px;}
+.sg-eyebrow{font-size:0.72rem;letter-spacing:0.25em;color:var(--warm);font-weight:700;}
+.sg-title{font-family:"Noto Serif JP",serif;font-size:1.3rem;margin-top:4px;}
+.sg-desc{color:var(--sub);font-size:0.85rem;margin-top:6px;}
+.variants{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;}
+.variant{background:var(--bg);border-radius:12px;padding:16px;}
+.v-label{font-weight:700;margin-bottom:4px;}
+.v-file{font-family:monospace;font-size:0.75rem;color:var(--mute);background:var(--surface);padding:4px 8px;border-radius:4px;display:inline-block;margin-bottom:10px;}
+.v-reason{font-size:0.8rem;color:var(--sub);margin-bottom:14px;}
+
+/* ===== LP SECTION MOCKS (actual LP styling, mobile width) ===== */
+.phone{max-width:380px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.1);background:#000;}
+
+/* HERO mock */
+.m-hero{position:relative;height:600px;overflow:hidden;background:#2a2520;}
+.m-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.m-hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.45) 40%,rgba(0,0,0,0.85) 100%);
+}
+.m-hero-inner{position:relative;height:100%;padding:30px 24px 36px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;}
+.m-hero-brand{font-size:0.65rem;letter-spacing:0.4em;color:rgba(255,255,255,0.95);}
+.m-hero-eyebrow{display:inline-block;font-size:0.68rem;letter-spacing:0.25em;background:rgba(255,255,255,0.18);padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.45);margin-bottom:14px;}
+.m-hero-h1{font-family:"Noto Serif JP",serif;font-size:1.7rem;line-height:1.4;font-weight:600;margin-bottom:12px;text-shadow:0 2px 20px rgba(0,0,0,0.6);}
+.m-hero-h1 .big{font-size:1.3em;display:block;margin:3px 0;}
+.m-hero-p{font-size:0.85rem;line-height:1.9;color:#fff;max-width:320px;text-shadow:0 1px 12px rgba(0,0,0,0.5);}
+.m-hero-cta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap;}
+.m-btn{padding:11px 18px;border-radius:999px;font-size:0.78rem;font-weight:700;}
+.m-btn-primary{background:#fff;color:var(--accent-dark);}
+.m-btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.6);}
+
+/* PROFILE mock */
+.m-profile{background:var(--bg);padding:36px 24px;}
+.m-eyebrow{font-size:0.68rem;letter-spacing:0.3em;color:var(--warm);font-weight:700;margin-bottom:10px;}
+.m-h2{font-family:"Noto Serif JP",serif;font-size:1.3rem;line-height:1.55;font-weight:600;color:var(--ink);margin-bottom:18px;}
+.m-h2 em{font-style:normal;color:var(--accent);}
+.m-profile-img{width:100%;max-width:300px;aspect-ratio:4/5;object-fit:cover;border-radius:12px;display:block;margin:0 auto 20px;}
+.m-tags{display:flex;gap:5px;flex-wrap:wrap;margin:12px 0 16px;}
+.m-tag{font-size:0.7rem;padding:3px 10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;color:var(--sub);}
+.m-p{color:var(--sub);font-size:0.88rem;margin-bottom:10px;}
+
+/* NIGHT mock (dark card) */
+.m-night-wrap{background:var(--surface);padding:30px 24px;}
+.m-night-card{background:linear-gradient(160deg,#2a2a2a 0%,#1a1a1a 100%);color:#f5f2eb;border-radius:14px;padding:22px 20px;}
+.m-b-time{font-size:0.68rem;letter-spacing:0.25em;color:var(--warm);font-weight:700;margin-bottom:4px;}
+.m-b-icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.1);color:#f5f2eb;font-size:1rem;margin-bottom:10px;}
+.m-night-h3{font-size:1rem;font-weight:700;margin-bottom:10px;color:#f5f2eb;}
+.m-night-img{width:100%;aspect-ratio:16/10;border-radius:10px;margin:12px 0;object-fit:cover;display:block;}
+.m-night-p{font-size:0.85rem;color:rgba(245,242,235,0.8);}
+
+/* MORNING mock (light card) */
+.m-morning-wrap{background:var(--surface);padding:30px 24px;}
+.m-morning-card{background:var(--bg);border-radius:14px;padding:22px 20px;border:1px solid var(--line);}
+.m-m-icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--bg);font-size:1rem;margin-bottom:10px;border:1px solid var(--line);}
+.m-morning-h3{font-size:1rem;font-weight:700;margin-bottom:10px;}
+.m-morning-img{width:100%;aspect-ratio:16/10;border-radius:10px;margin:12px 0;object-fit:cover;display:block;}
+.m-morning-p{font-size:0.85rem;color:var(--sub);}
+
+@media(max-width:720px){
+  .variants{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<h1 class="page-title">素材候補プレビュー</h1>
+<p class="page-sub">各セクションの推奨素材(a)と代替案(b)を、実際のLPスタイルで表示しています。a/b どちらを採用するか、または他候補が必要かお知らせください。</p>
+
+<!-- ========== HERO ========== -->
+<div class="section-group">
+  <div class="sg-head">
+    <div class="sg-eyebrow">SECTION 01 ─ HERO</div>
+    <div class="sg-title">ファーストビュー</div>
+    <div class="sg-desc">安曇野の絶景＋キャッチコピー。希望・絶景・できれば本人も入ると強い</div>
+  </div>
+  <div class="variants">
+
+    <div class="variant">
+      <div class="v-label">A. 本人＋宿＋空撮の全部入り（推奨）</div>
+      <span class="v-file">DJI_0023.MP4 / 251116　宿空撮</span>
+      <div class="v-reason">宿玄関前で手を振る本人→紅葉の森と山並みへ上昇。1本で宿・本人・絶景を見せきる。</div>
+      <div class="phone">
+        <div class="m-hero">
+          <img class="m-hero-img" src="media/hero.jpg" alt="">
+          <div class="m-hero-overlay"></div>
+          <div class="m-hero-inner">
+            <div class="m-hero-brand">PACK VACATION</div>
+            <div>
+              <span class="m-hero-eyebrow">安曇野おためし移住泊</span>
+              <h1 class="m-hero-h1">移住、<span class="big">まず一回</span>見に来ませんか</h1>
+              <p class="m-hero-p">ネットの情報だけじゃ、たぶんわからない。3年前に移住して宿を2軒やってる当事者と、安曇野で1泊。夜はお酒を飲みながら、本音で話しましょう。</p>
+              <div class="m-hero-cta">
+                <span class="m-btn m-btn-primary">申し込む →</span>
+                <span class="m-btn m-btn-outline">プランを見る</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">B. 宿中心＋有明山空撮（代替）</div>
+      <span class="v-file">DJI_0028.MP4 / 251116　宿空撮</span>
+      <div class="v-reason">ログハウス前から上昇、紅葉の森と有明山・安曇野を望む。宿を中心に置きたい場合。</div>
+      <div class="phone">
+        <div class="m-hero">
+          <img class="m-hero-img" src="media/hero_alt.jpg" alt="">
+          <div class="m-hero-overlay"></div>
+          <div class="m-hero-inner">
+            <div class="m-hero-brand">PACK VACATION</div>
+            <div>
+              <span class="m-hero-eyebrow">安曇野おためし移住泊</span>
+              <h1 class="m-hero-h1">移住、<span class="big">まず一回</span>見に来ませんか</h1>
+              <p class="m-hero-p">ネットの情報だけじゃ、たぶんわからない。3年前に移住して宿を2軒やってる当事者と、安曇野で1泊。夜はお酒を飲みながら、本音で話しましょう。</p>
+              <div class="m-hero-cta">
+                <span class="m-btn m-btn-primary">申し込む →</span>
+                <span class="m-btn m-btn-outline">プランを見る</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== PROFILE ========== -->
+<div class="section-group">
+  <div class="sg-head">
+    <div class="sg-eyebrow">SECTION 02 ─ PROFILE</div>
+    <div class="sg-title">ougaの自己紹介</div>
+    <div class="sg-desc">当事者だから話せる、の信頼づけ。縦長4:5で本人が中心</div>
+  </div>
+  <div class="variants">
+
+    <div class="variant">
+      <div class="v-label">A. ログハウス前で自撮り（推奨）</div>
+      <span class="v-file">GX010210.MP4 / 241109 あしゃんぽ</span>
+      <div class="v-reason">宿前で自撮り→最後に手を振る本人。「当事者」ポジション取りに最適。</div>
+      <div class="phone">
+        <div class="m-profile">
+          <div class="m-eyebrow">02 ─ 話す人</div>
+          <img class="m-profile-img" src="media/profile.jpg" alt="">
+          <h2 class="m-h2">東京で鬱 →<br>安曇野へ移住して3年、<br>宿を <em>2軒</em> やってます</h2>
+          <div class="m-tags">
+            <span class="m-tag">三條桜芽（ouga）</span>
+            <span class="m-tag">Pack Vacation 代表</span>
+            <span class="m-tag">東京→安曇野・3年目</span>
+          </div>
+          <p class="m-p">東京で働いていた20代、鬱になりました。逃げるように安曇野に来て…</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">B. 新緑×ヘルメット自撮り（代替）</div>
+      <span class="v-file">GX010277.MP4 / 250712 リバートレッキング</span>
+      <div class="v-reason">新緑の下、ヘルメット・ハーネス姿で手を振る。アウトドアな側面を強調したい場合。</div>
+      <div class="phone">
+        <div class="m-profile">
+          <div class="m-eyebrow">02 ─ 話す人</div>
+          <img class="m-profile-img" src="media/profile_alt.jpg" alt="">
+          <h2 class="m-h2">東京で鬱 →<br>安曇野へ移住して3年、<br>宿を <em>2軒</em> やってます</h2>
+          <div class="m-tags">
+            <span class="m-tag">三條桜芽（ouga）</span>
+            <span class="m-tag">Pack Vacation 代表</span>
+            <span class="m-tag">東京→安曇野・3年目</span>
+          </div>
+          <p class="m-p">東京で働いていた20代、鬱になりました。逃げるように安曇野に来て…</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== NIGHT ========== -->
+<div class="section-group">
+  <div class="sg-head">
+    <div class="sg-eyebrow">SECTION 03 ─ NIGHT CARD</div>
+    <div class="sg-title">夜の対話カード</div>
+    <div class="sg-desc">暗背景のカード内。食卓・暮らし・静けさ系</div>
+  </div>
+  <div class="variants">
+
+    <div class="variant">
+      <div class="v-label">A. 炭火のサンマ（推奨）</div>
+      <span class="v-file">GX010138.MP4 / 240910 サンマ</span>
+      <div class="v-reason">盛り付け完成のサンマ定食風。「お酒を飲みながら」の文脈にぴったり。</div>
+      <div class="phone">
+        <div class="m-night-wrap">
+          <div class="m-night-card">
+            <span class="m-b-time">THE NIGHT ─ 夜の対話</span>
+            <div class="m-b-icon">🍶</div>
+            <h3 class="m-night-h3">お酒を飲みながら、移住のリアル</h3>
+            <img class="m-night-img" src="media/night.jpg" alt="">
+            <p class="m-night-p">ゲストハウス灯のリビングで、宿のワインや日本酒を飲みながら。仕事はどうしてるか、家賃はいくらか、都会との落差は…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">B. 夕方の森・空撮（代替）</div>
+      <span class="v-file">DJI_0038.MP4 / 2601 北アルプス空撮</span>
+      <div class="v-reason">落葉林を低空で進む夕方、縦。「食」より「静けさの気配」を出したい場合。</div>
+      <div class="phone">
+        <div class="m-night-wrap">
+          <div class="m-night-card">
+            <span class="m-b-time">THE NIGHT ─ 夜の対話</span>
+            <div class="m-b-icon">🍶</div>
+            <h3 class="m-night-h3">お酒を飲みながら、移住のリアル</h3>
+            <img class="m-night-img" src="media/night_alt.jpg" alt="">
+            <p class="m-night-p">ゲストハウス灯のリビングで、宿のワインや日本酒を飲みながら。仕事はどうしてるか、家賃はいくらか、都会との落差は…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== MORNING ========== -->
+<div class="section-group">
+  <div class="sg-head">
+    <div class="sg-eyebrow">SECTION 04 ─ MORNING CARD</div>
+    <div class="sg-title">朝ツアーカード</div>
+    <div class="sg-desc">自然の中・早朝の清涼感。既存Focus Morning Tour素材も候補</div>
+  </div>
+  <div class="variants">
+
+    <div class="variant">
+      <div class="v-label">A. 朝日・雲海・尾根道（推奨）</div>
+      <span class="v-file">GX010680.MP4 / 251011 鹿島槍</span>
+      <div class="v-reason">逆光の朝日と雲海、枯れ草の尾根道。朝の希望感・光芒が美しい。</div>
+      <div class="phone">
+        <div class="m-morning-wrap">
+          <div class="m-morning-card">
+            <span class="m-b-time">THE MORNING ─ 朝ツアー</span>
+            <div class="m-m-icon">🌅</div>
+            <h3 class="m-morning-h3">自然の中を歩きながら、未来の話</h3>
+            <img class="m-morning-img" src="media/morning_alt.jpg" alt="">
+            <p class="m-morning-p">Pack Vacation の宿泊者限定ガイド「FOCUS MORNING TOUR」。朝、安曇野の自然の中を一緒に歩きます…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">B. 既存Focus Morning Tour写真（代替）</div>
+      <span class="v-file">既存LP素材 morning-tour-1.jpg</span>
+      <div class="v-reason">既存の商用クオリティ写真。「ツアー」ブランドとの連続性が出る。</div>
+      <div class="phone">
+        <div class="m-morning-wrap">
+          <div class="m-morning-card">
+            <span class="m-b-time">THE MORNING ─ 朝ツアー</span>
+            <div class="m-m-icon">🌅</div>
+            <h3 class="m-morning-h3">自然の中を歩きながら、未来の話</h3>
+            <img class="m-morning-img" src="media/morning_pro1.jpg" alt="">
+            <p class="m-morning-p">Pack Vacation の宿泊者限定ガイド「FOCUS MORNING TOUR」。朝、安曇野の自然の中を一緒に歩きます…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div style="text-align:center;padding:40px 20px;color:var(--mute);font-size:0.85rem;">
+  — 返信フォーマット例 —<br>
+  <code style="background:#fff;padding:4px 10px;border-radius:4px;display:inline-block;margin-top:8px;">HERO: A / PROFILE: B / NIGHT: A / MORNING: B</code>
+</div>
+
+</body>
+</html>
