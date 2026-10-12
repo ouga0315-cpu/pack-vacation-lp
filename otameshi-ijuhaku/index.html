@@ -46,16 +46,13 @@ a{color:inherit;}
 }
 .hero-media{
   position:absolute;inset:0;
-  background:
-    linear-gradient(180deg,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.45) 40%,rgba(0,0,0,0.85) 100%),
-    linear-gradient(135deg,#2d4525 0%,#4a6b3a 35%,#5c5340 70%,#2a2018 100%);
+  background-image:
+    linear-gradient(180deg,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.35) 40%,rgba(0,0,0,0.8) 100%),
+    url("media/hero.jpg");
   background-size:cover;
   background-position:center;
 }
-.hero-media::after{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(ellipse at 60% 15%,rgba(255,210,160,0.18),transparent 55%);
-}
+.hero-media::after{display:none;}
 .hero-inner{
   position:relative;height:100%;padding:40px 28px 48px;
   display:flex;flex-direction:column;justify-content:space-between;color:#fff;
@@ -138,15 +135,10 @@ p:last-child{margin-bottom:0;}
 .profile{background:var(--bg);}
 .profile-media{
   width:100%;aspect-ratio:4/5;max-width:320px;margin:0 auto 24px;
-  border-radius:12px;overflow:hidden;background:#8a9f6a;
-  background:linear-gradient(160deg,#6a8a5a 0%,#aa9a7a 60%,#8a6a4a 100%);
-  position:relative;
+  border-radius:12px;overflow:hidden;position:relative;
+  background:#2a2a2a;
 }
-.profile-media::after{
-  content:"photo";position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:0.3em;
-}
+.profile-media img{width:100%;height:100%;object-fit:cover;display:block;}
 .profile-tags{
   display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 20px;
 }
@@ -183,12 +175,9 @@ p:last-child{margin-bottom:0;}
   width:100%;aspect-ratio:16/10;border-radius:10px;margin:14px 0;
   background:linear-gradient(135deg,#4a6b3a,#8a6a4a);position:relative;overflow:hidden;
 }
-.benefit-media.morning{background:linear-gradient(135deg,#d4b78a 0%,#8a9f6a 60%,#4a6b5a 100%);}
-.benefit-media.night-img{background:linear-gradient(160deg,#1a1a2a 0%,#3a3a4a 60%,#5a4a3a 100%);}
-.benefit-media::after{
-  content:"photo";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  color:rgba(255,255,255,0.3);font-size:0.7rem;letter-spacing:0.3em;
-}
+.benefit-media.morning{background-image:url("media/morning_pro1.jpg");background-size:cover;background-position:center;}
+.benefit-media.night-img{background-image:url("media/night_dining_a.jpg");background-size:cover;background-position:center;}
+.benefit-media::after{display:none;}
 .vs-line{
   text-align:center;color:var(--mute);font-size:0.8rem;
   margin:12px 0;letter-spacing:0.2em;
@@ -332,7 +321,7 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
   <div class="eyebrow">02 ─ 話す人</div>
   <!-- 推奨素材: GX010210.MP4（ログハウス前で自撮り、最後に手を振る／G:\2024\2411\241109　あしゃんぽ\）
        代替: GX010277.MP4（新緑の下で自撮り、導入の語り向き） -->
-  <div class="profile-media"></div>
+  <div class="profile-media"><img src="media/profile_alt.jpg" alt="三條桜芽（ouga）"></div>
   <h2>東京で鬱 →<br>安曇野へ移住して3年、<br>宿を <em>2軒</em> やってます</h2>
   <div class="profile-tags">
     <span class="tag">三條桜芽（ouga）</span>
