@@ -16,11 +16,11 @@
   --surface:#FFFFFF;
   --ink:#1A1A18;
   --sub:#58544C;
-  --mute:#8A857A;
+  --mute:#6B655A;
   --line:#DED6C4;
   --accent:#5C7B3F;
   --accent-dark:#3C5A2A;
-  --warm:#C77A4A;
+  --warm:#8A4A1A;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -47,38 +47,39 @@ a{color:inherit;}
 .hero-media{
   position:absolute;inset:0;
   background:
-    linear-gradient(180deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.0) 30%,rgba(0,0,0,0.55) 100%),
-    linear-gradient(135deg,#4a6b3a 0%,#8a9f6a 40%,#d4b78a 70%,#8a6a4a 100%);
+    linear-gradient(180deg,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.45) 40%,rgba(0,0,0,0.85) 100%),
+    linear-gradient(135deg,#2d4525 0%,#4a6b3a 35%,#5c5340 70%,#2a2018 100%);
   background-size:cover;
   background-position:center;
 }
 .hero-media::after{
   content:"";position:absolute;inset:0;
-  background:radial-gradient(ellipse at 60% 20%,rgba(255,220,180,0.35),transparent 60%);
+  background:radial-gradient(ellipse at 60% 15%,rgba(255,210,160,0.18),transparent 55%);
 }
 .hero-inner{
   position:relative;height:100%;padding:40px 28px 48px;
   display:flex;flex-direction:column;justify-content:space-between;color:#fff;
 }
 .hero-brand{
-  font-size:0.7rem;letter-spacing:0.4em;opacity:0.85;
+  font-size:0.7rem;letter-spacing:0.4em;opacity:1;color:rgba(255,255,255,0.95);
 }
 .hero-copy{position:relative;}
 .hero-eyebrow{
   display:inline-block;font-size:0.75rem;letter-spacing:0.25em;
-  background:rgba(255,255,255,0.12);padding:5px 12px;border-radius:999px;
-  border:1px solid rgba(255,255,255,0.3);margin-bottom:16px;
+  background:rgba(255,255,255,0.18);padding:5px 12px;border-radius:999px;
+  border:1px solid rgba(255,255,255,0.45);margin-bottom:16px;
 }
 .hero-copy h1{
   font-family:"Noto Serif JP",serif;
   font-size:2rem;line-height:1.4;letter-spacing:0.05em;
   font-weight:600;margin-bottom:14px;
-  text-shadow:0 2px 20px rgba(0,0,0,0.3);
+  text-shadow:0 2px 20px rgba(0,0,0,0.6);
 }
 .hero-copy h1 .big{font-size:1.3em;display:block;margin:4px 0;}
 .hero-copy p{
-  font-size:0.9rem;opacity:0.95;line-height:1.9;
+  font-size:0.95rem;line-height:1.9;color:#fff;
   max-width:360px;
+  text-shadow:0 1px 12px rgba(0,0,0,0.5);
 }
 .hero-cta{
   margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;
@@ -232,7 +233,7 @@ p:last-child{margin-bottom:0;}
 .target-col h3{margin-top:0;}
 .target-col ul{padding-left:1.1em;}
 .target-col li{margin-bottom:8px;color:var(--sub);font-size:0.92rem;}
-.target-col.yes h3::before{content:"◎ ";color:var(--accent);}
+.target-col.yes h3::before{content:"◎ ";color:var(--accent-dark);}
 .target-col.no h3::before{content:"△ ";color:var(--mute);}
 
 /* 申込 */
