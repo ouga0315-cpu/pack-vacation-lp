@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安曇野おためし移住泊｜Pack Vacation</title>
+<meta name="description" content="移住、まず一回見に来ませんか。安曇野に移住して3年、宿を2軒やってる当事者がリアルを話します。ゲストハウス灯に泊まって、夜はお酒を飲みながら移住の本音を。朝ツアー付きも選べます。">
+<meta property="og:title" content="安曇野おためし移住泊｜移住、まず一回見に来ませんか">
+<meta property="og:description" content="安曇野に移住して3年、宿を2軒やってる当事者とお酒を飲みながら移住のリアルを話す1泊。8,000円〜。朝ツアー付きも選べます。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;
+  --surface:#FFFFFF;
+  --ink:#1A1A18;
+  --sub:#58544C;
+  --mute:#8A857A;
+  --line:#DED6C4;
+  --accent:#5C7B3F;
+  --accent-dark:#3C5A2A;
+  --warm:#C77A4A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.9;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:560px;margin:0 auto;background:var(--bg);}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+
+/* HERO */
+.hero{
+  position:relative;
+  height:92vh;
+  min-height:560px;
+  overflow:hidden;
+  background:#2a2520;
+}
+.hero-media{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.0) 30%,rgba(0,0,0,0.55) 100%),
+    linear-gradient(135deg,#4a6b3a 0%,#8a9f6a 40%,#d4b78a 70%,#8a6a4a 100%);
+  background-size:cover;
+  background-position:center;
+}
+.hero-media::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 60% 20%,rgba(255,220,180,0.35),transparent 60%);
+}
+.hero-inner{
+  position:relative;height:100%;padding:40px 28px 48px;
+  display:flex;flex-direction:column;justify-content:space-between;color:#fff;
+}
+.hero-brand{
+  font-size:0.7rem;letter-spacing:0.4em;opacity:0.85;
+}
+.hero-copy{position:relative;}
+.hero-eyebrow{
+  display:inline-block;font-size:0.75rem;letter-spacing:0.25em;
+  background:rgba(255,255,255,0.12);padding:5px 12px;border-radius:999px;
+  border:1px solid rgba(255,255,255,0.3);margin-bottom:16px;
+}
+.hero-copy h1{
+  font-family:"Noto Serif JP",serif;
+  font-size:2rem;line-height:1.4;letter-spacing:0.05em;
+  font-weight:600;margin-bottom:14px;
+  text-shadow:0 2px 20px rgba(0,0,0,0.3);
+}
+.hero-copy h1 .big{font-size:1.3em;display:block;margin:4px 0;}
+.hero-copy p{
+  font-size:0.9rem;opacity:0.95;line-height:1.9;
+  max-width:360px;
+}
+.hero-cta{
+  margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:14px 22px;border-radius:999px;
+  font-size:0.9rem;font-weight:700;letter-spacing:0.05em;
+  text-decoration:none;cursor:pointer;border:none;
+  font-family:inherit;transition:transform 0.15s;
+}
+.btn:active{transform:scale(0.97);}
+.btn-primary{background:#fff;color:var(--accent-dark);}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.6);}
+.btn-arrow::after{content:"→";margin-left:4px;}
+
+/* SECTION BASE */
+section{padding:60px 28px;}
+.eyebrow{
+  font-size:0.72rem;letter-spacing:0.3em;color:var(--warm);
+  font-weight:700;margin-bottom:12px;
+}
+h2{
+  font-family:"Noto Serif JP",serif;
+  font-size:1.5rem;line-height:1.55;letter-spacing:0.03em;
+  font-weight:600;color:var(--ink);margin-bottom:22px;
+}
+h2 em{font-style:normal;color:var(--accent);}
+h3{
+  font-size:1.05rem;font-weight:700;color:var(--ink);margin:24px 0 10px;
+}
+p{color:var(--sub);margin-bottom:14px;}
+p:last-child{margin-bottom:0;}
+.lead{font-size:1rem;color:var(--ink);line-height:2;}
+.quote{
+  font-family:"Noto Serif JP",serif;
+  font-size:1.1rem;line-height:1.8;color:var(--ink);
+  border-left:3px solid var(--accent);padding:4px 0 4px 18px;
+  margin:20px 0;font-weight:500;
+}
+
+/* 共感 */
+.empathy{background:var(--surface);}
+.empathy-list{margin:20px 0;}
+.empathy-list li{
+  list-style:none;padding:12px 0 12px 32px;position:relative;
+  border-bottom:1px dashed var(--line);color:var(--ink);font-size:0.95rem;
+}
+.empathy-list li::before{
+  content:"";position:absolute;left:8px;top:22px;
+  width:8px;height:8px;border:1.5px solid var(--mute);border-radius:50%;
+}
+.empathy-list li:last-child{border-bottom:none;}
+
+/* ouga紹介 */
+.profile{background:var(--bg);}
+.profile-media{
+  width:100%;aspect-ratio:4/5;max-width:320px;margin:0 auto 24px;
+  border-radius:12px;overflow:hidden;background:#8a9f6a;
+  background:linear-gradient(160deg,#6a8a5a 0%,#aa9a7a 60%,#8a6a4a 100%);
+  position:relative;
+}
+.profile-media::after{
+  content:"photo";position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:0.3em;
+}
+.profile-tags{
+  display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 20px;
+}
+.tag{
+  font-size:0.75rem;padding:4px 12px;
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:999px;color:var(--sub);
+}
+
+/* 得られること */
+.benefit{background:var(--surface);}
+.benefit-card{
+  background:var(--bg);border-radius:14px;padding:24px 22px;margin-bottom:14px;
+  border:1px solid var(--line);
+}
+.benefit-card.night{
+  background:linear-gradient(160deg,#2a2a2a 0%,#1a1a1a 100%);color:#f5f2eb;
+  border:none;
+}
+.benefit-card.night h3,
+.benefit-card.night .b-time{color:#f5f2eb;}
+.benefit-card.night p{color:rgba(245,242,235,0.8);}
+.benefit-card.night .b-icon{background:rgba(255,255,255,0.1);color:#f5f2eb;}
+.b-time{
+  font-size:0.72rem;letter-spacing:0.25em;color:var(--warm);
+  font-weight:700;margin-bottom:4px;
+}
+.b-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:50%;background:var(--bg);
+  font-size:1.2rem;margin-bottom:12px;
+}
+.benefit-media{
+  width:100%;aspect-ratio:16/10;border-radius:10px;margin:14px 0;
+  background:linear-gradient(135deg,#4a6b3a,#8a6a4a);position:relative;overflow:hidden;
+}
+.benefit-media.morning{background:linear-gradient(135deg,#d4b78a 0%,#8a9f6a 60%,#4a6b5a 100%);}
+.benefit-media.night-img{background:linear-gradient(160deg,#1a1a2a 0%,#3a3a4a 60%,#5a4a3a 100%);}
+.benefit-media::after{
+  content:"photo";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  color:rgba(255,255,255,0.3);font-size:0.7rem;letter-spacing:0.3em;
+}
+.vs-line{
+  text-align:center;color:var(--mute);font-size:0.8rem;
+  margin:12px 0;letter-spacing:0.2em;
+}
+
+/* 料金 */
+.price{background:var(--bg);}
+.price-table{
+  background:var(--surface);border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);
+}
+.price-row{
+  padding:20px 22px;border-bottom:1px solid var(--line);
+}
+.price-row:last-child{border-bottom:none;}
+.price-row.option{background:#fafaf6;}
+.price-tag{
+  font-size:0.7rem;letter-spacing:0.2em;color:var(--warm);
+  font-weight:700;margin-bottom:4px;
+}
+.price-name{font-size:1rem;font-weight:700;margin-bottom:6px;}
+.price-amount{
+  font-family:"Noto Serif JP",serif;
+  font-size:1.8rem;font-weight:600;color:var(--ink);
+  letter-spacing:0.02em;
+}
+.price-amount small{font-size:0.6em;color:var(--mute);font-weight:400;}
+.price-detail{font-size:0.85rem;color:var(--sub);margin-top:8px;}
+.price-note{
+  font-size:0.78rem;color:var(--mute);margin-top:14px;line-height:1.8;
+  padding:0 4px;
+}
+
+/* ターゲット */
+.target{background:var(--surface);}
+.target-cols{display:grid;grid-template-columns:1fr;gap:14px;}
+.target-col{
+  background:var(--bg);border-radius:12px;padding:22px;border:1px solid var(--line);
+}
+.target-col.yes{border-color:var(--accent);background:#f0f4e8;}
+.target-col.no{background:#fafaf6;}
+.target-col h3{margin-top:0;}
+.target-col ul{padding-left:1.1em;}
+.target-col li{margin-bottom:8px;color:var(--sub);font-size:0.92rem;}
+.target-col.yes h3::before{content:"◎ ";color:var(--accent);}
+.target-col.no h3::before{content:"△ ";color:var(--mute);}
+
+/* 申込 */
+.apply{background:var(--bg);text-align:center;}
+.apply h2{text-align:center;}
+.apply-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:28px;}
+.apply-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:28px 22px;text-align:left;
+}
+.apply-card-eyebrow{font-size:0.72rem;letter-spacing:0.25em;color:var(--warm);font-weight:700;margin-bottom:6px;}
+.apply-card h3{margin-top:4px;}
+.apply-card p{font-size:0.88rem;}
+.apply-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:14px;padding:14px 20px;
+  background:var(--accent);color:#fff !important;text-decoration:none;
+  border-radius:999px;font-weight:700;font-size:0.95rem;
+}
+.apply-btn.ig{background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af);}
+.apply-btn::after{content:"→";}
+
+/* 注意事項 */
+.notice{background:var(--surface);padding-top:30px;padding-bottom:30px;}
+.notice ul{padding-left:1.2em;}
+.notice li{color:var(--sub);font-size:0.85rem;margin-bottom:8px;}
+
+/* FOOTER */
+footer{
+  background:#1a1a18;color:rgba(245,242,235,0.7);
+  padding:36px 28px;text-align:center;font-size:0.78rem;line-height:2;
+}
+footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
+.foot-brand{font-family:"Noto Serif JP",serif;font-size:1rem;color:#fff;letter-spacing:0.15em;margin-bottom:10px;}
+.foot-sub{opacity:0.5;font-size:0.72rem;letter-spacing:0.2em;margin-bottom:16px;}
+
+/* 緊急事態 - desktop */
+@media(min-width:600px){
+  .wrap{max-width:720px;box-shadow:0 0 60px rgba(0,0,0,0.08);}
+  .hero-copy h1{font-size:2.4rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- =========== HERO =========== -->
+<header class="hero">
+  <!-- 推奨素材: DJI_0023.MP4（宿前で手を振る本人→紅葉の森と山並みへ上昇／G:\2025\2511\251116　宿空撮\）
+       代替: DJI_0028.MP4（ログハウス前→有明山・安曇野を望む）
+       縦版が必要な場合: DJI_0018.MP4（紅葉の渓谷と雪の峰を望む空撮） -->
+  <div class="hero-media"></div>
+  <div class="hero-inner">
+    <div class="hero-brand">PACK VACATION</div>
+    <div class="hero-copy">
+      <span class="hero-eyebrow">安曇野おためし移住泊</span>
+      <h1>
+        移住、<span class="big">まず一回</span>
+        見に来ませんか
+      </h1>
+      <p>ネットの情報だけじゃ、たぶんわからない。<br>
+      3年前に移住して宿を2軒やってる当事者と、安曇野で1泊。<br>
+      夜はお酒を飲みながら、本音で話しましょう。</p>
+      <div class="hero-cta">
+        <a href="#apply" class="btn btn-primary btn-arrow">申し込む</a>
+        <a href="#plan" class="btn btn-outline">プランを見る</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =========== 共感 =========== -->
+<section class="empathy">
+  <div class="eyebrow">01 ─ こんな人へ</div>
+  <h2>「移住、気になる。<br>でも、一歩が踏み出せない」</h2>
+  <ul class="empathy-list">
+    <li>地方移住って、実際どうなんだろう</li>
+    <li>仕事・家・お金、現実が見えない</li>
+    <li>ネットの移住記事は、どこか他人事に見える</li>
+    <li>一度行ったけど、観光客として見ただけで終わった</li>
+    <li>「向いてる人」と「向いてない人」、本音を聞きたい</li>
+  </ul>
+  <p class="lead">
+    SNSやnoteで見る移住のストーリーは、ちょっときれいすぎたりする。<br>
+    こっちは、鬱で逃げるように東京を出て、安曇野で宿を2軒やってる当事者です。
+  </p>
+  <p class="lead">
+    一回、泊まりに来てください。<br>
+    お酒を飲みながら、ちゃんと本音で話します。
+  </p>
+</section>
+
+<!-- =========== ouga紹介 =========== -->
+<section class="profile" id="who">
+  <div class="eyebrow">02 ─ 話す人</div>
+  <!-- 推奨素材: GX010210.MP4（ログハウス前で自撮り、最後に手を振る／G:\2024\2411\241109　あしゃんぽ\）
+       代替: GX010277.MP4（新緑の下で自撮り、導入の語り向き） -->
+  <div class="profile-media"></div>
+  <h2>東京で鬱 →<br>安曇野へ移住して3年、<br>宿を <em>2軒</em> やってます</h2>
+  <div class="profile-tags">
+    <span class="tag">三條桜芽（ouga）</span>
+    <span class="tag">株式会社Pack Vacation 代表</span>
+    <span class="tag">東京→安曇野・3年目</span>
+  </div>
+  <p>
+    東京で働いていた20代、鬱になりました。
+    逃げるように安曇野に来て、気づいたら移住して宿を始めていました。
+    今は 民宿笹森家 と ゲストハウス灯 の2軒を運営しています。
+  </p>
+  <p>
+    移住コンサルタントではないので、「地方は素晴らしい」みたいな営業トークはしません。
+    冬は凍てつくし、仕事は自分で作らないと食えないし、知らない土地で孤独な夜もある。
+    そのうえで、ぼくはここに来てよかったと思っています。
+  </p>
+  <div class="quote">
+    「移住が目的なら、一番寒い2月に来るといい。<br>絶望できますよ、笑」
+  </div>
+  <p style="font-size:0.8rem;color:var(--mute);">— Instagram DMで実際に送った文</p>
+</section>
+
+<!-- =========== 得られること =========== -->
+<section class="benefit" id="plan">
+  <div class="eyebrow">03 ─ 得られること</div>
+  <h2>夜と朝、<br><em>2つの場</em>で話します</h2>
+
+  <!-- 夜カード -->
+  <div class="benefit-card night">
+    <span class="b-time">THE NIGHT ─ 夜の対話</span>
+    <div class="b-icon">🍶</div>
+    <h3>お酒を飲みながら、移住のリアル</h3>
+    <!-- 推奨素材: GX010138.MP4（盛り付け完成のサンマ定食風／G:\2024\2409\240910　サンマ\）
+         代替雰囲気: DJI_0038.MP4（夕方の静けさ、落葉林の低空／G:\2026_ショート動画\PackVacation\2601\北アルプス空撮\） -->
+    <div class="benefit-media night-img"></div>
+    <p>
+      ゲストハウス灯のリビングで、宿のワインや日本酒を飲みながら。
+      仕事はどうしてるか、家賃はいくらか、都会との落差は、
+      集落との付き合いは——。きれいごとなしで、聞きたいことを聞いてください。
+    </p>
+  </div>
+
+  <div class="vs-line">— 夜に話すのと、自然の中で話すのは、また違う —</div>
+
+  <!-- 朝カード -->
+  <div class="benefit-card">
+    <span class="b-time">THE MORNING ─ 朝ツアー（オプション）</span>
+    <div class="b-icon">🌅</div>
+    <h3>自然の中を歩きながら、未来の話</h3>
+    <!-- 推奨素材: DJI_0005.MP4（夜明け前、安曇野盆地の雲海と山並み／G:\2025\2511\251116 長峰、中綱\）
+         代替: GX010680.MP4（逆光の朝日と雲海、尾根道／G:\2025\2510\251011　鹿島槍\）
+         FOCUS MORNING TOUR素材: focus-morning-tour/p_alpen.jpg -->
+    <div class="benefit-media morning"></div>
+    <p>
+      Pack Vacation の宿泊者限定ガイド「FOCUS MORNING TOUR」。
+      朝、安曇野の自然の中を一緒に歩きます。
+      自然の中にいると、不思議と出てくる話がある。
+      「移住するか・しないか」より先の、もっと手前の話が出てきたりします。
+    </p>
+  </div>
+</section>
+
+<!-- =========== 料金 =========== -->
+<section class="price">
+  <div class="eyebrow">04 ─ 料金</div>
+  <h2>プランと料金</h2>
+
+  <div class="price-table">
+    <div class="price-row">
+      <div class="price-tag">BASE ─ 基本プラン</div>
+      <div class="price-name">1泊 + 夜の対話</div>
+      <div class="price-amount">8,000<small>円〜</small></div>
+      <div class="price-detail">
+        ・ゲストハウス灯 1泊（6,000円〜）<br>
+        ・夜の対話 +2,000円（お酒代込み・時間制限なし）
+      </div>
+    </div>
+    <div class="price-row option">
+      <div class="price-tag">OPTION ─ 追加</div>
+      <div class="price-name">Focus Morning Tour（朝ツアー）</div>
+      <div class="price-amount">+6,000<small>円〜</small></div>
+      <div class="price-detail">
+        早朝〜朝、安曇野の自然を一緒に歩く<br>
+        （所要2〜3時間・軽食付き）
+      </div>
+    </div>
+  </div>
+  <p class="price-note">
+    ※ 日程・空き状況・正確な金額は、ゲストハウス灯の空室状況と連動します。<br>
+    ※ 全室空いている日のみ受付（ougaが時間を確保する前提のため）。<br>
+    ※ 繁忙期は料金が変動する場合があります。
+  </p>
+  <div style="margin-top:20px;text-align:center;">
+    <a href="#apply" class="btn" style="background:var(--accent);color:#fff;">空き状況を確認する →</a>
+  </div>
+</section>
+
+<!-- =========== ターゲット =========== -->
+<section class="target">
+  <div class="eyebrow">05 ─ 線引き</div>
+  <h2>こんな人へ・<br>こんな人には合いません</h2>
+  <div class="target-cols">
+    <div class="target-col yes">
+      <h3>来てほしい人</h3>
+      <ul>
+        <li>移住を本気で検討している人</li>
+        <li>ふわっと興味があるだけの人（も歓迎）</li>
+        <li>ネットの移住記事に違和感を感じている人</li>
+        <li>当事者の本音を聞きたい人</li>
+        <li>一緒にお酒を飲める人（下戸でもOK）</li>
+      </ul>
+    </div>
+    <div class="target-col no">
+      <h3>合わないかもしれない人</h3>
+      <ul>
+        <li>「地方は癒し」みたいな結論を聞きたい人</li>
+        <li>移住コンサル的なアドバイスが欲しい人</li>
+        <li>ougaに営業・勧誘目的で来る人</li>
+        <li>静かに1泊したいだけの人（通常宿泊でどうぞ）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =========== 申込 =========== -->
+<section class="apply" id="apply">
+  <div class="eyebrow">06 ─ 申込</div>
+  <h2>まず、泊まりに来てください</h2>
+  <p>
+    LPのフォーム、またはInstagramのDMからご連絡ください。<br>
+    どちらでも大丈夫です。
+  </p>
+
+  <div class="apply-grid">
+    <div class="apply-card">
+      <div class="apply-card-eyebrow">OPTION 1</div>
+      <h3>申込フォーム</h3>
+      <p>
+        希望日程・プラン・ひとこと（移住への興味度など）を記入。
+        24時間以内にougaから返信します。
+      </p>
+      <a href="#form" class="apply-btn">フォームを開く</a>
+    </div>
+    <div class="apply-card">
+      <div class="apply-card-eyebrow">OPTION 2</div>
+      <h3>Instagram DM</h3>
+      <p>
+        気軽にDMからどうぞ。質問だけでもOK。<br>
+        「移住が目的なら2月に来るといい」みたいな返事をします（笑）。
+      </p>
+      <a href="https://instagram.com/ouga_packvacation" target="_blank" class="apply-btn ig">@ouga_packvacation</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========== 注意事項 =========== -->
+<section class="notice">
+  <div class="eyebrow">07 ─ 注意事項</div>
+  <h2 style="font-size:1.2rem;">お申込み前にご確認ください</h2>
+  <ul>
+    <li>ゲストハウス灯の全室が空いている日のみ受付します（ougaが時間を確保する前提のため）。</li>
+    <li>必ず事前連絡をお願いします。当日飛び込みは不可。</li>
+    <li>夜の対話は「相談」ではなく「雑談」の延長です。重い相談を期待しないでください。</li>
+    <li>朝ツアーは天候により内容変更・中止があります。</li>
+    <li>お酒が苦手な方はソフトドリンクでOKです。</li>
+    <li>キャンセルポリシーは通常の宿泊と同じ基準です。</li>
+  </ul>
+</section>
+
+<!-- =========== FOOTER =========== -->
+<footer>
+  <div class="foot-brand">PACK VACATION</div>
+  <div class="foot-sub">AZUMINO / NAGANO</div>
+  <div>
+    株式会社Pack Vacation<br>
+    代表：三條桜芽（ouga）<br>
+    <a href="https://instagram.com/ouga_packvacation" target="_blank">Instagram @ouga_packvacation</a>
+  </div>
+  <div style="margin-top:14px;font-size:0.7rem;opacity:0.5;">
+    © Pack Vacation. All rights reserved.
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
