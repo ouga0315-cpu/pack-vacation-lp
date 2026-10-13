@@ -259,10 +259,95 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
 .foot-brand{font-family:"Noto Serif JP",serif;font-size:1rem;color:#fff;letter-spacing:0.15em;margin-bottom:10px;}
 .foot-sub{opacity:0.5;font-size:0.72rem;letter-spacing:0.2em;margin-bottom:16px;}
 
-/* 緊急事態 - desktop */
+/* tablet */
 @media(min-width:600px){
   .wrap{max-width:720px;box-shadow:0 0 60px rgba(0,0,0,0.08);}
   .hero-copy h1{font-size:2.4rem;}
+}
+
+/* ==================== DESKTOP (>=900px) ==================== */
+@media(min-width:900px){
+  body{font-size:17px;}
+  .wrap{max-width:1120px;}
+
+  /* HERO : full-width + content left */
+  .hero{height:88vh;min-height:640px;}
+  .hero-inner{
+    padding:48px 80px 72px;
+    max-width:1120px;margin:0 auto;
+  }
+  .hero-copy{max-width:620px;}
+  .hero-copy h1{font-size:3rem;line-height:1.35;}
+  .hero-copy h1 .big{font-size:1.25em;}
+  .hero-copy p{font-size:1rem;max-width:520px;line-height:2;}
+  .hero-cta{margin-top:32px;}
+  .btn{padding:16px 30px;font-size:0.95rem;}
+
+  /* SECTIONS : larger padding + content column */
+  section{padding:100px 80px;}
+  .empathy, .profile, .benefit, .price, .target, .apply, .notice{
+    padding-left:max(80px, calc((100% - 1120px) / 2 + 80px));
+    padding-right:max(80px, calc((100% - 1120px) / 2 + 80px));
+  }
+  h2{font-size:2rem;line-height:1.5;margin-bottom:32px;}
+  .lead{font-size:1.05rem;}
+  .eyebrow{margin-bottom:16px;}
+
+  /* 02 PROFILE : image left, text right */
+  .profile .eyebrow,
+  .profile h2{max-width:860px;margin-left:auto;margin-right:auto;}
+  .profile-main{
+    display:grid;grid-template-columns:320px 1fr;gap:48px;
+    align-items:start;max-width:860px;margin:0 auto;
+  }
+  .profile-media{margin:0;max-width:none;}
+  .profile-text{min-width:0;}
+
+  /* 03 BENEFIT : 2 columns side by side */
+  .benefit .eyebrow,
+  .benefit > h2{text-align:center;}
+  .benefit-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:24px;
+    align-items:stretch;max-width:960px;margin:0 auto;
+  }
+  .benefit-card{margin-bottom:0;display:flex;flex-direction:column;}
+  .vs-line{display:none;}
+  .benefit-media{flex-shrink:0;}
+
+  /* 04 PRICE : centered, wider */
+  .price .eyebrow,
+  .price h2{text-align:center;}
+  .price-table{max-width:720px;margin:0 auto;}
+  .price-row{padding:28px 36px;}
+  .price-amount{font-size:2.2rem;}
+  .price-note{text-align:center;max-width:720px;margin:20px auto 0;}
+
+  /* 05 TARGET : 2 columns */
+  .target .eyebrow,
+  .target h2{text-align:center;}
+  .target-cols{
+    grid-template-columns:1fr 1fr;gap:24px;max-width:960px;margin:0 auto;
+  }
+  .target-col{padding:32px 28px;}
+
+  /* 06 APPLY : 2 cards side by side */
+  .apply-grid{
+    grid-template-columns:1fr 1fr;gap:24px;max-width:860px;margin:32px auto 0;
+  }
+  .apply-card{padding:36px 28px;}
+
+  /* 07 NOTICE */
+  .notice{max-width:860px;margin:0 auto;}
+  .notice h2{text-align:center;font-size:1.4rem;}
+
+  /* FOOTER */
+  footer{padding:48px 32px;font-size:0.85rem;}
+}
+
+/* ==================== Wide desktop (>=1200px) ==================== */
+@media(min-width:1200px){
+  .hero-copy h1{font-size:3.4rem;}
+  .benefit-media{aspect-ratio:16/9;}
 }
 </style>
 </head>
@@ -342,12 +427,15 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
     「移住が目的なら、一番寒い2月に来るといい。<br>絶望できますよ、笑」
   </div>
   <p style="font-size:0.8rem;color:var(--mute);">— Instagram DMで実際に送った文</p>
+  </div>
+  </div>
 </section>
 
 <!-- =========== 得られること =========== -->
 <section class="benefit" id="plan">
   <div class="eyebrow">03 ─ 得られること</div>
   <h2>夜と朝、<br><em>2つの場</em>で話します</h2>
+  <div class="benefit-grid">
 
   <!-- 夜カード -->
   <div class="benefit-card night">
@@ -381,6 +469,8 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
       自然の中にいると、不思議と出てくる話がある。
       「移住するか・しないか」より先の、もっと手前の話が出てきたりします。
     </p>
+  </div>
+
   </div>
 </section>
 
