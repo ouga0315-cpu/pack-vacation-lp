@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>安曇野おためし移住泊｜Pack Vacation</title>
-<meta name="description" content="移住、まず一回見に来ませんか。安曇野に移住して3年、宿を2軒やってる当事者がリアルを話します。ゲストハウス灯に泊まって、夜はお酒を飲みながら移住の本音を。朝ツアー付きも選べます。">
-<meta property="og:title" content="安曇野おためし移住泊｜移住、まず一回見に来ませんか">
-<meta property="og:description" content="安曇野に移住して3年、宿を2軒やってる当事者とお酒を飲みながら移住のリアルを話す1泊。8,000円〜。朝ツアー付きも選べます。">
+<title>暮らしのおためし｜安曇野・1日住んでみる｜Pack Vacation</title>
+<meta name="description" content="泊まるんじゃなく、1日住んでみる。移住3年目の宿屋と一緒にスーパーへ買い出しに行き、夜を過ごし、朝を迎える。安曇野の暮らしを、観光じゃない角度で体験する1泊。">
+<meta property="og:title" content="暮らしのおためし｜泊まるんじゃなく、1日住んでみる">
+<meta property="og:description" content="移住3年目の宿屋と一緒にスーパーへ行き、夜を過ごし、朝を迎える。観光じゃない安曇野の暮らしを体験する1泊。¥10,000〜。">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
@@ -260,6 +260,19 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
 .foot-brand{font-family:"Noto Serif JP",serif;font-size:1rem;color:#fff;letter-spacing:0.15em;margin-bottom:10px;}
 .foot-sub{opacity:0.5;font-size:0.72rem;letter-spacing:0.2em;margin-bottom:16px;}
 
+/* 1日の流れ */
+.timeline{position:relative;max-width:640px;margin:0 auto;padding-left:0;}
+.t-step{display:grid;grid-template-columns:72px 24px 1fr;gap:12px;align-items:start;padding-bottom:28px;position:relative;}
+.t-step::after{content:"";position:absolute;left:84px;top:28px;bottom:0;width:2px;background:var(--line);}
+.t-step:last-child::after{display:none;}
+.t-time{font-family:"Noto Serif JP",serif;font-size:0.9rem;color:var(--accent-dark);font-weight:600;padding-top:4px;letter-spacing:0.03em;}
+.t-dot{width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--surface);box-shadow:0 0 0 2px var(--accent);margin:7px 5px 0;position:relative;z-index:1;}
+.t-step.optional .t-dot{background:var(--warm);box-shadow:0 0 0 2px var(--warm);}
+.t-body h3{margin:0 0 6px;font-size:1rem;}
+.t-body p{color:var(--sub);font-size:0.88rem;margin:0;line-height:1.8;}
+.t-step.optional .t-body{background:#FAF6EE;border-left:3px solid var(--warm);padding:12px 14px;border-radius:0 8px 8px 0;}
+.t-step.optional .t-body h3{color:var(--warm);}
+
 /* tablet */
 @media(min-width:600px){
   .wrap{max-width:720px;box-shadow:0 0 60px rgba(0,0,0,0.08);}
@@ -304,16 +317,13 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
   .profile-media{margin:0;max-width:none;}
   .profile-text{min-width:0;}
 
-  /* 03 BENEFIT : 2 columns side by side */
+  /* 03 TIMELINE : centered */
   .benefit .eyebrow,
   .benefit > h2{text-align:center;}
-  .benefit-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:24px;
-    align-items:stretch;max-width:960px;margin:0 auto;
-  }
-  .benefit-card{margin-bottom:0;display:flex;flex-direction:column;}
-  .vs-line{display:none;}
-  .benefit-media{flex-shrink:0;}
+  .timeline{max-width:720px;}
+  .t-step{grid-template-columns:100px 24px 1fr;gap:18px;}
+  .t-step::after{left:112px;}
+  .t-time{font-size:1rem;}
 
   /* 04 PRICE : centered, wider */
   .price .eyebrow,
@@ -364,17 +374,16 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
   <div class="hero-inner">
     <div class="hero-brand">PACK VACATION</div>
     <div class="hero-copy">
-      <span class="hero-eyebrow">安曇野おためし移住泊</span>
+      <span class="hero-eyebrow">暮らしのおためし</span>
       <h1>
-        移住、<span class="big">まず一回</span>
-        見に来ませんか
+        泊まるんじゃなく、<span class="big">1日住んでみる</span>
       </h1>
-      <p>ネットの情報だけじゃ、たぶんわからない。<br>
-      3年前に移住して宿を2軒やってる当事者と、安曇野で1泊。<br>
-      夜はお酒を飲みながら、本音で話しましょう。</p>
+      <p>観光じゃ見えない安曇野の暮らしを、<br>
+      移住3年目の宿屋と1日まるごと。<br>
+      ツルヤの値段も、冬の寒さも、集落との距離も。</p>
       <div class="hero-cta">
         <a href="#apply" class="btn btn-primary btn-arrow">申し込む</a>
-        <a href="#plan" class="btn btn-outline">プランを見る</a>
+        <a href="#plan" class="btn btn-outline">1日の流れを見る</a>
       </div>
     </div>
   </div>
@@ -383,21 +392,22 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
 <!-- =========== 共感 =========== -->
 <section class="empathy">
   <div class="eyebrow">01 ─ こんな人へ</div>
-  <h2>「移住、気になる。<br>でも、一歩が踏み出せない」</h2>
+  <h2>観光で来ても、<br>結局「暮らし」はわからなかった。</h2>
   <ul class="empathy-list">
-    <li>地方移住って、実際どうなんだろう</li>
-    <li>仕事・家・お金、現実が見えない</li>
-    <li>ネットの移住記事は、どこか他人事に見える</li>
-    <li>一度行ったけど、観光客として見ただけで終わった</li>
-    <li>「向いてる人」と「向いてない人」、本音を聞きたい</li>
+    <li>移住ブログの「いいところ」だけ読んでも、生活は見えない</li>
+    <li>家賃相場は調べた。でも「どこで買い物する？」「ゴミ出しは？」が見えない</li>
+    <li>冬の寒さを文字で読んでも、実感がない</li>
+    <li>一度観光で来たけど、結局 宿のロビーから出なかった</li>
+    <li>本気で検討する前に、1日だけ「住む側」を体験したい</li>
   </ul>
   <p class="lead">
-    SNSやnoteで見る移住のストーリーは、ちょっときれいすぎたりする。<br>
-    こっちは、鬱で逃げるように東京を出て、安曇野で宿を2軒やってる当事者です。
+    SNSで見る移住ストーリーは「着いた後の感動」ばかり。<br>
+    でも暮らしは、スーパーのレジ並び、冬の洗面所の冷たさ、ゴミ当番、<br>
+    そういう地味なことで出来ています。
   </p>
   <p class="lead">
-    一回、泊まりに来てください。<br>
-    お酒を飲みながら、ちゃんと本音で話します。
+    一度、ougaの生活圏にお邪魔しに来ませんか。<br>
+    1日まるごと一緒に過ごせば、「住む」の輪郭が見えます。
   </p>
 </section>
 
@@ -419,9 +429,13 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
     今は 民宿笹森家 と ゲストハウス灯 の2軒を運営しています。
   </p>
   <p>
-    移住コンサルタントではないので、「地方は素晴らしい」みたいな営業トークはしません。
+    移住コンサルタントではないので、「移住すべき」みたいな営業はしません。
     冬は凍てつくし、仕事は自分で作らないと食えないし、知らない土地で孤独な夜もある。
     そのうえで、ぼくはここに来てよかったと思っています。
+  </p>
+  <p>
+    一緒に買い物に行って、スーパーの値段を見て、夜を過ごして、朝を迎える。
+    1日まるごと、ぼくの日常にお邪魔してもらう感じです。
   </p>
   <div class="quote">
     「移住が目的なら、一番寒い2月に来るといい。<br>絶望できますよ、笑」
@@ -431,81 +445,112 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
   </div>
 </section>
 
-<!-- =========== 得られること =========== -->
+<!-- =========== 1日の流れ =========== -->
 <section class="benefit" id="plan">
-  <div class="eyebrow">03 ─ 得られること</div>
-  <h2>夜と朝、<br><em>2つの場</em>で話します</h2>
-  <div class="benefit-grid">
+  <div class="eyebrow">03 ─ 1日の流れ</div>
+  <h2>15:00から翌10:00まで、<br><em>まるごとお邪魔します</em></h2>
 
-  <!-- 夜カード -->
-  <div class="benefit-card night">
-    <span class="b-time">THE NIGHT ─ 夜の対話</span>
-    <div class="b-icon">🍶</div>
-    <h3>お酒を飲みながら、移住のリアル</h3>
-    <!-- 推奨素材: GX010138.MP4（盛り付け完成のサンマ定食風／G:\2024\2409\240910　サンマ\）
-         代替雰囲気: DJI_0038.MP4（夕方の静けさ、落葉林の低空／G:\2026_ショート動画\PackVacation\2601\北アルプス空撮\） -->
-    <div class="benefit-media night-img"></div>
-    <p>
-      ゲストハウス灯のリビングで、宿のワインや日本酒を飲みながら。
-      仕事はどうしてるか、家賃はいくらか、都会との落差は、
-      集落との付き合いは——。きれいごとなしで、聞きたいことを聞いてください。
-    </p>
-  </div>
-
-  <div class="vs-line">— 夜に話すのと、自然の中で話すのは、また違う —</div>
-
-  <!-- 朝カード -->
-  <div class="benefit-card">
-    <span class="b-time">THE MORNING ─ 朝ツアー（オプション）</span>
-    <div class="b-icon">🌅</div>
-    <h3>自然の中を歩きながら、未来の話</h3>
-    <!-- 推奨素材: DJI_0005.MP4（夜明け前、安曇野盆地の雲海と山並み／G:\2025\2511\251116 長峰、中綱\）
-         代替: GX010680.MP4（逆光の朝日と雲海、尾根道／G:\2025\2510\251011　鹿島槍\）
-         FOCUS MORNING TOUR素材: focus-morning-tour/p_alpen.jpg -->
-    <div class="benefit-media morning"></div>
-    <p>
-      Pack Vacation の宿泊者限定ガイド「FOCUS MORNING TOUR」。
-      朝、安曇野の自然の中を一緒に歩きます。
-      自然の中にいると、不思議と出てくる話がある。
-      「移住するか・しないか」より先の、もっと手前の話が出てきたりします。
-    </p>
-  </div>
-
+  <div class="timeline">
+    <div class="t-step">
+      <div class="t-time">15:00</div>
+      <div class="t-dot"></div>
+      <div class="t-body">
+        <h3>チェックイン＆家ツアー</h3>
+        <p>ゲストハウス灯に到着。部屋の案内、設備、Wi-Fi、暖房の使い方。「移住したらこの家に住む感じ」で見てもらいます。</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-time">16:00</div>
+      <div class="t-dot"></div>
+      <div class="t-body">
+        <h3>一緒に買い出しへ（ツルヤ）</h3>
+        <p>移住者御用達のスーパー・ツルヤへ。品揃え、価格、東京と何が違うか。「ここで食材が揃うか」は暮らしの8割を決めます。<br>※ ougaの車で同行（片道約15分）</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-time">18:30</div>
+      <div class="t-dot"></div>
+      <div class="t-body">
+        <h3>夕食（各自 or 一緒に）</h3>
+        <p>買ってきた食材で、各自調理 または 一緒に。宿のキッチンは普通に使えます。「安曇野の夜ごはん」を自分で作る感覚を体験。<br>※ 食材費は実費精算（割り勘）。外で済ませてくるのもOK。</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-time">20:00</div>
+      <div class="t-dot"></div>
+      <div class="t-body">
+        <h3>灯のリビングで一緒に過ごす</h3>
+        <p>宿のお酒を飲みながら、ougaと雑談。相談というより、普通の夜。移住のリアルも、集落の話も、聞きたくなったら聞いてください。</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-time">翌 7:00</div>
+      <div class="t-dot"></div>
+      <div class="t-body">
+        <h3>朝の導線を一緒に</h3>
+        <p>コーヒー、朝の空気、周辺の散歩。「移住後の朝ってこんな感じ」を体感する時間。</p>
+      </div>
+    </div>
+    <div class="t-step optional">
+      <div class="t-time">7:30〜</div>
+      <div class="t-dot"></div>
+      <div class="t-body">
+        <h3>オプション：FOCUS MORNING TOUR</h3>
+        <p>宿泊者限定の早朝ガイドツアー。安曇野の自然の中を一緒に歩きます。<br>※ 天候・季節により実施可否あり。追加料金 ¥6,000（2名まで）</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-time">10:00</div>
+      <div class="t-dot"></div>
+      <div class="t-body">
+        <h3>チェックアウト</h3>
+        <p>見送って終了。「次に来るとしたら、どこを見るか」ぐらいの話ができたら上々です。</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- =========== 料金 =========== -->
 <section class="price">
   <div class="eyebrow">04 ─ 料金</div>
-  <h2>プランと料金</h2>
+  <h2>料金</h2>
 
   <div class="price-table">
     <div class="price-row">
-      <div class="price-tag">BASE ─ 基本プラン</div>
-      <div class="price-name">1泊 + 夜の対話</div>
-      <div class="price-amount">8,000<small>円〜</small></div>
+      <div class="price-tag">BASE ─ 暮らしのおためし</div>
+      <div class="price-name">1泊 + 生活体験（買い出し同行・夜・朝の導線）</div>
+      <div class="price-amount">10,000<small>円 / 1名</small></div>
+      <div class="price-amount" style="font-size:1.3rem;margin-top:4px;">12,000<small>円 / 2名</small></div>
       <div class="price-detail">
-        ・ゲストハウス灯 1泊（6,000円〜）<br>
-        ・夜の対話 +2,000円（お酒代込み・時間制限なし）
+        ・ゲストハウス灯 1泊：1名 ¥6,000 / 2名 ¥8,000<br>
+        ・生活体験：+¥4,000（人数問わず固定／ougaの時間代）
       </div>
     </div>
     <div class="price-row option">
-      <div class="price-tag">OPTION ─ 追加</div>
-      <div class="price-name">Focus Morning Tour（朝ツアー）</div>
-      <div class="price-amount">+6,000<small>円〜</small></div>
+      <div class="price-tag">OPTION ─ 追加できる朝</div>
+      <div class="price-name">FOCUS MORNING TOUR（朝ツアー）</div>
+      <div class="price-amount">+6,000<small>円 / 2名まで</small></div>
       <div class="price-detail">
-        早朝〜朝、安曇野の自然を一緒に歩く<br>
-        （所要2〜3時間・軽食付き）
+        早朝、安曇野の自然の中を一緒に歩く（所要2〜3時間・軽食付き）<br>
+        ※ 天候・季節により実施可否あり。中止時は追加料金も発生しません。
+      </div>
+    </div>
+    <div class="price-row" style="background:#F9F6EE;">
+      <div class="price-tag">NOTE ─ 食事について</div>
+      <div class="price-name">食材費は実費精算（または別途各自）</div>
+      <div class="price-detail" style="margin-top:6px;">
+        夕食は、一緒にツルヤで買い出し→宿のキッチンで調理（割り勘）<br>
+        もしくは「夕食は外で済ませてくる」でもOK。それも含めて暮らしの実演です。
       </div>
     </div>
   </div>
   <p class="price-note">
-    ※ 日程・空き状況・正確な金額は、ゲストハウス灯の空室状況と連動します。<br>
-    ※ 全室空いている日のみ受付（ougaが時間を確保する前提のため）。<br>
-    ※ 繁忙期は料金が変動する場合があります。
+    ※ ゲストハウス灯が全室空いている日のみ受付します（ougaが半日時間を確保する前提のため）。<br>
+    ※ 繁忙期は料金が変動する場合があります。<br>
+    ※ 3名以上をご希望の場合は別途ご相談ください。
   </p>
   <div style="margin-top:20px;text-align:center;">
-    <a href="#apply" class="btn" style="background:var(--accent);color:#fff;">空き状況を確認する →</a>
+    <a href="#apply" class="btn" style="background:var(--accent);color:#fff;">空き状況を問い合わせる →</a>
   </div>
 </section>
 
@@ -539,7 +584,7 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
 <!-- =========== 申込 =========== -->
 <section class="apply" id="apply">
   <div class="eyebrow">06 ─ 申込</div>
-  <h2>まず、泊まりに来てください</h2>
+  <h2>まず、1日住みに来てください</h2>
   <p>
     Instagramの DM からお気軽にご連絡ください。<br>
     予約フォームは準備中です。
@@ -564,10 +609,12 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
   <div class="eyebrow">07 ─ 注意事項</div>
   <h2 style="font-size:1.2rem;">お申込み前にご確認ください</h2>
   <ul>
-    <li>ゲストハウス灯の全室が空いている日のみ受付します（ougaが時間を確保する前提のため）。</li>
+    <li>ゲストハウス灯が全室空いている日のみ受付します（ougaが半日時間を確保する前提のため）。</li>
     <li>必ず事前連絡をお願いします。当日飛び込みは不可。</li>
-    <li>夜の対話は「相談」ではなく「雑談」の延長です。重い相談を期待しないでください。</li>
-    <li>朝ツアーは天候により内容変更・中止があります。</li>
+    <li>夜の時間は「相談」ではなく「雑談」の延長です。重い相談を期待しないでください。</li>
+    <li>FOCUS MORNING TOUR は天候・季節により実施できない場合があります。中止時は追加料金も発生しません。</li>
+    <li>食材費・入浴料・観光施設の入場料などは実費となります。</li>
+    <li>ツルヤ買い出しはougaの車で同行します。片道約15分。</li>
     <li>お酒が苦手な方はソフトドリンクでOKです。</li>
     <li>キャンセルポリシーは通常の宿泊と同じ基準です。</li>
   </ul>
