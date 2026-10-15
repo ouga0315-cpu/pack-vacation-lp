@@ -176,7 +176,7 @@ p:last-child{margin-bottom:0;}
   background:linear-gradient(135deg,#4a6b3a,#8a6a4a);position:relative;overflow:hidden;
 }
 .benefit-media.morning{background-image:url("media/morning_pro1.jpg");background-size:cover;background-position:center;}
-.benefit-media.night-img{background-image:url("media/night_dining_a.jpg");background-size:cover;background-position:center;}
+.benefit-media.night-img{background-image:url("media/night_dining_b.jpg");background-size:cover;background-position:center;}
 .benefit-media::after{display:none;}
 .vs-line{
   text-align:center;color:var(--mute);font-size:0.8rem;
@@ -229,6 +229,7 @@ p:last-child{margin-bottom:0;}
 .apply{background:var(--bg);text-align:center;}
 .apply h2{text-align:center;}
 .apply-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:28px;}
+.apply-single{max-width:520px;margin:28px auto 0;}
 .apply-card{
   background:var(--surface);border:1px solid var(--line);border-radius:14px;
   padding:28px 22px;text-align:left;
@@ -286,8 +287,8 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
   /* SECTIONS : larger padding + content column */
   section{padding:100px 80px;}
   .empathy, .profile, .benefit, .price, .target, .apply, .notice{
-    padding-left:max(80px, calc((100% - 1120px) / 2 + 80px));
-    padding-right:max(80px, calc((100% - 1120px) / 2 + 80px));
+    padding-left:80px;
+    padding-right:80px;
   }
   h2{font-size:2rem;line-height:1.5;margin-bottom:32px;}
   .lead{font-size:1.05rem;}
@@ -330,15 +331,14 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
   }
   .target-col{padding:32px 28px;}
 
-  /* 06 APPLY : 2 cards side by side */
-  .apply-grid{
-    grid-template-columns:1fr 1fr;gap:24px;max-width:860px;margin:32px auto 0;
-  }
-  .apply-card{padding:36px 28px;}
+  /* 06 APPLY : single card centered */
+  .apply-single{max-width:560px;margin:32px auto 0;}
+  .apply-card{padding:40px 32px;}
 
   /* 07 NOTICE */
-  .notice{max-width:860px;margin:0 auto;}
   .notice h2{text-align:center;font-size:1.4rem;}
+  .notice .eyebrow{text-align:center;}
+  .notice ul{max-width:720px;margin:0 auto;}
 
   /* FOOTER */
   footer{padding:48px 32px;font-size:0.85rem;}
@@ -541,25 +541,17 @@ footer a{color:rgba(245,242,235,0.9);text-decoration:underline;}
   <div class="eyebrow">06 ─ 申込</div>
   <h2>まず、泊まりに来てください</h2>
   <p>
-    LPのフォーム、またはInstagramのDMからご連絡ください。<br>
-    どちらでも大丈夫です。
+    Instagramの DM からお気軽にご連絡ください。<br>
+    予約フォームは準備中です。
   </p>
 
-  <div class="apply-grid">
+  <div class="apply-single">
     <div class="apply-card">
-      <div class="apply-card-eyebrow">OPTION 1</div>
-      <h3>申込フォーム</h3>
+      <div class="apply-card-eyebrow">CONTACT</div>
+      <h3>Instagram DM からご連絡ください</h3>
       <p>
-        希望日程・プラン・ひとこと（移住への興味度など）を記入。
-        24時間以内にougaから返信します。
-      </p>
-      <a href="#form" class="apply-btn">フォームを開く</a>
-    </div>
-    <div class="apply-card">
-      <div class="apply-card-eyebrow">OPTION 2</div>
-      <h3>Instagram DM</h3>
-      <p>
-        気軽にDMからどうぞ。質問だけでもOK。<br>
+        希望日程・プラン・ひとこと（移住への興味度・質問など）を気軽にDMで。<br>
+        24時間以内にougaから返信します。質問だけでもOK。<br>
         「移住が目的なら2月に来るといい」みたいな返事をします（笑）。
       </p>
       <a href="https://instagram.com/ouga_packvacation" target="_blank" class="apply-btn ig">@ouga_packvacation</a>
