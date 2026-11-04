@@ -389,8 +389,9 @@ gtag('config','G-6VJSJFMXPX',{page_version:'v2'});
     }
   },true);
 
-  /* 4. セクション到達 */
-  if('IntersectionObserver' in window){
+  /* 4. セクション到達 (DOM準備完了を待つ) */
+  function setupSectionObserver(){
+    if(!('IntersectionObserver' in window))return;
     var secFired={};
     var obs=new IntersectionObserver(function(entries){
       entries.forEach(function(en){
@@ -400,8 +401,13 @@ gtag('config','G-6VJSJFMXPX',{page_version:'v2'});
           gtag('event','section_view',{section:id,page_version:'v2'});
         }
       });
-    },{threshold:0.3});
+    },{threshold:0.2});
     document.querySelectorAll('section,header.fv').forEach(function(s){obs.observe(s);});
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',setupSectionObserver);
+  }else{
+    setupSectionObserver();
   }
 })();
 </script>
