@@ -241,6 +241,18 @@ p.lead{
 }
 @media(min-width:640px){.months-grid{grid-template-columns:repeat(3,1fr);}}
 @media(min-width:1024px){.months-grid{grid-template-columns:repeat(4,1fr);}}
+
+/* month-card をリンク化 */
+a.month-card{display:block;text-decoration:none;color:inherit;transition:transform .3s ease,box-shadow .3s ease;}
+a.month-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.08);}
+a.month-card .month-media::before{
+  content:"詳しく見る →";position:absolute;top:10px;right:10px;z-index:3;
+  background:rgba(255,255,255,0.92);color:var(--green);
+  padding:4px 10px;border-radius:12px;font-size:0.75rem;letter-spacing:0.05em;
+  opacity:0;transform:translateY(-4px);transition:opacity .3s ease,transform .3s ease;
+}
+a.month-card:hover .month-media::before{opacity:1;transform:translateY(0);}
+
 .month-card{
   background:var(--white);border-radius:12px;overflow:hidden;
   box-shadow:0 2px 12px rgba(0,0,0,0.04);
@@ -730,7 +742,7 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
           <p class="month-act">雪遊び、天体観察</p>
         </div>
       </div>
-      <div class="month-card">
+      <a class="month-card" href="month-01.html">
         <div class="month-media m-winter">
           <img src="images/month-01.jpg" alt="1月の安曇野">
           <div class="month-label">1月<small>JAN</small></div>
@@ -739,7 +751,7 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
           <p class="month-view">一面の雪、氷柱、ダイヤモンドダスト。北アルプスが最も美しい</p>
           <p class="month-act">雪遊び、雪見の温泉（近隣）</p>
         </div>
-      </div>
+      </a>
       <div class="month-card">
         <div class="month-media m-winter">
           <img src="images/month-02.jpg" alt="2月の安曇野">
