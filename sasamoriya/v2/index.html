@@ -319,6 +319,35 @@ footer .foot-brand{
   font-family:'Zen Old Mincho',serif;font-size:1rem;color:#fff;
   letter-spacing:0.2em;margin-bottom:10px;
 }
+
+/* ====================== 遷移中ローディングオーバーレイ ====================== */
+.nav-loader{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(42,31,24,0.92);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:20px;opacity:0;pointer-events:none;
+  transition:opacity 0.2s ease;
+}
+.nav-loader.show{opacity:1;pointer-events:auto;}
+.nav-loader-spinner{
+  width:42px;height:42px;
+  border:3px solid rgba(255,255,255,0.15);
+  border-top-color:var(--accent);
+  border-radius:50%;
+  animation:navspin 0.8s linear infinite;
+}
+.nav-loader-text{
+  font-family:'Zen Old Mincho',serif;color:#fff;
+  font-size:0.95rem;letter-spacing:0.15em;opacity:0.9;
+}
+.nav-loader-sub{
+  font-family:'Inter',sans-serif;color:rgba(255,255,255,0.55);
+  font-size:0.7rem;letter-spacing:0.25em;
+}
+@keyframes navspin{to{transform:rotate(360deg);}}
+@media(prefers-reduced-motion:reduce){
+  .nav-loader-spinner{animation:none;border-top-color:rgba(255,255,255,0.4);}
+}
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJSJFMXPX"></script>
@@ -574,5 +603,33 @@ gtag('config','G-6VJSJFMXPX',{page_version:'v2'});
   </div>
 </footer>
 
+
+<!-- 遷移中ローディングオーバーレイ -->
+<div class="nav-loader" id="navLoader" aria-hidden="true">
+  <div class="nav-loader-spinner"></div>
+  <div class="nav-loader-text">空室を確認しています</div>
+  <div class="nav-loader-sub">LOADING ...</div>
+</div>
+<script>
+(function(){
+  var loader=document.getElementById('navLoader');
+  if(!loader)return;
+  function showLoader(){loader.classList.add('show');loader.setAttribute('aria-hidden','false');}
+  function hideLoader(){loader.classList.remove('show');loader.setAttribute('aria-hidden','true');}
+  // カレンダー遷移・予約遷移リンクのクリックでローディング表示
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="availability-calendar"],a[href*="booking"],.btn-main,.cta-bar-btn,.contrast-photo');
+    if(a){
+      // 外部タブ or 修飾キー付きは除外
+      if(a.target==='_blank'||e.metaKey||e.ctrlKey||e.shiftKey)return;
+      showLoader();
+      // 保険: 8秒後に強制非表示（遷移しなかった場合）
+      setTimeout(hideLoader,8000);
+    }
+  });
+  // bfcache復元時にローダーを消す
+  window.addEventListener('pageshow',function(e){if(e.persisted)hideLoader();});
+})();
+</script>
 </body>
 </html>
