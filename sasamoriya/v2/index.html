@@ -320,6 +320,62 @@ footer .foot-brand{
   letter-spacing:0.2em;margin-bottom:10px;
 }
 </style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJSJFMXPX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-6VJSJFMXPX',{page_version:'v2'});
+
+/* --- Pack Vacation LP v2 カスタムイベント追跡 --- */
+(function(){
+  /* 1. スクロール深度 (25/50/75/100%) */
+  var scrollFired={};
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body;
+    var pct=Math.round((h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight)*100);
+    [25,50,75,100].forEach(function(t){
+      if(pct>=t&&!scrollFired[t]){scrollFired[t]=true;gtag('event','scroll_depth',{depth:t+'%',page_version:'v2'});}
+    });
+  },{passive:true});
+
+  /* 2. CTA クリック（カレンダー遷移） */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="availability-calendar"],.btn-main,.cta-bar-btn,.contrast-photo');
+    if(a){
+      var txt=(a.textContent||a.getAttribute('aria-label')||'').trim().slice(0,40);
+      var loc='other';
+      if(a.classList.contains('cta-bar-btn')) loc='fixed_bar';
+      else if(a.classList.contains('btn-main')) loc='book_section';
+      else if(a.classList.contains('contrast-photo')) loc='contrast_photo';
+      gtag('event','cta_click',{cta_text:txt,cta_location:loc,page_version:'v2'});
+    }
+  });
+
+  /* 3. 含まれるもの/備考 の開閉 */
+  document.addEventListener('toggle',function(e){
+    var el=e.target;
+    if(el && el.classList && el.classList.contains('details-block')){
+      gtag('event','details_toggle',{opened:el.open,page_version:'v2'});
+    }
+  },true);
+
+  /* 4. セクション到達 */
+  if('IntersectionObserver' in window){
+    var secFired={};
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        var id=en.target.id||en.target.className.split(' ')[0];
+        if(en.isIntersecting&&!secFired[id]){
+          secFired[id]=true;
+          gtag('event','section_view',{section:id,page_version:'v2'});
+        }
+      });
+    },{threshold:0.3});
+    document.querySelectorAll('section,header.fv').forEach(function(s){obs.observe(s);});
+  }
+})();
+</script>
 </head>
 <body>
 
