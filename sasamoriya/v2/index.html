@@ -104,6 +104,7 @@ p.lead{font-size:1rem;line-height:2;color:var(--ink-sub);max-width:620px;}
 .fv-host img{
   width:48px;height:48px;border-radius:50%;object-fit:cover;
   border:2px solid rgba(255,255,255,0.8);
+  cursor:default;pointer-events:none;
 }
 .fv-host .fv-host-text{font-size:0.78rem;line-height:1.5;opacity:0.9;}
 .fv-host .fv-host-text strong{display:block;font-weight:600;font-size:0.85rem;}
@@ -115,22 +116,25 @@ p.lead{font-size:1rem;line-height:2;color:var(--ink-sub);max-width:620px;}
   font-size:clamp(1.3rem,4.5vw,1.6rem);
   font-weight:600;line-height:1.55;margin-bottom:28px;letter-spacing:0.03em;
 }
-.facts-grid{display:grid;grid-template-columns:1fr;gap:14px;}
-@media(min-width:600px){.facts-grid{grid-template-columns:1fr 1fr;}}
+.facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(min-width:600px){.facts-grid{gap:14px;}}
 .fact{
   background:rgba(255,255,255,0.55);
   border:1px solid var(--line);border-radius:10px;
-  padding:18px 20px;
+  padding:14px 14px;
+  cursor:default;
 }
+@media(min-width:600px){.fact{padding:18px 20px;}}
 .fact-label{
   font-family:'Inter','Noto Sans JP',sans-serif;
   font-size:0.68rem;letter-spacing:0.25em;color:var(--accent);
   font-weight:600;margin-bottom:6px;text-transform:uppercase;
 }
 .fact-value{
-  font-family:'Zen Old Mincho',serif;font-size:1.05rem;
-  font-weight:600;line-height:1.55;color:var(--ink);
+  font-family:'Zen Old Mincho',serif;font-size:0.95rem;
+  font-weight:600;line-height:1.5;color:var(--ink);
 }
+@media(min-width:600px){.fact-value{font-size:1.05rem;}}
 .fact-sub{font-size:0.78rem;color:var(--ink-sub);margin-top:4px;line-height:1.7;}
 .facts-grid .fact.wide{grid-column:1/-1;}
 
@@ -160,6 +164,22 @@ p.lead{font-size:1rem;line-height:2;color:var(--ink-sub);max-width:620px;}
 }
 .suited .label-en{display:block;margin-bottom:6px;}
 .suited p{font-size:0.92rem;line-height:1.95;color:var(--ink);}
+
+.details-block{
+  margin-top:20px;background:rgba(255,255,255,0.55);
+  border:1px solid var(--line);border-radius:10px;overflow:hidden;
+}
+.details-block summary{
+  cursor:pointer;list-style:none;padding:16px 20px;
+  font-family:'Zen Old Mincho',serif;font-size:0.95rem;
+  color:var(--ink);font-weight:600;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  min-height:48px;
+}
+.details-block summary::-webkit-details-marker{display:none;}
+.details-block summary::after{content:"＋";color:var(--accent);font-size:1.3rem;transition:transform 0.2s;}
+.details-block[open] summary::after{content:"−";}
+.details-block .incl-grid{padding:0 16px 20px;margin-top:0;}
 
 /* ====================== 3. よくある宿はこう → この宿はこう ====================== */
 .contrast-sec{background:var(--paper);padding-top:72px;padding-bottom:72px;}
@@ -196,8 +216,14 @@ p.lead{font-size:1rem;line-height:2;color:var(--ink-sub);max-width:620px;}
 }
 .contrast-headline .accent{color:var(--accent);}
 .contrast-photo{
-  width:100%;aspect-ratio:16/10;border-radius:10px;overflow:hidden;
-  margin:16px 0 14px;
+  display:block;width:100%;aspect-ratio:16/10;border-radius:10px;overflow:hidden;
+  margin:16px 0 14px;position:relative;
+}
+.contrast-photo::after{
+  content:"空室を見る →";position:absolute;right:12px;bottom:12px;
+  background:rgba(42,31,24,0.85);color:#fff;
+  font-family:'Zen Old Mincho',serif;font-size:0.78rem;
+  padding:6px 12px;border-radius:999px;letter-spacing:0.08em;
 }
 .contrast-photo img{width:100%;height:100%;object-fit:cover;}
 .contrast-body{font-size:0.88rem;line-height:1.95;color:var(--ink-sub);max-width:560px;}
@@ -211,6 +237,7 @@ p.lead{font-size:1rem;line-height:2;color:var(--ink-sub);max-width:620px;}
 .host-face{
   width:120px;height:120px;border-radius:50%;overflow:hidden;
   border:3px solid rgba(255,255,255,0.15);
+  cursor:default;
 }
 .host-face img{width:100%;height:100%;object-fit:cover;}
 .host-sec .label-en{color:#D9B090;margin-bottom:12px;display:block;}
@@ -259,6 +286,7 @@ p.lead{font-size:1rem;line-height:2;color:var(--ink-sub);max-width:620px;}
   flex:1;min-width:0;
   font-family:'Zen Old Mincho',serif;font-size:0.95rem;
   line-height:1.4;letter-spacing:0.05em;
+  cursor:default;
 }
 .cta-bar-text small{
   display:block;font-family:'Inter',sans-serif;
@@ -281,13 +309,6 @@ p.lead{font-size:1rem;line-height:2;color:var(--ink-sub);max-width:620px;}
 main{padding-bottom:calc(var(--cta-bar-h) + 16px);}
 @media(min-width:600px){.cta-bar-text{font-size:1rem;}}
 
-/* ====================== フェードイン（軽量・初回のみ） ====================== */
-.fade-up{opacity:0;transform:translateY(16px);transition:opacity 0.3s ease,transform 0.3s ease;}
-.fade-up.visible{opacity:1;transform:translateY(0);}
-@media(prefers-reduced-motion:reduce){
-  .fade-up{opacity:1;transform:none;transition:none;}
-}
-
 /* ====================== フッター ====================== */
 footer{
   background:var(--dark);color:rgba(245,240,232,0.6);
@@ -309,8 +330,8 @@ footer .foot-brand{
   <div class="fv-img" role="img" aria-label="笹森家 外観（秋）"></div>
   <div class="fv-inner">
     <div class="fv-brand">SASAMORIYA / AZUMINO</div>
-    <h1 class="fv-title">森の中、<br>2LDK一棟<br>まるごと、<br>あなたたちだけで。</h1>
-    <p class="fv-sub">安曇野学者村の森の奥、他の客はいません。<br>鳥の声と風、焚き火と星空。</p>
+    <h1 class="fv-title">森の中、<br>一棟まるごと。</h1>
+    <p class="fv-sub">別荘地の森、1組限定の貸切。</p>
     <div class="fv-host">
       <img src="../images/host-ouga.jpg" alt="三條桜芽（ouga）">
       <div class="fv-host-text">
@@ -334,12 +355,12 @@ footer .foot-brand{
     <div class="fact">
       <div class="fact-label">Capacity</div>
       <div class="fact-value">1〜6名</div>
-      <div class="fact-sub">一棟貸切・人数問わず一律料金</div>
+      <div class="fact-sub">一棟貸切・人数一律</div>
     </div>
     <div class="fact">
       <div class="fact-label">Price</div>
-      <div class="fact-value"><span class="accent">¥21,800〜¥37,700</span></div>
-      <div class="fact-sub">1泊・一棟・税込（日によって変動）</div>
+      <div class="fact-value"><span class="accent">¥21,800〜</span></div>
+      <div class="fact-sub">1泊・一棟・税込</div>
     </div>
     <div class="fact">
       <div class="fact-label">Check-in</div>
@@ -348,39 +369,42 @@ footer .foot-brand{
     </div>
     <div class="fact">
       <div class="fact-label">Access</div>
-      <div class="fact-value">車 20分 / 駅 徒歩35分</div>
-      <div class="fact-sub">安曇野ICから車20分・安曇追分駅からタクシー10分</div>
-    </div>
-  </div>
-
-  <div class="incl-grid">
-    <div class="incl in">
-      <h3>含まれるもの</h3>
-      <ul>
-        <li>一棟貸切（2LDK・2寝室）</li>
-        <li>温泉を引いた浴室（2025年新設）</li>
-        <li>Wi-Fi・100インチホームシアター</li>
-        <li>フルキッチン（食器・調理器具一式）</li>
-        <li>BBQコンロ・庭700㎡</li>
-        <li>駐車場2台無料</li>
-      </ul>
-    </div>
-    <div class="incl out">
-      <h3>含まれないもの</h3>
-      <ul>
-        <li>食事（素泊まり）</li>
-        <li>炭・網（BBQ時はご持参）</li>
-        <li>調味料・歯ブラシ</li>
-        <li>ペット料金 ¥3,000/回</li>
-        <li>宿泊税 ¥200/人・泊</li>
-      </ul>
+      <div class="fact-value">車20分／<br>駅タクシー10分</div>
+      <div class="fact-sub">安曇野IC／JR安曇追分駅</div>
     </div>
   </div>
 
   <div class="suited">
     <span class="label-en">Fits for</span>
-    <p>家族・友人グループの貸切／ペット同伴／静かな場所で何もしない時間がほしい方／BBQ・星空を楽しみたい方。</p>
+    <p>家族・友人の貸切／ペット同伴／静けさを求める方／BBQ・星空を楽しみたい方。</p>
   </div>
+
+  <details class="details-block">
+    <summary><span>含まれるもの ／ 備考</span></summary>
+    <div class="incl-grid">
+      <div class="incl in">
+        <h3>含まれるもの</h3>
+        <ul>
+          <li>一棟貸切（2LDK・2寝室）</li>
+          <li>温泉を引いた浴室（2025年新設）</li>
+          <li>Wi-Fi・100インチホームシアター</li>
+          <li>フルキッチン一式</li>
+          <li>BBQコンロ・庭700㎡</li>
+          <li>駐車場2台無料</li>
+        </ul>
+      </div>
+      <div class="incl out">
+        <h3>備考・別途ご用意</h3>
+        <ul>
+          <li>素泊まりです（食事なし）</li>
+          <li>BBQは炭・網をご持参ください</li>
+          <li>調味料・歯ブラシは各自で</li>
+          <li>ペット同伴 +¥3,000／回</li>
+          <li>宿泊税 ¥200／人・泊（現地徴収）</li>
+        </ul>
+      </div>
+    </div>
+  </details>
 </section>
 
 <!-- ============================================================ -->
@@ -394,44 +418,44 @@ footer .foot-brand{
     </div>
 
     <!-- ① 間取り -->
-    <article class="contrast fade-up">
+    <article class="contrast">
       <div class="contrast-row">
-        <span class="common">よくある宿：画一的な客室が並ぶ</span>
+        <span class="common">よくある一棟貸し：写真映えする新築</span>
         <span class="arrow">→</span>
       </div>
       <span class="contrast-therefore">だから</span>
-      <h3 class="contrast-headline"><span class="accent">暮らしごと、1棟</span>お貸しします。</h3>
-      <div class="contrast-photo"><img src="../images/living-kitchen.jpg" alt="リビング・キッチン" loading="lazy"></div>
+      <h3 class="contrast-headline">築年数のある、<br><span class="accent">手触りのある</span>1棟。</h3>
+      <a href="../availability-calendar.html" class="contrast-photo" aria-label="空室カレンダーへ"><img src="../images/living-kitchen.jpg" alt="リビング・キッチン" loading="lazy"></a>
       <p class="contrast-body">
-        キッチン、ダイニング、リビング、2寝室、浴室。2LDKまるごと1組だけ。他のお客様とすれ違うことも、気を遣うこともありません。
+        2LDKのログハウス。新築の均質さではなく、年月ぶんの味のある木と、手を入れ続けた室内。他のお客様とすれ違うこともありません。
       </p>
     </article>
 
     <!-- ② 立地 -->
-    <article class="contrast fade-up">
+    <article class="contrast">
       <div class="contrast-row">
-        <span class="common">よくある宿：街中・駅前の便利な場所</span>
+        <span class="common">よくある別荘地：隣家との距離が近い</span>
         <span class="arrow">→</span>
       </div>
       <span class="contrast-therefore">だから</span>
-      <h3 class="contrast-headline">別荘地の<span class="accent">森の中</span>、<br>他の音は何もない。</h3>
-      <div class="contrast-photo"><img src="../images/exterior-autumn.jpg" alt="森の中の外観" loading="lazy"></div>
+      <h3 class="contrast-headline">森の中、<br><span class="accent">隣家が見えない</span>静けさ。</h3>
+      <a href="../availability-calendar.html" class="contrast-photo" aria-label="空室カレンダーへ"><img src="../images/exterior-autumn.jpg" alt="森の中の外観" loading="lazy"></a>
       <p class="contrast-body">
-        安曇野・学者村の別荘地。人通りも車通りもほぼありません。きこえてくるのは、森の揺らぎと、鳥の声。夜は満天の星が見えます。
+        安曇野・学者村の別荘地のなかでも、周囲は木立に囲まれ、隣の建物が見えない立地。きこえてくるのは、森の揺らぎと、鳥の声。
       </p>
     </article>
 
     <!-- ③ 過ごし方 -->
-    <article class="contrast fade-up">
+    <article class="contrast">
       <div class="contrast-row">
-        <span class="common">よくある宿：観光スケジュールに詰め込む</span>
+        <span class="common">よくある貸切：オーナーが遠隔</span>
         <span class="arrow">→</span>
       </div>
       <span class="contrast-therefore">だから</span>
-      <h3 class="contrast-headline"><span class="accent">「何もしない」</span>を、<br>ちゃんとやる宿。</h3>
-      <div class="contrast-photo"><img src="../images/atmosphere-wine.jpg" alt="くつろぎのダイニング" loading="lazy"></div>
+      <h3 class="contrast-headline">何かあれば、<br><span class="accent">すぐ相談できる</span>宿主がいる。</h3>
+      <a href="../availability-calendar.html" class="contrast-photo" aria-label="空室カレンダーへ"><img src="../images/atmosphere-wine.jpg" alt="くつろぎのダイニング" loading="lazy"></a>
       <p class="contrast-body">
-        BBQ、温泉を引いた浴室、100インチシアター、ワインとキッチン、700㎡の庭。ここから一歩も出ない1泊が、たぶん一番贅沢です。
+        オーナーのougaが安曇野に居住。設備の使い方・近隣のお店・突然の天候変化まで、Airbnbメッセージですぐ返信します。放置はしません。
       </p>
     </article>
   </div>
@@ -493,25 +517,6 @@ footer .foot-brand{
     © Pack Vacation. All rights reserved.
   </div>
 </footer>
-
-<script>
-// フェードイン（初回・0.3秒以内）
-(function(){
-  if(!('IntersectionObserver' in window)){
-    document.querySelectorAll('.fade-up').forEach(function(el){el.classList.add('visible');});
-    return;
-  }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
-    });
-  },{threshold:0.15,rootMargin:'0px 0px -5% 0px'});
-  document.querySelectorAll('.fade-up').forEach(function(el){io.observe(el);});
-})();
-</script>
 
 </body>
 </html>
