@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ゲストハウス灯｜安曇野・温泉つき個室の小さな宿</title>
+<meta name="description" content="北アルプスの麓・安曇野、築55年の古民家。温泉つきの個室で過ごす静かな一晩。1名¥6,000〜。ホストが対面でお迎えします。">
+<meta property="og:title" content="ゲストハウス灯｜安曇野・温泉つき個室の小さな宿">
+<meta property="og:description" content="築55年の古民家、温泉つき。ふすまで仕切った個室。1名¥6,000〜。">
+<meta property="og:image" content="../images/hero-reading.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ====================== 3色 + 3書体 ====================== */
+:root{
+  --bg:#F5F0E8;        /* 地色（アイボリー） */
+  --ink:#2A1F18;       /* 文字色（深いブラウン） */
+  --accent:#D97A3A;    /* アクセント（焚き火／CTA・強調語のみ） */
+  --ink-sub:rgba(42,31,24,0.68);
+  --line:rgba(42,31,24,0.14);
+  --paper:#EEE7D7;     /* 帯背景（地色から派生） */
+  --dark:#2A1F18;      /* 濃色帯（文字色と同じ） */
+  --cta-bar-h:72px;    /* 固定CTAバーの高さ */
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  /* 素材感: うっすら木目/和紙感（可読性を損なわない濃度） */
+  background-image:
+    radial-gradient(circle at 20% 20%,rgba(217,122,58,0.03),transparent 50%),
+    radial-gradient(circle at 80% 80%,rgba(42,31,24,0.03),transparent 50%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.12 0 0 0 0 0.09 0 0 0 0.04 0'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");
+  line-height:1.95;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+
+.serif{font-family:'Zen Old Mincho','Hiragino Mincho ProN',serif;}
+.label-en{
+  font-family:'Inter','Noto Sans JP',sans-serif;
+  font-size:0.68rem;letter-spacing:0.3em;font-weight:500;
+  text-transform:uppercase;color:var(--accent);
+}
+
+.accent{color:var(--accent);font-weight:700;}
+
+/* ====================== 共通 ====================== */
+.wrap{max-width:720px;margin:0 auto;padding:0 20px;}
+@media(min-width:900px){.wrap{max-width:900px;padding:0 32px;}}
+
+section{padding:64px 0;position:relative;}
+section.band{background:var(--paper);}
+section.band-dark{background:var(--dark);color:var(--bg);}
+section.band-dark .label-en{color:#D9B090;}
+
+.section-title{
+  font-family:'Zen Old Mincho','Hiragino Mincho ProN',serif;
+  font-size:clamp(1.5rem,5vw,2rem);
+  line-height:1.55;font-weight:600;margin:12px 0 24px;
+  letter-spacing:0.04em;
+}
+p.lead{font-size:1rem;line-height:2;color:var(--ink-sub);max-width:620px;}
+
+/* ====================== 1. ファーストビュー ====================== */
+.fv{
+  padding:0;position:relative;
+  min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;color:#fff;
+}
+.fv-img{
+  position:absolute;inset:0;z-index:0;
+  background:url('../images/hero-reading.jpg') center/cover no-repeat;
+}
+.fv-img::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.05) 40%,rgba(0,0,0,0.78) 100%);
+}
+.fv-inner{
+  position:relative;z-index:1;padding:40px 24px 56px;
+  max-width:720px;margin:0 auto;width:100%;
+}
+.fv-brand{font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.4em;opacity:0.9;margin-bottom:14px;}
+.fv-title{
+  font-family:'Zen Old Mincho',serif;
+  font-size:clamp(1.9rem,6.5vw,2.8rem);
+  line-height:1.5;font-weight:600;letter-spacing:0.06em;
+  text-shadow:0 2px 20px rgba(0,0,0,0.5);margin-bottom:14px;
+}
+.fv-sub{
+  font-size:0.95rem;line-height:1.9;max-width:460px;opacity:0.95;
+  text-shadow:0 1px 12px rgba(0,0,0,0.5);
+}
+.fv-host{
+  display:flex;align-items:center;gap:12px;margin-top:28px;
+}
+.fv-host img{
+  width:48px;height:48px;border-radius:50%;object-fit:cover;
+  border:2px solid rgba(255,255,255,0.8);
+  cursor:default;pointer-events:none;
+}
+.fv-host .fv-host-text{font-size:0.78rem;line-height:1.5;opacity:0.9;}
+.fv-host .fv-host-text strong{display:block;font-weight:600;font-size:0.85rem;}
+
+/* ====================== 2. 予約の迷いを消すブロック ====================== */
+.facts{padding-top:56px;padding-bottom:56px;}
+.facts h2{
+  font-family:'Zen Old Mincho',serif;
+  font-size:clamp(1.3rem,4.5vw,1.6rem);
+  font-weight:600;line-height:1.55;margin-bottom:28px;letter-spacing:0.03em;
+}
+.facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(min-width:600px){.facts-grid{gap:14px;}}
+.fact{
+  background:rgba(255,255,255,0.55);
+  border:1px solid var(--line);border-radius:10px;
+  padding:14px 14px;
+  cursor:default;
+}
+@media(min-width:600px){.fact{padding:18px 20px;}}
+.fact-label{
+  font-family:'Inter','Noto Sans JP',sans-serif;
+  font-size:0.68rem;letter-spacing:0.25em;color:var(--accent);
+  font-weight:600;margin-bottom:6px;text-transform:uppercase;
+}
+.fact-value{
+  font-family:'Zen Old Mincho',serif;font-size:0.95rem;
+  font-weight:600;line-height:1.5;color:var(--ink);
+}
+@media(min-width:600px){.fact-value{font-size:1.05rem;}}
+.fact-sub{font-size:0.78rem;color:var(--ink-sub);margin-top:4px;line-height:1.7;}
+.facts-grid .fact.wide{grid-column:1/-1;}
+
+.incl-grid{
+  display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px;
+}
+@media(min-width:600px){.incl-grid{grid-template-columns:1fr 1fr;}}
+.incl{
+  padding:18px 20px;border-radius:10px;
+  border:1px solid var(--line);background:rgba(255,255,255,0.55);
+}
+.incl h3{
+  font-family:'Zen Old Mincho',serif;font-size:1rem;font-weight:600;
+  margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);
+}
+.incl.in h3{color:var(--accent);}
+.incl ul{list-style:none;}
+.incl li{
+  font-size:0.86rem;padding:4px 0 4px 20px;position:relative;line-height:1.75;
+}
+.incl.in li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700;}
+.incl.out li::before{content:"—";position:absolute;left:0;color:var(--ink-sub);}
+
+.suited{
+  margin-top:24px;padding:18px 20px;border-radius:10px;
+  background:rgba(217,122,58,0.09);border-left:3px solid var(--accent);
+}
+.suited .label-en{display:block;margin-bottom:6px;}
+.suited p{font-size:0.92rem;line-height:1.95;color:var(--ink);}
+
+.details-block{
+  margin-top:20px;background:rgba(255,255,255,0.55);
+  border:1px solid var(--line);border-radius:10px;overflow:hidden;
+}
+.details-block summary{
+  cursor:pointer;list-style:none;padding:16px 20px;
+  font-family:'Zen Old Mincho',serif;font-size:0.95rem;
+  color:var(--ink);font-weight:600;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  min-height:48px;
+}
+.details-block summary::-webkit-details-marker{display:none;}
+.details-block summary::after{content:"＋";color:var(--accent);font-size:1.3rem;transition:transform 0.2s;}
+.details-block[open] summary::after{content:"−";}
+.details-block .incl-grid{padding:0 16px 20px;margin-top:0;}
+
+/* ====================== 3. よくある宿はこう → この宿はこう ====================== */
+.contrast-sec{background:var(--paper);padding-top:72px;padding-bottom:72px;}
+.contrast-head{margin-bottom:36px;}
+.contrast-head h2{
+  font-family:'Zen Old Mincho',serif;
+  font-size:clamp(1.5rem,5vw,2rem);font-weight:600;
+  line-height:1.6;letter-spacing:0.04em;
+}
+
+.contrast{margin-bottom:40px;}
+.contrast:last-child{margin-bottom:0;}
+.contrast-row{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  font-size:0.88rem;color:var(--ink-sub);margin-bottom:12px;
+}
+.contrast-row .common{
+  flex:1;min-width:140px;
+  font-family:'Zen Old Mincho',serif;font-size:0.95rem;
+}
+.contrast-row .arrow{
+  color:var(--accent);font-size:1.3rem;font-weight:700;
+  font-family:'Inter',sans-serif;
+}
+.contrast-therefore{
+  display:inline-block;font-family:'Inter',sans-serif;
+  font-size:0.68rem;letter-spacing:0.25em;color:var(--accent);
+  font-weight:600;margin-bottom:8px;text-transform:uppercase;
+}
+.contrast-headline{
+  font-family:'Zen Old Mincho',serif;
+  font-size:clamp(1.2rem,4.2vw,1.55rem);
+  font-weight:600;line-height:1.6;letter-spacing:0.03em;margin-bottom:18px;
+}
+.contrast-headline .accent{color:var(--accent);}
+.contrast-photo{
+  display:block;width:100%;aspect-ratio:16/10;border-radius:10px;overflow:hidden;
+  margin:16px 0 14px;position:relative;
+}
+.contrast-photo::after{
+  content:"空室を見る →";position:absolute;right:12px;bottom:12px;
+  background:rgba(42,31,24,0.85);color:#fff;
+  font-family:'Zen Old Mincho',serif;font-size:0.78rem;
+  padding:6px 12px;border-radius:999px;letter-spacing:0.08em;
+}
+.contrast-photo img{width:100%;height:100%;object-fit:cover;}
+.contrast-body{font-size:0.88rem;line-height:1.95;color:var(--ink-sub);max-width:560px;}
+
+/* ====================== 4. ouga一言 ====================== */
+.host-sec{background:var(--dark);color:var(--bg);padding:72px 0;}
+.host-inner{
+  display:grid;grid-template-columns:1fr;gap:24px;align-items:center;
+}
+@media(min-width:600px){.host-inner{grid-template-columns:120px 1fr;gap:28px;}}
+.host-face{
+  width:120px;height:120px;border-radius:50%;overflow:hidden;
+  border:3px solid rgba(255,255,255,0.15);
+  cursor:default;
+}
+.host-face img{width:100%;height:100%;object-fit:cover;}
+.host-sec .label-en{color:#D9B090;margin-bottom:12px;display:block;}
+.host-msg{
+  font-family:'Zen Old Mincho',serif;
+  font-size:clamp(1.05rem,3.8vw,1.3rem);
+  line-height:2;font-weight:500;letter-spacing:0.04em;
+}
+.host-name{
+  margin-top:16px;font-family:'Inter',sans-serif;
+  font-size:0.72rem;letter-spacing:0.25em;opacity:0.65;
+}
+
+/* ====================== 5. 予約導線 ====================== */
+.book-sec{padding:84px 0 96px;text-align:center;}
+.book-sec h2{
+  font-family:'Zen Old Mincho',serif;
+  font-size:clamp(1.5rem,5vw,2rem);font-weight:600;
+  line-height:1.6;letter-spacing:0.04em;margin-bottom:12px;
+}
+.book-sec p.lead{margin:0 auto 32px;text-align:center;}
+.btn-main{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:18px 36px;border-radius:999px;
+  background:var(--accent);color:#fff;
+  font-family:'Zen Old Mincho',serif;
+  font-size:1rem;font-weight:600;letter-spacing:0.1em;
+  min-height:48px;
+  box-shadow:0 4px 20px rgba(217,122,58,0.3);
+  transition:transform 0.15s,box-shadow 0.2s;
+}
+.btn-main:hover{box-shadow:0 6px 28px rgba(217,122,58,0.4);}
+.btn-main:active{transform:scale(0.97);}
+.btn-main::after{content:"→";font-weight:400;}
+
+/* ====================== 固定CTAバー ====================== */
+.cta-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:100;
+  background:var(--dark);color:var(--bg);
+  padding:12px 20px;min-height:var(--cta-bar-h);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  box-shadow:0 -4px 24px rgba(0,0,0,0.15);
+  padding-bottom:calc(12px + env(safe-area-inset-bottom));
+}
+.cta-bar-text{
+  flex:1;min-width:0;
+  font-family:'Zen Old Mincho',serif;font-size:0.95rem;
+  line-height:1.4;letter-spacing:0.05em;
+  cursor:default;
+}
+.cta-bar-text small{
+  display:block;font-family:'Inter',sans-serif;
+  font-size:0.65rem;letter-spacing:0.25em;color:#D9B090;
+  margin-bottom:2px;text-transform:uppercase;
+}
+.cta-bar-btn{
+  flex-shrink:0;display:inline-flex;align-items:center;gap:6px;
+  padding:14px 22px;border-radius:999px;
+  background:var(--accent);color:#fff;
+  font-family:'Zen Old Mincho',serif;
+  font-size:0.92rem;font-weight:600;letter-spacing:0.1em;
+  min-height:48px;
+  transition:background 0.2s;
+}
+.cta-bar-btn::after{content:"→";font-weight:400;}
+.cta-bar-btn:hover{background:#B76430;}
+
+/* 固定CTAバーぶんの下余白 */
+main{padding-bottom:calc(var(--cta-bar-h) + 16px);}
+@media(min-width:600px){.cta-bar-text{font-size:1rem;}}
+
+/* ====================== フッター ====================== */
+footer{
+  background:var(--dark);color:rgba(245,240,232,0.6);
+  text-align:center;padding:40px 24px 36px;font-size:0.78rem;
+}
+footer a{color:rgba(245,240,232,0.8);text-decoration:underline;}
+footer .foot-brand{
+  font-family:'Zen Old Mincho',serif;font-size:1rem;color:#fff;
+  letter-spacing:0.2em;margin-bottom:10px;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- 1. FIRST VIEW                                                 -->
+<!-- ============================================================ -->
+<header class="fv">
+  <div class="fv-img" role="img" aria-label="ゲストハウス灯 室内"></div>
+  <div class="fv-inner">
+    <div class="fv-brand">TOMOSHIBI / AZUMINO</div>
+    <h1 class="fv-title">温泉つきの<br>個室の宿。</h1>
+    <p class="fv-sub">築55年の古民家。ougaが対面でお迎えします。</p>
+    <div class="fv-host">
+      <img src="../../sasamoriya/images/host-ouga.jpg" alt="三條桜芽（ouga）">
+      <div class="fv-host-text">
+        <strong>宿主 / ouga</strong>
+        安曇野移住3年目。宿を2軒運営
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================ -->
+<!-- 2. 予約の迷いを消すブロック                                   -->
+<!-- ============================================================ -->
+<section class="facts wrap">
+  <span class="label-en">For your booking</span>
+  <h2>予約の前に、<br>知っておいてほしいこと</h2>
+
+  <div class="facts-grid">
+    <div class="fact">
+      <div class="fact-label">Capacity</div>
+      <div class="fact-value">2名部屋 /<br>4名部屋</div>
+      <div class="fact-sub">それぞれ鍵付き個室</div>
+    </div>
+    <div class="fact">
+      <div class="fact-label">Price</div>
+      <div class="fact-value"><span class="accent">¥6,000〜</span></div>
+      <div class="fact-sub">1名・1泊・税込</div>
+    </div>
+    <div class="fact">
+      <div class="fact-label">Check-in</div>
+      <div class="fact-value">15:00 〜 22:00</div>
+      <div class="fact-sub">対面でお迎え／CO 10:00</div>
+    </div>
+    <div class="fact">
+      <div class="fact-label">Access</div>
+      <div class="fact-value">無料送迎<br>あります</div>
+      <div class="fact-sub">駅・登山口まで／時間相談</div>
+    </div>
+  </div>
+
+  <div class="suited">
+    <span class="label-en">Fits for</span>
+    <p>北アルプス登山の拠点／バックパッカー・ソロ旅／外国人旅行者／温泉と静けさを求める方。</p>
+  </div>
+
+  <details class="details-block">
+    <summary><span>含まれるもの ／ 備考</span></summary>
+    <div class="incl-grid">
+      <div class="incl in">
+        <h3>含まれるもの</h3>
+        <ul>
+          <li>温泉つきの共用浴室（中房温泉引き）</li>
+          <li>Wi-Fi（居室・ダイニング）</li>
+          <li>共用フルキッチン一式</li>
+          <li>共用ダイニング・リビング</li>
+          <li>駅・登山口への無料送迎</li>
+          <li>駐車場2台無料・登山中の荷物預かり無料</li>
+        </ul>
+      </div>
+      <div class="incl out">
+        <h3>備考・別途ご用意</h3>
+        <ul>
+          <li>素泊まりです（食事なし）</li>
+          <li>調味料・歯ブラシ・寝間着は各自で</li>
+          <li>ペット不可（介助動物のみ可）</li>
+          <li>未就学児の宿泊はお断りしています</li>
+          <li>宿泊税 ¥200／人・泊（現地徴収）</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================ -->
+<!-- 3. よくある宿はこう → この宿はこう ×3                         -->
+<!-- ============================================================ -->
+<section class="contrast-sec">
+  <div class="wrap">
+    <div class="contrast-head">
+      <span class="label-en">Why sasamoriya</span>
+      <h2>よくある宿と、<br>ここの違い</h2>
+    </div>
+
+    <!-- ① 間取り -->
+    <article class="contrast">
+      <div class="contrast-row">
+        <span class="common">よくあるゲストハウス：ドミトリー・相部屋</span>
+        <span class="arrow">→</span>
+      </div>
+      <span class="contrast-therefore">だから</span>
+      <h3 class="contrast-headline">ふすまで仕切った、<br><span class="accent">自分だけの</span>個室。</h3>
+      <a href="../availability-calendar.html" class="contrast-photo" aria-label="空室カレンダーへ"><img src="../images/room-2bed.jpg" alt="和室の個室" loading="lazy"></a>
+      <p class="contrast-body">
+        2名部屋と4名部屋、それぞれ鍵付きの個室。ふすま一枚の仕切りですが、ほどよい距離感のある「ひとりの時間」が持てます。
+      </p>
+    </article>
+
+    <!-- ② 立地 -->
+    <article class="contrast">
+      <div class="contrast-row">
+        <span class="common">よくある温泉：大浴場で他人と入浴</span>
+        <span class="arrow">→</span>
+      </div>
+      <span class="contrast-therefore">だから</span>
+      <h3 class="contrast-headline">温泉浴室は<br><span class="accent">一組貸切制</span>。</h3>
+      <a href="../availability-calendar.html" class="contrast-photo" aria-label="空室カレンダーへ"><img src="../images/lifestyle-bunk.jpg" alt="温泉つきの浴室" loading="lazy"></a>
+      <p class="contrast-body">
+        中房温泉から引いた本物の温泉を、宿泊者とホストで交代の貸切制で。他のお客様と同時に入ることはありません。15時から23時まで。
+      </p>
+    </article>
+
+    <!-- ③ 過ごし方 -->
+    <article class="contrast">
+      <div class="contrast-row">
+        <span class="common">よくあるゲストハウス：セルフCI・鍵box</span>
+        <span class="arrow">→</span>
+      </div>
+      <span class="contrast-therefore">だから</span>
+      <h3 class="contrast-headline">ougaが玄関で、<br><span class="accent">対面でお迎え</span>します。</h3>
+      <a href="../availability-calendar.html" class="contrast-photo" aria-label="空室カレンダーへ"><img src="../images/room-4bed.jpg" alt="4名部屋" loading="lazy"></a>
+      <p class="contrast-body">
+        ホストのougaが到着時に玄関でお出迎えし、お部屋・設備・鍵の使い方を直接ご案内します。日本語・英語対応。
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 4. 本人の一言＋顔写真                                          -->
+<!-- ============================================================ -->
+<section class="host-sec">
+  <div class="wrap host-inner">
+    <div class="host-face">
+      <img src="../../sasamoriya/images/host-ouga.jpg" alt="三條桜芽（ouga）">
+    </div>
+    <div>
+      <span class="label-en">Host's note</span>
+      <p class="host-msg">
+        北アルプスに登る前、下山した後。<br>
+        静かに整う一晩を、この小さな宿で<br>
+        お渡しできればと思っています。
+      </p>
+      <div class="host-name">SANJO OUGA ／ PACK VACATION</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 5. 予約導線                                                    -->
+<!-- ============================================================ -->
+<section class="book-sec wrap">
+  <span class="label-en">Book your stay</span>
+  <h2>空室を見る</h2>
+  <p class="lead">カレンダーから日付を選んで予約できます。<br>直販なのでOTA手数料ぶんお得です。</p>
+  <a href="../availability-calendar.html" class="btn-main">空室を見る / 予約する</a>
+</section>
+
+</main>
+
+<!-- ============================================================ -->
+<!-- 固定CTAバー                                                    -->
+<!-- ============================================================ -->
+<div class="cta-bar">
+  <div class="cta-bar-text">
+    <small>TOMOSHIBI</small>
+    温泉つきの個室の宿
+  </div>
+  <a href="../availability-calendar.html" class="cta-bar-btn">空室を見る</a>
+</div>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                        -->
+<!-- ============================================================ -->
+<footer>
+  <div class="foot-brand">TOMOSHIBI</div>
+  <address style="font-style:normal;line-height:1.8;">
+    ゲストハウス 灯 ／ 株式会社Pack Vacation<br>
+    〒399-8301 長野県安曇野市穂高有明7403-30
+  </address>
+  <div style="opacity:0.5;font-size:0.7rem;margin-top:16px;letter-spacing:0.1em;">
+    © Pack Vacation. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
