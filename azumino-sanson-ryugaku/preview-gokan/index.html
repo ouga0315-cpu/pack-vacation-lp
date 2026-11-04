@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>五感カード 候補プレビュー</title>
+<style>
+  :root{--ink:#2b2623;--mute:#6b6058;--accent:#e8826b;--green:#2d4a3a;--ivory:#f5f1e8;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Noto Sans JP",system-ui,sans-serif;color:var(--ink);background:#faf9f6;line-height:1.75;padding:24px 16px 80px;}
+  h1{font-family:"Noto Serif JP",serif;font-size:1.3rem;letter-spacing:0.08em;color:var(--green);margin-bottom:10px;font-weight:600;}
+  .lead{font-size:0.95rem;color:var(--mute);margin-bottom:28px;max-width:720px;line-height:2;}
+  .lead strong{color:var(--ink);}
+  .card-copy{background:var(--ivory);border-radius:10px;padding:16px 20px;margin-bottom:32px;max-width:720px;}
+  .card-copy small{display:block;color:var(--accent);letter-spacing:0.2em;font-weight:700;font-size:0.65rem;margin-bottom:6px;}
+  .card-copy h3{font-family:"Noto Serif JP",serif;font-size:1.05rem;color:var(--green);font-weight:600;margin-bottom:8px;}
+  .card-copy p{font-size:0.85rem;color:var(--mute);}
+  .grid{display:grid;grid-template-columns:1fr;gap:28px;max-width:960px;}
+  @media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr);}}
+  .candidate{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,0.06);}
+  .candidate.current{outline:2px dashed #ccc;}
+  .candidate img{width:100%;height:280px;object-fit:cover;display:block;background:#eee;}
+  .candidate .body{padding:16px 18px 20px;}
+  .tag{display:inline-block;background:var(--accent);color:#fff;font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:0.05em;}
+  .tag.gray{background:#999;}
+  .candidate h4{font-family:"Noto Serif JP",serif;font-size:1.05rem;color:var(--green);margin:10px 0 6px;font-weight:600;}
+  .candidate .theme{font-size:0.78rem;color:var(--accent);font-weight:700;letter-spacing:0.08em;margin-bottom:6px;}
+  .candidate .desc{font-size:0.82rem;color:var(--mute);line-height:1.85;}
+  .footer{margin-top:40px;font-size:0.8rem;color:var(--mute);text-align:center;max-width:720px;margin-left:auto;margin-right:auto;line-height:2;}
+</style>
+</head>
+<body>
+  <h1>五感カード 写真候補</h1>
+  <p class="lead">
+    「<strong>03 五感を呼び覚ます学び</strong>」のカード写真の候補です。<br>
+    好みのIDを「<strong>Aで</strong>」「<strong>Dで</strong>」などで教えてください、本番LPに反映します。<br>
+    どれもしっくり来なければ「もっと別案」で別フォルダから追加探索します。
+  </p>
+
+  <div class="card-copy">
+    <small>LP上のコピー（参考）</small>
+    <h3>五感を呼び覚ます学び</h3>
+    <p>採る・作る・食べる・歩く・観察する。頭ではなく体で覚える学びの時間が、記憶に残ります。</p>
+  </div>
+
+  <div class="grid">
+    <div class="candidate">
+      <img src="A_食_川底のプリズム.jpg" alt="A">
+      <div class="body">
+        <span class="tag">A</span>
+        <h4>川底のプリズム</h4>
+        <div class="theme">観察 / 自然の光</div>
+        <p class="desc">湧水の川底を貫く光。「ただ見る」より「見つける」に近い、自然観察の象徴。採る・作るの前段「気づく」に合う。</p>
+      </div>
+    </div>
+
+    <div class="candidate">
+      <img src="B_歩_新緑の渓流.jpg" alt="B">
+      <div class="body">
+        <span class="tag">B</span>
+        <h4>新緑の渓流（人物あり）</h4>
+        <div class="theme">歩く / 五感全体</div>
+        <p class="desc">光あふれる新緑の中、川に入って歩く一枚。涼しさ・足裏の感触・水音まで想像できる。身体丸ごとの体験感。</p>
+      </div>
+    </div>
+
+    <div class="candidate">
+      <img src="C_探_森の小道.jpg" alt="C">
+      <div class="body">
+        <span class="tag">C</span>
+        <h4>森の小道・黄帽子</h4>
+        <div class="theme">歩く / 探る</div>
+        <p class="desc">森の静けさに踏み入る瞬間。「どこへ行くんだろう」と誘導される構図。空間の奥行きが安曇野の広さを示す。</p>
+      </div>
+    </div>
+
+    <div class="candidate">
+      <img src="D_食_子どもの食卓.jpg" alt="D">
+      <div class="body">
+        <span class="tag">D</span>
+        <h4>子どもの食卓</h4>
+        <div class="theme">作る / 食べる</div>
+        <p class="desc">子どもたち自身が囲む食卓。「食べる」を主役に。ただし屋内ショット（情景の文脈は少し薄め）。</p>
+      </div>
+    </div>
+
+    <div class="candidate current">
+      <img src="現状_スキレット焚き火.jpg" alt="現状">
+      <div class="body">
+        <span class="tag gray">現状</span>
+        <h4>肉と野菜のスキレット</h4>
+        <div class="theme">食べる（肉寄り）</div>
+        <p class="desc">現状写真。食材が肉中心で、採る→作るのストーリーが伝わりにくい。差し替え推奨。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    すべてPack Vacation撮影物件（©Pack Vacation）。<br>
+    追加の候補が必要なら、「もっと別案」「子どもの手元で」「野菜収穫で」等、方向性を指定してください。
+  </div>
+</body>
+</html>
