@@ -83,6 +83,27 @@ p.lead{
 .ph.dining{background:linear-gradient(160deg,#6a4a3a 0%,#9a7a5a 50%,#d8b890 100%);}
 .ph.portrait{background:linear-gradient(160deg,#4a6b5a 0%,#7a8a6a 50%,#b0a890 100%);}
 
+/* 画像化: すべてのメディア枠で object-fit:cover */
+.hero-bg img, .value-media img, .az-item img, .host-media img, .facility-main img, .facility-sub img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.month-media{position:relative;overflow:hidden;}
+.month-media img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+}
+.month-media .month-label{position:relative;z-index:2;}
+.month-media::after{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,0.55) 100%);
+}
+.months-footnote{
+  text-align:center;margin-top:32px;font-family:"Noto Serif JP",serif;
+  font-size:0.95rem;color:var(--sub);line-height:1.9;letter-spacing:0.05em;
+}
+.host-video img{width:100%;height:100%;object-fit:cover;display:block;}
+.host-video{position:relative;}
+.hero-bg{overflow:hidden;}
+
 /* HERO */
 .hero{
   position:relative;height:90vh;min-height:620px;overflow:hidden;
@@ -145,6 +166,16 @@ p.lead{
 .ov-label{font-size:0.7rem;letter-spacing:0.25em;color:var(--accent);font-weight:700;margin-bottom:10px;}
 .ov-value{font-family:"Noto Serif JP",serif;font-size:1.6rem;color:var(--green);font-weight:600;line-height:1.4;}
 .ov-sub{font-size:0.8rem;color:var(--mute);margin-top:4px;}
+
+
+/* OVERVIEW カメラテーマの一文 */
+.overview-camera-note{
+  margin-top:36px;text-align:center;font-family:"Noto Serif JP",serif;
+  font-size:1rem;line-height:2;color:var(--green);letter-spacing:0.08em;
+  padding:22px 20px;background:var(--ivory);border-radius:12px;
+  max-width:780px;margin-left:auto;margin-right:auto;
+}
+.overview-camera-note strong{color:var(--accent);font-weight:600;}
 
 /* SECTION 3: 3つの価値 */
 .values{background:var(--ivory);}
@@ -479,7 +510,7 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
 
 <!-- ============== SECTION 1 : HERO ============== -->
 <header class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg"><img src="images/hero-main.jpg" alt="安曇野・北アルプスの朝"></div>
   <div class="hero-inner">
     <div class="hero-brand">PACK VACATION × アノネ</div>
     <div class="hero-copy">
@@ -526,6 +557,8 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
         <div class="ov-sub">少人数制</div>
       </div>
     </div>
+
+    <p class="overview-camera-note">季節の移ろいを、自分の目で、自分のカメラで記録する1年間。<br>12か月後、あなたの中に<strong>「自分で見つけた安曇野」</strong>が残ります。</p>
   </div>
 </section>
 
@@ -537,7 +570,7 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
 
     <div class="values-grid">
       <div class="value-card">
-        <div class="value-media ph forest">写真: 森・子どもたち</div>
+        <div class="value-media"><img src="images/value-nature.jpg" alt="自然のなかで"></div>
         <div class="value-body">
           <span class="value-num">01</span>
           <h3>本物の自然体験</h3>
@@ -545,7 +578,7 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
         </div>
       </div>
       <div class="value-card">
-        <div class="value-media ph portrait">写真: 農家・職人との交流</div>
+        <div class="value-media"><img src="images/value-people.jpg" alt="地域の人との時間"></div>
         <div class="value-body">
           <span class="value-num">02</span>
           <h3>地域の人との出会い</h3>
@@ -553,7 +586,7 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
         </div>
       </div>
       <div class="value-card">
-        <div class="value-media ph wasabi">写真: 収穫・調理</div>
+        <div class="value-media"><img src="images/value-learn.jpg" alt="手を動かす学び"></div>
         <div class="value-body">
           <span class="value-num">03</span>
           <h3>五感を呼び覚ます学び</h3>
@@ -576,10 +609,10 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
     </p>
 
     <div class="azumino-grid">
-      <div class="az-item"><div class="ph alps">写真: 北アルプス</div><div class="az-caption">北アルプス</div></div>
-      <div class="az-item"><div class="ph wasabi">写真: わさび田</div><div class="az-caption">わさび田</div></div>
-      <div class="az-item"><div class="ph river">写真: 清流</div><div class="az-caption">清流</div></div>
-      <div class="az-item"><div class="ph rice">写真: 田園</div><div class="az-caption">田園</div></div>
+      <div class="az-item"><img src="images/azumino-alps.jpg" alt="北アルプス"><div class="az-caption">北アルプス</div></div>
+      <div class="az-item"><img src="images/azumino-wasabi.jpg" alt="わさび田"><div class="az-caption">わさび田</div></div>
+      <div class="az-item"><img src="images/azumino-river.jpg" alt="清流"><div class="az-caption">清流</div></div>
+      <div class="az-item"><img src="images/azumino-rice.jpg" alt="田園"><div class="az-caption">田園</div></div>
     </div>
   </div>
 </section>
@@ -590,23 +623,26 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
     <div class="section-eyebrow">MONTHS</div>
     <h2 class="section-title">毎月、違う安曇野が<br>待っています</h2>
     <p class="lead">
-      毎月のプログラムだからこそ、季節の変化を体で覚えられます。<br>
+      毎月のプログラムだからこそ、季節の移ろいを自分の目で、体で覚えられます。<br>
+      <strong>📷 その月の空気を、自分のカメラで一枚ずつ撮りためていく。</strong><br>
       1月は雪の中で、5月は水鏡の田の中で、10月は紅葉の中で。<br>
-      同じ場所でも、来る月によって見えるもの・手にするもの・食べるものが変わります。
+      同じ場所でも、来る月によって見えるもの・手にするもの・撮りたくなるものが変わります。
     </p>
 
     <div class="months-grid">
       <div class="month-card">
         <div class="month-media m-spring">
+          <img src="images/month-03.jpg" alt="3月の安曇野">
           <div class="month-label">3月<small>MAR</small></div>
         </div>
         <div class="month-body">
           <p class="month-view">まだ雪残る田畑、梅のつぼみ、朝霜</p>
-          <p class="month-act">味噌仕込みの仕上げ、山菜の芽吹き観察、焚き火</p>
+          <p class="month-act">山菜の芽吹き観察、焚き火</p>
         </div>
       </div>
       <div class="month-card">
         <div class="month-media m-spring">
+          <img src="images/month-04.jpg" alt="4月の安曇野">
           <div class="month-label">4月<small>APR</small></div>
         </div>
         <div class="month-body">
@@ -616,6 +652,7 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
       </div>
       <div class="month-card">
         <div class="month-media m-spring">
+          <img src="images/month-05.jpg" alt="5月の安曇野">
           <div class="month-label">5月<small>MAY</small></div>
         </div>
         <div class="month-body">
@@ -625,15 +662,17 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
       </div>
       <div class="month-card">
         <div class="month-media m-summer">
+          <img src="images/month-06.jpg" alt="6月の安曇野">
           <div class="month-label">6月<small>JUN</small></div>
         </div>
         <div class="month-body">
           <p class="month-view">稲が伸び始める、梅雨の霧、紫陽花と深い緑</p>
-          <p class="month-act">ホタル観察、梅仕事、雨の森歩き</p>
+          <p class="month-act">ホタル観察、雨の森歩き</p>
         </div>
       </div>
       <div class="month-card">
         <div class="month-media m-summer">
+          <img src="images/month-07.jpg" alt="7月の安曇野">
           <div class="month-label">7月<small>JUL</small></div>
         </div>
         <div class="month-body">
@@ -643,24 +682,27 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
       </div>
       <div class="month-card">
         <div class="month-media m-summer">
+          <img src="images/month-08.jpg" alt="8月の安曇野">
           <div class="month-label">8月<small>AUG</small></div>
         </div>
         <div class="month-body">
           <p class="month-view">稲穂が実り始める、ひまわり畑、満天の星空</p>
-          <p class="month-act">星空観察、燕岳登山、流しそうめん</p>
+          <p class="month-act">星空観察、夏山登山、流しそうめん</p>
         </div>
       </div>
       <div class="month-card">
         <div class="month-media m-autumn">
+          <img src="images/month-09.jpg" alt="9月の安曇野">
           <div class="month-label">9月<small>SEP</small></div>
         </div>
         <div class="month-body">
           <p class="month-view">稲穂が黄金に実り、朝霧が田に広がる</p>
-          <p class="month-act">稲刈り、そば打ち体験、キノコの季節入り</p>
+          <p class="month-act">稲刈り、夏山登山、森散策</p>
         </div>
       </div>
       <div class="month-card">
         <div class="month-media m-autumn">
+          <img src="images/month-10.jpg" alt="10月の安曇野">
           <div class="month-label">10月<small>OCT</small></div>
         </div>
         <div class="month-body">
@@ -670,41 +712,47 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
       </div>
       <div class="month-card">
         <div class="month-media m-autumn">
+          <img src="images/month-11.jpg" alt="11月の安曇野">
           <div class="month-label">11月<small>NOV</small></div>
         </div>
         <div class="month-body">
           <p class="month-view">山全体が紅葉のピーク、朝霜、落ち葉</p>
-          <p class="month-act">キノコ採り、焚き火、落ち葉のクラフト、燻製作り</p>
+          <p class="month-act">焚き火、落ち葉のクラフト</p>
         </div>
       </div>
       <div class="month-card">
         <div class="month-media m-winter">
+          <img src="images/month-12.jpg" alt="12月の安曇野">
           <div class="month-label">12月<small>DEC</small></div>
         </div>
         <div class="month-body">
           <p class="month-view">初雪、凍てつく空気、朝霧</p>
-          <p class="month-act">雪遊び、クリスマスピザ作り、天体観察</p>
+          <p class="month-act">雪遊び、天体観察</p>
         </div>
       </div>
       <div class="month-card">
         <div class="month-media m-winter">
+          <img src="images/month-01.jpg" alt="1月の安曇野">
           <div class="month-label">1月<small>JAN</small></div>
         </div>
         <div class="month-body">
           <p class="month-view">一面の雪、氷柱、ダイヤモンドダスト。北アルプスが最も美しい</p>
-          <p class="month-act">雪遊び、かまくら作り、雪見の温泉（近隣）</p>
+          <p class="month-act">雪遊び、雪見の温泉（近隣）</p>
         </div>
       </div>
       <div class="month-card">
         <div class="month-media m-winter">
+          <img src="images/month-02.jpg" alt="2月の安曇野">
           <div class="month-label">2月<small>FEB</small></div>
         </div>
         <div class="month-body">
           <p class="month-view">深い雪、白鳥飛来、凍てついた渓谷</p>
-          <p class="month-act">スノーシュー、白鳥観察（犀川）、味噌仕込み</p>
+          <p class="month-act">スノーシュー、白鳥観察（犀川）</p>
         </div>
       </div>
     </div>
+
+    <p class="months-footnote">1年を終える頃には、12枚の季節が、あなたの中に残ります。</p>
   </div>
 </section>
 
@@ -791,8 +839,8 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
 
     <div class="host-grid">
       <div>
-        <div class="host-media ph portrait">写真: ouga</div>
-        <div class="host-video">
+        <div class="host-media"><img src="images/host-portrait.jpg" alt="三條桜芽（Ouga）"></div>
+        <div class="host-video"><img src="images/host-video-thumb.jpg" alt="朝のアクティビティ">
           <div class="play">▶</div>
           <div>ougaさん自己紹介（1-2分）<br>※ 動画埋め込み予定</div>
         </div>
@@ -844,10 +892,10 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
     </p>
 
     <div class="facility-grid">
-      <div class="facility-main ph inn">写真: 灯 外観</div>
+      <div class="facility-main"><img src="images/facility-exterior.jpg" alt="ゲストハウス灯 外観"></div>
       <div class="facility-sub">
-        <div class="ph onsen">写真: 温泉</div>
-        <div class="ph dining">写真: ダイニング</div>
+        <div><img src="images/facility-onsen.jpg" alt="近隣の温泉"></div>
+        <div><img src="images/facility-dining.jpg" alt="灯のダイニング"></div>
       </div>
     </div>
 
