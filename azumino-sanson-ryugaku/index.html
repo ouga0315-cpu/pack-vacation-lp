@@ -204,6 +204,44 @@ p.lead{
 }
 .season-card p{font-size:0.88rem;color:var(--sub);line-height:1.85;}
 
+/* SECTION 5: 月別カレンダー（12か月版） */
+.months-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:40px;
+}
+@media(min-width:640px){.months-grid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:1024px){.months-grid{grid-template-columns:repeat(4,1fr);}}
+.month-card{
+  background:var(--white);border-radius:12px;overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,0.04);
+  display:flex;flex-direction:column;
+}
+.month-media{
+  height:120px;position:relative;display:flex;align-items:flex-end;
+}
+.month-label{
+  padding:10px 14px;
+  font-family:"Noto Serif JP",serif;font-size:1.3rem;font-weight:600;
+  color:rgba(255,255,255,0.98);text-shadow:0 1px 8px rgba(0,0,0,0.4);
+  letter-spacing:0.05em;line-height:1.2;
+}
+.month-label small{display:block;font-size:0.65rem;font-weight:400;letter-spacing:0.25em;opacity:0.85;margin-top:2px;}
+.month-body{padding:14px 16px 18px;flex:1;display:flex;flex-direction:column;gap:8px;}
+.month-view, .month-act{font-size:0.78rem;line-height:1.75;}
+.month-view{color:var(--sub);}
+.month-act{color:var(--ink);font-weight:500;}
+.month-view::before, .month-act::before{
+  display:inline-block;font-size:0.6rem;font-weight:700;letter-spacing:0.05em;
+  padding:2px 7px;border-radius:3px;margin-right:6px;vertical-align:1px;
+}
+.month-view::before{content:"眺め";background:var(--accent);color:#fff;}
+.month-act::before{content:"体験";background:var(--green);color:#fff;}
+/* 季節別グラデーション */
+.m-spring{background:linear-gradient(160deg,#F5B5CF 0%,#EFC9A5 60%,#E8D4A0 100%);}
+.m-summer{background:linear-gradient(160deg,#A8D49A 0%,#6FB07A 50%,#3F8450 100%);}
+.m-autumn{background:linear-gradient(160deg,#F2A456 0%,#D97A3A 50%,#A85628 100%);}
+.m-winter{background:linear-gradient(160deg,#F2F5F7 0%,#D0D8DE 60%,#A5B2BC 100%);}
+.m-winter .month-label{color:#2C3E50;text-shadow:0 1px 2px rgba(255,255,255,0.6);}
+
 /* SECTION 6: タイムライン */
 .timeline-sec{background:var(--white);}
 .timeline{margin-top:40px;max-width:720px;margin-left:auto;margin-right:auto;}
@@ -546,47 +584,124 @@ footer .foot-meta{opacity:0.5;font-size:0.72rem;margin-top:20px;}
   </div>
 </section>
 
-<!-- ============== SECTION 5 : 季節 ============== -->
+<!-- ============== SECTION 5 : 月別カレンダー ============== -->
 <section class="seasons">
   <div class="wrap">
-    <div class="section-eyebrow">SEASONS</div>
-    <h2 class="section-title">四季の安曇野、<br>12通りの顔</h2>
+    <div class="section-eyebrow">MONTHS</div>
+    <h2 class="section-title">毎月、違う安曇野が<br>待っています</h2>
     <p class="lead">
       毎月のプログラムだからこそ、季節の変化を体で覚えられます。<br>
+      1月は雪の中で、5月は水鏡の田の中で、10月は紅葉の中で。<br>
       同じ場所でも、来る月によって見えるもの・手にするもの・食べるものが変わります。
     </p>
 
-    <div class="seasons-grid">
-      <div class="season-card">
-        <div class="season-media ph spring">写真: 春</div>
-        <div class="season-body">
-          <span class="season-tag">SPRING ─ 春</span>
-          <h3>芽吹きの季節</h3>
-          <p>山菜採り・田植え・桜・新緑。冬が明け、里山が一斉に動き出す時期です。</p>
+    <div class="months-grid">
+      <div class="month-card">
+        <div class="month-media m-spring">
+          <div class="month-label">3月<small>MAR</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">まだ雪残る田畑、梅のつぼみ、朝霜</p>
+          <p class="month-act">味噌仕込みの仕上げ、山菜の芽吹き観察、焚き火</p>
         </div>
       </div>
-      <div class="season-card">
-        <div class="season-media ph summer">写真: 夏</div>
-        <div class="season-body">
-          <span class="season-tag">SUMMER ─ 夏</span>
-          <h3>水と光の季節</h3>
-          <p>川遊び・登山・星空・農業体験。安曇野の夏は湿気が少なく、外遊びに最適です。</p>
+      <div class="month-card">
+        <div class="month-media m-spring">
+          <div class="month-label">4月<small>APR</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">桜が咲き、田んぼの準備が始まる。北アルプスは残雪で白</p>
+          <p class="month-act">桜のお花見、山菜採り（フキノトウ・コゴミ）、春野菜の種まき</p>
         </div>
       </div>
-      <div class="season-card">
-        <div class="season-media ph autumn">写真: 秋</div>
-        <div class="season-body">
-          <span class="season-tag">AUTUMN ─ 秋</span>
-          <h3>実りの季節</h3>
-          <p>稲刈り・紅葉・キノコ・栗拾い。里山が最も忙しく、最も豊かな時期です。</p>
+      <div class="month-card">
+        <div class="month-media m-spring">
+          <div class="month-label">5月<small>MAY</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">田に水が張られ、水鏡に北アルプスの残雪が映る</p>
+          <p class="month-act">田植え、わさび田見学、新緑ハイキング</p>
         </div>
       </div>
-      <div class="season-card">
-        <div class="season-media ph winter">写真: 冬</div>
-        <div class="season-body">
-          <span class="season-tag">WINTER ─ 冬</span>
-          <h3>静けさの季節</h3>
-          <p>焚き火・雪遊び・味噌仕込み・星空。凍てつく寒さと、澄み切った空気を体感します。</p>
+      <div class="month-card">
+        <div class="month-media m-summer">
+          <div class="month-label">6月<small>JUN</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">稲が伸び始める、梅雨の霧、紫陽花と深い緑</p>
+          <p class="month-act">ホタル観察、梅仕事、雨の森歩き</p>
+        </div>
+      </div>
+      <div class="month-card">
+        <div class="month-media m-summer">
+          <div class="month-label">7月<small>JUL</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">田んぼが青々と、空に高い雲、中房川が最高の季節</p>
+          <p class="month-act">川遊び、キャニオニング、夏野菜収穫</p>
+        </div>
+      </div>
+      <div class="month-card">
+        <div class="month-media m-summer">
+          <div class="month-label">8月<small>AUG</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">稲穂が実り始める、ひまわり畑、満天の星空</p>
+          <p class="month-act">星空観察、燕岳登山、流しそうめん</p>
+        </div>
+      </div>
+      <div class="month-card">
+        <div class="month-media m-autumn">
+          <div class="month-label">9月<small>SEP</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">稲穂が黄金に実り、朝霧が田に広がる</p>
+          <p class="month-act">稲刈り、そば打ち体験、キノコの季節入り</p>
+        </div>
+      </div>
+      <div class="month-card">
+        <div class="month-media m-autumn">
+          <div class="month-label">10月<small>OCT</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">北アルプスの初冠雪、紅葉が山から降りてくる</p>
+          <p class="month-act">大王わさび農場見学、紅葉狩り、焼き芋</p>
+        </div>
+      </div>
+      <div class="month-card">
+        <div class="month-media m-autumn">
+          <div class="month-label">11月<small>NOV</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">山全体が紅葉のピーク、朝霜、落ち葉</p>
+          <p class="month-act">キノコ採り、焚き火、落ち葉のクラフト、燻製作り</p>
+        </div>
+      </div>
+      <div class="month-card">
+        <div class="month-media m-winter">
+          <div class="month-label">12月<small>DEC</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">初雪、凍てつく空気、朝霧</p>
+          <p class="month-act">雪遊び、クリスマスピザ作り、天体観察</p>
+        </div>
+      </div>
+      <div class="month-card">
+        <div class="month-media m-winter">
+          <div class="month-label">1月<small>JAN</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">一面の雪、氷柱、ダイヤモンドダスト。北アルプスが最も美しい</p>
+          <p class="month-act">雪遊び、かまくら作り、雪見の温泉（近隣）</p>
+        </div>
+      </div>
+      <div class="month-card">
+        <div class="month-media m-winter">
+          <div class="month-label">2月<small>FEB</small></div>
+        </div>
+        <div class="month-body">
+          <p class="month-view">深い雪、白鳥飛来、凍てついた渓谷</p>
+          <p class="month-act">スノーシュー、白鳥観察（犀川）、味噌仕込み</p>
         </div>
       </div>
     </div>
