@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="写真：室内 1">
+  <rect width="1200" height="800" fill="#D6D1C4"/>
+  <rect x="2" y="2" width="1196" height="796" fill="none" stroke="#B8B19F" stroke-width="2" stroke-dasharray="8 8"/>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+    font-family="Noto Sans JP, sans-serif" font-size="66" fill="#6E6A5E">写真：室内 1</text>
+</svg>
