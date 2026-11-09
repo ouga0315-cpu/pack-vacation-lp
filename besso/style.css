@@ -262,3 +262,107 @@ blockquote cite{
 .inns-pair figcaption strong{color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:16px;display:block;margin-bottom:4px}
 .inns-pair{margin-top:28px}
 .contact .inns-pair{margin-bottom:36px}
+
+
+/* ===== v4: 企業広告版の追加スタイル ===== */
+
+/* ヒーロー */
+.hero{text-align:center;margin-bottom:8px}
+.hero .eyebrow{
+  display:inline-block;
+  font-size:13px;letter-spacing:.14em;color:var(--sub);
+  padding:6px 14px;border:1px solid var(--line);border-radius:999px;
+  margin-bottom:28px;
+}
+.hero h1{margin-bottom:28px;line-height:1.55}
+.hero .lead{
+  font-size:16px;color:var(--ink);line-height:2;
+  margin-bottom:28px;
+}
+.hero .hero-offer{
+  margin-top:28px;padding:20px 20px;
+  background:var(--surface);border-radius:8px;
+  font-size:15px;line-height:1.95;color:var(--ink);
+  text-align:center;
+}
+.hero .hero-offer strong{font-weight:700;color:var(--accent)}
+@media(min-width:720px){
+  .hero .hero-offer{font-size:16px}
+}
+
+/* セクション小見出し */
+.section-eyebrow{
+  text-align:center;font-size:12px;letter-spacing:.3em;
+  color:var(--accent);margin-bottom:8px;
+}
+
+/* 顔写真キャプション（企業版）*/
+.who .face{margin:24px 0 28px}
+.who .face figcaption strong{
+  font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;
+  font-size:17px;color:var(--ink);letter-spacing:.04em;
+  display:block;margin-bottom:6px;
+}
+.who .face figcaption small{
+  font-size:13px;color:var(--sub);line-height:1.8;letter-spacing:.04em;
+}
+
+/* 会社情報テーブル */
+.corp-table{
+  margin:20px 0 0;
+  border-top:1px solid var(--line);
+}
+.corp-table dt{
+  padding:14px 0 4px;
+  font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;
+  font-size:13px;color:var(--accent);letter-spacing:.1em;
+}
+.corp-table dd{
+  padding:0 0 14px;
+  border-bottom:1px solid var(--line);
+  font-size:15px;line-height:1.9;color:var(--ink);
+}
+.corp-table dd small{
+  display:block;margin-top:6px;
+  font-size:12px;color:var(--sub);line-height:1.8;
+}
+@media(min-width:720px){
+  .corp-table{
+    display:grid;grid-template-columns:140px 1fr;
+    column-gap:24px;
+  }
+  .corp-table dt{padding:16px 0;border-bottom:1px solid var(--line)}
+  .corp-table dd{padding:16px 0}
+}
+
+/* セクション間マージン */
+.company,.track,.ask,.terms,.ops,.faqs,.flow{
+  margin-top:56px;
+}
+@media(min-width:720px){
+  .company,.track,.ask,.terms,.ops,.faqs,.flow{margin-top:72px}
+}
+
+/* 宿カードの数字を強調 */
+.inns-pair figcaption b{
+  color:var(--accent);font-family:"Zen Kaku Gothic New",sans-serif;
+  font-weight:700;font-size:15px;letter-spacing:.02em;
+}
+
+/* 流れの番号と本文のバランス */
+.flow-letter li strong{font-weight:700;color:var(--ink)}
+.flow-letter li em{font-size:16px}
+
+/* 連絡ブロックの電話リンクをタップ範囲広く */
+.tel-big a{display:inline-block;padding:4px 0}
+
+/* 追伸 */
+.signoff{padding-top:40px}
+.signoff .ps{margin-bottom:36px}
+.signoff .ps strong{color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif}
+
+/* ページフッター */
+.page-foot p strong{
+  font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;
+  color:var(--ink);font-size:15px;
+}
