@@ -366,3 +366,92 @@ blockquote cite{
   font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;
   color:var(--ink);font-size:15px;
 }
+
+
+/* ===== v5: 写真ドリブン ===== */
+
+/* ヒーロー大写真（letter の外、画面幅いっぱい） */
+.hero-img{
+  margin:0;
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:var(--surface);
+}
+.hero-img img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+@media(min-width:720px){
+  .hero-img{aspect-ratio:21/9;max-height:520px}
+}
+
+/* hero section 上余白を詰める（画像の下に続く） */
+.letter{padding-top:32px}
+@media(min-width:720px){.letter{padding-top:56px}}
+
+/* 宿カード（3枚：メイン + サブ2） */
+.inns-block{
+  display:grid;gap:40px;margin-top:28px;
+}
+.inn-card{margin:0}
+.inn-photos{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:6px;
+  aspect-ratio:3/2;
+}
+.inn-photos .main{
+  grid-row:1 / span 2;
+  width:100%;height:100%;object-fit:cover;
+  border-radius:6px 0 0 6px;border:1px solid var(--line);
+}
+.inn-photos .sub{
+  width:100%;height:100%;object-fit:cover;
+  border:1px solid var(--line);
+}
+.inn-photos .sub:nth-of-type(2){border-radius:0 6px 0 0}
+.inn-photos .sub:nth-of-type(3){border-radius:0 0 6px 0}
+.inn-card figcaption{
+  margin-top:14px;font-size:14px;line-height:2;color:var(--sub);
+}
+.inn-card figcaption strong{
+  color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;
+  font-weight:700;font-size:16px;display:block;margin-bottom:4px;
+}
+.inn-card figcaption b{
+  color:var(--accent);font-family:"Zen Kaku Gothic New",sans-serif;
+  font-weight:700;font-size:15px;
+}
+
+/* 安曇野ギャラリー 2x3 → md 3x2 */
+.scene-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:28px;
+}
+.scene-grid figure{margin:0;position:relative;overflow:hidden;border-radius:4px}
+.scene-grid img{
+  width:100%;aspect-ratio:1/1;object-fit:cover;display:block;
+  border:1px solid var(--line);
+  transition:transform .5s ease;
+}
+.scene-grid figure:hover img{transform:scale(1.03)}
+.scene-grid figcaption{
+  position:absolute;left:8px;bottom:8px;
+  background:rgba(31,42,36,.78);color:#fff;
+  font-size:11px;letter-spacing:.08em;
+  padding:4px 10px;border-radius:3px;
+  font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+}
+@media(min-width:720px){
+  .scene-grid{grid-template-columns:repeat(3,1fr);gap:10px}
+  .scene-grid figcaption{font-size:12px;padding:5px 12px}
+}
+
+/* scenesセクションの余白 */
+.scenes{margin-top:0}
+.scenes h2{text-align:center}
+.scenes .prose{text-align:center;max-width:520px;margin:0 auto 10px}
+

@@ -14,6 +14,10 @@
 <body>
 <a class="skip" href="#main">本文へスキップ</a>
 
+<figure class="hero-img">
+  <img src="img/hero.jpg" alt="安曇野の景色" loading="eager">
+</figure>
+
 <main id="main" class="letter">
 
   <!-- ① ヒーロー -->
@@ -22,7 +26,7 @@
     <h1>使われていないお別荘、<br>お借りできませんでしょうか。</h1>
     <p class="lead">
       チラシを手に取ってくださり、ありがとうございます。<br>
-      株式会社Pack Vacation 代表の三条（さんじょう）と申します。
+      株式会社Pack Vacation 代表の三條（さんじょう）と申します。
     </p>
     <p class="hero-offer">
       月々の家賃を、こちらからお支払いいたします。<br>
@@ -39,7 +43,7 @@
     <figure class="face">
       <img src="img/face.jpg" alt="代表 三条桜芽">
       <figcaption>
-        <strong>三条 桜芽（さんじょう おうが）</strong>
+        <strong>三條 桜芽（さんじょう おうが）</strong>
         <small>株式会社Pack Vacation 代表取締役<br>1999年 東京都生まれ ／ 24歳で安曇野へ移住 ／ 2024年開業</small>
       </figcaption>
     </figure>
@@ -71,18 +75,27 @@
       <p>現在、安曇野で以下の二軒を運営しております。ご所有者様に「どんな質の運営をするのか」ご判断いただくための、わたくしどもの実績です。</p>
     </div>
 
-    <div class="inns-pair">
-      <figure>
-        <img src="img/sasamori.jpg" alt="笹森家コテージ">
+    <div class="inns-block">
+      <figure class="inn-card">
+        <div class="inn-photos">
+          <img class="main" src="img/sasamori.jpg" alt="笹森家コテージ 内観">
+          <img class="sub" src="img/sasamori-02.jpg" alt="笹森家コテージ">
+          <img class="sub" src="img/sasamori-03.jpg" alt="笹森家コテージ">
+        </div>
         <figcaption>
-          <strong>笹森家コテージ</strong>
-          一棟貸し／6名まで／ペット可<br>
+          <strong>民宿 笹森家</strong>
+          一棟貸しコテージ／6名まで／ペット可<br>
           Airbnbご評価 <b>★4.84</b>（50件以上）<br>
           BBQ可／無料送迎あり
         </figcaption>
       </figure>
-      <figure>
-        <img src="img/tomoshibi.jpg" alt="ゲストハウス灯">
+
+      <figure class="inn-card">
+        <div class="inn-photos">
+          <img class="main" src="img/tomoshibi.jpg" alt="ゲストハウス灯 ダイニング">
+          <img class="sub" src="img/tomoshibi-02.jpg" alt="ゲストハウス灯">
+          <img class="sub" src="img/tomoshibi-03.jpg" alt="ゲストハウス灯から見える景色">
+        </div>
         <figcaption>
           <strong>ゲストハウス灯</strong>
           温泉付き／登山拠点<br>
@@ -93,6 +106,25 @@
     </div>
 
     <p class="note">いずれも開業以来、<strong>近隣からの苦情ゼロ・大きな設備事故ゼロ</strong>で運営しております。</p>
+  </section>
+
+  <!-- ④.5 安曇野の時間（写真セクション） -->
+  <hr class="rule">
+  <section class="scenes">
+    <p class="section-eyebrow">わたくしどもが預かる、安曇野の時間</p>
+    <h2>お借りするのは建物、お渡しするのは「この場所」です</h2>
+    <div class="prose">
+      <p>お家を宿にするとき、お客様に本当にお渡ししているのは、建物ではなく <strong>その土地が持つ時間</strong>だと思っています。わたくしどもは、毎日この景色の中で暮らし、撮り、記録し続けています。</p>
+    </div>
+    <div class="scene-grid">
+      <figure><img src="img/scene-01.jpg" alt="早春の安曇野" loading="lazy"><figcaption>三月／雪残る安曇野</figcaption></figure>
+      <figure><img src="img/scene-02.jpg" alt="桜" loading="lazy"><figcaption>四月／桜の咲くころ</figcaption></figure>
+      <figure><img src="img/scene-03.jpg" alt="新緑" loading="lazy"><figcaption>五月／新緑の朝</figcaption></figure>
+      <figure><img src="img/scene-04.jpg" alt="夏" loading="lazy"><figcaption>八月はじめ／稲の緑</figcaption></figure>
+      <figure><img src="img/scene-05.jpg" alt="夏末" loading="lazy"><figcaption>八月末／夕立のあと</figcaption></figure>
+      <figure><img src="img/scene-06.jpg" alt="秋" loading="lazy"><figcaption>十月末／紅葉</figcaption></figure>
+    </div>
+    <p class="note">これらはすべて代表三條が撮った写真です。宿のSNSや会社noteで、日々の安曇野を綴っております。 → <a href="https://note.com/ouga_sanjo" target="_blank" rel="noopener">noteを見る</a></p>
   </section>
 
   <!-- ⑤ ご相談内容 -->
@@ -132,7 +164,7 @@
     <p class="section-eyebrow">管理・運営の体制</p>
     <h2>お借りしたあと、どう守るか</h2>
     <div class="prose">
-      <p><strong>代表の三条が、安曇野に常駐しております。</strong>何かあった際に、現地まで車で駆けつけられる距離に住んでおり、連絡から現地対応までを一人で判断し、動けます。</p>
+      <p><strong>代表の三條が、安曇野に常駐しております。</strong>何かあった際に、現地まで車で駆けつけられる距離に住んでおり、連絡から現地対応までを一人で判断し、動けます。</p>
     </div>
     <ul class="plain">
       <li><strong>日常点検</strong>：代表が週次で巡回。設備不具合・外観の異常・雨漏り等を早期発見。</li>
@@ -219,7 +251,7 @@
       → <a href="https://note.com/ouga_sanjo" target="_blank" rel="noopener">三条桜芽のnote</a>
     </p>
     <p class="signature">
-      三条 桜芽<br>
+      三條 桜芽<br>
       <small>株式会社Pack Vacation 代表取締役</small>
     </p>
   </section>
