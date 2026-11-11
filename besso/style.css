@@ -541,3 +541,65 @@ h2{word-break:keep-all;overflow-wrap:break-word;text-wrap:balance}
   width:40px;height:40px;
 }
 @keyframes lbIn{from{opacity:0}to{opacity:1}}
+
+
+/* ===== v9: accordion ===== */
+.accordion{margin-top:20px}
+.accordion details{
+  border-bottom:1px solid var(--line);
+}
+.accordion details:first-of-type{border-top:1px solid var(--line)}
+
+.accordion summary{
+  cursor:pointer;
+  padding:18px 36px 18px 4px;
+  position:relative;
+  list-style:none;
+  font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+  font-weight:700;
+  font-size:15px;
+  line-height:1.7;
+  color:var(--ink);
+  letter-spacing:.02em;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+.accordion summary::-webkit-details-marker{display:none}
+.accordion summary::marker{display:none}
+.accordion summary::after{
+  content:'';
+  position:absolute;
+  right:6px;top:50%;
+  width:14px;height:14px;
+  margin-top:-7px;
+  background-image:
+    linear-gradient(var(--accent),var(--accent)),
+    linear-gradient(var(--accent),var(--accent));
+  background-size:14px 2px,2px 14px;
+  background-position:center;
+  background-repeat:no-repeat;
+  transition:transform .2s ease;
+}
+.accordion details[open] summary::after{
+  background-size:14px 2px,0 0;
+}
+.accordion summary:hover{color:var(--accent)}
+
+.accordion .ans{
+  padding:0 4px 20px;
+  font-size:15px;
+  line-height:2;
+  color:var(--ink);
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+.accordion .ans strong{font-weight:700;color:var(--ink)}
+.accordion details[open] .ans{
+  animation:ansIn .2s ease;
+}
+@keyframes ansIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+@media(min-width:720px){
+  .accordion summary{font-size:16px;padding:20px 40px 20px 6px}
+  .accordion .ans{font-size:16px;padding:0 6px 24px}
+}
