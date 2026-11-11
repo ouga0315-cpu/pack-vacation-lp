@@ -474,3 +474,70 @@ blockquote cite{
   padding:5px 12px;border-radius:3px;
   font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
 }
+
+
+/* ===== v8: 改行・バンド・ライトボックス ===== */
+
+/* 改行修正：日本語で変な位置で折り返さない */
+.hero h1{
+  font-size:24px;
+  text-wrap:balance;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+@media(min-width:400px){.hero h1{font-size:26px}}
+@media(min-width:720px){.hero h1{font-size:30px}}
+
+.hero .lead,
+.hero .hero-offer,
+.hero .eyebrow{
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+.hero .eyebrow{text-wrap:balance}
+.hero .lead{text-wrap:pretty}
+
+h2{word-break:keep-all;overflow-wrap:break-word;text-wrap:balance}
+.prose p{word-break:keep-all;overflow-wrap:break-word}
+
+/* 写真バンド（セクション区切りの全幅フル写真） */
+.band{
+  margin:48px 0;
+  width:100%;
+  aspect-ratio:21/9;
+  max-height:360px;
+  overflow:hidden;
+  background:var(--surface);
+}
+.band img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+@media(min-width:720px){
+  .band{margin:72px 0;max-height:420px}
+}
+
+/* scene-grid: クリックでライトボックス */
+.scene-grid img{cursor:zoom-in}
+
+/* ライトボックス */
+.lb{
+  position:fixed;inset:0;background:rgba(10,15,12,.95);
+  display:grid;place-items:center;z-index:999;
+  padding:20px;cursor:zoom-out;
+  animation:lbIn .15s ease;
+}
+.lb img{
+  max-width:100%;max-height:85vh;object-fit:contain;
+  border-radius:4px;box-shadow:0 10px 40px rgba(0,0,0,.5);
+}
+.lb-cap{
+  position:absolute;left:0;right:0;bottom:24px;
+  color:#fff;font-size:13px;text-align:center;letter-spacing:.08em;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+}
+.lb-close{
+  position:absolute;top:16px;right:16px;color:#fff;font-size:28px;
+  background:transparent;border:0;cursor:pointer;line-height:1;
+  width:40px;height:40px;
+}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
