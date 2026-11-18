@@ -663,3 +663,65 @@ h2{word-break:keep-all;overflow-wrap:break-word;text-wrap:balance}
   .flow-cards .step-body h3{font-size:15px}
   .flow-cards .step-body p{font-size:12px;line-height:1.6}
 }
+
+
+/* ===== v11: voices ===== */
+.voices{margin-top:56px}
+.voices h2{text-align:center;line-height:1.6}
+
+/* 数字バッジ */
+.voice-stats{
+  display:flex;justify-content:center;gap:28px;
+  margin:28px 0 36px;
+  flex-wrap:wrap;
+}
+.voice-stats .stat{
+  display:flex;flex-direction:column;align-items:center;
+  padding:16px 24px;
+  background:var(--surface);border-radius:8px;
+  min-width:140px;
+}
+.voice-stats .stat-num{
+  font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;
+  font-size:26px;color:var(--accent);letter-spacing:.02em;line-height:1.2;
+}
+.voice-stats .stat-label{
+  margin-top:8px;font-size:12px;color:var(--ink);line-height:1.6;text-align:center;
+  letter-spacing:.04em;
+}
+.voice-stats .stat-label small{display:block;color:var(--sub);font-size:11px;margin-top:2px}
+@media(min-width:720px){
+  .voice-stats .stat-num{font-size:30px}
+  .voice-stats .stat-label{font-size:13px}
+}
+
+/* 声の一覧 */
+.voice-list{
+  list-style:none;padding:0;margin:28px 0 0;
+  display:grid;gap:14px;
+}
+.voice{
+  background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:20px 22px 18px;
+  position:relative;
+}
+.voice::before{
+  content:'"';position:absolute;top:4px;left:12px;
+  font-family:Georgia,serif;font-weight:700;font-size:48px;
+  color:var(--accent);opacity:.18;line-height:1;
+}
+.voice .quote{
+  margin:0 0 10px;font-size:15px;line-height:2;color:var(--ink);
+  letter-spacing:.02em;
+  word-break:keep-all;overflow-wrap:break-word;
+}
+.voice .attr{
+  margin:0;font-size:13px;color:var(--sub);letter-spacing:.06em;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  text-align:right;
+}
+@media(min-width:720px){
+  .voice-list{grid-template-columns:1fr 1fr;gap:16px}
+  .voice{padding:24px 26px 20px}
+  .voice .quote{font-size:16px}
+}
