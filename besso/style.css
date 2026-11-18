@@ -725,3 +725,41 @@ h2{word-break:keep-all;overflow-wrap:break-word;text-wrap:balance}
   .voice{padding:24px 26px 20px}
   .voice .quote{font-size:16px}
 }
+
+
+/* ===== v13: 改行・サイズ微調整 ===== */
+
+/* h1 を小さく、句点のぶら下げを許可 */
+.hero h1{
+  font-size:22px;
+  line-height:1.6;
+  letter-spacing:.02em;
+  hanging-punctuation:allow-end;
+}
+@media(min-width:400px){.hero h1{font-size:24px}}
+@media(min-width:720px){.hero h1{font-size:30px;line-height:1.5}}
+
+/* lead を自然な行高に、改行をブラウザに任せる */
+.hero .lead{
+  font-size:15px;
+  line-height:1.9;
+  text-align:left;
+  max-width:420px;
+  margin:0 auto 20px;
+  hanging-punctuation:allow-end;
+}
+@media(min-width:720px){.hero .lead{font-size:16px;text-align:center;max-width:none}}
+
+/* hero-offer も行高を抑えて、ぶら下げ許可 */
+.hero .hero-offer{
+  line-height:1.9;
+  font-size:14px;
+  padding:16px 18px;
+  text-align:left;
+  hanging-punctuation:allow-end;
+}
+@media(min-width:720px){.hero .hero-offer{text-align:center;font-size:15px;padding:20px}}
+
+/* eyebrow も少しコンパクト */
+.hero .eyebrow{font-size:12px;padding:5px 12px}
+@media(min-width:720px){.hero .eyebrow{font-size:13px}}
