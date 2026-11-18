@@ -42,3 +42,22 @@
     });
   });
 })();
+
+
+// v14: video toggle
+(function(){
+  var btn = document.getElementById('vidToggle');
+  var vid = document.getElementById('heroVid');
+  if(!btn || !vid) return;
+  btn.addEventListener('click', function(){
+    if(vid.paused){
+      vid.play();
+      btn.classList.remove('paused');
+      btn.setAttribute('aria-label','動画を一時停止');
+    } else {
+      vid.pause();
+      btn.classList.add('paused');
+      btn.setAttribute('aria-label','動画を再生');
+    }
+  });
+})();

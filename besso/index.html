@@ -15,10 +15,15 @@
 <a class="skip" href="#main">本文へスキップ</a>
 
 <figure class="hero-img">
-  <video autoplay muted loop playsinline preload="metadata" poster="img/hero-poster.jpg">
+  <video id="heroVid" autoplay muted loop playsinline preload="metadata" poster="img/hero-poster.jpg">
+    <source src="img/hero-540.mp4" type="video/mp4" media="(max-width:720px)">
     <source src="img/hero.mp4" type="video/mp4">
     <img src="img/hero-poster.jpg" alt="安曇野の景色">
   </video>
+  <button type="button" class="vid-toggle" id="vidToggle" aria-label="動画を一時停止">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ico-pause"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    <svg viewBox="0 0 24 24" fill="currentColor" class="ico-play"><polygon points="5,3 19,12 5,21"/></svg>
+  </button>
 </figure>
 
 <main id="main" class="letter">
@@ -29,6 +34,12 @@
     <h1>使われていないお別荘、お借りできませんでしょうか。</h1>
     <p class="lead">チラシを手に取ってくださり、ありがとうございます。株式会社Pack Vacation 代表の三條 桜芽（さんじょう おうが）と申します。</p>
     <p class="hero-offer">月々の家賃をこちらからお支払いいたします。管理・清掃・近隣対応、すべて弊社が責任を持ちます。</p>
+    <nav class="toc" aria-label="ページ内の目次">
+      <a href="#inns">運営してきた宿</a>
+      <a href="#terms">ご契約の条件</a>
+      <a href="#faqs">よくあるご質問</a>
+      <a href="#contact">ご相談フォーム</a>
+    </nav>
   </section>
 
   <!-- ② 誰がやっているか -->
@@ -67,7 +78,7 @@
   <figure class="band"><img src="img/band-01.jpg" alt="エアコンフィルターの清掃" loading="lazy"></figure>
 
   <!-- ④ 運営実績 -->
-  <section class="track">
+  <section class="track" id="inns">
     <h2>これまで運営してきた宿</h2>
     <div class="prose">
       <p>現在、安曇野で以下の二軒を運営しております。</p>
@@ -187,10 +198,29 @@
       <p><strong>売るには愛着が、使うには時間がない。</strong></p>
       <p>そのあいだでお別荘が眠っているのなら、わたくしどもにしばらくお預けください。弊社で宿として整え、月々の家賃をお支払いしながら、お家を「使われている状態」にお戻しいたします。</p>
     </div>
+    <p class="inline-cta">
+      <a href="#contact" class="btn-primary">ご相談・お見積り（無料）</a>
+      <a href="tel:09063083620" class="btn-secondary">お電話：090-6308-3620</a>
+    </p>
+  </section>
+
+  <!-- ⑤.5 こんな方へ -->
+  <section class="selfcheck">
+    <p class="section-eyebrow">こんな方へ</p>
+    <h2>一つでも当てはまれば、ご相談いただけます</h2>
+    <ul class="check-list">
+      <li>年に数日しか使っていない</li>
+      <li>固定資産税・管理費が負担に感じる</li>
+      <li>売るには愛着があって決められない</li>
+      <li>相続でご家族のご意見が分かれている</li>
+      <li>空き家のまま傷んでいくのが気がかり</li>
+      <li>ご自身でも年に数日は使えたら、と思う</li>
+    </ul>
+    <p class="check-note">お借りする・お借りしない、どちらに決まってもご相談は無料です。</p>
   </section>
 
   <!-- ⑥ 契約条件 -->
-  <section class="terms">
+  <section class="terms" id="terms">
     <h2>ご契約の条件</h2>
     <dl class="corp-table">
       <dt>契約形態</dt><dd>定期借家契約 ／ 宅地建物取引業者を介して締結</dd>
@@ -211,7 +241,7 @@
       <p><strong>代表の三條が、安曇野に常駐しております。</strong>連絡から現地対応までを一人で判断し、動けます。</p>
     </div>
     <div class="accordion">
-      <details>
+      <details open>
         <summary>日常管理</summary>
         <div class="ans">代表が週次で巡回。設備・外観・雨漏り等の異常を早期発見。自社の清掃スタッフが各滞在後に実施。</div>
       </details>
@@ -233,12 +263,12 @@
   <figure class="band"><img src="img/band-02.jpg" alt="外回りの落ち葉掃き" loading="lazy"></figure>
 
   <!-- ⑧ FAQ -->
-  <section class="faqs">
+  <section class="faqs" id="faqs">
     <p class="section-eyebrow">よくあるご質問</p>
     <h2>ご心配なことに、お答えします</h2>
 
     <div class="accordion">
-      <details>
+      <details open>
         <summary>お家を荒らされたりしないか、心配です。</summary>
         <div class="ans">全予約が事前審査制です。ご家族旅行・ご年配のご夫婦・法人利用が中心で、若者のパーティー利用はお断りしております。万一の破損は保証金と弊社の保険で、<strong>ご所有者様にご負担が及ばない形で</strong>対応します。</div>
       </details>
@@ -259,10 +289,13 @@
         <div class="ans">年間数日〜数週間のご利用枠を、契約時にお取りいただけます。ご家族・ご親族の方のご利用もご自由に。</div>
       </details>
     </div>
+    <p class="inline-cta">
+      <a href="#contact" class="btn-primary">他にご心配ごとがあれば、ご相談ください</a>
+    </p>
   </section>
 
   <!-- ⑨ ご連絡の流れ -->
-  <section class="flow">
+  <section class="flow" id="flow">
     <p class="section-eyebrow">ご契約までの流れ</p>
     <h2>ご検討から、ご契約まで</h2>
     <ol class="flow-cards">
@@ -303,19 +336,52 @@
       </li>
     </ol>
     <p class="note"><strong>お見積りのみ、他社との比較のためのご相談のみ、どちらも歓迎</strong>です。ご契約の義務はございません。</p>
+    <p class="inline-cta inline-cta--flow">
+      <a href="#contact" class="btn-primary">01からはじめる（ご連絡する）</a>
+    </p>
   </section>
 
   <figure class="band"><img src="img/band-03.jpg" alt="夕焼けの田んぼ" loading="lazy"></figure>
 
   <!-- ⑩ CTA -->
   <section class="contact-block" id="contact">
-    <p class="tel-lead">お電話でのご相談</p>
-    <p class="tel-big"><a href="tel:09063083620">090-6308-3620</a></p>
-    <p class="tel-sub">いつでもお電話ください ／ 担当：三條</p>
-    <p class="mail">
-      フォームでのご相談 → <a href="#form">ご相談フォーム</a><br>
-      メールでのご相談 → <a href="mailto:ouga0315@gmail.com">ouga0315@gmail.com</a>
-    </p>
+    <p class="section-eyebrow">ご相談</p>
+    <h2>まずは、お気軽にご一報ください</h2>
+
+    <div class="contact-two">
+      <div class="contact-tel">
+        <p class="tel-lead">お電話でのご相談</p>
+        <p class="tel-big"><a href="tel:09063083620">090-6308-3620</a></p>
+        <p class="tel-sub">いつでもお電話ください ／ 担当：三條</p>
+      </div>
+
+      <form id="form" class="contact-form" action="https://formsubmit.co/ouga0315@gmail.com" method="POST">
+        <p class="form-lead">フォームでのご相談</p>
+        <input type="hidden" name="_subject" value="【別荘LP】ご相談">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="field">
+          <label for="f-name">お名前 <span class="req">必須</span></label>
+          <input type="text" name="お名前" id="f-name" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="f-contact">ご連絡先（お電話 or メール） <span class="req">必須</span></label>
+          <input type="text" name="ご連絡先" id="f-contact" required placeholder="例：090-0000-0000 / name@example.com">
+        </div>
+        <div class="field">
+          <label for="f-place">お別荘の所在地（市町村まで）</label>
+          <input type="text" name="お別荘の所在地" id="f-place" placeholder="例：安曇野市穂高有明">
+        </div>
+        <div class="field">
+          <label for="f-msg">備考（任意）</label>
+          <textarea name="備考" id="f-msg" rows="4" placeholder="ご質問、現地状況、ご希望の時期など"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">送信する</button>
+        <p class="form-note">送信後、1〜2営業日以内に代表 三條 よりご連絡いたします。<br>メールでも結構です → <a href="mailto:ouga0315@gmail.com">ouga0315@gmail.com</a></p>
+      </form>
+    </div>
   </section>
 
   <!-- ⑪ 追伸 -->
