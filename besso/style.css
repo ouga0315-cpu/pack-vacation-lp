@@ -57,8 +57,9 @@ h1,h2,h3{
   word-break:keep-all;overflow-wrap:break-word;text-wrap:balance;
 }
 h2{
-  font-size:26px;text-align:center;
-  margin:0 auto 32px;position:relative;padding-bottom:20px;
+  font-size:21px;text-align:center;
+  margin:0 auto 32px;position:relative;padding-bottom:18px;
+  letter-spacing:.01em;
 }
 h2::after{
   content:'';position:absolute;left:50%;bottom:0;
@@ -71,13 +72,12 @@ h3{font-size:17px;margin-bottom:10px;letter-spacing:.02em}
 @media(min-width:720px){h3{font-size:20px}}
 
 .section-eyebrow{
-  text-align:center;font-size:11px;letter-spacing:.24em;
+  text-align:center;font-size:11px;letter-spacing:.1em;
   color:var(--accent);font-weight:700;margin:0 0 14px;
-  text-transform:uppercase;
-  display:flex;align-items:center;justify-content:center;gap:12px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
 }
 .section-eyebrow::before,.section-eyebrow::after{
-  content:'';display:inline-block;width:20px;height:1px;background:var(--accent-lt);
+  content:'';display:inline-block;width:16px;height:1px;background:var(--accent-lt);
 }
 @media(min-width:720px){
   .section-eyebrow{font-size:12px;margin-bottom:18px}
@@ -119,9 +119,9 @@ section{padding:72px 0}
 }
 .brand strong{
   font-family:"Zen Kaku Gothic New",sans-serif;
-  font-weight:900;font-size:17px;letter-spacing:.06em;color:var(--accent);
+  font-weight:900;font-size:15px;letter-spacing:.04em;color:var(--accent);
 }
-.brand span{font-size:10px;color:var(--sub);letter-spacing:.14em;margin-top:3px}
+.brand span{font-size:9.5px;color:var(--sub);letter-spacing:.1em;margin-top:2px}
 @media(min-width:720px){
   .brand strong{font-size:19px}
   .brand span{font-size:11px}
@@ -145,11 +145,11 @@ section{padding:72px 0}
   margin-left:auto;
   text-decoration:none;
   background:var(--accent);color:#fff;
-  padding:11px 20px;border-radius:999px;
+  padding:9px 16px;border-radius:999px;
   font-family:"Zen Kaku Gothic New",sans-serif;
-  font-weight:700;font-size:12px;letter-spacing:.08em;
+  font-weight:700;font-size:11.5px;letter-spacing:.06em;
   transition:background .15s ease,transform .15s ease,box-shadow .2s ease;
-  flex:0 0 auto;
+  flex:0 0 auto;white-space:nowrap;
   box-shadow:0 2px 10px rgba(46,90,71,.18);
 }
 .head-cta:hover{background:var(--accent-dk);transform:translateY(-1px);box-shadow:0 4px 14px rgba(46,90,71,.26)}
@@ -159,10 +159,11 @@ section{padding:72px 0}
    ① ヒーロー
    ========================= */
 .hero{
-  position:relative;padding:0;min-height:88vh;
+  position:relative;padding:0;min-height:100svh;
   display:grid;place-items:center;
   overflow:hidden;
 }
+@media(max-height:720px){.hero{min-height:auto}}
 .hero-bg{
   position:absolute;inset:0;margin:0;
   animation:heroZoom 20s ease-out forwards;
@@ -183,9 +184,10 @@ section{padding:72px 0}
 .hero-inner{
   position:relative;z-index:1;
   max-width:860px;margin:0 auto;
-  padding:96px 20px 80px;
+  padding:72px 20px 120px;
   color:#fff;text-align:center;
 }
+@media(min-width:720px){.hero-inner{padding:96px 40px 80px}}
 
 .hero-badge{
   display:inline-block;
@@ -200,8 +202,8 @@ section{padding:72px 0}
 @media(min-width:720px){.hero-badge{font-size:12px;padding:9px 20px;margin-bottom:36px}}
 
 .hero h1{
-  color:#fff;font-size:30px;line-height:1.55;font-weight:900;
-  margin:0 0 24px;letter-spacing:.04em;
+  color:#fff;font-size:26px;line-height:1.55;font-weight:900;
+  margin:0 0 24px;letter-spacing:.03em;
   text-shadow:0 4px 30px rgba(0,0,0,.4);
 }
 .hero h1 strong{
@@ -327,17 +329,17 @@ section:not(.hero):not(.cta-band) .btn-secondary:hover{background:var(--surface-
   display:grid;gap:12px;
 }
 .intro ul.plain li{
-  position:relative;padding:16px 20px 16px 52px;
+  position:relative;padding:14px 16px 14px 40px;
   background:var(--card);
   border:1px solid var(--line-lt);
   border-radius:10px;
-  font-size:14px;line-height:1.75;
+  font-size:13.5px;line-height:1.75;
   box-shadow:0 1px 4px rgba(31,42,36,.03);
 }
 .intro ul.plain li::before{
-  content:'';position:absolute;left:20px;top:50%;margin-top:-4px;
+  content:'';position:absolute;left:16px;top:50%;margin-top:-4px;
   width:8px;height:8px;border-radius:50%;background:var(--accent);
-  box-shadow:0 0 0 4px rgba(46,90,71,.1);
+  box-shadow:0 0 0 3px rgba(46,90,71,.1);
 }
 @media(min-width:720px){.intro ul.plain li{font-size:15px;padding:18px 24px 18px 56px}}
 
@@ -376,7 +378,7 @@ section:not(.hero):not(.cta-band) .btn-secondary:hover{background:var(--surface-
   display:grid;gap:24px;max-width:1000px;margin:0 auto;
 }
 .strength{
-  display:grid;grid-template-columns:80px 1fr;gap:16px;
+  display:block;
   background:#fff;border-radius:14px;padding:28px 22px;
   box-shadow:0 4px 24px rgba(31,42,36,.06);
   position:relative;overflow:hidden;
@@ -389,8 +391,8 @@ section:not(.hero):not(.cta-band) .btn-secondary:hover{background:var(--surface-
 .strength:hover{transform:translateY(-4px);box-shadow:0 10px 36px rgba(31,42,36,.1)}
 .st-num{
   font-family:"Zen Kaku Gothic New",sans-serif;
-  font-weight:900;font-size:44px;
-  color:var(--accent-lt);line-height:1;letter-spacing:.02em;
+  font-weight:900;font-size:36px;
+  line-height:1;letter-spacing:.04em;margin-bottom:12px;
   background:linear-gradient(135deg,var(--accent-lt),var(--accent));
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
@@ -406,8 +408,8 @@ section:not(.hero):not(.cta-band) .btn-secondary:hover{background:var(--surface-
 .st-body p{margin:0;font-size:14px;line-height:1.95;color:var(--ink-sub)}
 @media(min-width:720px){
   .strength-blocks{gap:28px}
-  .strength{grid-template-columns:110px 1fr;padding:40px 36px;gap:28px;align-items:center}
-  .st-num{font-size:64px}
+  .strength{display:grid;grid-template-columns:110px 1fr;padding:40px 36px;gap:28px;align-items:center}
+  .st-num{font-size:64px;margin-bottom:0}
   .st-body p{font-size:15.5px}
 }
 
@@ -796,17 +798,18 @@ section:not(.hero):not(.cta-band) .btn-secondary:hover{background:var(--surface-
    FAB
    ========================= */
 .fab{
-  position:fixed;bottom:16px;left:16px;right:16px;z-index:50;
+  position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:50;
+  width:calc(100% - 28px);max-width:420px;
   display:flex;align-items:center;justify-content:center;gap:10px;
   background:var(--warn);color:#fff;
-  padding:17px;border-radius:999px;
+  padding:15px;border-radius:999px;
   font-family:"Zen Kaku Gothic New",sans-serif;
-  font-weight:900;font-size:15px;letter-spacing:.08em;
+  font-weight:900;font-size:14px;letter-spacing:.06em;
   text-decoration:none;
-  box-shadow:0 8px 24px rgba(180,73,62,.4);
+  box-shadow:0 6px 20px rgba(180,73,62,.35);
   transition:opacity .25s ease,transform .25s ease;
 }
-.fab.hidden{opacity:0;transform:translateY(120%);pointer-events:none}
+.fab.hidden{opacity:0;transform:translateX(-50%) translateY(140%);pointer-events:none}
 .fab .ico{width:18px;height:18px;flex:0 0 auto}
 @media(min-width:720px){.fab{display:none}}
 

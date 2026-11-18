@@ -1,33 +1,39 @@
-// 画面下固定の電話ボタン：フッターの電話番号が見えている間は隠す
+// FAB: フッター or ヒーローが見えている間は隠す
 (function(){
   var fab = document.querySelector('.fab');
+  if(!fab || !('IntersectionObserver' in window)) return;
   var footer = document.querySelector('footer');
-  if(fab && footer && ('IntersectionObserver' in window)){
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ fab.classList.add('hidden'); }
-        else { fab.classList.remove('hidden'); }
-      });
-    }, { rootMargin: '0px' });
-    obs.observe(footer);
+  var hero = document.querySelector('.hero');
+  var state = { footer:false, hero:false };
+  function update(){
+    if(state.footer || state.hero){ fab.classList.add('hidden'); }
+    else { fab.classList.remove('hidden'); }
+  }
+  if(footer){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ state.footer = e.isIntersecting; });
+      update();
+    }).observe(footer);
+  }
+  if(hero){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ state.hero = e.intersectionRatio > 0.3; });
+      update();
+    }, { threshold:[0, 0.3, 0.6] }).observe(hero);
   }
 })();
 
-// ヘッダースクロール影
 (function(){
   var head = document.querySelector('.site-head');
   if(!head) return;
-  var y = window.scrollY;
   function onScroll(){
-    y = window.scrollY;
-    if(y > 20){ head.classList.add('scrolled'); }
+    if(window.scrollY > 20){ head.classList.add('scrolled'); }
     else { head.classList.remove('scrolled'); }
   }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive:true });
 })();
 
-// セクション reveal
 (function(){
   if(!('IntersectionObserver' in window)) return;
   var targets = document.querySelectorAll('section > .wrap, .hero-inner');
